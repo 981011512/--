@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ucenter.dao.mapper.CfUserMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ucenter.domain.CfUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+    <result column="true_name" property="trueName" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="BIGINT" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AdminerResultMap" type="com.cf.ucenter.domain.CfUserExt" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+    <result column="true_name" property="trueName" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="BIGINT" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <collection property="cfRole" ofType="com.cf.ucenter.domain.CfRole">
+      <id column="role_id" property="id" jdbcType="VARCHAR" />
+      <result column="role_name" property="name" jdbcType="VARCHAR" />
+      <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+      <result column="role_level" property="roleLevel" jdbcType="INTEGER" />
+      <result column="role_icon" property="icon" jdbcType="VARCHAR" />
+      <result column="role_description" property="description" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="cfDepartment" ofType="com.cf.ucenter.domain.CfDepartment">
+      <id column="department_id" property="id" jdbcType="VARCHAR" />
+      <result column="department_name" property="name" jdbcType="VARCHAR" />
+      <result column="department_icon" property="icon" jdbcType="VARCHAR" />
+      <result column="department_sort_index" property="sortIndex" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_name, password, avatar, type, nick_name, true_name, phone, email, birthday, sex, sign, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ucenter.domain.CfUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ucenter.domain.CfUserExample" >
+    delete from cf_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ucenter.domain.CfUser" >
+    insert into cf_user (id, user_name, password, 
+      avatar, type, nick_name,
+      true_name, phone, email, birthday, sex,
+      sign, create_time)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{nickName,jdbcType=VARCHAR},
+      #{trueName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birthday,jdbcType=INTEGER}, #{sex,jdbcType=BIT},
+      #{sign,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ucenter.domain.CfUser" >
+    insert into cf_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+        <if test="nickName != null">
+            nick_name,
+      </if>
+      <if test="trueName != null" >
+        true_name,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+        <if test="nickName != null">
+            #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null" >
+        #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ucenter.domain.CfUserExample" resultType="java.lang.Integer" >
+    select count(*) from cf_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avatar != null" >
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+        <if test="record.nickName != null">
+            nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trueName != null" >
+        true_name = #{record.trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=BIT},
+      </if>
+      <if test="record.sign != null" >
+        sign = #{record.sign,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_user
+    set id = #{record.id,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      true_name = #{record.trueName,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=BIT},
+      sign = #{record.sign,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ucenter.domain.CfUser" >
+    update cf_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+        <if test="nickName != null">
+            nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null" >
+        true_name = #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ucenter.domain.CfUser" >
+    update cf_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      true_name = #{trueName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=BIT},
+      sign = #{sign,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <select id="getUserAdministratorByUid" resultMap="AdminerResultMap" parameterType="java.lang.String" >
+    select
+      u.*,r.id role_id,r.name role_name,r.department_id,
+      dp.name department_name,r.role_level,dp.icon department_icon,
+      dp.sort_index department_sort_index,r.icon role_icon,r.description role_description
+    from (select * from cf_user where id = #{id,jdbcType=VARCHAR}) u
+    left join cf_user_role ur on(u.id=ur.uid)
+    left join cf_role r on(ur.role_id=r.id)
+    left join cf_department dp on(r.department_id=dp.id)
+  </select>
+</mapper>

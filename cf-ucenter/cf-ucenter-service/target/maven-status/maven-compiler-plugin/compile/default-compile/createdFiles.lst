@@ -1,0 +1,8 @@
+com\cf\ucenter\service\impl\CfRoleServiceImpl.class
+com\cf\ucenter\UcenterApplication.class
+com\cf\ucenter\service\impl\CfUserFriendAddLogServiceImpl.class
+com\cf\ucenter\service\impl\CfDepartmentServiceImpl.class
+com\cf\ucenter\service\impl\CfUserRoleServiceImpl.class
+com\cf\ucenter\service\impl\CfUserGroupServiceImpl.class
+com\cf\ucenter\service\impl\CfUserServiceImpl.class
+com\cf\ucenter\service\impl\CfUserFriendServiceImpl.class

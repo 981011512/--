@@ -1,0 +1,17 @@
+com\cf\ucenter\admin\config\Swagger2Configuration.class
+com\cf\ucenter\admin\swagger\CfUserGroupSwagger.class
+com\cf\ucenter\admin\controller\BaseController.class
+com\cf\ucenter\admin\controller\CfUserGroupApi.class
+com\cf\ucenter\admin\controller\DepartmentController.class
+com\cf\ucenter\admin\swagger\DepartmentSwagger.class
+com\cf\ucenter\admin\config\ResourceServerConfig.class
+com\cf\ucenter\admin\config\CorsConfig.class
+com\cf\ucenter\admin\controller\UcenterController.class
+com\cf\ucenter\admin\controller\CfUserFriendController.class
+com\cf\ucenter\admin\swagger\AuthSwagger.class
+com\cf\ucenter\admin\UcenterAdminApplication.class
+com\cf\ucenter\admin\swagger\UcenterSwagger.class
+com\cf\ucenter\admin\controller\RoleController.class
+com\cf\ucenter\admin\swagger\RoleSwagger.class
+com\cf\ucenter\admin\controller\AuthSwaggerController.class
+com\cf\ucenter\admin\swagger\CfUserFriendSwagger.class

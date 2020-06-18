@@ -1,0 +1,8 @@
+com\cf\ucenter\auth\config\AuthorizationServerConfig.class
+com\cf\ucenter\auth\config\CustomUserAuthenticationConverter.class
+com\cf\ucenter\auth\service\impl\AuthServiceImpl$1.class
+com\cf\ucenter\auth\service\impl\UserDetailsServiceImpl.class
+com\cf\ucenter\auth\config\WebSecurityConfig.class
+com\cf\ucenter\auth\service\impl\AuthServiceImpl.class
+com\cf\ucenter\auth\UcenterAuthApplication.class
+com\cf\ucenter\auth\service\impl\UserJwt.class

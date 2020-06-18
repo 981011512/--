@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ucenter.dao.mapper.CfUserGroupMemberMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ucenter.domain.CfUserGroupMember" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="BIT" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="join_type" property="joinType" jdbcType="BIT" />
+    <result column="join_time" property="joinTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="muted_deadline" property="mutedDeadline" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, group_id, uid, level, nick_name, join_type, join_time, status, muted_deadline
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ucenter.domain.CfUserGroupMemberExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_user_group_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_user_group_member
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_user_group_member
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ucenter.domain.CfUserGroupMemberExample" >
+    delete from cf_user_group_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ucenter.domain.CfUserGroupMember" >
+    insert into cf_user_group_member (id, group_id, uid, 
+      level, nick_name, join_type, 
+      join_time, status, muted_deadline
+      )
+    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{level,jdbcType=BIT}, #{nickName,jdbcType=VARCHAR}, #{joinType,jdbcType=BIT}, 
+      #{joinTime,jdbcType=BIGINT}, #{status,jdbcType=BIT}, #{mutedDeadline,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ucenter.domain.CfUserGroupMember" >
+    insert into cf_user_group_member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="joinType != null" >
+        join_type,
+      </if>
+      <if test="joinTime != null" >
+        join_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="mutedDeadline != null" >
+        muted_deadline,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=BIT},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="joinType != null" >
+        #{joinType,jdbcType=BIT},
+      </if>
+      <if test="joinTime != null" >
+        #{joinTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="mutedDeadline != null" >
+        #{mutedDeadline,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ucenter.domain.CfUserGroupMemberExample" resultType="java.lang.Integer" >
+    select count(*) from cf_user_group_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_user_group_member
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=BIT},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joinType != null" >
+        join_type = #{record.joinType,jdbcType=BIT},
+      </if>
+      <if test="record.joinTime != null" >
+        join_time = #{record.joinTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.mutedDeadline != null" >
+        muted_deadline = #{record.mutedDeadline,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_user_group_member
+    set id = #{record.id,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=BIT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      join_type = #{record.joinType,jdbcType=BIT},
+      join_time = #{record.joinTime,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=BIT},
+      muted_deadline = #{record.mutedDeadline,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ucenter.domain.CfUserGroupMember" >
+    update cf_user_group_member
+    <set >
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=BIT},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="joinType != null" >
+        join_type = #{joinType,jdbcType=BIT},
+      </if>
+      <if test="joinTime != null" >
+        join_time = #{joinTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="mutedDeadline != null" >
+        muted_deadline = #{mutedDeadline,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ucenter.domain.CfUserGroupMember" >
+    update cf_user_group_member
+    set group_id = #{groupId,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      level = #{level,jdbcType=BIT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      join_type = #{joinType,jdbcType=BIT},
+      join_time = #{joinTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=BIT},
+      muted_deadline = #{mutedDeadline,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

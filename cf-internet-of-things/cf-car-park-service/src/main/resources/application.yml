@@ -1,0 +1,27 @@
+#默认使用配置
+spring:
+  profiles:
+    active: dev
+  datasource:
+    name: caifeng
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://139.9.155.149:3306/caifeng?characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: caifeng
+    password: 这填您的数据库密码
+    driver-class-name: com.mysql.jdbc.Driver
+#  redis:
+#    host: 139.9.155.149
+#    port: 6379
+#    pass:
+#    database: 0
+#    maxIdle: 300
+#    maxWait: 3000
+#    testOnBorrow: true
+
+#公共配置与profiles选择无关
+mybatis:
+#  mapperScanPackage: com.cf.mapper
+#  typeAliasesPackage: com.cf.pojo
+  mapperLocations: classpath:com.cf.carpark.dao.mapper/*.xml
+  configLocation: classpath:config/SqlMapConfig.xml
+

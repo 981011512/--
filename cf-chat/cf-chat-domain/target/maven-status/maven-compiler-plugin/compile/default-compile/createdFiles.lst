@@ -1,0 +1,4 @@
+com\cf\chat\domain\Message.class
+com\cf\chat\domain\CfUserMessage.class
+com\cf\chat\domain\CfUserGroupMessage.class
+com\cf\chat\domain\CfUserMessageVo.class

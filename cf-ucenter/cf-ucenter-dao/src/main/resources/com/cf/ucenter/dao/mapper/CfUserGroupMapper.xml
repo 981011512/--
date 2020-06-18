@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ucenter.dao.mapper.CfUserGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ucenter.domain.CfUserGroup" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="people" property="people" jdbcType="SMALLINT" />
+    <result column="people_cap" property="peopleCap" jdbcType="SMALLINT" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creater_id" property="createrId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cf.ucenter.domain.CfUserGroup" extends="BaseResultMap" >
+    <result column="announcement" property="announcement" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, avatar, people, people_cap, level, status, creater_id, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    announcement
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.cf.ucenter.domain.CfUserGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cf_user_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ucenter.domain.CfUserGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_user_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cf_user_group
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_user_group
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ucenter.domain.CfUserGroupExample" >
+    delete from cf_user_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ucenter.domain.CfUserGroup" >
+    insert into cf_user_group (id, name, avatar, 
+      people, people_cap, level, 
+      status, creater_id, create_time, 
+      announcement)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{people,jdbcType=SMALLINT}, #{peopleCap,jdbcType=SMALLINT}, #{level,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{createrId,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, 
+      #{announcement,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ucenter.domain.CfUserGroup" >
+    insert into cf_user_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="people != null" >
+        people,
+      </if>
+      <if test="peopleCap != null" >
+        people_cap,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createrId != null" >
+        creater_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="announcement != null" >
+        announcement,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="people != null" >
+        #{people,jdbcType=SMALLINT},
+      </if>
+      <if test="peopleCap != null" >
+        #{peopleCap,jdbcType=SMALLINT},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createrId != null" >
+        #{createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="announcement != null" >
+        #{announcement,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ucenter.domain.CfUserGroupExample" resultType="java.lang.Integer" >
+    select count(*) from cf_user_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_user_group
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avatar != null" >
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.people != null" >
+        people = #{record.people,jdbcType=SMALLINT},
+      </if>
+      <if test="record.peopleCap != null" >
+        people_cap = #{record.peopleCap,jdbcType=SMALLINT},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createrId != null" >
+        creater_id = #{record.createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.announcement != null" >
+        announcement = #{record.announcement,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cf_user_group
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      people = #{record.people,jdbcType=SMALLINT},
+      people_cap = #{record.peopleCap,jdbcType=SMALLINT},
+      level = #{record.level,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      creater_id = #{record.createrId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      announcement = #{record.announcement,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_user_group
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      people = #{record.people,jdbcType=SMALLINT},
+      people_cap = #{record.peopleCap,jdbcType=SMALLINT},
+      level = #{record.level,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      creater_id = #{record.createrId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ucenter.domain.CfUserGroup" >
+    update cf_user_group
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="people != null" >
+        people = #{people,jdbcType=SMALLINT},
+      </if>
+      <if test="peopleCap != null" >
+        people_cap = #{peopleCap,jdbcType=SMALLINT},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createrId != null" >
+        creater_id = #{createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="announcement != null" >
+        announcement = #{announcement,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cf.ucenter.domain.CfUserGroup" >
+    update cf_user_group
+    set name = #{name,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      people = #{people,jdbcType=SMALLINT},
+      people_cap = #{peopleCap,jdbcType=SMALLINT},
+      level = #{level,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      creater_id = #{createrId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      announcement = #{announcement,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ucenter.domain.CfUserGroup" >
+    update cf_user_group
+    set name = #{name,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      people = #{people,jdbcType=SMALLINT},
+      people_cap = #{peopleCap,jdbcType=SMALLINT},
+      level = #{level,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      creater_id = #{createrId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

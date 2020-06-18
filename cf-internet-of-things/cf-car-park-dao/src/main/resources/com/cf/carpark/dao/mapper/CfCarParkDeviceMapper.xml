@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkDevice" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="device_brand_id" property="deviceBrandId" jdbcType="VARCHAR" />
+    <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="vendor_id" property="vendorId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="last_online_time" property="lastOnlineTime" jdbcType="BIGINT" />
+    <result column="link_mode" property="linkMode" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="checkpoint_id" property="checkpointId" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_park_id, device_brand_id, bar_code, model, vendor_id, status, last_online_time, 
+    link_mode, type, checkpoint_id, product_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkDeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_device
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkDeviceExample" >
+    delete from cf_car_park_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkDevice" >
+    insert into cf_car_park_device (id, car_park_id, device_brand_id, 
+      bar_code, model, vendor_id, 
+      status, last_online_time, link_mode, 
+      type, checkpoint_id, product_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{carParkId,jdbcType=VARCHAR}, #{deviceBrandId,jdbcType=VARCHAR}, 
+      #{barCode,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{vendorId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{lastOnlineTime,jdbcType=BIGINT}, #{linkMode,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{checkpointId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkDevice" >
+    insert into cf_car_park_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carParkId != null" >
+        car_park_id,
+      </if>
+      <if test="deviceBrandId != null" >
+        device_brand_id,
+      </if>
+      <if test="barCode != null" >
+        bar_code,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="vendorId != null" >
+        vendor_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastOnlineTime != null" >
+        last_online_time,
+      </if>
+      <if test="linkMode != null" >
+        link_mode,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="checkpointId != null" >
+        checkpoint_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceBrandId != null" >
+        #{deviceBrandId,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="vendorId != null" >
+        #{vendorId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="lastOnlineTime != null" >
+        #{lastOnlineTime,jdbcType=BIGINT},
+      </if>
+      <if test="linkMode != null" >
+        #{linkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="checkpointId != null" >
+        #{checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkDeviceExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_device
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carParkId != null" >
+        car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceBrandId != null" >
+        device_brand_id = #{record.deviceBrandId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barCode != null" >
+        bar_code = #{record.barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vendorId != null" >
+        vendor_id = #{record.vendorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.lastOnlineTime != null" >
+        last_online_time = #{record.lastOnlineTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.linkMode != null" >
+        link_mode = #{record.linkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.checkpointId != null" >
+        checkpoint_id = #{record.checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_device
+    set id = #{record.id,jdbcType=VARCHAR},
+      car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      device_brand_id = #{record.deviceBrandId,jdbcType=VARCHAR},
+      bar_code = #{record.barCode,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      vendor_id = #{record.vendorId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      last_online_time = #{record.lastOnlineTime,jdbcType=BIGINT},
+      link_mode = #{record.linkMode,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      checkpoint_id = #{record.checkpointId,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkDevice" >
+    update cf_car_park_device
+    <set >
+      <if test="carParkId != null" >
+        car_park_id = #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceBrandId != null" >
+        device_brand_id = #{deviceBrandId,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        bar_code = #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="vendorId != null" >
+        vendor_id = #{vendorId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="lastOnlineTime != null" >
+        last_online_time = #{lastOnlineTime,jdbcType=BIGINT},
+      </if>
+      <if test="linkMode != null" >
+        link_mode = #{linkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="checkpointId != null" >
+        checkpoint_id = #{checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkDevice" >
+    update cf_car_park_device
+    set car_park_id = #{carParkId,jdbcType=VARCHAR},
+      device_brand_id = #{deviceBrandId,jdbcType=VARCHAR},
+      bar_code = #{barCode,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      vendor_id = #{vendorId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      last_online_time = #{lastOnlineTime,jdbcType=BIGINT},
+      link_mode = #{linkMode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      checkpoint_id = #{checkpointId,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

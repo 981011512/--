@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ucenter.dao.mapper.CfRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ucenter.domain.CfRole" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="flag_key" property="flagKey" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+    <result column="role_level" property="roleLevel" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ContainDepartmentResultMap" type="com.cf.ucenter.domain.CfRole" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="flag_key" property="flagKey" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+    <result column="role_level" property="roleLevel" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <collection property="cfDepartment" ofType="com.cf.ucenter.domain.CfDepartment">
+      <id column="department_id" property="id" jdbcType="VARCHAR" />
+      <result column="department_name" property="name" jdbcType="VARCHAR" />
+      <result column="department_icon" property="icon" jdbcType="VARCHAR" />
+      <result column="department_sort_index" property="sortIndex" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, flag_key, department_id, role_level, icon, description
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ucenter.domain.CfRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_role
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_role
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ucenter.domain.CfRoleExample" >
+    delete from cf_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ucenter.domain.CfRole" >
+    insert into cf_role (id, name, flag_key, 
+      department_id, role_level, icon, 
+      description)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{flagKey,jdbcType=VARCHAR}, 
+      #{departmentId,jdbcType=VARCHAR}, #{roleLevel,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ucenter.domain.CfRole" >
+    insert into cf_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="flagKey != null" >
+        flag_key,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="roleLevel != null" >
+        role_level,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flagKey != null" >
+        #{flagKey,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleLevel != null" >
+        #{roleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ucenter.domain.CfRoleExample" resultType="java.lang.Integer" >
+    select count(*) from cf_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_role
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flagKey != null" >
+        flag_key = #{record.flagKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentId != null" >
+        department_id = #{record.departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleLevel != null" >
+        role_level = #{record.roleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.icon != null" >
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_role
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      flag_key = #{record.flagKey,jdbcType=VARCHAR},
+      department_id = #{record.departmentId,jdbcType=VARCHAR},
+      role_level = #{record.roleLevel,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ucenter.domain.CfRole" >
+    update cf_role
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flagKey != null" >
+        flag_key = #{flagKey,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleLevel != null" >
+        role_level = #{roleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ucenter.domain.CfRole" >
+    update cf_role
+    set name = #{name,jdbcType=VARCHAR},
+      flag_key = #{flagKey,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=VARCHAR},
+      role_level = #{roleLevel,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectContainDepartmentByUid" parameterType="java.lang.String" resultMap="ContainDepartmentResultMap">
+    select
+     r.*,dp.name department_name,dp.icon department_icon,dp.sort_index department_sort_index
+    from
+     cf_role r
+    left join
+     cf_department dp on(r.department_id=dp.id)
+    where
+     r.id in(select role_id from cf_user_role where uid = #{uid,jdbcType=VARCHAR})
+  </select>
+
+  <select id="selectContainDepartment" resultMap="ContainDepartmentResultMap">
+    select
+     r.*,dp.name department_name,dp.icon department_icon,dp.sort_index department_sort_index
+    from
+     cf_role r
+    left join
+     cf_department dp on(r.department_id=dp.id)
+  </select>
+</mapper>

@@ -1,0 +1,8 @@
+com\cf\carpark\dao\mapper\CfCarParkCouponMapper.class
+com\cf\carpark\dao\mapper\CfCarParkMapper.class
+com\cf\carpark\dao\mapper\CfCarMapper.class
+com\cf\carpark\dao\mapper\CfCarParkCheckpointMapper.class
+com\cf\carpark\dao\mapper\CfCarParkDeviceBrandMapper.class
+com\cf\carpark\dao\mapper\CfCarParkDeviceVendorMapper.class
+com\cf\carpark\dao\mapper\CfCarParkUseLogMapper.class
+com\cf\carpark\dao\mapper\CfCarParkDeviceMapper.class

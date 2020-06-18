@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ucenter.dao.mapper.CfAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ucenter.domain.CfAuth" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="module" property="module" jdbcType="VARCHAR" />
+    <result column="controller" property="controller" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ContainGainedResultMap" type="com.cf.ucenter.domain.CfAuth" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="module" property="module" jdbcType="VARCHAR" />
+    <result column="controller" property="controller" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="auth_id" property="gained" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, module, controller, method, path, level, description
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ucenter.domain.CfAuthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_auth
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_auth
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ucenter.domain.CfAuthExample" >
+    delete from cf_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ucenter.domain.CfAuth" >
+    insert into cf_auth (id, name, module, 
+      controller, method, path, 
+      level, description)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{module,jdbcType=VARCHAR}, 
+      #{controller,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{level,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ucenter.domain.CfAuth" >
+    insert into cf_auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="module != null" >
+        module,
+      </if>
+      <if test="controller != null" >
+        controller,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null" >
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="controller != null" >
+        #{controller,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ucenter.domain.CfAuthExample" resultType="java.lang.Integer" >
+    select count(*) from cf_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_auth
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.module != null" >
+        module = #{record.module,jdbcType=VARCHAR},
+      </if>
+      <if test="record.controller != null" >
+        controller = #{record.controller,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null" >
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_auth
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      module = #{record.module,jdbcType=VARCHAR},
+      controller = #{record.controller,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=TINYINT},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ucenter.domain.CfAuth" >
+    update cf_auth
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null" >
+        module = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="controller != null" >
+        controller = #{controller,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ucenter.domain.CfAuth" >
+    update cf_auth
+    set name = #{name,jdbcType=VARCHAR},
+      module = #{module,jdbcType=VARCHAR},
+      controller = #{controller,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <select id="selectByUid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+     au.* from cf_user_auth ua
+    left join cf_auth au on(au.id=ua.auth_id)
+    where
+     ua.uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUidAndLevel" resultMap="ContainGainedResultMap">
+    select
+     au.*,ua.auth_id from cf_auth au
+    left join cf_user_auth ua on(au.id=ua.auth_id and ua.uid = #{uid,jdbcType=VARCHAR})
+    where
+     au.level = #{level,jdbcType=TINYINT}
+  </select>
+  <select id="selectByUidAndModuleAndLevel" resultMap="ContainGainedResultMap">
+    select
+     au.*,ua.auth_id from cf_auth au
+    left join cf_user_auth ua on(au.id=ua.auth_id and ua.uid = #{uid,jdbcType=VARCHAR})
+    where
+     au.module = #{module,jdbcType=VARCHAR} and au.level = #{level,jdbcType=TINYINT}
+  </select>
+  <select id="selectByUidAndControllerAndLevel" resultMap="ContainGainedResultMap">
+    select
+     au.*,ua.auth_id from cf_auth au
+    left join cf_user_auth ua on(au.id=ua.auth_id and ua.uid = #{uid,jdbcType=VARCHAR})
+    where
+     au.controller = #{controller,jdbcType=VARCHAR} and au.level = #{level,jdbcType=TINYINT}
+  </select>
+
+  <select id="selectByRoleIdAndLevel" resultMap="ContainGainedResultMap">
+    select
+     au.*,ra.auth_id from cf_auth au
+    left join cf_role_auth ra on(au.id=ra.auth_id and ra.role_id = #{roleId,jdbcType=VARCHAR})
+    where
+     au.level = #{level,jdbcType=TINYINT}
+  </select>
+  <select id="selectByRoleIdAndModuleAndLevel" resultMap="ContainGainedResultMap">
+    select
+     au.*,ra.auth_id from cf_auth au
+    left join cf_role_auth ra on(au.id=ra.auth_id and ra.role_id = #{roleId,jdbcType=VARCHAR})
+    where
+     au.module = #{module,jdbcType=VARCHAR} and au.level = #{level,jdbcType=TINYINT}
+  </select>
+  <select id="selectByRoleIdAndControllerAndLevel" resultMap="ContainGainedResultMap">
+    select
+     au.*,ra.auth_id from cf_auth au
+    left join cf_role_auth ra on(au.id=ra.auth_id and ra.role_id = #{roleId,jdbcType=VARCHAR})
+    where
+     au.controller = #{controller,jdbcType=VARCHAR} and au.level = #{level,jdbcType=TINYINT}
+  </select>
+
+  <select id="selectByUidAndRoleIdAndLevel" resultMap="BaseResultMap">
+    select * from cf_auth where id in (select auth_id from cf_role_auth where role_id in(select role_id from cf_user_role where uid = #{uid,jdbcType=VARCHAR}))
+    and level = #{level,jdbcType=TINYINT} group by id
+  </select>
+</mapper>

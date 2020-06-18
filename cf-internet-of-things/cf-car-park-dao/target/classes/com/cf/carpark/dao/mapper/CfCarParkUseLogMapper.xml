@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkUseLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkUseLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="in_time" property="inTime" jdbcType="BIGINT" />
+    <result column="out_time" property="outTime" jdbcType="BIGINT" />
+    <result column="release_type" property="releaseType" jdbcType="TINYINT" />
+    <result column="in_check_point_id" property="inCheckPointId" jdbcType="VARCHAR" />
+    <result column="out_check_point_id" property="outCheckPointId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, number_plate, car_park_id, in_time, out_time, release_type, in_check_point_id, 
+    out_check_point_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkUseLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_use_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_use_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_use_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkUseLogExample" >
+    delete from cf_car_park_use_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkUseLog" >
+    insert into cf_car_park_use_log (id, number_plate, car_park_id, 
+      in_time, out_time, release_type, 
+      in_check_point_id, out_check_point_id)
+    values (#{id,jdbcType=VARCHAR}, #{numberPlate,jdbcType=VARCHAR}, #{carParkId,jdbcType=VARCHAR}, 
+      #{inTime,jdbcType=BIGINT}, #{outTime,jdbcType=BIGINT}, #{releaseType,jdbcType=TINYINT}, 
+      #{inCheckPointId,jdbcType=VARCHAR}, #{outCheckPointId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkUseLog" >
+    insert into cf_car_park_use_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="numberPlate != null" >
+        number_plate,
+      </if>
+      <if test="carParkId != null" >
+        car_park_id,
+      </if>
+      <if test="inTime != null" >
+        in_time,
+      </if>
+      <if test="outTime != null" >
+        out_time,
+      </if>
+      <if test="releaseType != null" >
+        release_type,
+      </if>
+      <if test="inCheckPointId != null" >
+        in_check_point_id,
+      </if>
+      <if test="outCheckPointId != null" >
+        out_check_point_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null" >
+        #{inTime,jdbcType=BIGINT},
+      </if>
+      <if test="outTime != null" >
+        #{outTime,jdbcType=BIGINT},
+      </if>
+      <if test="releaseType != null" >
+        #{releaseType,jdbcType=TINYINT},
+      </if>
+      <if test="inCheckPointId != null" >
+        #{inCheckPointId,jdbcType=VARCHAR},
+      </if>
+      <if test="outCheckPointId != null" >
+        #{outCheckPointId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkUseLogExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_use_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_use_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberPlate != null" >
+        number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carParkId != null" >
+        car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inTime != null" >
+        in_time = #{record.inTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.outTime != null" >
+        out_time = #{record.outTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.releaseType != null" >
+        release_type = #{record.releaseType,jdbcType=TINYINT},
+      </if>
+      <if test="record.inCheckPointId != null" >
+        in_check_point_id = #{record.inCheckPointId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outCheckPointId != null" >
+        out_check_point_id = #{record.outCheckPointId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_use_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      in_time = #{record.inTime,jdbcType=BIGINT},
+      out_time = #{record.outTime,jdbcType=BIGINT},
+      release_type = #{record.releaseType,jdbcType=TINYINT},
+      in_check_point_id = #{record.inCheckPointId,jdbcType=VARCHAR},
+      out_check_point_id = #{record.outCheckPointId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkUseLog" >
+    update cf_car_park_use_log
+    <set >
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        car_park_id = #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null" >
+        in_time = #{inTime,jdbcType=BIGINT},
+      </if>
+      <if test="outTime != null" >
+        out_time = #{outTime,jdbcType=BIGINT},
+      </if>
+      <if test="releaseType != null" >
+        release_type = #{releaseType,jdbcType=TINYINT},
+      </if>
+      <if test="inCheckPointId != null" >
+        in_check_point_id = #{inCheckPointId,jdbcType=VARCHAR},
+      </if>
+      <if test="outCheckPointId != null" >
+        out_check_point_id = #{outCheckPointId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkUseLog" >
+    update cf_car_park_use_log
+    set number_plate = #{numberPlate,jdbcType=VARCHAR},
+      car_park_id = #{carParkId,jdbcType=VARCHAR},
+      in_time = #{inTime,jdbcType=BIGINT},
+      out_time = #{outTime,jdbcType=BIGINT},
+      release_type = #{releaseType,jdbcType=TINYINT},
+      in_check_point_id = #{inCheckPointId,jdbcType=VARCHAR},
+      out_check_point_id = #{outCheckPointId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

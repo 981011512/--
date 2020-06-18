@@ -1,0 +1,6 @@
+com\cf\carpark\api\config\Swagger2Configuration.class
+com\cf\carpark\CarParkApiApplication.class
+com\cf\carpark\api\config\CorsConfig.class
+com\cf\carpark\api\config\ResourceServerConfig.class
+com\cf\carpark\api\controller\CarParkController.class
+com\cf\carpark\api\swagger\CfCarParkSwagger.class

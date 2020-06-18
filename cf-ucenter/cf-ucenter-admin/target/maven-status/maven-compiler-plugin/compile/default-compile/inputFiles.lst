@@ -1,0 +1,17 @@
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\controller\DepartmentController.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\controller\AuthSwaggerController.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\controller\BaseController.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\controller\RoleController.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\UcenterAdminApplication.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\config\Swagger2Configuration.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\controller\CfUserGroupApi.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\swagger\DepartmentSwagger.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\config\CorsConfig.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\swagger\AuthSwagger.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\controller\UcenterController.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\config\ResourceServerConfig.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\swagger\UcenterSwagger.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\swagger\CfUserGroupSwagger.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\swagger\RoleSwagger.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\swagger\CfUserFriendSwagger.java
+G:\java\cf\cf-ucenter\cf-ucenter-admin\src\main\java\com\cf\ucenter\admin\controller\CfUserFriendController.java

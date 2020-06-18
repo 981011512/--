@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarPark" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+    <result column="end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+    <result column="parking_space_number" property="parkingSpaceNumber" jdbcType="INTEGER" />
+    <result column="used_parking_space_number" property="usedParkingSpaceNumber" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="landline" property="landline" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+    <result column="township_id" property="townshipId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, image, position_x, position_y, start_business_hours, end_business_hours, 
+    parking_space_number, used_parking_space_number, address, phone, landline, status, 
+    country_id, province_id, state_or_city_id, zone_or_county_id, township_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkExample" >
+    delete from cf_car_park
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarPark" >
+    insert into cf_car_park (id, name, image, 
+      position_x, position_y, start_business_hours, 
+      end_business_hours, parking_space_number, used_parking_space_number, 
+      address, phone, landline, 
+      status, country_id, province_id, 
+      state_or_city_id, zone_or_county_id, township_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{positionX,jdbcType=DECIMAL}, #{positionY,jdbcType=DECIMAL}, #{startBusinessHours,jdbcType=BIGINT}, 
+      #{endBusinessHours,jdbcType=BIGINT}, #{parkingSpaceNumber,jdbcType=INTEGER}, #{usedParkingSpaceNumber,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{landline,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{countryId,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, 
+      #{stateOrCityId,jdbcType=VARCHAR}, #{zoneOrCountyId,jdbcType=VARCHAR}, #{townshipId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarPark" >
+    insert into cf_car_park
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="positionX != null" >
+        position_x,
+      </if>
+      <if test="positionY != null" >
+        position_y,
+      </if>
+      <if test="startBusinessHours != null" >
+        start_business_hours,
+      </if>
+      <if test="endBusinessHours != null" >
+        end_business_hours,
+      </if>
+      <if test="parkingSpaceNumber != null" >
+        parking_space_number,
+      </if>
+      <if test="usedParkingSpaceNumber != null" >
+        used_parking_space_number,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="landline != null" >
+        landline,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id,
+      </if>
+      <if test="zoneOrCountyId != null" >
+        zone_or_county_id,
+      </if>
+      <if test="townshipId != null" >
+        township_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="startBusinessHours != null" >
+        #{startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="endBusinessHours != null" >
+        #{endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="parkingSpaceNumber != null" >
+        #{parkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="usedParkingSpaceNumber != null" >
+        #{usedParkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="landline != null" >
+        #{landline,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneOrCountyId != null" >
+        #{zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipId != null" >
+        #{townshipId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionX != null" >
+        position_x = #{record.positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.positionY != null" >
+        position_y = #{record.positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startBusinessHours != null" >
+        start_business_hours = #{record.startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="record.endBusinessHours != null" >
+        end_business_hours = #{record.endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="record.parkingSpaceNumber != null" >
+        parking_space_number = #{record.parkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.usedParkingSpaceNumber != null" >
+        used_parking_space_number = #{record.usedParkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landline != null" >
+        landline = #{record.landline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.countryId != null" >
+        country_id = #{record.countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateOrCityId != null" >
+        state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zoneOrCountyId != null" >
+        zone_or_county_id = #{record.zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.townshipId != null" >
+        township_id = #{record.townshipId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      position_x = #{record.positionX,jdbcType=DECIMAL},
+      position_y = #{record.positionY,jdbcType=DECIMAL},
+      start_business_hours = #{record.startBusinessHours,jdbcType=BIGINT},
+      end_business_hours = #{record.endBusinessHours,jdbcType=BIGINT},
+      parking_space_number = #{record.parkingSpaceNumber,jdbcType=INTEGER},
+      used_parking_space_number = #{record.usedParkingSpaceNumber,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      landline = #{record.landline,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      country_id = #{record.countryId,jdbcType=VARCHAR},
+      province_id = #{record.provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      zone_or_county_id = #{record.zoneOrCountyId,jdbcType=VARCHAR},
+      township_id = #{record.townshipId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarPark" >
+    update cf_car_park
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        position_x = #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        position_y = #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="startBusinessHours != null" >
+        start_business_hours = #{startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="endBusinessHours != null" >
+        end_business_hours = #{endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="parkingSpaceNumber != null" >
+        parking_space_number = #{parkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="usedParkingSpaceNumber != null" >
+        used_parking_space_number = #{usedParkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="landline != null" >
+        landline = #{landline,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneOrCountyId != null" >
+        zone_or_county_id = #{zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipId != null" >
+        township_id = #{townshipId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarPark" >
+    update cf_car_park
+    set name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      position_x = #{positionX,jdbcType=DECIMAL},
+      position_y = #{positionY,jdbcType=DECIMAL},
+      start_business_hours = #{startBusinessHours,jdbcType=BIGINT},
+      end_business_hours = #{endBusinessHours,jdbcType=BIGINT},
+      parking_space_number = #{parkingSpaceNumber,jdbcType=INTEGER},
+      used_parking_space_number = #{usedParkingSpaceNumber,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      landline = #{landline,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      country_id = #{countryId,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      zone_or_county_id = #{zoneOrCountyId,jdbcType=VARCHAR},
+      township_id = #{townshipId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+</mapper>

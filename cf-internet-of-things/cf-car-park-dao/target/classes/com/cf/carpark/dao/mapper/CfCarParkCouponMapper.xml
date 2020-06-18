@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkCouponMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkCoupon" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="denomination" property="denomination" jdbcType="DECIMAL" />
+    <result column="effective_time" property="effectiveTime" jdbcType="BIGINT" />
+    <result column="expire_time" property="expireTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="use_time" property="useTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, uid, number_plate, denomination, effective_time, expire_time, status, create_time, 
+    use_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkCouponExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_coupon
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_coupon
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkCouponExample" >
+    delete from cf_car_park_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkCoupon" >
+    insert into cf_car_park_coupon (id, uid, number_plate, 
+      denomination, effective_time, expire_time, 
+      status, create_time, use_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{numberPlate,jdbcType=VARCHAR}, 
+      #{denomination,jdbcType=DECIMAL}, #{effectiveTime,jdbcType=BIGINT}, #{expireTime,jdbcType=BIGINT}, 
+      #{status,jdbcType=BIT}, #{createTime,jdbcType=BIGINT}, #{useTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkCoupon" >
+    insert into cf_car_park_coupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="numberPlate != null" >
+        number_plate,
+      </if>
+      <if test="denomination != null" >
+        denomination,
+      </if>
+      <if test="effectiveTime != null" >
+        effective_time,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="useTime != null" >
+        use_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="denomination != null" >
+        #{denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="effectiveTime != null" >
+        #{effectiveTime,jdbcType=BIGINT},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="useTime != null" >
+        #{useTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkCouponExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_coupon
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberPlate != null" >
+        number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.denomination != null" >
+        denomination = #{record.denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="record.effectiveTime != null" >
+        effective_time = #{record.effectiveTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.expireTime != null" >
+        expire_time = #{record.expireTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.useTime != null" >
+        use_time = #{record.useTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_coupon
+    set id = #{record.id,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      denomination = #{record.denomination,jdbcType=DECIMAL},
+      effective_time = #{record.effectiveTime,jdbcType=BIGINT},
+      expire_time = #{record.expireTime,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      use_time = #{record.useTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkCoupon" >
+    update cf_car_park_coupon
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="denomination != null" >
+        denomination = #{denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="effectiveTime != null" >
+        effective_time = #{effectiveTime,jdbcType=BIGINT},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="useTime != null" >
+        use_time = #{useTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkCoupon" >
+    update cf_car_park_coupon
+    set uid = #{uid,jdbcType=VARCHAR},
+      number_plate = #{numberPlate,jdbcType=VARCHAR},
+      denomination = #{denomination,jdbcType=DECIMAL},
+      effective_time = #{effectiveTime,jdbcType=BIGINT},
+      expire_time = #{expireTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      use_time = #{useTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

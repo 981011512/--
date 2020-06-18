@@ -1,0 +1,8 @@
+com\cf\file\api\FileApiApplication.class
+com\cf\file\api\config\Swagger2Configuration.class
+com\cf\file\api\swagger\FileSwagger.class
+com\cf\file\api\config\CorsConfig.class
+com\cf\file\api\config\ResourceServerConfig.class
+com\cf\file\api\config\FileUpLoadConfig.class
+com\cf\file\api\controller\BaseController.class
+com\cf\file\api\controller\FileController.class

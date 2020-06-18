@@ -1,0 +1,68 @@
+server:
+  port: ${PORT:8082}
+  servlet:
+    context-path: /auth
+spring:
+  application:
+    name: cf-ucenter-auth
+  redis:
+    host: ${REDIS_HOST:139.9.155.149}
+    port: ${REDIS_PORT:6379}
+    timeout: 5000 #连接超时 毫秒
+    jedis:
+      pool:
+        maxActive: 3
+        maxIdle: 3
+        minIdle: 1
+        maxWait: -1 #连接池最大等行时间 -1没有限制
+    password: gebixiaowang
+  datasource:
+    name: caifeng
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://139.9.155.149:3306/caifeng?characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: caifeng
+    password: pNrApiSx5Ti2iPNF
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      url: ${MYSQL_URL:jdbc:mysql://139.9.155.149:3306/caifeng?characterEncoding=utf-8}
+      username: caifeng
+      password: pNrApiSx5Ti2iPNF
+      driverClassName: com.mysql.jdbc.Driver
+      initialSize: 5  #初始建立连接数量
+      minIdle: 5  #最小连接数量
+      maxActive: 20 #最大连接数量
+      maxWait: 10000  #获取连接最大等待时间，毫秒
+      testOnBorrow: true #申请连接时检测连接是否有效
+      testOnReturn: false #归还连接时检测连接是否有效
+      timeBetweenEvictionRunsMillis: 60000 #配置间隔检测连接是否有效的时间（单位是毫秒）
+      minEvictableIdleTimeMillis: 300000  #连接在连接池的最小生存时间（毫秒）
+auth:
+  tokenValiditySeconds: 1200  #redis的token的过期时间(暂时不用)
+  clientId: XcWebApp
+  clientSecret: XcWebApp
+  cookieDomain: xuecheng.com
+  cookieMaxAge: -1
+encrypt:
+  key-store:
+    location: classpath:/xc.keystore
+    secret: xuechengkeystore
+    alias: xckey
+    password: xuecheng
+
+dubbo:
+  scan:
+    base-packages: com.cf.ucenter.auth.service
+  application:
+    name: ${spring.application.name}
+  protocol:
+    name: dubbo
+    port: 20882
+  registry:
+    address: zookeeper://139.9.155.149:2181
+  provider:
+    filter: -exception
+
+
+
+
+

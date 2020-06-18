@@ -1,0 +1,11 @@
+com\cf\ucenter\dao\mapper\CfDepartmentMapper.class
+com\cf\ucenter\dao\mapper\CfUserFriendAddLogMapper.class
+com\cf\ucenter\dao\mapper\CfUserMapper.class
+com\cf\ucenter\dao\mapper\CfRoleAuthMapper.class
+com\cf\ucenter\dao\mapper\CfUserGroupMemberMapper.class
+com\cf\ucenter\dao\mapper\CfUserAuthMapper.class
+com\cf\ucenter\dao\mapper\CfUserFriendMapper.class
+com\cf\ucenter\dao\mapper\CfUserRoleMapper.class
+com\cf\ucenter\dao\mapper\CfRoleMapper.class
+com\cf\ucenter\dao\mapper\CfUserGroupMapper.class
+com\cf\ucenter\dao\mapper\CfAuthMapper.class
