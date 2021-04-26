@@ -7,7 +7,7 @@ import lombok.ToString;
 
 
 /**
- * Created by admin on 2020/3/5.
+ * 角色管理的响应消息体
  */
 @ToString
 public enum RoleCode implements ResultCode {
