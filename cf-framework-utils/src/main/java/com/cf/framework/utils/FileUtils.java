@@ -125,12 +125,7 @@ public class FileUtils {
 			return null;
 		}
 	}
-
-	public static void main(String[] args) {
-		// WebFileUtils.createFileByUrl("http://122.152.205.72:88/group1/M00/00/01/CpoxxFr7oIaAZ0rOAAC0d3GKDio580.png",
-		// "png");
-		// WebFileUtils.createImg("http://122.152.205.72:88/group1/M00/00/01/CpoxxFr7oIaAZ0rOAAC0d3GKDio580.png");
-	}
+	
 
 	public static boolean base64ToFile(String filePath, String base64Data)  throws Exception {
 		String dataPrix = "";
