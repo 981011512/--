@@ -61,6 +61,7 @@ public class CfUserGroupMessageServiceImpl implements CfUserGroupMessageService 
                 }
                 Channel channel = UserChannelMap.get(cfUserGroupMember.getUid());
                 if(channel != null) {
+                    //直接发送，对方直接接收
                     Message message = new Message();
                     message.setType("chat_message");
                     message.setCfUserMessage(cfUserMessage);
