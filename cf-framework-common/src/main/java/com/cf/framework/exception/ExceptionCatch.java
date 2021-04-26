@@ -76,5 +76,6 @@ public class ExceptionCatch {
         builder.put(BindException.class, CommonCode.INVALID_PARAM);
         builder.put(MissingServletRequestParameterException.class, CommonCode.INVALID_PARAM);
         builder.put(AccessDeniedException.class, AuthCode.INSUFFICIENT_PERMISSIONS);
+        //需要的其它你可以继续在此进行增加
     }
 }
