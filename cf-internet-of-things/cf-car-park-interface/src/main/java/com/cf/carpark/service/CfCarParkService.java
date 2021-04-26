@@ -53,5 +53,7 @@ public interface CfCarParkService {
      * @return
      */
     public List<CfCarPark> selectListByCondition(Map<String, Map<String, Object>> conditions, Map<String, String> allowFiledsMap, List<String> allowFileds);
+    
+    //这里只是提供了基础的停车场模块和功能，如果你想使用完整的，更高级，更专业的停车场系统商业源代码，请联系我们公司 微信 Dove981011512  谢谢！ 为千万级数据专业大系统而生
 
 }
