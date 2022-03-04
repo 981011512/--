@@ -12,7 +12,7 @@
 【微信小程序演示效果】：
 点此此连接查看微信小程序二维码：http://file.cfeng.wang/wx_min.jpg
 
-**【商业版官方地址】：http://product.cfeng.wang/**
+**【商业版官方地址】：http://www.cfeng.wang/**
 
 #### 【 互动交流 】：想商业合作的加我微信: Dove981011512 非诚勿扰，谢谢配合！
 
