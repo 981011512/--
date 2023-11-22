@@ -1,0 +1,45 @@
+server:
+  port: 8070
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: cf-dh
+dh:
+  forward:
+    coding: GBK
+    ledBrand: yang_bang
+    cameraInfoes:
+      - ip: 192.168.3.200
+        server: http://192.168.3.19:8089
+        port: 37777
+        username: admin
+        password: admin123
+        uuid: 6F01FFAPAJ65519
+#      - ip: 10.66.52.101
+#        server: https://parking-api.ebatech.cn
+#        port: 37777
+#        username: admin
+#        password: admin123
+#        uuid: 7C0AEEDPAJ2A1A2
+#      - ip: 10.66.52.102
+#        server: https://parking-api.ebatech.cn
+#        port: 37777
+#        username: admin
+#        password: admin123
+#        uuid: 7C0AEEDPAJ9B4D5
+#      - ip: 10.66.52.103
+#        server: https://parking-api.ebatech.cn
+#        port: 37777
+#        username: admin
+#        password: admin123
+#        uuid: 7C0AEEDPAJCE7F8
+    ledConfigs:
+      - ip: 192.168.3.250
+        port: 5005
+        uuid: 6F01FFAPAJ65519
+
+
+
+
+

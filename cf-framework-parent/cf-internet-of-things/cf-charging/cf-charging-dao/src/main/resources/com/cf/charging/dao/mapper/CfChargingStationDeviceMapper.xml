@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.charging.dao.mapper.CfChargingStationDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.charging.domain.CfChargingStationDevice" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="charging_station_id" property="chargingStationId" jdbcType="VARCHAR" />
+    <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="last_online_time" property="lastOnlineTime" jdbcType="BIGINT" />
+    <result column="link_mode" property="linkMode" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="checkpoint_id" property="checkpointId" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="play_contents" property="playContents" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="video_address" property="videoAddress" jdbcType="VARCHAR" />
+    <result column="history_video_address" property="historyVideoAddress" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="index_no" property="indexNo" jdbcType="TINYINT" />
+    <result column="noticed" property="noticed" jdbcType="TINYINT" />
+    <result column="rows" property="rows" jdbcType="TINYINT" />
+    <result column="mac_address" property="macAddress" jdbcType="VARCHAR" />
+    <result column="power" property="power" jdbcType="INTEGER" />
+    <result column="power_type" property="powerType" jdbcType="TINYINT" />
+    <result column="alias_name" property="aliasName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, charging_station_id, bar_code, brand, model, status, last_online_time, link_mode, 
+    type, checkpoint_id, product_id, play_contents, ip, video_address, history_video_address, 
+    username, password, index_no, noticed, rows, mac_address, power, power_type, alias_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.charging.domain.CfChargingStationDeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_charging_station_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_charging_station_device
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_charging_station_device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.charging.domain.CfChargingStationDeviceExample" >
+    delete from cf_charging_station_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.charging.domain.CfChargingStationDevice" >
+    insert into cf_charging_station_device (id, charging_station_id, bar_code, 
+      brand, model, status, 
+      last_online_time, link_mode, type, 
+      checkpoint_id, product_id, play_contents, 
+      ip, video_address, history_video_address, 
+      username, password, index_no, 
+      noticed, rows, mac_address, 
+      power, power_type, alias_name
+      )
+    values (#{id,jdbcType=VARCHAR}, #{chargingStationId,jdbcType=VARCHAR}, #{barCode,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{lastOnlineTime,jdbcType=BIGINT}, #{linkMode,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+      #{checkpointId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{playContents,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{videoAddress,jdbcType=VARCHAR}, #{historyVideoAddress,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{indexNo,jdbcType=TINYINT}, 
+      #{noticed,jdbcType=TINYINT}, #{rows,jdbcType=TINYINT}, #{macAddress,jdbcType=VARCHAR}, 
+      #{power,jdbcType=INTEGER}, #{powerType,jdbcType=TINYINT}, #{aliasName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.charging.domain.CfChargingStationDevice" >
+    insert into cf_charging_station_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="chargingStationId != null" >
+        charging_station_id,
+      </if>
+      <if test="barCode != null" >
+        bar_code,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastOnlineTime != null" >
+        last_online_time,
+      </if>
+      <if test="linkMode != null" >
+        link_mode,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="checkpointId != null" >
+        checkpoint_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="playContents != null" >
+        play_contents,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="videoAddress != null" >
+        video_address,
+      </if>
+      <if test="historyVideoAddress != null" >
+        history_video_address,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="indexNo != null" >
+        index_no,
+      </if>
+      <if test="noticed != null" >
+        noticed,
+      </if>
+      <if test="rows != null" >
+        rows,
+      </if>
+      <if test="macAddress != null" >
+        mac_address,
+      </if>
+      <if test="power != null" >
+        power,
+      </if>
+      <if test="powerType != null" >
+        power_type,
+      </if>
+      <if test="aliasName != null" >
+        alias_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingStationId != null" >
+        #{chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="lastOnlineTime != null" >
+        #{lastOnlineTime,jdbcType=BIGINT},
+      </if>
+      <if test="linkMode != null" >
+        #{linkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="checkpointId != null" >
+        #{checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="playContents != null" >
+        #{playContents,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="videoAddress != null" >
+        #{videoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="historyVideoAddress != null" >
+        #{historyVideoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="indexNo != null" >
+        #{indexNo,jdbcType=TINYINT},
+      </if>
+      <if test="noticed != null" >
+        #{noticed,jdbcType=TINYINT},
+      </if>
+      <if test="rows != null" >
+        #{rows,jdbcType=TINYINT},
+      </if>
+      <if test="macAddress != null" >
+        #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null" >
+        #{power,jdbcType=INTEGER},
+      </if>
+      <if test="powerType != null" >
+        #{powerType,jdbcType=TINYINT},
+      </if>
+      <if test="aliasName != null" >
+        #{aliasName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.charging.domain.CfChargingStationDeviceExample" resultType="java.lang.Integer" >
+    select count(*) from cf_charging_station_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_charging_station_device
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargingStationId != null" >
+        charging_station_id = #{record.chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barCode != null" >
+        bar_code = #{record.barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.lastOnlineTime != null" >
+        last_online_time = #{record.lastOnlineTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.linkMode != null" >
+        link_mode = #{record.linkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.checkpointId != null" >
+        checkpoint_id = #{record.checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.playContents != null" >
+        play_contents = #{record.playContents,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoAddress != null" >
+        video_address = #{record.videoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyVideoAddress != null" >
+        history_video_address = #{record.historyVideoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexNo != null" >
+        index_no = #{record.indexNo,jdbcType=TINYINT},
+      </if>
+      <if test="record.noticed != null" >
+        noticed = #{record.noticed,jdbcType=TINYINT},
+      </if>
+      <if test="record.rows != null" >
+        rows = #{record.rows,jdbcType=TINYINT},
+      </if>
+      <if test="record.macAddress != null" >
+        mac_address = #{record.macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.power != null" >
+        power = #{record.power,jdbcType=INTEGER},
+      </if>
+      <if test="record.powerType != null" >
+        power_type = #{record.powerType,jdbcType=TINYINT},
+      </if>
+      <if test="record.aliasName != null" >
+        alias_name = #{record.aliasName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_charging_station_device
+    set id = #{record.id,jdbcType=VARCHAR},
+      charging_station_id = #{record.chargingStationId,jdbcType=VARCHAR},
+      bar_code = #{record.barCode,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      last_online_time = #{record.lastOnlineTime,jdbcType=BIGINT},
+      link_mode = #{record.linkMode,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      checkpoint_id = #{record.checkpointId,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      play_contents = #{record.playContents,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      video_address = #{record.videoAddress,jdbcType=VARCHAR},
+      history_video_address = #{record.historyVideoAddress,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      index_no = #{record.indexNo,jdbcType=TINYINT},
+      noticed = #{record.noticed,jdbcType=TINYINT},
+      rows = #{record.rows,jdbcType=TINYINT},
+      mac_address = #{record.macAddress,jdbcType=VARCHAR},
+      power = #{record.power,jdbcType=INTEGER},
+      power_type = #{record.powerType,jdbcType=TINYINT},
+      alias_name = #{record.aliasName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.charging.domain.CfChargingStationDevice" >
+    update cf_charging_station_device
+    <set >
+      <if test="chargingStationId != null" >
+        charging_station_id = #{chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        bar_code = #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="lastOnlineTime != null" >
+        last_online_time = #{lastOnlineTime,jdbcType=BIGINT},
+      </if>
+      <if test="linkMode != null" >
+        link_mode = #{linkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="checkpointId != null" >
+        checkpoint_id = #{checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="playContents != null" >
+        play_contents = #{playContents,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="videoAddress != null" >
+        video_address = #{videoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="historyVideoAddress != null" >
+        history_video_address = #{historyVideoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="indexNo != null" >
+        index_no = #{indexNo,jdbcType=TINYINT},
+      </if>
+      <if test="noticed != null" >
+        noticed = #{noticed,jdbcType=TINYINT},
+      </if>
+      <if test="rows != null" >
+        rows = #{rows,jdbcType=TINYINT},
+      </if>
+      <if test="macAddress != null" >
+        mac_address = #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null" >
+        power = #{power,jdbcType=INTEGER},
+      </if>
+      <if test="powerType != null" >
+        power_type = #{powerType,jdbcType=TINYINT},
+      </if>
+      <if test="aliasName != null" >
+        alias_name = #{aliasName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.charging.domain.CfChargingStationDevice" >
+    update cf_charging_station_device
+    set charging_station_id = #{chargingStationId,jdbcType=VARCHAR},
+      bar_code = #{barCode,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      last_online_time = #{lastOnlineTime,jdbcType=BIGINT},
+      link_mode = #{linkMode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      checkpoint_id = #{checkpointId,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      play_contents = #{playContents,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      video_address = #{videoAddress,jdbcType=VARCHAR},
+      history_video_address = #{historyVideoAddress,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      index_no = #{indexNo,jdbcType=TINYINT},
+      noticed = #{noticed,jdbcType=TINYINT},
+      rows = #{rows,jdbcType=TINYINT},
+      mac_address = #{macAddress,jdbcType=VARCHAR},
+      power = #{power,jdbcType=INTEGER},
+      power_type = #{powerType,jdbcType=TINYINT},
+      alias_name = #{aliasName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

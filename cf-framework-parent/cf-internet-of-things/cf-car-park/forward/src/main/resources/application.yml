@@ -1,0 +1,20 @@
+server:
+  port: ${random.int[1024,9999]}
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: cf-hk
+hk:
+  forward:
+    baseUrl: http://192.168.3.19
+    localIP: 192.168.3.252
+#    deviceIP: 192.168.10.61,192.168.10.62,192.168.10.63,192.168.10.64
+    deviceIP: 192.168.3.249
+    port: 8000
+    username: admin
+    password: abcde12345
+
+
+
+

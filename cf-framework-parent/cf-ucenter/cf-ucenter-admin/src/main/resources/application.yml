@@ -1,0 +1,43 @@
+server:
+  port: 8091
+  max-http-header-size: 64KB
+spring:
+  application:
+    name: cf-ucenter-admin
+  profiles:
+    active: dev
+  datasource:
+    name: caifeng
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://mysql数据库地址:3306/caifeng?characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+    username: caifeng
+    password: mysql数据库密码
+    driver-class-name: com.mysql.jdbc.Driver
+    maxActive: 32
+  redis:
+    host: redis数据库地址
+    port: 6379
+    password: redis密码
+    database: 0
+    jedis:
+      pool:
+        maxActive: 3
+        maxIdle: 3
+        minIdle: 1
+        maxWait: -1
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: zookeeper://127.0.0.1:2181
+auth:
+  tokenValiditySeconds: 1200
+  clientId: oauth2用户名，记得在对应的数据库配置用户名
+  clientSecret: oauth2密码，记得在对应数据库配置密码
+  cookieDomain: xuecheng.com
+  cookieMaxAge: -1
+

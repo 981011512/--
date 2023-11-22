@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.logistics.dao.mapper.CfLogisticsTaskLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.logistics.domain.CfLogisticsTaskLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="deliver_uid" property="deliverUid" jdbcType="VARCHAR" />
+    <result column="receipt_uid" property="receiptUid" jdbcType="VARCHAR" />
+    <result column="checker_uid" property="checkerUid" jdbcType="VARCHAR" />
+    <result column="task_log_status" property="taskLogStatus" jdbcType="TINYINT" />
+    <result column="reserve_quantity" property="reserveQuantity" jdbcType="INTEGER" />
+    <result column="finally_quantity" property="finallyQuantity" jdbcType="INTEGER" />
+    <result column="reserve_weight" property="reserveWeight" jdbcType="BIGINT" />
+    <result column="finally_weight" property="finallyWeight" jdbcType="BIGINT" />
+    <result column="queue_index" property="queueIndex" jdbcType="SMALLINT" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="delivery_note_code" property="deliveryNoteCode" jdbcType="VARCHAR" />
+    <result column="delivery_note_image" property="deliveryNoteImage" jdbcType="VARCHAR" />
+    <result column="inbound_delivery_note_number" property="inboundDeliveryNoteNumber" jdbcType="VARCHAR" />
+    <result column="purchase_order_number" property="purchaseOrderNumber" jdbcType="VARCHAR" />
+    <result column="item_number" property="itemNumber" jdbcType="VARCHAR" />
+    <result column="item_description" property="itemDescription" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="requested_delivery_time" property="requestedDeliveryTime" jdbcType="BIGINT" />
+    <result column="exempt_from_inspection" property="exemptFromInspection" jdbcType="TINYINT" />
+    <result column="earliest_delivery_time" property="earliestDeliveryTime" jdbcType="BIGINT" />
+    <result column="latest_delivery_date" property="latestDeliveryDate" jdbcType="BIGINT" />
+    <result column="shelf_life" property="shelfLife" jdbcType="BIGINT" />
+    <result column="notify_driver_time" property="notifyDriverTime" jdbcType="BIGINT" />
+    <result column="logistics_storehouse_id" property="logisticsStorehouseId" jdbcType="BIGINT" />
+    <result column="logistics_platform_id" property="logisticsPlatformId" jdbcType="BIGINT" />
+    <result column="check_time" property="checkTime" jdbcType="BIGINT" />
+    <result column="emergency_level" property="emergencyLevel" jdbcType="TINYINT" />
+    <result column="queuing_area_id" property="queuingAreaId" jdbcType="BIGINT" />
+    <result column="start_queuing_time" property="startQueuingTime" jdbcType="BIGINT" />
+    <result column="call_time" property="callTime" jdbcType="BIGINT" />
+    <result column="factory_id" property="factoryId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pid, task_id, deliver_uid, receipt_uid, checker_uid, task_log_status, reserve_quantity, 
+    finally_quantity, reserve_weight, finally_weight, queue_index, number_plate, delivery_note_code, 
+    delivery_note_image, inbound_delivery_note_number, purchase_order_number, item_number, 
+    item_description, category, requested_delivery_time, exempt_from_inspection, earliest_delivery_time, 
+    latest_delivery_date, shelf_life, notify_driver_time, logistics_storehouse_id, logistics_platform_id, 
+    check_time, emergency_level, queuing_area_id, start_queuing_time, call_time, factory_id, 
+    create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.logistics.domain.CfLogisticsTaskLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_logistics_task_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from cf_logistics_task_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_logistics_task_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.logistics.domain.CfLogisticsTaskLogExample" >
+    delete from cf_logistics_task_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.logistics.domain.CfLogisticsTaskLog" >
+    insert into cf_logistics_task_log (id, pid, task_id,
+                                       deliver_uid, receipt_uid, checker_uid,
+                                       task_log_status, reserve_quantity, finally_quantity,
+                                       reserve_weight, finally_weight, queue_index,
+                                       number_plate, delivery_note_code, delivery_note_image,
+                                       inbound_delivery_note_number, purchase_order_number,
+                                       item_number, item_description, category,
+                                       requested_delivery_time, exempt_from_inspection,
+                                       earliest_delivery_time, latest_delivery_date,
+                                       shelf_life, notify_driver_time, logistics_storehouse_id,
+                                       logistics_platform_id, check_time, emergency_level,
+                                       queuing_area_id, start_queuing_time, call_time,
+                                       factory_id, create_time)
+    values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT},
+            #{deliverUid,jdbcType=VARCHAR}, #{receiptUid,jdbcType=VARCHAR}, #{checkerUid,jdbcType=VARCHAR},
+            #{taskLogStatus,jdbcType=TINYINT}, #{reserveQuantity,jdbcType=INTEGER}, #{finallyQuantity,jdbcType=INTEGER},
+            #{reserveWeight,jdbcType=BIGINT}, #{finallyWeight,jdbcType=BIGINT}, #{queueIndex,jdbcType=SMALLINT},
+            #{numberPlate,jdbcType=VARCHAR}, #{deliveryNoteCode,jdbcType=VARCHAR}, #{deliveryNoteImage,jdbcType=VARCHAR},
+            #{inboundDeliveryNoteNumber,jdbcType=VARCHAR}, #{purchaseOrderNumber,jdbcType=VARCHAR},
+            #{itemNumber,jdbcType=VARCHAR}, #{itemDescription,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+            #{requestedDeliveryTime,jdbcType=BIGINT}, #{exemptFromInspection,jdbcType=TINYINT},
+            #{earliestDeliveryTime,jdbcType=BIGINT}, #{latestDeliveryDate,jdbcType=BIGINT},
+            #{shelfLife,jdbcType=BIGINT}, #{notifyDriverTime,jdbcType=BIGINT}, #{logisticsStorehouseId,jdbcType=BIGINT},
+            #{logisticsPlatformId,jdbcType=BIGINT}, #{checkTime,jdbcType=BIGINT}, #{emergencyLevel,jdbcType=TINYINT},
+            #{queuingAreaId,jdbcType=BIGINT}, #{startQueuingTime,jdbcType=BIGINT}, #{callTime,jdbcType=BIGINT},
+            #{factoryId,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.logistics.domain.CfLogisticsTaskLog" >
+    insert into cf_logistics_task_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="deliverUid != null" >
+        deliver_uid,
+      </if>
+      <if test="receiptUid != null" >
+        receipt_uid,
+      </if>
+      <if test="checkerUid != null" >
+        checker_uid,
+      </if>
+      <if test="taskLogStatus != null" >
+        task_log_status,
+      </if>
+      <if test="reserveQuantity != null" >
+        reserve_quantity,
+      </if>
+      <if test="finallyQuantity != null" >
+        finally_quantity,
+      </if>
+      <if test="reserveWeight != null" >
+        reserve_weight,
+      </if>
+      <if test="finallyWeight != null" >
+        finally_weight,
+      </if>
+      <if test="queueIndex != null" >
+        queue_index,
+      </if>
+      <if test="numberPlate != null" >
+        number_plate,
+      </if>
+      <if test="deliveryNoteCode != null" >
+        delivery_note_code,
+      </if>
+      <if test="deliveryNoteImage != null" >
+        delivery_note_image,
+      </if>
+      <if test="inboundDeliveryNoteNumber != null" >
+        inbound_delivery_note_number,
+      </if>
+      <if test="purchaseOrderNumber != null" >
+        purchase_order_number,
+      </if>
+      <if test="itemNumber != null" >
+        item_number,
+      </if>
+      <if test="itemDescription != null" >
+        item_description,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="requestedDeliveryTime != null" >
+        requested_delivery_time,
+      </if>
+      <if test="exemptFromInspection != null" >
+        exempt_from_inspection,
+      </if>
+      <if test="earliestDeliveryTime != null" >
+        earliest_delivery_time,
+      </if>
+      <if test="latestDeliveryDate != null" >
+        latest_delivery_date,
+      </if>
+      <if test="shelfLife != null" >
+        shelf_life,
+      </if>
+      <if test="notifyDriverTime != null" >
+        notify_driver_time,
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        logistics_storehouse_id,
+      </if>
+      <if test="logisticsPlatformId != null" >
+        logistics_platform_id,
+      </if>
+      <if test="checkTime != null" >
+        check_time,
+      </if>
+      <if test="emergencyLevel != null" >
+        emergency_level,
+      </if>
+      <if test="queuingAreaId != null" >
+        queuing_area_id,
+      </if>
+      <if test="startQueuingTime != null" >
+        start_queuing_time,
+      </if>
+      <if test="callTime != null" >
+        call_time,
+      </if>
+      <if test="factoryId != null" >
+        factory_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="deliverUid != null" >
+        #{deliverUid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptUid != null" >
+        #{receiptUid,jdbcType=VARCHAR},
+      </if>
+      <if test="checkerUid != null" >
+        #{checkerUid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskLogStatus != null" >
+        #{taskLogStatus,jdbcType=TINYINT},
+      </if>
+      <if test="reserveQuantity != null" >
+        #{reserveQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="finallyQuantity != null" >
+        #{finallyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="reserveWeight != null" >
+        #{reserveWeight,jdbcType=BIGINT},
+      </if>
+      <if test="finallyWeight != null" >
+        #{finallyWeight,jdbcType=BIGINT},
+      </if>
+      <if test="queueIndex != null" >
+        #{queueIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="numberPlate != null" >
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryNoteCode != null" >
+        #{deliveryNoteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryNoteImage != null" >
+        #{deliveryNoteImage,jdbcType=VARCHAR},
+      </if>
+      <if test="inboundDeliveryNoteNumber != null" >
+        #{inboundDeliveryNoteNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseOrderNumber != null" >
+        #{purchaseOrderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNumber != null" >
+        #{itemNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="itemDescription != null" >
+        #{itemDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="requestedDeliveryTime != null" >
+        #{requestedDeliveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="exemptFromInspection != null" >
+        #{exemptFromInspection,jdbcType=TINYINT},
+      </if>
+      <if test="earliestDeliveryTime != null" >
+        #{earliestDeliveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="latestDeliveryDate != null" >
+        #{latestDeliveryDate,jdbcType=BIGINT},
+      </if>
+      <if test="shelfLife != null" >
+        #{shelfLife,jdbcType=BIGINT},
+      </if>
+      <if test="notifyDriverTime != null" >
+        #{notifyDriverTime,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        #{logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsPlatformId != null" >
+        #{logisticsPlatformId,jdbcType=BIGINT},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=BIGINT},
+      </if>
+      <if test="emergencyLevel != null" >
+        #{emergencyLevel,jdbcType=TINYINT},
+      </if>
+      <if test="queuingAreaId != null" >
+        #{queuingAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="startQueuingTime != null" >
+        #{startQueuingTime,jdbcType=BIGINT},
+      </if>
+      <if test="callTime != null" >
+        #{callTime,jdbcType=BIGINT},
+      </if>
+      <if test="factoryId != null" >
+        #{factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.logistics.domain.CfLogisticsTaskLogExample" resultType="java.lang.Integer" >
+    select count(*) from cf_logistics_task_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_logistics_task_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=BIGINT},
+      </if>
+      <if test="record.deliverUid != null" >
+        deliver_uid = #{record.deliverUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiptUid != null" >
+        receipt_uid = #{record.receiptUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkerUid != null" >
+        checker_uid = #{record.checkerUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskLogStatus != null" >
+        task_log_status = #{record.taskLogStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.reserveQuantity != null" >
+        reserve_quantity = #{record.reserveQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.finallyQuantity != null" >
+        finally_quantity = #{record.finallyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.reserveWeight != null" >
+        reserve_weight = #{record.reserveWeight,jdbcType=BIGINT},
+      </if>
+      <if test="record.finallyWeight != null" >
+        finally_weight = #{record.finallyWeight,jdbcType=BIGINT},
+      </if>
+      <if test="record.queueIndex != null" >
+        queue_index = #{record.queueIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.numberPlate != null" >
+        number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryNoteCode != null" >
+        delivery_note_code = #{record.deliveryNoteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryNoteImage != null" >
+        delivery_note_image = #{record.deliveryNoteImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inboundDeliveryNoteNumber != null" >
+        inbound_delivery_note_number = #{record.inboundDeliveryNoteNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseOrderNumber != null" >
+        purchase_order_number = #{record.purchaseOrderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemNumber != null" >
+        item_number = #{record.itemNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemDescription != null" >
+        item_description = #{record.itemDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null" >
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestedDeliveryTime != null" >
+        requested_delivery_time = #{record.requestedDeliveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.exemptFromInspection != null" >
+        exempt_from_inspection = #{record.exemptFromInspection,jdbcType=TINYINT},
+      </if>
+      <if test="record.earliestDeliveryTime != null" >
+        earliest_delivery_time = #{record.earliestDeliveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.latestDeliveryDate != null" >
+        latest_delivery_date = #{record.latestDeliveryDate,jdbcType=BIGINT},
+      </if>
+      <if test="record.shelfLife != null" >
+        shelf_life = #{record.shelfLife,jdbcType=BIGINT},
+      </if>
+      <if test="record.notifyDriverTime != null" >
+        notify_driver_time = #{record.notifyDriverTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.logisticsStorehouseId != null" >
+        logistics_storehouse_id = #{record.logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.logisticsPlatformId != null" >
+        logistics_platform_id = #{record.logisticsPlatformId,jdbcType=BIGINT},
+      </if>
+      <if test="record.checkTime != null" >
+        check_time = #{record.checkTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.emergencyLevel != null" >
+        emergency_level = #{record.emergencyLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.queuingAreaId != null" >
+        queuing_area_id = #{record.queuingAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="record.startQueuingTime != null" >
+        start_queuing_time = #{record.startQueuingTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.callTime != null" >
+        call_time = #{record.callTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.factoryId != null" >
+        factory_id = #{record.factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_logistics_task_log
+    set id = #{record.id,jdbcType=BIGINT},
+    pid = #{record.pid,jdbcType=BIGINT},
+    task_id = #{record.taskId,jdbcType=BIGINT},
+    deliver_uid = #{record.deliverUid,jdbcType=VARCHAR},
+    receipt_uid = #{record.receiptUid,jdbcType=VARCHAR},
+    checker_uid = #{record.checkerUid,jdbcType=VARCHAR},
+    task_log_status = #{record.taskLogStatus,jdbcType=TINYINT},
+    reserve_quantity = #{record.reserveQuantity,jdbcType=INTEGER},
+    finally_quantity = #{record.finallyQuantity,jdbcType=INTEGER},
+    reserve_weight = #{record.reserveWeight,jdbcType=BIGINT},
+    finally_weight = #{record.finallyWeight,jdbcType=BIGINT},
+    queue_index = #{record.queueIndex,jdbcType=SMALLINT},
+    number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+    delivery_note_code = #{record.deliveryNoteCode,jdbcType=VARCHAR},
+    delivery_note_image = #{record.deliveryNoteImage,jdbcType=VARCHAR},
+    inbound_delivery_note_number = #{record.inboundDeliveryNoteNumber,jdbcType=VARCHAR},
+    purchase_order_number = #{record.purchaseOrderNumber,jdbcType=VARCHAR},
+    item_number = #{record.itemNumber,jdbcType=VARCHAR},
+    item_description = #{record.itemDescription,jdbcType=VARCHAR},
+    category = #{record.category,jdbcType=VARCHAR},
+    requested_delivery_time = #{record.requestedDeliveryTime,jdbcType=BIGINT},
+    exempt_from_inspection = #{record.exemptFromInspection,jdbcType=TINYINT},
+    earliest_delivery_time = #{record.earliestDeliveryTime,jdbcType=BIGINT},
+    latest_delivery_date = #{record.latestDeliveryDate,jdbcType=BIGINT},
+    shelf_life = #{record.shelfLife,jdbcType=BIGINT},
+    notify_driver_time = #{record.notifyDriverTime,jdbcType=BIGINT},
+    logistics_storehouse_id = #{record.logisticsStorehouseId,jdbcType=BIGINT},
+    logistics_platform_id = #{record.logisticsPlatformId,jdbcType=BIGINT},
+    check_time = #{record.checkTime,jdbcType=BIGINT},
+    emergency_level = #{record.emergencyLevel,jdbcType=TINYINT},
+    queuing_area_id = #{record.queuingAreaId,jdbcType=BIGINT},
+    start_queuing_time = #{record.startQueuingTime,jdbcType=BIGINT},
+    call_time = #{record.callTime,jdbcType=BIGINT},
+    factory_id = #{record.factoryId,jdbcType=BIGINT},
+    create_time = #{record.createTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.logistics.domain.CfLogisticsTaskLog" >
+    update cf_logistics_task_log
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="deliverUid != null" >
+        deliver_uid = #{deliverUid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptUid != null" >
+        receipt_uid = #{receiptUid,jdbcType=VARCHAR},
+      </if>
+      <if test="checkerUid != null" >
+        checker_uid = #{checkerUid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskLogStatus != null" >
+        task_log_status = #{taskLogStatus,jdbcType=TINYINT},
+      </if>
+      <if test="reserveQuantity != null" >
+        reserve_quantity = #{reserveQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="finallyQuantity != null" >
+        finally_quantity = #{finallyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="reserveWeight != null" >
+        reserve_weight = #{reserveWeight,jdbcType=BIGINT},
+      </if>
+      <if test="finallyWeight != null" >
+        finally_weight = #{finallyWeight,jdbcType=BIGINT},
+      </if>
+      <if test="queueIndex != null" >
+        queue_index = #{queueIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryNoteCode != null" >
+        delivery_note_code = #{deliveryNoteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryNoteImage != null" >
+        delivery_note_image = #{deliveryNoteImage,jdbcType=VARCHAR},
+      </if>
+      <if test="inboundDeliveryNoteNumber != null" >
+        inbound_delivery_note_number = #{inboundDeliveryNoteNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseOrderNumber != null" >
+        purchase_order_number = #{purchaseOrderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNumber != null" >
+        item_number = #{itemNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="itemDescription != null" >
+        item_description = #{itemDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="requestedDeliveryTime != null" >
+        requested_delivery_time = #{requestedDeliveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="exemptFromInspection != null" >
+        exempt_from_inspection = #{exemptFromInspection,jdbcType=TINYINT},
+      </if>
+      <if test="earliestDeliveryTime != null" >
+        earliest_delivery_time = #{earliestDeliveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="latestDeliveryDate != null" >
+        latest_delivery_date = #{latestDeliveryDate,jdbcType=BIGINT},
+      </if>
+      <if test="shelfLife != null" >
+        shelf_life = #{shelfLife,jdbcType=BIGINT},
+      </if>
+      <if test="notifyDriverTime != null" >
+        notify_driver_time = #{notifyDriverTime,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsPlatformId != null" >
+        logistics_platform_id = #{logisticsPlatformId,jdbcType=BIGINT},
+      </if>
+      <if test="checkTime != null" >
+        check_time = #{checkTime,jdbcType=BIGINT},
+      </if>
+      <if test="emergencyLevel != null" >
+        emergency_level = #{emergencyLevel,jdbcType=TINYINT},
+      </if>
+      <if test="queuingAreaId != null" >
+        queuing_area_id = #{queuingAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="startQueuingTime != null" >
+        start_queuing_time = #{startQueuingTime,jdbcType=BIGINT},
+      </if>
+      <if test="callTime != null" >
+        call_time = #{callTime,jdbcType=BIGINT},
+      </if>
+      <if test="factoryId != null" >
+        factory_id = #{factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.logistics.domain.CfLogisticsTaskLog" >
+    update cf_logistics_task_log
+    set pid = #{pid,jdbcType=BIGINT},
+        task_id = #{taskId,jdbcType=BIGINT},
+        deliver_uid = #{deliverUid,jdbcType=VARCHAR},
+        receipt_uid = #{receiptUid,jdbcType=VARCHAR},
+        checker_uid = #{checkerUid,jdbcType=VARCHAR},
+        task_log_status = #{taskLogStatus,jdbcType=TINYINT},
+        reserve_quantity = #{reserveQuantity,jdbcType=INTEGER},
+        finally_quantity = #{finallyQuantity,jdbcType=INTEGER},
+        reserve_weight = #{reserveWeight,jdbcType=BIGINT},
+        finally_weight = #{finallyWeight,jdbcType=BIGINT},
+        queue_index = #{queueIndex,jdbcType=SMALLINT},
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+        delivery_note_code = #{deliveryNoteCode,jdbcType=VARCHAR},
+        delivery_note_image = #{deliveryNoteImage,jdbcType=VARCHAR},
+        inbound_delivery_note_number = #{inboundDeliveryNoteNumber,jdbcType=VARCHAR},
+        purchase_order_number = #{purchaseOrderNumber,jdbcType=VARCHAR},
+        item_number = #{itemNumber,jdbcType=VARCHAR},
+        item_description = #{itemDescription,jdbcType=VARCHAR},
+        category = #{category,jdbcType=VARCHAR},
+        requested_delivery_time = #{requestedDeliveryTime,jdbcType=BIGINT},
+        exempt_from_inspection = #{exemptFromInspection,jdbcType=TINYINT},
+        earliest_delivery_time = #{earliestDeliveryTime,jdbcType=BIGINT},
+        latest_delivery_date = #{latestDeliveryDate,jdbcType=BIGINT},
+        shelf_life = #{shelfLife,jdbcType=BIGINT},
+        notify_driver_time = #{notifyDriverTime,jdbcType=BIGINT},
+        logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT},
+        logistics_platform_id = #{logisticsPlatformId,jdbcType=BIGINT},
+        check_time = #{checkTime,jdbcType=BIGINT},
+        emergency_level = #{emergencyLevel,jdbcType=TINYINT},
+        queuing_area_id = #{queuingAreaId,jdbcType=BIGINT},
+        start_queuing_time = #{startQueuingTime,jdbcType=BIGINT},
+        call_time = #{callTime,jdbcType=BIGINT},
+        factory_id = #{factoryId,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <resultMap id="LogContainLogisticsStorehouseResultMap" type="com.cf.logistics.domain.CfLogisticsTaskLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="deliver_uid" property="deliverUid" jdbcType="VARCHAR" />
+    <result column="receipt_uid" property="receiptUid" jdbcType="VARCHAR" />
+    <result column="checker_uid" property="checkerUid" jdbcType="VARCHAR" />
+    <result column="task_log_status" property="taskLogStatus" jdbcType="TINYINT" />
+    <result column="reserve_quantity" property="reserveQuantity" jdbcType="INTEGER" />
+    <result column="finally_quantity" property="finallyQuantity" jdbcType="INTEGER" />
+    <result column="reserve_weight" property="reserveWeight" jdbcType="BIGINT" />
+    <result column="finally_weight" property="finallyWeight" jdbcType="BIGINT" />
+    <result column="queue_index" property="queueIndex" jdbcType="SMALLINT" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="delivery_note_code" property="deliveryNoteCode" jdbcType="VARCHAR" />
+    <result column="delivery_note_image" property="deliveryNoteImage" jdbcType="VARCHAR" />
+    <result column="inbound_delivery_note_number" property="inboundDeliveryNoteNumber" jdbcType="VARCHAR" />
+    <result column="purchase_order_number" property="purchaseOrderNumber" jdbcType="VARCHAR" />
+    <result column="item_number" property="itemNumber" jdbcType="VARCHAR" />
+    <result column="item_description" property="itemDescription" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="requested_delivery_time" property="requestedDeliveryTime" jdbcType="BIGINT" />
+    <result column="exempt_from_inspection" property="exemptFromInspection" jdbcType="TINYINT" />
+    <result column="earliest_delivery_time" property="earliestDeliveryTime" jdbcType="BIGINT" />
+    <result column="latest_delivery_date" property="latestDeliveryDate" jdbcType="BIGINT" />
+    <result column="shelf_life" property="shelfLife" jdbcType="BIGINT" />
+    <result column="notify_driver_time" property="notifyDriverTime" jdbcType="BIGINT" />
+    <result column="logistics_storehouse_id" property="logisticsStorehouseId" jdbcType="BIGINT" />
+    <result column="logistics_platform_id" property="logisticsPlatformId" jdbcType="BIGINT" />
+    <result column="check_time" property="checkTime" jdbcType="BIGINT" />
+    <result column="emergency_level" property="emergencyLevel" jdbcType="TINYINT" />
+    <result column="queuing_area_id" property="queuingAreaId" jdbcType="BIGINT" />
+    <result column="start_queuing_time" property="startQueuingTime" jdbcType="BIGINT" />
+    <result column="call_time" property="callTime" jdbcType="BIGINT" />
+    <result column="factory_id" property="factoryId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <collection property="cfLogisticsStorehouse"  ofType="com.cf.logistics.domain.CfLogisticsStorehouse">
+      <id column="lgsh_id" property="id" jdbcType="BIGINT" />
+      <result column="lgsh_storehouse_name" property="storehouseName" jdbcType="VARCHAR" />
+      <result column="lgsh_country_id" property="countryId" jdbcType="VARCHAR" />
+      <result column="lgsh_province_id" property="provinceId" jdbcType="VARCHAR" />
+      <result column="lgsh_state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+      <result column="lgsh_zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+      <result column="lgsh_township_id" property="townshipId" jdbcType="VARCHAR" />
+      <result column="lgsh_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgsh_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgsh_start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+      <result column="lgsh_end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+      <result column="lgsh_address" property="address" jdbcType="VARCHAR" />
+      <result column="lgsh_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="lgsh_image" property="image" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="cfLogisticsTask"  ofType="com.cf.logistics.domain.CfLogisticsTask">
+      <id column="lgtsk_id" property="id" jdbcType="BIGINT" />
+      <result column="lgtsk_pid" property="pid" jdbcType="BIGINT" />
+      <result column="lgtsk_editer_uid" property="editerUid" jdbcType="VARCHAR" />
+      <result column="lgtsk_create_time" property="createTime" jdbcType="BIGINT" />
+      <result column="lgtsk_start_time" property="startTime" jdbcType="BIGINT" />
+      <result column="lgtsk_end_time" property="endTime" jdbcType="BIGINT" />
+      <result column="lgtsk_update_time" property="updateTime" jdbcType="BIGINT" />
+      <result column="lgtsk_origin" property="origin" jdbcType="VARCHAR" />
+      <result column="lgtsk_destination" property="destination" jdbcType="VARCHAR" />
+      <result column="lgtsk_cargo_type" property="cargoType" jdbcType="VARCHAR" />
+      <result column="lgtsk_car_type" property="carType" jdbcType="VARCHAR" />
+      <result column="lgtsk_vehicles_required" property="vehiclesRequired" jdbcType="SMALLINT" />
+      <result column="lgtsk_reserved_vehicles" property="reservedVehicles" jdbcType="SMALLINT" />
+      <result column="lgtsk_res_each" property="resEach" jdbcType="INTEGER" />
+      <result column="lgtsk_weight" property="weight" jdbcType="BIGINT" />
+      <result column="lgtsk_logistics_storehouse_id" property="logisticsStorehouseId" jdbcType="BIGINT" />
+      <result column="lgtsk_logistics_platform_ids" property="logisticsPlatformIds" jdbcType="VARCHAR" />
+      <result column="lgtsk_task_status" property="taskStatus" jdbcType="TINYINT" />
+      <result column="lgtsk_task_type" property="taskType" jdbcType="TINYINT" />
+      <result column="lgtsk_factory_id" property="factoryId" jdbcType="VARCHAR" />
+      <result column="lgtsk_supplier" property="supplier" jdbcType="VARCHAR" />
+      <result column="lgtsk_waybill_number" property="waybillNumber" jdbcType="VARCHAR" />
+      <result column="lgtsk_task_title" property="taskTitle" jdbcType="VARCHAR" />
+      <result column="lgtsk_emergency_level" property="emergencyLevel" jdbcType="TINYINT" />
+    </collection>
+    <collection property="cfLogisticsStorehousePlatform"  ofType="com.cf.logistics.domain.CfLogisticsStorehousePlatform">
+      <id column="lgshpf_id" property="id" jdbcType="BIGINT" />
+      <result column="lgshpf_platform_name" property="platformName" jdbcType="VARCHAR" />
+      <result column="lgshpf_storehouse_id" property="storehouseId" jdbcType="BIGINT" />
+      <result column="lgshpf_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgshpf_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgshpf_queue_capacity" property="queueCapacity" jdbcType="INTEGER" />
+      <result column="lgshpf_used_queue_capacity" property="usedQueueCapacity" jdbcType="INTEGER" />
+      <result column="lgshpf_platform_status" property="platformStatus" jdbcType="TINYINT" />
+      <result column="lgshpf_sort_index" property="sortIndex" jdbcType="SMALLINT" />
+      <result column="lgshpf_handle_uid" property="handleUid" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="cfLogisticsQueuingArea"  ofType="com.cf.logistics.domain.CfLogisticsQueuingArea">
+      <id column="lqa_id" property="id" jdbcType="BIGINT" />
+      <result column="lqa_area_name" property="areaName" jdbcType="VARCHAR" />
+      <result column="lqa_queue_capacity" property="queueCapacity" jdbcType="INTEGER" />
+      <result column="lqa_used_queue_capacity" property="usedQueueCapacity" jdbcType="INTEGER" />
+      <result column="lqa_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lqa_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lqa_area_status" property="areaStatus" jdbcType="TINYINT" />
+      <result column="lqa_factory_id" property="factoryId" jdbcType="BIGINT" />
+    </collection>
+    <collection property="cfUser"  ofType="com.cf.ucenter.domain.CfUser">
+      <id column="usr_id" property="id" jdbcType="VARCHAR" />
+      <result column="usr_user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="usr_password" property="password" jdbcType="VARCHAR" />
+      <result column="usr_avatar" property="avatar" jdbcType="VARCHAR" />
+      <result column="usr_type" property="type" jdbcType="TINYINT" />
+      <result column="usr_nick_name" property="nickName" jdbcType="VARCHAR" />
+      <result column="usr_true_name" property="trueName" jdbcType="VARCHAR" />
+      <result column="usr_birthday" property="birthday" jdbcType="BIGINT" />
+      <result column="usr_sex" property="sex" jdbcType="BIT" />
+      <result column="usr_sign" property="sign" jdbcType="VARCHAR" />
+      <result column="usr_create_time" property="createTime" jdbcType="BIGINT" />
+      <result column="usr_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="usr_email" property="email" jdbcType="VARCHAR" />
+      <result column="usr_last_login_time" property="lastLoginTime" jdbcType="BIGINT" />
+    </collection>
+    <collection property="cfUserDriverLicense"  ofType="com.cf.ucenter.domain.CfUserDriverLicense">
+      <id column="udl_id" property="id" jdbcType="BIGINT" />
+      <result column="udl_uid" property="uid" jdbcType="VARCHAR" />
+      <result column="udl_user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="udl_sex" property="sex" jdbcType="TINYINT" />
+      <result column="udl_nationality" property="nationality" jdbcType="VARCHAR" />
+      <result column="udl_address" property="address" jdbcType="VARCHAR" />
+      <result column="udl_birthday_year" property="birthdayYear" jdbcType="SMALLINT" />
+      <result column="udl_birthday_month" property="birthdayMonth" jdbcType="TINYINT" />
+      <result column="udl_birthday_day" property="birthdayDay" jdbcType="TINYINT" />
+      <result column="udl_first_issue_year" property="firstIssueYear" jdbcType="SMALLINT" />
+      <result column="udl_first_issue_month" property="firstIssueMonth" jdbcType="TINYINT" />
+      <result column="udl_first_issue_day" property="firstIssueDay" jdbcType="TINYINT" />
+      <result column="udl_car_class" property="carClass" jdbcType="VARCHAR" />
+      <result column="udl_start_time" property="startTime" jdbcType="BIGINT" />
+      <result column="udl_end_time" property="endTime" jdbcType="BIGINT" />
+      <result column="udl_certificate_number" property="certificateNumber" jdbcType="VARCHAR" />
+      <result column="udl_issuing_authority" property="issuingAuthority" jdbcType="VARCHAR" />
+      <result column="udl_file_number" property="fileNumber" jdbcType="VARCHAR" />
+      <result column="udl_internship_period_ends" property="internshipPeriodEnds" jdbcType="BIGINT" />
+      <result column="udl_images" property="images" jdbcType="VARCHAR" />
+      <result column="udl_check_status" property="checkStatus" jdbcType="TINYINT" />
+      <result column="udl_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="udl_qualification_certificate_number" property="qualificationCertificateNumber" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="cfLogisticsFactory"  ofType="com.cf.logistics.domain.CfLogisticsFactory">
+      <id column="lgft_id" property="id" jdbcType="BIGINT" />
+      <result column="lgft_factory_name" property="factoryName" jdbcType="VARCHAR" />
+      <result column="lgft_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgft_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgft_address" property="address" jdbcType="VARCHAR" />
+      <result column="lgft_principal" property="principal" jdbcType="VARCHAR" />
+      <result column="lgft_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="lgft_sign_in_range" property="signInRange" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+
+  <select id="selectListByQuery" parameterType="com.cf.logistics.domain.request.CfLogisticsTaskLogQuery" resultMap="LogContainLogisticsStorehouseResultMap">
+    select lgshtslg.*,lgsh.storehouse_name lgsh_storehouse_name,lgsh.position_x lgsh_position_x,lgsh.position_y lgsh_position_y,lgsh.address lgsh_address,lgsh.phone lgsh_phone,lgsh.image lgsh_image,usr.user_name usr_user_name,usr.nick_name usr_nick_name,
+    usr.true_name usr_true_name,usr.phone usr_phone,usr.avatar usr_avatar,lgtsk.id lgtsk_id,lgtsk.pid lgtsk_pid,lgtsk.editer_uid lgtsk_editer_uid,lgtsk.create_time lgtsk_create_time,lgtsk.start_time lgtsk_start_time,
+    lgtsk.end_time lgtsk_end_time,lgtsk.update_time lgtsk_update_time,lgtsk.origin lgtsk_origin,lgtsk.destination lgtsk_destination,lgtsk.cargo_type lgtsk_cargo_type,lgtsk.car_type lgtsk_car_type,
+    lgtsk.vehicles_required lgtsk_vehicles_required,lgtsk.reserved_vehicles lgtsk_reserved_vehicles,lgtsk.res_each lgtsk_res_each,lgtsk.weight lgtsk_weight,lgtsk.logistics_storehouse_id lgtsk_logistics_storehouse_id,lgtsk.task_status lgtsk_task_status,
+    lgtsk.task_type lgtsk_task_type,lgtsk.factory_id lgtsk_factory_id,lgtsk.supplier lgtsk_supplier,lgtsk.waybill_number lgtsk_waybill_number,lgtsk.task_title lgtsk_task_title,lgtsk.emergency_level lgtsk_emergency_level,
+    lqa.area_name lqa_area_name,lgft.factory_name lgft_factory_name
+    from cf_logistics_task_log lgshtslg
+    left join cf_logistics_storehouse lgsh on (lgshtslg.logistics_storehouse_id=lgsh.id)
+    left join cf_logistics_queuing_area lqa on (lgshtslg.queuing_area_id=lqa.id)
+    left join cf_logistics_task lgtsk on (lgshtslg.task_id=lgtsk.id)
+    left join cf_user usr on(lgshtslg.deliver_uid=usr.id)
+    left join cf_logistics_factory lgft on(lgshtslg.factory_id=lgft.id)
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and lgshtslg.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="taskId!=null">
+        and lgshtslg.task_id = #{taskId,jdbcType=BIGINT}
+      </if>
+      <if test="pid!=null">
+        and lgshtslg.pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="deliverUid!=null">
+        and lgshtslg.deliver_uid = #{deliverUid,jdbcType=VARCHAR}
+      </if>
+      <if test="checkerUid!=null">
+        and lgshtslg.checker_uid = #{checkerUid,jdbcType=VARCHAR}
+      </if>
+      <if test="taskLogStatus!=null">
+        and lgshtslg.task_log_status = #{taskLogStatus,jdbcType=TINYINT}
+      </if>
+      <if test="numberPlate!=null">
+        and lgshtslg.number_plate = #{numberPlate,jdbcType=VARCHAR}
+      </if>
+      <if test="deliveryNoteCode!=null">
+        and lgshtslg.delivery_note_code = #{deliveryNoteCode,jdbcType=VARCHAR}
+      </if>
+      <if test="itemNumber!=null">
+        and lgshtslg.item_number = #{itemNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="category!=null">
+        and lgshtslg.category = #{category,jdbcType=VARCHAR}
+      </if>
+      <if test="logisticsStorehouseId!=null">
+        and lgshtslg.logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT}
+      </if>
+      <if test="queuingAreaId!=null">
+        and lgshtslg.queuing_area_id = #{queuingAreaId,jdbcType=BIGINT}
+      </if>
+      <if test="logisticsStorehouseIds!=null">
+        and lgshtslg.logistics_storehouse_id in
+        <foreach item="item" collection="logisticsStorehouseIds" separator="," open="(" close=")" index="">
+          #{item,jdbcType=BIGINT}
+        </foreach>
+      </if>
+      <if test="logisticsPlatformId!=null">
+        and lgshtslg.logistics_platform_id = #{logisticsPlatformId,jdbcType=BIGINT}
+      </if>
+      <if test="notifyDriverTime!=null">
+        and lgshtslg.notify_driver_time = #{notifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="minNotifyDriverTime!=null">
+        and lgshtslg.notify_driver_time <![CDATA[ >= ]]> #{minNotifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxNotifyDriverTime!=null">
+        and lgshtslg.notify_driver_time <![CDATA[ <= ]]> #{maxNotifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="minCreateTime!=null">
+        and lgshtslg.create_time <![CDATA[ >= ]]> #{minCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxCreateTime!=null">
+        and lgshtslg.create_time <![CDATA[ <= ]]> #{maxCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="minTaskLogStatus!=null">
+        and lgshtslg.task_log_status <![CDATA[ >= ]]> #{minTaskLogStatus,jdbcType=TINYINT}
+      </if>
+      <if test="maxTaskLogStatus!=null">
+        and lgshtslg.task_log_status <![CDATA[ <= ]]> #{maxTaskLogStatus,jdbcType=TINYINT}
+      </if>
+    </trim>
+    <if test="orderBy!=null">
+      order by ${orderBy}
+    </if>
+    <if test="page!=null and size !=null">
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+  <select id="selectDeliverListByQuery" parameterType="com.cf.logistics.domain.request.CfLogisticsTaskLogQuery" resultMap="LogContainLogisticsStorehouseResultMap">
+    select lgshtslg.*,udl.user_name udl_user_name,udl.car_class udl_car_class,udl.certificate_number udl_certificate_number,udl.phone udl_phone
+    from cf_logistics_task_log lgshtslg
+    left join cf_user_driver_license udl on(lgshtslg.deliver_uid=udl.uid)
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and lgshtslg.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="taskId!=null">
+        and lgshtslg.task_id = #{taskId,jdbcType=BIGINT}
+      </if>
+      <if test="pid!=null">
+        and lgshtslg.pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="deliverUid!=null">
+        and lgshtslg.deliver_uid = #{deliverUid,jdbcType=VARCHAR}
+      </if>
+      <if test="checkerUid!=null">
+        and lgshtslg.checker_uid = #{checkerUid,jdbcType=VARCHAR}
+      </if>
+      <if test="taskLogStatus!=null">
+        and lgshtslg.task_log_status = #{taskLogStatus,jdbcType=TINYINT}
+      </if>
+      <if test="numberPlate!=null">
+        and lgshtslg.number_plate = #{numberPlate,jdbcType=VARCHAR}
+      </if>
+      <if test="deliveryNoteCode!=null">
+        and lgshtslg.delivery_note_code = #{deliveryNoteCode,jdbcType=VARCHAR}
+      </if>
+      <if test="itemNumber!=null">
+        and lgshtslg.item_number = #{itemNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="category!=null">
+        and lgshtslg.category = #{category,jdbcType=VARCHAR}
+      </if>
+      <if test="logisticsStorehouseId!=null">
+        and lgshtslg.logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT}
+      </if>
+      <if test="logisticsStorehouseIds!=null">
+        and lgshtslg.logistics_storehouse_id in
+        <foreach item="item" collection="logisticsStorehouseIds" separator="," open="(" close=")" index="">
+          #{item,jdbcType=BIGINT}
+        </foreach>
+      </if>
+      <if test="logisticsPlatformId!=null">
+        and lgshtslg.logistics_platform_id = #{logisticsPlatformId,jdbcType=BIGINT}
+      </if>
+      <if test="notifyDriverTime!=null">
+        and lgshtslg.notify_driver_time = #{notifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="minNotifyDriverTime!=null">
+        and lgshtslg.notify_driver_time <![CDATA[ >= ]]> #{minNotifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxNotifyDriverTime!=null">
+        and lgshtslg.notify_driver_time <![CDATA[ <= ]]> #{maxNotifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="minCreateTime!=null">
+        and lgshtslg.create_time <![CDATA[ >= ]]> #{minCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxCreateTime!=null">
+        and lgshtslg.create_time <![CDATA[ <= ]]> #{maxCreateTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+    <if test="orderBy!=null">
+      order by ${orderBy}
+    </if>
+    <if test="page!=null and size !=null">
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+
+  <select id="increaseQueueIndex" parameterType="com.cf.logistics.domain.request.CfLogisticsTaskLogQuery">
+    update cf_logistics_task_log set queue_index=queue_index+(${queueIndexChangeValue})
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="taskId!=null">
+        and task_id = #{taskId,jdbcType=BIGINT}
+      </if>
+      <if test="pid!=null">
+        and pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="deliverUid!=null">
+        and deliver_uid = #{deliverUid,jdbcType=VARCHAR}
+      </if>
+      <if test="checkerUid!=null">
+        and checker_uid = #{checkerUid,jdbcType=VARCHAR}
+      </if>
+      <if test="taskLogStatus!=null">
+        and task_log_status = #{taskLogStatus,jdbcType=TINYINT}
+      </if>
+      <if test="numberPlate!=null">
+        and number_plate = #{numberPlate,jdbcType=VARCHAR}
+      </if>
+      <if test="deliveryNoteCode!=null">
+        and delivery_note_code = #{deliveryNoteCode,jdbcType=VARCHAR}
+      </if>
+      <if test="itemNumber!=null">
+        and item_number = #{itemNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="category!=null">
+        and category = #{category,jdbcType=VARCHAR}
+      </if>
+      <if test="logisticsStorehouseId!=null">
+        and logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT}
+      </if>
+      <if test="emergencyLevel!=null">
+        and emergency_level = #{emergencyLevel,jdbcType=TINYINT}
+      </if>
+      <if test="queuingAreaId!=null">
+        and queuing_area_id = #{queuingAreaId,jdbcType=BIGINT}
+      </if>
+      <if test="logisticsStorehouseIds!=null">
+        and logistics_storehouse_id in
+        <foreach item="item" collection="logisticsStorehouseIds" separator="," open="(" close=")" index="">
+          #{item,jdbcType=BIGINT}
+        </foreach>
+      </if>
+      <if test="logisticsPlatformId!=null">
+        and logistics_platform_id = #{logisticsPlatformId,jdbcType=BIGINT}
+      </if>
+      <if test="notifyDriverTime!=null">
+        and notify_driver_time = #{notifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="minNotifyDriverTime!=null">
+        and notify_driver_time <![CDATA[ >= ]]> #{minNotifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxNotifyDriverTime!=null">
+        and notify_driver_time <![CDATA[ <= ]]> #{maxNotifyDriverTime,jdbcType=BIGINT}
+      </if>
+      <if test="minQueueIndex!=null">
+        and queue_index <![CDATA[ >= ]]> #{minQueueIndex,jdbcType=SMALLINT}
+      </if>
+      <if test="maxQueueIndex!=null">
+        and queue_index <![CDATA[ <= ]]> #{maxQueueIndex,jdbcType=SMALLINT}
+      </if>
+    </trim>
+    <if test="orderBy!=null">
+      order by #{orderBy,jdbcType=VARCHAR}
+    </if>
+    <if test="page!=null and size !=null">
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+</mapper>

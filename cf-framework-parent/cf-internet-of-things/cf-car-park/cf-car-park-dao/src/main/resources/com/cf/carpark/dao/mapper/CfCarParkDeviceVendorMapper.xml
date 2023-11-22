@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkDeviceVendorMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkDeviceVendor" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="county_id" property="countyId" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cf.carpark.domain.CfCarParkDeviceVendor" extends="BaseResultMap" >
+    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, country_id, province_id, state_or_city_id, county_id, position_x, position_y, 
+    address
+  </sql>
+  <sql id="Blob_Column_List" >
+    introduction
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cf_car_park_device_vendor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_device_vendor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cf_car_park_device_vendor
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_device_vendor
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendorExample" >
+    delete from cf_car_park_device_vendor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendor" >
+    insert into cf_car_park_device_vendor (id, name, country_id, 
+      province_id, state_or_city_id, county_id, 
+      position_x, position_y, address, 
+      introduction)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{countryId,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=VARCHAR}, #{stateOrCityId,jdbcType=VARCHAR}, #{countyId,jdbcType=VARCHAR}, 
+      #{positionX,jdbcType=DECIMAL}, #{positionY,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendor" >
+    insert into cf_car_park_device_vendor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id,
+      </if>
+      <if test="countyId != null" >
+        county_id,
+      </if>
+      <if test="positionX != null" >
+        position_x,
+      </if>
+      <if test="positionY != null" >
+        position_y,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="countyId != null" >
+        #{countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendorExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_device_vendor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_device_vendor
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryId != null" >
+        country_id = #{record.countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateOrCityId != null" >
+        state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyId != null" >
+        county_id = #{record.countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionX != null" >
+        position_x = #{record.positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.positionY != null" >
+        position_y = #{record.positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cf_car_park_device_vendor
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      country_id = #{record.countryId,jdbcType=VARCHAR},
+      province_id = #{record.provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      county_id = #{record.countyId,jdbcType=VARCHAR},
+      position_x = #{record.positionX,jdbcType=DECIMAL},
+      position_y = #{record.positionY,jdbcType=DECIMAL},
+      address = #{record.address,jdbcType=VARCHAR},
+      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_device_vendor
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      country_id = #{record.countryId,jdbcType=VARCHAR},
+      province_id = #{record.provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      county_id = #{record.countyId,jdbcType=VARCHAR},
+      position_x = #{record.positionX,jdbcType=DECIMAL},
+      position_y = #{record.positionY,jdbcType=DECIMAL},
+      address = #{record.address,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendor" >
+    update cf_car_park_device_vendor
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="countyId != null" >
+        county_id = #{countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        position_x = #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        position_y = #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendor" >
+    update cf_car_park_device_vendor
+    set name = #{name,jdbcType=VARCHAR},
+      country_id = #{countryId,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      county_id = #{countyId,jdbcType=VARCHAR},
+      position_x = #{positionX,jdbcType=DECIMAL},
+      position_y = #{positionY,jdbcType=DECIMAL},
+      address = #{address,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkDeviceVendor" >
+    update cf_car_park_device_vendor
+    set name = #{name,jdbcType=VARCHAR},
+      country_id = #{countryId,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      county_id = #{countyId,jdbcType=VARCHAR},
+      position_x = #{positionX,jdbcType=DECIMAL},
+      position_y = #{positionY,jdbcType=DECIMAL},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

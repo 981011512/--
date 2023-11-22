@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkPackagePriceMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkPackagePrice" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="flag_key" property="flagKey" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="original_price" property="originalPrice" jdbcType="DECIMAL" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="time_quota" property="timeQuota" jdbcType="BIGINT" />
+    <result column="sort_index" property="sortIndex" jdbcType="INTEGER" />
+    <result column="special_give" property="specialGive" jdbcType="TINYINT" />
+    <result column="grace_period" property="gracePeriod" jdbcType="BIGINT" />
+    <result column="use_grace_period" property="useGracePeriod" jdbcType="TINYINT" />
+    <result column="special_car_package" property="specialCarPackage" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, subtitle, image, flag_key, car_park_id, original_price, current_price, 
+    time_quota, sort_index, special_give, grace_period, use_grace_period, special_car_package
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkPackagePriceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_package_price
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_package_price
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_package_price
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkPackagePriceExample" >
+    delete from cf_car_park_package_price
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkPackagePrice" >
+    insert into cf_car_park_package_price (id, title, subtitle, 
+      image, flag_key, car_park_id, 
+      original_price, current_price, time_quota, 
+      sort_index, special_give, grace_period, 
+      use_grace_period, special_car_package)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{flagKey,jdbcType=VARCHAR}, #{carParkId,jdbcType=VARCHAR}, 
+      #{originalPrice,jdbcType=DECIMAL}, #{currentPrice,jdbcType=DECIMAL}, #{timeQuota,jdbcType=BIGINT}, 
+      #{sortIndex,jdbcType=INTEGER}, #{specialGive,jdbcType=TINYINT}, #{gracePeriod,jdbcType=BIGINT}, 
+      #{useGracePeriod,jdbcType=TINYINT}, #{specialCarPackage,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkPackagePrice" >
+    insert into cf_car_park_package_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="subtitle != null" >
+        subtitle,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="flagKey != null" >
+        flag_key,
+      </if>
+      <if test="carParkId != null" >
+        car_park_id,
+      </if>
+      <if test="originalPrice != null" >
+        original_price,
+      </if>
+      <if test="currentPrice != null" >
+        current_price,
+      </if>
+      <if test="timeQuota != null" >
+        time_quota,
+      </if>
+      <if test="sortIndex != null" >
+        sort_index,
+      </if>
+      <if test="specialGive != null" >
+        special_give,
+      </if>
+      <if test="gracePeriod != null" >
+        grace_period,
+      </if>
+      <if test="useGracePeriod != null" >
+        use_grace_period,
+      </if>
+      <if test="specialCarPackage != null" >
+        special_car_package,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="flagKey != null" >
+        #{flagKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null" >
+        #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPrice != null" >
+        #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="timeQuota != null" >
+        #{timeQuota,jdbcType=BIGINT},
+      </if>
+      <if test="sortIndex != null" >
+        #{sortIndex,jdbcType=INTEGER},
+      </if>
+      <if test="specialGive != null" >
+        #{specialGive,jdbcType=TINYINT},
+      </if>
+      <if test="gracePeriod != null" >
+        #{gracePeriod,jdbcType=BIGINT},
+      </if>
+      <if test="useGracePeriod != null" >
+        #{useGracePeriod,jdbcType=TINYINT},
+      </if>
+      <if test="specialCarPackage != null" >
+        #{specialCarPackage,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkPackagePriceExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_package_price
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_package_price
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtitle != null" >
+        subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flagKey != null" >
+        flag_key = #{record.flagKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carParkId != null" >
+        car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalPrice != null" >
+        original_price = #{record.originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currentPrice != null" >
+        current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.timeQuota != null" >
+        time_quota = #{record.timeQuota,jdbcType=BIGINT},
+      </if>
+      <if test="record.sortIndex != null" >
+        sort_index = #{record.sortIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.specialGive != null" >
+        special_give = #{record.specialGive,jdbcType=TINYINT},
+      </if>
+      <if test="record.gracePeriod != null" >
+        grace_period = #{record.gracePeriod,jdbcType=BIGINT},
+      </if>
+      <if test="record.useGracePeriod != null" >
+        use_grace_period = #{record.useGracePeriod,jdbcType=TINYINT},
+      </if>
+      <if test="record.specialCarPackage != null" >
+        special_car_package = #{record.specialCarPackage,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_package_price
+    set id = #{record.id,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      flag_key = #{record.flagKey,jdbcType=VARCHAR},
+      car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      original_price = #{record.originalPrice,jdbcType=DECIMAL},
+      current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      time_quota = #{record.timeQuota,jdbcType=BIGINT},
+      sort_index = #{record.sortIndex,jdbcType=INTEGER},
+      special_give = #{record.specialGive,jdbcType=TINYINT},
+      grace_period = #{record.gracePeriod,jdbcType=BIGINT},
+      use_grace_period = #{record.useGracePeriod,jdbcType=TINYINT},
+      special_car_package = #{record.specialCarPackage,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkPackagePrice" >
+    update cf_car_park_package_price
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="flagKey != null" >
+        flag_key = #{flagKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        car_park_id = #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null" >
+        original_price = #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPrice != null" >
+        current_price = #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="timeQuota != null" >
+        time_quota = #{timeQuota,jdbcType=BIGINT},
+      </if>
+      <if test="sortIndex != null" >
+        sort_index = #{sortIndex,jdbcType=INTEGER},
+      </if>
+      <if test="specialGive != null" >
+        special_give = #{specialGive,jdbcType=TINYINT},
+      </if>
+      <if test="gracePeriod != null" >
+        grace_period = #{gracePeriod,jdbcType=BIGINT},
+      </if>
+      <if test="useGracePeriod != null" >
+        use_grace_period = #{useGracePeriod,jdbcType=TINYINT},
+      </if>
+      <if test="specialCarPackage != null" >
+        special_car_package = #{specialCarPackage,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkPackagePrice" >
+    update cf_car_park_package_price
+    set title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      flag_key = #{flagKey,jdbcType=VARCHAR},
+      car_park_id = #{carParkId,jdbcType=VARCHAR},
+      original_price = #{originalPrice,jdbcType=DECIMAL},
+      current_price = #{currentPrice,jdbcType=DECIMAL},
+      time_quota = #{timeQuota,jdbcType=BIGINT},
+      sort_index = #{sortIndex,jdbcType=INTEGER},
+      special_give = #{specialGive,jdbcType=TINYINT},
+      grace_period = #{gracePeriod,jdbcType=BIGINT},
+      use_grace_period = #{useGracePeriod,jdbcType=TINYINT},
+      special_car_package = #{specialCarPackage,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <resultMap id="ContainCarParkAndTypekNameResultMap" type="com.cf.carpark.domain.CfCarParkPackagePrice" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="flag_key" property="flagKey" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="original_price" property="originalPrice" jdbcType="DECIMAL" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="time_quota" property="timeQuota" jdbcType="BIGINT" />
+    <result column="sort_index" property="sortIndex" jdbcType="INTEGER" />
+    <result column="carpark_name" property="carParkName" jdbcType="VARCHAR" />
+    <result column="car_type_name" property="carTypeName" jdbcType="VARCHAR" />
+    <result column="special_give" property="specialGive" jdbcType="TINYINT" />
+    <result column="grace_period" property="gracePeriod" jdbcType="BIGINT" />
+    <result column="use_grace_period" property="useGracePeriod" jdbcType="TINYINT" />
+    <result column="special_car_package" property="specialCarPackage" jdbcType="TINYINT" />
+  </resultMap>
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="ContainCarParkAndTypekNameResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <select id="findByIdContainName" parameterType="java.lang.String" resultMap="ContainCarParkAndTypekNameResultMap">
+    select cppp.*,cp.name carpark_name from cf_car_park_package_price cppp left join cf_car_park cp on(cppp.car_park_id=cp.id)
+    where cppp.id =  #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

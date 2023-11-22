@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.logistics.dao.mapper.CfLogisticsQueueMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.logistics.domain.CfLogisticsQueue" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="use_log_id" property="useLogId" jdbcType="BIGINT" />
+    <result column="sort_index" property="sortIndex" jdbcType="SMALLINT" />
+    <result column="logistics_storehouse_id" property="logisticsStorehouseId" jdbcType="BIGINT" />
+    <result column="logistics_platform_id" property="logisticsPlatformId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, use_log_id, sort_index, logistics_storehouse_id, logistics_platform_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.logistics.domain.CfLogisticsQueueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_logistics_queue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_logistics_queue
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_logistics_queue
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.logistics.domain.CfLogisticsQueueExample" >
+    delete from cf_logistics_queue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.logistics.domain.CfLogisticsQueue" >
+    insert into cf_logistics_queue (id, use_log_id, sort_index, 
+      logistics_storehouse_id, logistics_platform_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{useLogId,jdbcType=BIGINT}, #{sortIndex,jdbcType=SMALLINT}, 
+      #{logisticsStorehouseId,jdbcType=BIGINT}, #{logisticsPlatformId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.logistics.domain.CfLogisticsQueue" >
+    insert into cf_logistics_queue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="useLogId != null" >
+        use_log_id,
+      </if>
+      <if test="sortIndex != null" >
+        sort_index,
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        logistics_storehouse_id,
+      </if>
+      <if test="logisticsPlatformId != null" >
+        logistics_platform_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="useLogId != null" >
+        #{useLogId,jdbcType=BIGINT},
+      </if>
+      <if test="sortIndex != null" >
+        #{sortIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        #{logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsPlatformId != null" >
+        #{logisticsPlatformId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.logistics.domain.CfLogisticsQueueExample" resultType="java.lang.Integer" >
+    select count(*) from cf_logistics_queue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_logistics_queue
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.useLogId != null" >
+        use_log_id = #{record.useLogId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sortIndex != null" >
+        sort_index = #{record.sortIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.logisticsStorehouseId != null" >
+        logistics_storehouse_id = #{record.logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.logisticsPlatformId != null" >
+        logistics_platform_id = #{record.logisticsPlatformId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_logistics_queue
+    set id = #{record.id,jdbcType=BIGINT},
+      use_log_id = #{record.useLogId,jdbcType=BIGINT},
+      sort_index = #{record.sortIndex,jdbcType=SMALLINT},
+      logistics_storehouse_id = #{record.logisticsStorehouseId,jdbcType=BIGINT},
+      logistics_platform_id = #{record.logisticsPlatformId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.logistics.domain.CfLogisticsQueue" >
+    update cf_logistics_queue
+    <set >
+      <if test="useLogId != null" >
+        use_log_id = #{useLogId,jdbcType=BIGINT},
+      </if>
+      <if test="sortIndex != null" >
+        sort_index = #{sortIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsPlatformId != null" >
+        logistics_platform_id = #{logisticsPlatformId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.logistics.domain.CfLogisticsQueue" >
+    update cf_logistics_queue
+    set use_log_id = #{useLogId,jdbcType=BIGINT},
+      sort_index = #{sortIndex,jdbcType=SMALLINT},
+      logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT},
+      logistics_platform_id = #{logisticsPlatformId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

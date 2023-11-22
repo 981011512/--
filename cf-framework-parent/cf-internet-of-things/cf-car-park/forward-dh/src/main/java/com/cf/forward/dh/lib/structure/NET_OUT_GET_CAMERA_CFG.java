@@ -1,0 +1,25 @@
+package com.cf.forward.dh.lib.structure;
+
+import com.cf.forward.dh.lib.NetSDKLib;
+/**
+ * @author 251823
+ * @version 1.0
+ * @description {@link NetSDKLib#CLIENT_GetCameraCfg}的出参
+ * @date 2020/11/06
+ */
+public class NET_OUT_GET_CAMERA_CFG extends NetSDKLib.SdkStructure {
+
+	// 结构体大小
+	public int dwSize;
+
+	// 相机编号
+	public int nCameraNo;
+
+	// 相机的信息
+	public NET_CAMERA_CFG_INFO stuCameraInfo;
+
+	public NET_OUT_GET_CAMERA_CFG() {
+		this.dwSize = this.size();
+	}
+
+}

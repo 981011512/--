@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkWhitelistIssuedLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkWhitelistIssuedLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="device_sn" property="deviceSn" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="issued_time" property="issuedTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, device_sn, number_plate, issued_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkWhitelistIssuedLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_whitelist_issued_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_whitelist_issued_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_whitelist_issued_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkWhitelistIssuedLogExample" >
+    delete from cf_car_park_whitelist_issued_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkWhitelistIssuedLog" >
+    insert into cf_car_park_whitelist_issued_log (id, device_sn, number_plate, 
+      issued_time)
+    values (#{id,jdbcType=VARCHAR}, #{deviceSn,jdbcType=VARCHAR}, #{numberPlate,jdbcType=VARCHAR}, 
+      #{issuedTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkWhitelistIssuedLog" >
+    insert into cf_car_park_whitelist_issued_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceSn != null" >
+        device_sn,
+      </if>
+      <if test="numberPlate != null" >
+        number_plate,
+      </if>
+      <if test="issuedTime != null" >
+        issued_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSn != null" >
+        #{deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="issuedTime != null" >
+        #{issuedTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkWhitelistIssuedLogExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_whitelist_issued_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_whitelist_issued_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceSn != null" >
+        device_sn = #{record.deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberPlate != null" >
+        number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issuedTime != null" >
+        issued_time = #{record.issuedTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_whitelist_issued_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      device_sn = #{record.deviceSn,jdbcType=VARCHAR},
+      number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      issued_time = #{record.issuedTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkWhitelistIssuedLog" >
+    update cf_car_park_whitelist_issued_log
+    <set >
+      <if test="deviceSn != null" >
+        device_sn = #{deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="issuedTime != null" >
+        issued_time = #{issuedTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkWhitelistIssuedLog" >
+    update cf_car_park_whitelist_issued_log
+    set device_sn = #{deviceSn,jdbcType=VARCHAR},
+      number_plate = #{numberPlate,jdbcType=VARCHAR},
+      issued_time = #{issuedTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <insert id="batchAdd" parameterType="java.util.List" useGeneratedKeys="false">
+    insert into cf_car_park_whitelist_issued_log
+    (id,device_sn,number_plate,issued_time)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id},#{item.deviceSn},#{item.numberPlate},#{item.issuedTime})
+    </foreach>
+  </insert>
+</mapper>

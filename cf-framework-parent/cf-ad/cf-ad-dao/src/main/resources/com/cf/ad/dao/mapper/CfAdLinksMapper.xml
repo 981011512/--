@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ad.dao.mapper.CfAdLinksMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ad.domain.CfAdLinks" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ad_id" property="adId" jdbcType="VARCHAR" />
+    <result column="scenes" property="scenes" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="carrier_id" property="carrierId" jdbcType="VARCHAR" />
+    <result column="sort_index" property="sortIndex" jdbcType="SMALLINT" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="show_counts" property="showCounts" jdbcType="INTEGER" />
+    <result column="click_counts" property="clickCounts" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ad_id, scenes, platform, carrier_id, sort_index, start_time, end_time, show_counts, 
+    click_counts, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ad.domain.CfAdLinksExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_ad_links
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_ad_links
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_ad_links
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ad.domain.CfAdLinksExample" >
+    delete from cf_ad_links
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ad.domain.CfAdLinks" >
+    insert into cf_ad_links (id, ad_id, scenes, 
+      platform, carrier_id, sort_index, 
+      start_time, end_time, show_counts, 
+      click_counts, create_time)
+    values (#{id,jdbcType=VARCHAR}, #{adId,jdbcType=VARCHAR}, #{scenes,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR}, #{carrierId,jdbcType=VARCHAR}, #{sortIndex,jdbcType=SMALLINT}, 
+      #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, #{showCounts,jdbcType=INTEGER}, 
+      #{clickCounts,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ad.domain.CfAdLinks" >
+    insert into cf_ad_links
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="adId != null" >
+        ad_id,
+      </if>
+      <if test="scenes != null" >
+        scenes,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="carrierId != null" >
+        carrier_id,
+      </if>
+      <if test="sortIndex != null" >
+        sort_index,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="showCounts != null" >
+        show_counts,
+      </if>
+      <if test="clickCounts != null" >
+        click_counts,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="adId != null" >
+        #{adId,jdbcType=VARCHAR},
+      </if>
+      <if test="scenes != null" >
+        #{scenes,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierId != null" >
+        #{carrierId,jdbcType=VARCHAR},
+      </if>
+      <if test="sortIndex != null" >
+        #{sortIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="showCounts != null" >
+        #{showCounts,jdbcType=INTEGER},
+      </if>
+      <if test="clickCounts != null" >
+        #{clickCounts,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ad.domain.CfAdLinksExample" resultType="java.lang.Integer" >
+    select count(*) from cf_ad_links
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_ad_links
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adId != null" >
+        ad_id = #{record.adId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scenes != null" >
+        scenes = #{record.scenes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carrierId != null" >
+        carrier_id = #{record.carrierId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortIndex != null" >
+        sort_index = #{record.sortIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.showCounts != null" >
+        show_counts = #{record.showCounts,jdbcType=INTEGER},
+      </if>
+      <if test="record.clickCounts != null" >
+        click_counts = #{record.clickCounts,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_ad_links
+    set id = #{record.id,jdbcType=VARCHAR},
+      ad_id = #{record.adId,jdbcType=VARCHAR},
+      scenes = #{record.scenes,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=VARCHAR},
+      carrier_id = #{record.carrierId,jdbcType=VARCHAR},
+      sort_index = #{record.sortIndex,jdbcType=SMALLINT},
+      start_time = #{record.startTime,jdbcType=BIGINT},
+      end_time = #{record.endTime,jdbcType=BIGINT},
+      show_counts = #{record.showCounts,jdbcType=INTEGER},
+      click_counts = #{record.clickCounts,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ad.domain.CfAdLinks" >
+    update cf_ad_links
+    <set >
+      <if test="adId != null" >
+        ad_id = #{adId,jdbcType=VARCHAR},
+      </if>
+      <if test="scenes != null" >
+        scenes = #{scenes,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="carrierId != null" >
+        carrier_id = #{carrierId,jdbcType=VARCHAR},
+      </if>
+      <if test="sortIndex != null" >
+        sort_index = #{sortIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="showCounts != null" >
+        show_counts = #{showCounts,jdbcType=INTEGER},
+      </if>
+      <if test="clickCounts != null" >
+        click_counts = #{clickCounts,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ad.domain.CfAdLinks" >
+    update cf_ad_links
+    set ad_id = #{adId,jdbcType=VARCHAR},
+      scenes = #{scenes,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      carrier_id = #{carrierId,jdbcType=VARCHAR},
+      sort_index = #{sortIndex,jdbcType=SMALLINT},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      show_counts = #{showCounts,jdbcType=INTEGER},
+      click_counts = #{clickCounts,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="false">
+    insert into cf_ad_links
+    (id,ad_id,scenes,platform,carrier_id,sort_index,start_time,end_time,show_counts,click_counts,create_time)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id},#{item.adId},#{item.scenes},#{item.platform},#{item.carrierId},#{item.sortIndex},#{item.startTime},#{item.endTime},#{item.showCounts},#{item.clickCounts},#{item.createTime})
+    </foreach>
+  </insert>
+
+  <resultMap id="ContainAdMap" type="com.cf.ad.domain.CfAdLinks" >
+    <id column="link_id" property="id" jdbcType="VARCHAR" />
+    <collection property="cfAd" ofType="com.cf.ad.domain.CfAd">
+      <id column="ad_id" property="id" jdbcType="VARCHAR" />
+      <result column="ad_title" property="title" jdbcType="VARCHAR" />
+      <result column="ad_subtitle" property="subtitle" jdbcType="VARCHAR" />
+      <result column="ad_cover" property="cover" jdbcType="VARCHAR" />
+      <result column="ad_material_type" property="materialType" jdbcType="VARCHAR" />
+      <result column="ad_source_address" property="sourceAddress" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="selectContainAdByQuery" parameterType="com.cf.ad.domain.request.CfAdLinksQuery" resultMap="ContainAdMap">
+    select
+     lk.id link_id,ad.id ad_id,ad.title ad_title,ad.subtitle ad_subtitle,ad.cover ad_cover,ad.material_type ad_material_type,ad.source_address ad_source_address
+    from cf_ad_links lk left join cf_ad ad on(lk.ad_id=ad.id)
+    <trim prefix="where" prefixOverrides="and">
+      <if test="id!=null">
+        and lk.id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="adId!=null">
+        and lk.ad_id = #{adId,jdbcType=VARCHAR}
+      </if>
+      <if test="scenes!=null">
+        and lk.scenes = #{scenes,jdbcType=VARCHAR}
+      </if>
+      <if test="platform!=null">
+        and lk.platform = #{platform,jdbcType=VARCHAR}
+      </if>
+      <if test="carrierId!=null">
+        and lk.carrier_id like #{carrierId,jdbcType=VARCHAR}
+      </if>
+      <if test="minStartTime!=null">
+        and lk.start_time <![CDATA[ >= ]]> #{minStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxStartTime!=null">
+        and lk.start_time <![CDATA[ <= ]]> #{maxStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="minEndTime!=null">
+        and lk.end_time <![CDATA[ >= ]]> #{minEndTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxEndTime!=null">
+        and lk.end_time <![CDATA[ <= ]]> #{maxEndTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+    <if test="orderBy != null" >
+      order by #{orderBy,jdbcType=VARCHAR}
+    </if>
+    <if test="page != null and size != null" >
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+
+  <update id="adCounts" parameterType="com.cf.ad.domain.request.AdCounts" >
+    update cf_ad_links
+    set
+    <if test="field=='show_counts'" >
+      show_counts = show_counts+1
+    </if>
+    <if test="field=='click_counts'" >
+      click_counts = click_counts+1
+    </if>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

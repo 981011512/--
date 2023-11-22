@@ -1,0 +1,31 @@
+server:
+  port: 8097
+  max-http-header-size: 64KB
+spring:
+  application:
+    name: cf-pay-admin
+  profiles:
+    active: dev
+  redis:
+    host: redis数据库地址
+    port: 6379
+    password: redis密码
+    database: 0
+    jedis:
+      pool:
+        maxActive: 3
+        maxIdle: 3
+        minIdle: 1
+        maxWait: -1
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: zookeeper://127.0.0.1:2181
+auth:
+  tokenValiditySeconds: 1200
+  clientId: oauth2用户名，记得在对应的数据库配置用户名
+  clientSecret: oauth2密码，记得在对应数据库配置密码
+  cookieDomain: xuecheng.com
+  cookieMaxAge: -1
+

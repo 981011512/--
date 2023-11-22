@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkReleaseLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkReleaseLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="carpark_id" property="carparkId" jdbcType="VARCHAR" />
+    <result column="carpark_use_log_id" property="carparkUseLogId" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="device_serial_number" property="deviceSerialNumber" jdbcType="VARCHAR" />
+    <result column="application_time" property="applicationTime" jdbcType="BIGINT" />
+    <result column="application_reason" property="applicationReason" jdbcType="VARCHAR" />
+    <result column="execution_time" property="executionTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, carpark_id, carpark_use_log_id, number_plate, uid, device_serial_number, application_time, 
+    application_reason, execution_time, status, type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkReleaseLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_release_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from cf_car_park_release_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_release_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkReleaseLogExample" >
+    delete from cf_car_park_release_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkReleaseLog" >
+    insert into cf_car_park_release_log (id, carpark_id, carpark_use_log_id,
+                                         number_plate, uid, device_serial_number,
+                                         application_time, application_reason, execution_time,
+                                         status, type)
+    values (#{id,jdbcType=VARCHAR}, #{carparkId,jdbcType=VARCHAR}, #{carparkUseLogId,jdbcType=VARCHAR},
+            #{numberPlate,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{deviceSerialNumber,jdbcType=VARCHAR},
+            #{applicationTime,jdbcType=BIGINT}, #{applicationReason,jdbcType=VARCHAR}, #{executionTime,jdbcType=BIGINT},
+            #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkReleaseLog" >
+    insert into cf_car_park_release_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carparkId != null" >
+        carpark_id,
+      </if>
+      <if test="carparkUseLogId != null" >
+        carpark_use_log_id,
+      </if>
+      <if test="numberPlate != null" >
+        number_plate,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="deviceSerialNumber != null" >
+        device_serial_number,
+      </if>
+      <if test="applicationTime != null" >
+        application_time,
+      </if>
+      <if test="applicationReason != null" >
+        application_reason,
+      </if>
+      <if test="executionTime != null" >
+        execution_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carparkId != null" >
+        #{carparkId,jdbcType=VARCHAR},
+      </if>
+      <if test="carparkUseLogId != null" >
+        #{carparkUseLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSerialNumber != null" >
+        #{deviceSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationTime != null" >
+        #{applicationTime,jdbcType=BIGINT},
+      </if>
+      <if test="applicationReason != null" >
+        #{applicationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="executionTime != null" >
+        #{executionTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkReleaseLogExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_release_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_release_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carparkId != null" >
+        carpark_id = #{record.carparkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carparkUseLogId != null" >
+        carpark_use_log_id = #{record.carparkUseLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberPlate != null" >
+        number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceSerialNumber != null" >
+        device_serial_number = #{record.deviceSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicationTime != null" >
+        application_time = #{record.applicationTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.applicationReason != null" >
+        application_reason = #{record.applicationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.executionTime != null" >
+        execution_time = #{record.executionTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_release_log
+    set id = #{record.id,jdbcType=VARCHAR},
+    carpark_id = #{record.carparkId,jdbcType=VARCHAR},
+    carpark_use_log_id = #{record.carparkUseLogId,jdbcType=VARCHAR},
+    number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+    uid = #{record.uid,jdbcType=VARCHAR},
+    device_serial_number = #{record.deviceSerialNumber,jdbcType=VARCHAR},
+    application_time = #{record.applicationTime,jdbcType=BIGINT},
+    application_reason = #{record.applicationReason,jdbcType=VARCHAR},
+    execution_time = #{record.executionTime,jdbcType=BIGINT},
+    status = #{record.status,jdbcType=TINYINT},
+    type = #{record.type,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkReleaseLog" >
+    update cf_car_park_release_log
+    <set >
+      <if test="carparkId != null" >
+        carpark_id = #{carparkId,jdbcType=VARCHAR},
+      </if>
+      <if test="carparkUseLogId != null" >
+        carpark_use_log_id = #{carparkUseLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSerialNumber != null" >
+        device_serial_number = #{deviceSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationTime != null" >
+        application_time = #{applicationTime,jdbcType=BIGINT},
+      </if>
+      <if test="applicationReason != null" >
+        application_reason = #{applicationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="executionTime != null" >
+        execution_time = #{executionTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkReleaseLog" >
+    update cf_car_park_release_log
+    set carpark_id = #{carparkId,jdbcType=VARCHAR},
+        carpark_use_log_id = #{carparkUseLogId,jdbcType=VARCHAR},
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+        uid = #{uid,jdbcType=VARCHAR},
+        device_serial_number = #{deviceSerialNumber,jdbcType=VARCHAR},
+        application_time = #{applicationTime,jdbcType=BIGINT},
+        application_reason = #{applicationReason,jdbcType=VARCHAR},
+        execution_time = #{executionTime,jdbcType=BIGINT},
+        status = #{status,jdbcType=TINYINT},
+        type = #{type,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <resultMap id="ContainCarParkAndCheckPointResultMap" type="com.cf.carpark.domain.CfCarParkReleaseLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="carpark_id" property="carparkId" jdbcType="VARCHAR" />
+    <result column="carpark_use_log_id" property="carparkUseLogId" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="device_serial_number" property="deviceSerialNumber" jdbcType="VARCHAR" />
+    <result column="application_time" property="applicationTime" jdbcType="BIGINT" />
+    <result column="application_reason" property="applicationReason" jdbcType="VARCHAR" />
+    <result column="execution_time" property="executionTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <collection property="cfCarPark" ofType="com.cf.carpark.domain.CfCarPark">
+      <id column="cp_id" property="id" jdbcType="VARCHAR" />
+      <result column="cp_name" property="name" jdbcType="VARCHAR" />
+      <result column="cp_image" property="image" jdbcType="VARCHAR" />
+      <result column="cp_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="cp_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="cp_start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+      <result column="cp_end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+      <result column="cp_parking_space_number" property="parkingSpaceNumber" jdbcType="INTEGER" />
+      <result column="cp_used_parking_space_number" property="usedParkingSpaceNumber" jdbcType="INTEGER" />
+      <result column="cp_address" property="address" jdbcType="VARCHAR" />
+      <result column="cp_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="cp_landline" property="landline" jdbcType="VARCHAR" />
+      <result column="cp_status" property="status" jdbcType="TINYINT" />
+      <result column="cp_country_id" property="countryId" jdbcType="VARCHAR" />
+      <result column="cp_province_id" property="provinceId" jdbcType="VARCHAR" />
+      <result column="cp_state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+      <result column="cp_zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+      <result column="cp_township_id" property="townshipId" jdbcType="VARCHAR" />
+      <result column="cp_free_time" property="freeTime" jdbcType="BIGINT" />
+      <result column="cp_score" property="score" jdbcType="DECIMAL" />
+      <result column="cp_number_of_comments" property="numberOfComments" jdbcType="INTEGER" />
+      <result column="cp_fee_upper_limit" property="feeUpperLimit" jdbcType="DECIMAL" />
+      <result column="cp_unit_duration" property="unitDuration" jdbcType="BIGINT" />
+      <result column="cp_billing_model" property="billingModel" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="cfCarParkCheckpoint" ofType="com.cf.carpark.domain.CfCarParkCheckpoint">
+      <id column="cpck_id" property="id" jdbcType="VARCHAR" />
+      <result column="cpck_name" property="name" jdbcType="VARCHAR" />
+      <result column="cpck_car_park_id" property="carParkId" jdbcType="VARCHAR" />
+      <result column="cpck_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="cpck_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="cpck_position_describe" property="positionDescribe" jdbcType="VARCHAR" />
+      <result column="cpck_floor" property="floor" jdbcType="TINYINT" />
+      <result column="cpck_mode" property="mode" jdbcType="TINYINT" />
+      <result column="cpck_status" property="status" jdbcType="TINYINT" />
+    </collection>
+    <collection property="cfCarParkDevice"  ofType="com.cf.carpark.domain.CfCarParkDevice">
+      <id column="cpdv_id" property="id" jdbcType="VARCHAR" />
+      <result column="cpdv_car_park_id" property="carParkId" jdbcType="VARCHAR" />
+      <result column="cpdv_bar_code" property="barCode" jdbcType="VARCHAR" />
+      <result column="cpdv_brand" property="brand" jdbcType="VARCHAR" />
+      <result column="cpdv_model" property="model" jdbcType="VARCHAR" />
+      <result column="cpdv_status" property="status" jdbcType="TINYINT" />
+      <result column="cpdv_last_online_time" property="lastOnlineTime" jdbcType="BIGINT" />
+      <result column="cpdv_link_mode" property="linkMode" jdbcType="VARCHAR" />
+      <result column="cpdv_type" property="type" jdbcType="TINYINT" />
+      <result column="cpdv_checkpoint_id" property="checkpointId" jdbcType="VARCHAR" />
+      <result column="cpdv_product_id" property="productId" jdbcType="VARCHAR" />
+      <result column="cpdv_direction" property="direction" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <resultMap id="CountAndOrderResultMap" type="com.cf.framework.domain.report.CountByKeyAndValue" >
+    <result column="name" property="countKey" jdbcType="VARCHAR" />
+    <result column="counts" property="countValue" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="ContainCarParkAndCheckPointResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <select id="countAndOrder" resultMap="CountAndOrderResultMap">
+    select sum(1) counts,cp.name from cf_car_park_release_log cprl left join cf_car_park cp on(cprl.carpark_id=cp.id)
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="carParkIds!=null">
+        and cprl.carpark_id in
+        <foreach item="item" collection="carParkIds" separator="," open="(" close=")" index="">
+          #{item,jdbcType=VARCHAR}
+        </foreach>
+      </if>
+      <if test="day!=null">
+        and cprl.execution_time >= unix_timestamp( DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00') - INTERVAL #{day,jdbcType=INTEGER} DAY ) * 1000
+      </if>
+      and cprl.type=2 and name is not null
+    </trim>
+    group by cprl.carpark_id order by counts desc
+  </select>
+
+  <update id="update" parameterType="com.cf.carpark.domain.CfCarParkReleaseLog" >
+    update cf_car_park_release_log
+    set
+    <trim suffixOverrides=",">
+      <if test="carparkId != null" >
+        carpark_id = #{carparkId,jdbcType=VARCHAR},
+      </if>
+      <if test="carparkUseLogId != null" >
+        carpark_use_log_id = #{carparkUseLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSerialNumber != null" >
+        device_serial_number = #{deviceSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationTime != null" >
+        application_time = #{applicationTime,jdbcType=BIGINT},
+      </if>
+      <if test="applicationReason != null" >
+        application_reason = #{applicationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="executionTime != null" >
+        execution_time = #{executionTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT}
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT}
+      </if>
+    </trim>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

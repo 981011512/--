@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfCouponActivityLinkShopMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfCouponActivityLinkShop" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="coupon_activity_id" property="couponActivityId" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="scene" property="scene" jdbcType="VARCHAR" />
+    <result column="main_shop" property="mainShop" jdbcType="TINYINT" />
+    <result column="require_using" property="requireUsing" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, coupon_activity_id, shop_id, scene, main_shop, require_using
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfCouponActivityLinkShopExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_coupon_activity_link_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_coupon_activity_link_shop
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_coupon_activity_link_shop
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfCouponActivityLinkShopExample" >
+    delete from cf_coupon_activity_link_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfCouponActivityLinkShop" >
+    insert into cf_coupon_activity_link_shop (id, coupon_activity_id, shop_id, 
+      scene, main_shop, require_using
+      )
+    values (#{id,jdbcType=VARCHAR}, #{couponActivityId,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, 
+      #{scene,jdbcType=VARCHAR}, #{mainShop,jdbcType=TINYINT}, #{requireUsing,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfCouponActivityLinkShop" >
+    insert into cf_coupon_activity_link_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="couponActivityId != null" >
+        coupon_activity_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="scene != null" >
+        scene,
+      </if>
+      <if test="mainShop != null" >
+        main_shop,
+      </if>
+      <if test="requireUsing != null" >
+        require_using,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="couponActivityId != null" >
+        #{couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="scene != null" >
+        #{scene,jdbcType=VARCHAR},
+      </if>
+      <if test="mainShop != null" >
+        #{mainShop,jdbcType=TINYINT},
+      </if>
+      <if test="requireUsing != null" >
+        #{requireUsing,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfCouponActivityLinkShopExample" resultType="java.lang.Integer" >
+    select count(*) from cf_coupon_activity_link_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_coupon_activity_link_shop
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponActivityId != null" >
+        coupon_activity_id = #{record.couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scene != null" >
+        scene = #{record.scene,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainShop != null" >
+        main_shop = #{record.mainShop,jdbcType=TINYINT},
+      </if>
+      <if test="record.requireUsing != null" >
+        require_using = #{record.requireUsing,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_coupon_activity_link_shop
+    set id = #{record.id,jdbcType=VARCHAR},
+      coupon_activity_id = #{record.couponActivityId,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=VARCHAR},
+      scene = #{record.scene,jdbcType=VARCHAR},
+      main_shop = #{record.mainShop,jdbcType=TINYINT},
+      require_using = #{record.requireUsing,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfCouponActivityLinkShop" >
+    update cf_coupon_activity_link_shop
+    <set >
+      <if test="couponActivityId != null" >
+        coupon_activity_id = #{couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="scene != null" >
+        scene = #{scene,jdbcType=VARCHAR},
+      </if>
+      <if test="mainShop != null" >
+        main_shop = #{mainShop,jdbcType=TINYINT},
+      </if>
+      <if test="requireUsing != null" >
+        require_using = #{requireUsing,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfCouponActivityLinkShop" >
+    update cf_coupon_activity_link_shop
+    set coupon_activity_id = #{couponActivityId,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      scene = #{scene,jdbcType=VARCHAR},
+      main_shop = #{mainShop,jdbcType=TINYINT},
+      require_using = #{requireUsing,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+  <resultMap id="ContainNameResultMap" type="com.cf.pay.domain.CfCouponActivityLinkShop" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="coupon_activity_id" property="couponActivityId" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="scene" property="scene" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="main_shop" property="mainShop" jdbcType="TINYINT" />
+    <result column="require_using" property="requireUsing" jdbcType="TINYINT" />
+  </resultMap>
+  <select id="selectByQuery" parameterType="com.cf.pay.domain.request.CfCouponActivityLinkShopQuery" resultMap="ContainNameResultMap">
+    select cals.*,sc.${shopNameField} shop_name from cf_coupon_activity_link_shop cals
+    left join ${tableName} sc on(sc.id=cals.shop_id)
+    <trim prefix="where " prefixOverrides="and" >
+      <if test="id != null" >
+        and cals.id=#{id,jdbcType=VARCHAR}
+      </if>
+      <if test="couponActivityId != null" >
+        and cals.coupon_activity_id=#{couponActivityId,jdbcType=VARCHAR}
+      </if>
+      <if test="shopId != null" >
+        and cals.shop_id=#{shopId,jdbcType=VARCHAR}
+      </if>
+      <if test="scene != null" >
+        and cals.scene=#{scene,jdbcType=VARCHAR}
+      </if>
+      <if test="mainShop != null" >
+        and cals.main_shop=#{mainShop,jdbcType=TINYINT}
+      </if>
+      <if test="requireUsing != null" >
+        and cals.require_using=#{requireUsing,jdbcType=TINYINT}
+      </if>
+    </trim>
+    <if test="page != null and size != null" >
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+</mapper>

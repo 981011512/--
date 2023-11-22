@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkPackageMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkPackage" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="type_key" property="typeKey" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="special_give" property="specialGive" jdbcType="TINYINT" />
+    <result column="package_price_id" property="packagePriceId" jdbcType="VARCHAR" />
+    <result column="trans_regional" property="transRegional" jdbcType="TINYINT" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="main_car_park_id" property="mainCarParkId" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="car_owner_name" property="carOwnerName" jdbcType="VARCHAR" />
+    <result column="group_flag" property="groupFlag" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="issued_whitelist" property="issuedWhitelist" jdbcType="TINYINT" />
+    <result column="issued_whitelist_time" property="issuedWhitelistTime" jdbcType="BIGINT" />
+    <result column="notice_expiring_soon" property="noticeExpiringSoon" jdbcType="TINYINT" />
+    <result column="notice_expired" property="noticeExpired" jdbcType="TINYINT" />
+    <result column="special_car_id" property="specialCarId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_park_id, type_key, start_time, end_time, create_time, uid, number_plate, 
+    special_give, package_price_id, trans_regional, parent_id, phone, main_car_park_id, 
+    remarks, car_owner_name, group_flag, status, issued_whitelist, issued_whitelist_time, 
+    notice_expiring_soon, notice_expired, special_car_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkPackageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_package
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_package
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_package
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkPackageExample" >
+    delete from cf_car_park_package
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkPackage" >
+    insert into cf_car_park_package (id, car_park_id, type_key, 
+      start_time, end_time, create_time, 
+      uid, number_plate, special_give, 
+      package_price_id, trans_regional, parent_id, 
+      phone, main_car_park_id, remarks, 
+      car_owner_name, group_flag, status, 
+      issued_whitelist, issued_whitelist_time, notice_expiring_soon, 
+      notice_expired, special_car_id)
+    values (#{id,jdbcType=VARCHAR}, #{carParkId,jdbcType=VARCHAR}, #{typeKey,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, 
+      #{uid,jdbcType=VARCHAR}, #{numberPlate,jdbcType=VARCHAR}, #{specialGive,jdbcType=TINYINT}, 
+      #{packagePriceId,jdbcType=VARCHAR}, #{transRegional,jdbcType=TINYINT}, #{parentId,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{mainCarParkId,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{carOwnerName,jdbcType=VARCHAR}, #{groupFlag,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{issuedWhitelist,jdbcType=TINYINT}, #{issuedWhitelistTime,jdbcType=BIGINT}, #{noticeExpiringSoon,jdbcType=TINYINT}, 
+      #{noticeExpired,jdbcType=TINYINT}, #{specialCarId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkPackage" >
+    insert into cf_car_park_package
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carParkId != null" >
+        car_park_id,
+      </if>
+      <if test="typeKey != null" >
+        type_key,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="numberPlate != null" >
+        number_plate,
+      </if>
+      <if test="specialGive != null" >
+        special_give,
+      </if>
+      <if test="packagePriceId != null" >
+        package_price_id,
+      </if>
+      <if test="transRegional != null" >
+        trans_regional,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="mainCarParkId != null" >
+        main_car_park_id,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="carOwnerName != null" >
+        car_owner_name,
+      </if>
+      <if test="groupFlag != null" >
+        group_flag,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="issuedWhitelist != null" >
+        issued_whitelist,
+      </if>
+      <if test="issuedWhitelistTime != null" >
+        issued_whitelist_time,
+      </if>
+      <if test="noticeExpiringSoon != null" >
+        notice_expiring_soon,
+      </if>
+      <if test="noticeExpired != null" >
+        notice_expired,
+      </if>
+      <if test="specialCarId != null" >
+        special_car_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeKey != null" >
+        #{typeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="specialGive != null" >
+        #{specialGive,jdbcType=TINYINT},
+      </if>
+      <if test="packagePriceId != null" >
+        #{packagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="transRegional != null" >
+        #{transRegional,jdbcType=TINYINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mainCarParkId != null" >
+        #{mainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="carOwnerName != null" >
+        #{carOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupFlag != null" >
+        #{groupFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="issuedWhitelist != null" >
+        #{issuedWhitelist,jdbcType=TINYINT},
+      </if>
+      <if test="issuedWhitelistTime != null" >
+        #{issuedWhitelistTime,jdbcType=BIGINT},
+      </if>
+      <if test="noticeExpiringSoon != null" >
+        #{noticeExpiringSoon,jdbcType=TINYINT},
+      </if>
+      <if test="noticeExpired != null" >
+        #{noticeExpired,jdbcType=TINYINT},
+      </if>
+      <if test="specialCarId != null" >
+        #{specialCarId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkPackageExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_package
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_package
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carParkId != null" >
+        car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeKey != null" >
+        type_key = #{record.typeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberPlate != null" >
+        number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialGive != null" >
+        special_give = #{record.specialGive,jdbcType=TINYINT},
+      </if>
+      <if test="record.packagePriceId != null" >
+        package_price_id = #{record.packagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transRegional != null" >
+        trans_regional = #{record.transRegional,jdbcType=TINYINT},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainCarParkId != null" >
+        main_car_park_id = #{record.mainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carOwnerName != null" >
+        car_owner_name = #{record.carOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupFlag != null" >
+        group_flag = #{record.groupFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.issuedWhitelist != null" >
+        issued_whitelist = #{record.issuedWhitelist,jdbcType=TINYINT},
+      </if>
+      <if test="record.issuedWhitelistTime != null" >
+        issued_whitelist_time = #{record.issuedWhitelistTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.noticeExpiringSoon != null" >
+        notice_expiring_soon = #{record.noticeExpiringSoon,jdbcType=TINYINT},
+      </if>
+      <if test="record.noticeExpired != null" >
+        notice_expired = #{record.noticeExpired,jdbcType=TINYINT},
+      </if>
+      <if test="record.specialCarId != null" >
+        special_car_id = #{record.specialCarId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_package
+    set id = #{record.id,jdbcType=VARCHAR},
+      car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      type_key = #{record.typeKey,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=BIGINT},
+      end_time = #{record.endTime,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      special_give = #{record.specialGive,jdbcType=TINYINT},
+      package_price_id = #{record.packagePriceId,jdbcType=VARCHAR},
+      trans_regional = #{record.transRegional,jdbcType=TINYINT},
+      parent_id = #{record.parentId,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      main_car_park_id = #{record.mainCarParkId,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      car_owner_name = #{record.carOwnerName,jdbcType=VARCHAR},
+      group_flag = #{record.groupFlag,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      issued_whitelist = #{record.issuedWhitelist,jdbcType=TINYINT},
+      issued_whitelist_time = #{record.issuedWhitelistTime,jdbcType=BIGINT},
+      notice_expiring_soon = #{record.noticeExpiringSoon,jdbcType=TINYINT},
+      notice_expired = #{record.noticeExpired,jdbcType=TINYINT},
+      special_car_id = #{record.specialCarId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkPackage" >
+    update cf_car_park_package
+    <set >
+      <if test="carParkId != null" >
+        car_park_id = #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeKey != null" >
+        type_key = #{typeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="specialGive != null" >
+        special_give = #{specialGive,jdbcType=TINYINT},
+      </if>
+      <if test="packagePriceId != null" >
+        package_price_id = #{packagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="transRegional != null" >
+        trans_regional = #{transRegional,jdbcType=TINYINT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mainCarParkId != null" >
+        main_car_park_id = #{mainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="carOwnerName != null" >
+        car_owner_name = #{carOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupFlag != null" >
+        group_flag = #{groupFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="issuedWhitelist != null" >
+        issued_whitelist = #{issuedWhitelist,jdbcType=TINYINT},
+      </if>
+      <if test="issuedWhitelistTime != null" >
+        issued_whitelist_time = #{issuedWhitelistTime,jdbcType=BIGINT},
+      </if>
+      <if test="noticeExpiringSoon != null" >
+        notice_expiring_soon = #{noticeExpiringSoon,jdbcType=TINYINT},
+      </if>
+      <if test="noticeExpired != null" >
+        notice_expired = #{noticeExpired,jdbcType=TINYINT},
+      </if>
+      <if test="specialCarId != null" >
+        special_car_id = #{specialCarId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkPackage" >
+    update cf_car_park_package
+    set car_park_id = #{carParkId,jdbcType=VARCHAR},
+      type_key = #{typeKey,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      uid = #{uid,jdbcType=VARCHAR},
+      number_plate = #{numberPlate,jdbcType=VARCHAR},
+      special_give = #{specialGive,jdbcType=TINYINT},
+      package_price_id = #{packagePriceId,jdbcType=VARCHAR},
+      trans_regional = #{transRegional,jdbcType=TINYINT},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      main_car_park_id = #{mainCarParkId,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      car_owner_name = #{carOwnerName,jdbcType=VARCHAR},
+      group_flag = #{groupFlag,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      issued_whitelist = #{issuedWhitelist,jdbcType=TINYINT},
+      issued_whitelist_time = #{issuedWhitelistTime,jdbcType=BIGINT},
+      notice_expiring_soon = #{noticeExpiringSoon,jdbcType=TINYINT},
+      notice_expired = #{noticeExpired,jdbcType=TINYINT},
+      special_car_id = #{specialCarId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <resultMap id="ContainCarParkNameResultMap" type="com.cf.carpark.domain.CfCarParkPackage" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="type_key" property="typeKey" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="carpark_name" property="carParkName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="special_give" property="specialGive" jdbcType="TINYINT" />
+    <result column="package_price_id" property="packagePriceId" jdbcType="VARCHAR" />
+    <result column="trans_regional" property="transRegional" jdbcType="TINYINT" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="main_car_park_id" property="mainCarParkId" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="car_owner_name" property="carOwnerName" jdbcType="VARCHAR" />
+    <result column="group_flag" property="groupFlag" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="issued_whitelist" property="issuedWhitelist" jdbcType="TINYINT" />
+    <result column="issued_whitelist_time" property="issuedWhitelistTime" jdbcType="BIGINT" />
+    <result column="notice_expiring_soon" property="noticeExpiringSoon" jdbcType="TINYINT" />
+    <result column="notice_expired" property="noticeExpired" jdbcType="TINYINT" />
+    <result column="special_car_id" property="specialCarId" jdbcType="VARCHAR" />
+    <collection property="cfCarParkCarType" ofType="com.cf.carpark.domain.CfCarParkCarType">
+      <id column="cpct_id" property="id" jdbcType="VARCHAR" />
+      <result column="cpct_name" property="name" jdbcType="VARCHAR" />
+      <result column="cpct_flag_key" property="flagKey" jdbcType="VARCHAR" />
+      <result column="cpct_image" property="image" jdbcType="VARCHAR" />
+      <result column="cpct_description" property="description" jdbcType="VARCHAR" />
+      <result column="cpct_sort_index" property="sortIndex" jdbcType="INTEGER" />
+    </collection>
+    <collection property="cfCarParkPackagePrice" ofType="com.cf.carpark.domain.CfCarParkPackagePrice">
+      <id column="cppp_id" property="id" jdbcType="VARCHAR" />
+      <result column="cppp_title" property="title" jdbcType="VARCHAR" />
+      <result column="cppp_subtitle" property="subtitle" jdbcType="VARCHAR" />
+      <result column="cppp_image" property="image" jdbcType="VARCHAR" />
+      <result column="cppp_flag_key" property="flagKey" jdbcType="VARCHAR" />
+      <result column="cppp_car_park_id" property="carParkId" jdbcType="VARCHAR" />
+      <result column="cppp_original_price" property="originalPrice" jdbcType="DECIMAL" />
+      <result column="cppp_current_price" property="currentPrice" jdbcType="DECIMAL" />
+      <result column="cppp_time_quota" property="timeQuota" jdbcType="BIGINT" />
+      <result column="cppp_sort_index" property="sortIndex" jdbcType="INTEGER" />
+      <result column="cppp_special_give" property="specialGive" jdbcType="TINYINT" />
+      <result column="cppp_grace_period" property="gracePeriod" jdbcType="BIGINT" />
+    </collection>
+  </resultMap>
+  <resultMap id="ContainCarParkAndUserNameResultMap" type="com.cf.carpark.domain.CfCarParkPackage" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="type_key" property="typeKey" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="carpark_name" property="carParkName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="special_give" property="specialGive" jdbcType="TINYINT" />
+    <result column="package_price_id" property="packagePriceId" jdbcType="VARCHAR" />
+    <result column="trans_regional" property="transRegional" jdbcType="TINYINT" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="main_car_park_id" property="mainCarParkId" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="car_owner_name" property="carOwnerName" jdbcType="VARCHAR" />
+    <result column="group_flag" property="groupFlag" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="issued_whitelist" property="issuedWhitelist" jdbcType="TINYINT" />
+    <result column="issued_whitelist_time" property="issuedWhitelistTime" jdbcType="BIGINT" />
+    <result column="notice_expiring_soon" property="noticeExpiringSoon" jdbcType="TINYINT" />
+    <result column="notice_expired" property="noticeExpired" jdbcType="TINYINT" />
+    <result column="special_car_id" property="specialCarId" jdbcType="VARCHAR" />
+    <collection property="cfCarParkPackagePrice" ofType="com.cf.carpark.domain.CfCarParkPackagePrice">
+      <id column="cppp_id" property="id" jdbcType="VARCHAR" />
+      <result column="cppp_title" property="title" jdbcType="VARCHAR" />
+      <result column="cppp_subtitle" property="subtitle" jdbcType="VARCHAR" />
+      <result column="cppp_image" property="image" jdbcType="VARCHAR" />
+      <result column="cppp_flag_key" property="flagKey" jdbcType="VARCHAR" />
+      <result column="cppp_car_park_id" property="carParkId" jdbcType="VARCHAR" />
+      <result column="cppp_original_price" property="originalPrice" jdbcType="DECIMAL" />
+      <result column="cppp_current_price" property="currentPrice" jdbcType="DECIMAL" />
+      <result column="cppp_time_quota" property="timeQuota" jdbcType="BIGINT" />
+      <result column="cppp_sort_index" property="sortIndex" jdbcType="INTEGER" />
+      <result column="cppp_special_give" property="specialGive" jdbcType="TINYINT" />
+      <result column="cppp_grace_period" property="gracePeriod" jdbcType="BIGINT" />
+    </collection>
+  </resultMap>
+  <sql id="ContainCarParkName_Column_List" >
+    cpp.id,cpp.car_park_id,cpp.type_key,cpp.start_time,cpp.end_time,cpp.create_time,cpp.uid,cpp.number_plate,cpp.special_give,cpp.package_price_id,cpp.trans_regional,cpp.parent_id,cpp.phone,cpp.main_car_park_id,cp.name carpark_name,cpct.name
+  </sql>
+  <select id="selectByExampleContainCarParkName" resultMap="ContainCarParkNameResultMap" parameterType="com.cf.carpark.domain.CfCarParkPackageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="ContainCarParkName_Column_List" />
+    from cf_car_park_package cpp left join cf_car_park cp on(cpp.car_park_id=cp.id) left join cf_car_park_car_type cpct on(cpct.flag_key=cpp.type_key)
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="ContainCarParkAndUserNameResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <select id="batchAdd" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <update id="batchBindUserByPhone">
+    update cf_car_park_package set uid = #{uid,jdbcType=VARCHAR} where phone = #{phone,jdbcType=VARCHAR} and uid = ''
+  </update>
+
+  <select id="selectByQuery"  parameterType="com.cf.carpark.domain.request.CfCarParkPackageQuery" resultMap="ContainCarParkNameResultMap">
+    select cpp.*,cp.name carpark_name,cpct.name cpct_name from cf_car_park_package cpp left join cf_car_park cp on(cpp.car_park_id=cp.id)
+        left join cf_car_park_car_type cpct on(cpct.flag_key=cpp.type_key)
+    <trim prefix="where" prefixOverrides="and">
+      <if test="id!=null">
+        and cpp.id=#{id,jdbcType=VARCHAR}
+      </if>
+      <if test="carParkId!=null">
+        and cpp.car_park_id=#{carParkId,jdbcType=VARCHAR}
+      </if>
+      <if test="typeKey!=null">
+        and cpp.type_key=#{typeKey,jdbcType=VARCHAR}
+      </if>
+      <if test="minStartTime!=null">
+        and cpp.start_time <![CDATA[ >= ]]> #{minStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxStartTime!=null">
+        and cpp.start_time <![CDATA[ <= ]]> #{maxStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="minEndTime!=null">
+        and cpp.end_time <![CDATA[ >= ]]> #{minEndTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxEndTime!=null">
+        and cpp.end_time <![CDATA[ <= ]]> #{maxEndTime,jdbcType=BIGINT}
+      </if>
+      <if test="uid!=null">
+        and cpp.uid=#{uid,jdbcType=VARCHAR}
+      </if>
+      <if test="numberPlate!=null">
+        and cpp.number_plate like #{numberPlate,jdbcType=VARCHAR}
+      </if>
+      <if test="specialGive!=null">
+        and cpp.special_give=#{specialGive,jdbcType=TINYINT}
+      </if>
+      <if test="packagePriceId!=null">
+        and cpp.package_price_id=#{packagePriceId,jdbcType=VARCHAR}
+      </if>
+      <if test="transRegional!=null">
+        and cpp.trans_regional=#{transRegional,jdbcType=TINYINT}
+      </if>
+      <if test="mainCarParkId!=null">
+        and cpp.main_car_park_id=#{mainCarParkId,jdbcType=VARCHAR}
+      </if>
+      <if test="parentId!=null">
+        and cpp.parent_id=#{parentId,jdbcType=VARCHAR}
+      </if>
+      <if test="groupFlag!=null">
+        and cpp.group_flag=#{groupFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="status!=null">
+        and cpp.status=#{status,jdbcType=VARCHAR}
+      </if>
+      <if test="issuedWhitelist!=null">
+        and cpp.issued_whitelist=#{issuedWhitelist,jdbcType=VARCHAR}
+      </if>
+      <if test="noticeExpiringSoon!=null">
+        and cpp.notice_expiring_soon=#{noticeExpiringSoon,jdbcType=VARCHAR}
+      </if>
+      <if test="noticeExpired!=null">
+        and cpp.notice_expired=#{noticeExpired,jdbcType=VARCHAR}
+      </if>
+      <if test="page!=null and size!=null">
+        limit ${(page-1)*size},${size}
+      </if>
+    </trim>
+  </select>
+</mapper>

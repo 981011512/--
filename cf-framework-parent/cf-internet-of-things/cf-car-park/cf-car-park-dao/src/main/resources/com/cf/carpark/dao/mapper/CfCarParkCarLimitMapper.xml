@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkCarLimitMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkCarLimit" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="car_type_key" property="carTypeKey" jdbcType="VARCHAR" />
+    <result column="free_time" property="freeTime" jdbcType="BIGINT" />
+    <result column="give_free_time" property="giveFreeTime" jdbcType="TINYINT" />
+    <result column="auto_open_door" property="autoOpenDoor" jdbcType="TINYINT" />
+    <result column="forbid_in" property="forbidIn" jdbcType="TINYINT" />
+    <result column="free_release" property="freeRelease" jdbcType="TINYINT" />
+    <result column="upper_limit_time" property="upperLimitTime" jdbcType="BIGINT" />
+    <result column="billing_model" property="billingModel" jdbcType="VARCHAR" />
+    <result column="fee_upper_limit" property="feeUpperLimit" jdbcType="DECIMAL" />
+    <result column="leave_time_limit" property="leaveTimeLimit" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_park_id, car_type_key, free_time, give_free_time, auto_open_door, forbid_in, 
+    free_release, upper_limit_time, billing_model, fee_upper_limit, leave_time_limit
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkCarLimitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_car_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_car_limit
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_car_limit
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkCarLimitExample" >
+    delete from cf_car_park_car_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkCarLimit" >
+    insert into cf_car_park_car_limit (id, car_park_id, car_type_key, 
+      free_time, give_free_time, auto_open_door, 
+      forbid_in, free_release, upper_limit_time, 
+      billing_model, fee_upper_limit, leave_time_limit
+      )
+    values (#{id,jdbcType=VARCHAR}, #{carParkId,jdbcType=VARCHAR}, #{carTypeKey,jdbcType=VARCHAR}, 
+      #{freeTime,jdbcType=BIGINT}, #{giveFreeTime,jdbcType=TINYINT}, #{autoOpenDoor,jdbcType=TINYINT}, 
+      #{forbidIn,jdbcType=TINYINT}, #{freeRelease,jdbcType=TINYINT}, #{upperLimitTime,jdbcType=BIGINT}, 
+      #{billingModel,jdbcType=VARCHAR}, #{feeUpperLimit,jdbcType=DECIMAL}, #{leaveTimeLimit,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkCarLimit" >
+    insert into cf_car_park_car_limit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carParkId != null" >
+        car_park_id,
+      </if>
+      <if test="carTypeKey != null" >
+        car_type_key,
+      </if>
+      <if test="freeTime != null" >
+        free_time,
+      </if>
+      <if test="giveFreeTime != null" >
+        give_free_time,
+      </if>
+      <if test="autoOpenDoor != null" >
+        auto_open_door,
+      </if>
+      <if test="forbidIn != null" >
+        forbid_in,
+      </if>
+      <if test="freeRelease != null" >
+        free_release,
+      </if>
+      <if test="upperLimitTime != null" >
+        upper_limit_time,
+      </if>
+      <if test="billingModel != null" >
+        billing_model,
+      </if>
+      <if test="feeUpperLimit != null" >
+        fee_upper_limit,
+      </if>
+      <if test="leaveTimeLimit != null" >
+        leave_time_limit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeKey != null" >
+        #{carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="freeTime != null" >
+        #{freeTime,jdbcType=BIGINT},
+      </if>
+      <if test="giveFreeTime != null" >
+        #{giveFreeTime,jdbcType=TINYINT},
+      </if>
+      <if test="autoOpenDoor != null" >
+        #{autoOpenDoor,jdbcType=TINYINT},
+      </if>
+      <if test="forbidIn != null" >
+        #{forbidIn,jdbcType=TINYINT},
+      </if>
+      <if test="freeRelease != null" >
+        #{freeRelease,jdbcType=TINYINT},
+      </if>
+      <if test="upperLimitTime != null" >
+        #{upperLimitTime,jdbcType=BIGINT},
+      </if>
+      <if test="billingModel != null" >
+        #{billingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="feeUpperLimit != null" >
+        #{feeUpperLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="leaveTimeLimit != null" >
+        #{leaveTimeLimit,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkCarLimitExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_car_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_car_limit
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carParkId != null" >
+        car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carTypeKey != null" >
+        car_type_key = #{record.carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.freeTime != null" >
+        free_time = #{record.freeTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.giveFreeTime != null" >
+        give_free_time = #{record.giveFreeTime,jdbcType=TINYINT},
+      </if>
+      <if test="record.autoOpenDoor != null" >
+        auto_open_door = #{record.autoOpenDoor,jdbcType=TINYINT},
+      </if>
+      <if test="record.forbidIn != null" >
+        forbid_in = #{record.forbidIn,jdbcType=TINYINT},
+      </if>
+      <if test="record.freeRelease != null" >
+        free_release = #{record.freeRelease,jdbcType=TINYINT},
+      </if>
+      <if test="record.upperLimitTime != null" >
+        upper_limit_time = #{record.upperLimitTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.billingModel != null" >
+        billing_model = #{record.billingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feeUpperLimit != null" >
+        fee_upper_limit = #{record.feeUpperLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.leaveTimeLimit != null" >
+        leave_time_limit = #{record.leaveTimeLimit,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_car_limit
+    set id = #{record.id,jdbcType=VARCHAR},
+      car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      car_type_key = #{record.carTypeKey,jdbcType=VARCHAR},
+      free_time = #{record.freeTime,jdbcType=BIGINT},
+      give_free_time = #{record.giveFreeTime,jdbcType=TINYINT},
+      auto_open_door = #{record.autoOpenDoor,jdbcType=TINYINT},
+      forbid_in = #{record.forbidIn,jdbcType=TINYINT},
+      free_release = #{record.freeRelease,jdbcType=TINYINT},
+      upper_limit_time = #{record.upperLimitTime,jdbcType=BIGINT},
+      billing_model = #{record.billingModel,jdbcType=VARCHAR},
+      fee_upper_limit = #{record.feeUpperLimit,jdbcType=DECIMAL},
+      leave_time_limit = #{record.leaveTimeLimit,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkCarLimit" >
+    update cf_car_park_car_limit
+    <set >
+      <if test="carParkId != null" >
+        car_park_id = #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeKey != null" >
+        car_type_key = #{carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="freeTime != null" >
+        free_time = #{freeTime,jdbcType=BIGINT},
+      </if>
+      <if test="giveFreeTime != null" >
+        give_free_time = #{giveFreeTime,jdbcType=TINYINT},
+      </if>
+      <if test="autoOpenDoor != null" >
+        auto_open_door = #{autoOpenDoor,jdbcType=TINYINT},
+      </if>
+      <if test="forbidIn != null" >
+        forbid_in = #{forbidIn,jdbcType=TINYINT},
+      </if>
+      <if test="freeRelease != null" >
+        free_release = #{freeRelease,jdbcType=TINYINT},
+      </if>
+      <if test="upperLimitTime != null" >
+        upper_limit_time = #{upperLimitTime,jdbcType=BIGINT},
+      </if>
+      <if test="billingModel != null" >
+        billing_model = #{billingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="feeUpperLimit != null" >
+        fee_upper_limit = #{feeUpperLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="leaveTimeLimit != null" >
+        leave_time_limit = #{leaveTimeLimit,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkCarLimit" >
+    update cf_car_park_car_limit
+    set car_park_id = #{carParkId,jdbcType=VARCHAR},
+      car_type_key = #{carTypeKey,jdbcType=VARCHAR},
+      free_time = #{freeTime,jdbcType=BIGINT},
+      give_free_time = #{giveFreeTime,jdbcType=TINYINT},
+      auto_open_door = #{autoOpenDoor,jdbcType=TINYINT},
+      forbid_in = #{forbidIn,jdbcType=TINYINT},
+      free_release = #{freeRelease,jdbcType=TINYINT},
+      upper_limit_time = #{upperLimitTime,jdbcType=BIGINT},
+      billing_model = #{billingModel,jdbcType=VARCHAR},
+      fee_upper_limit = #{feeUpperLimit,jdbcType=DECIMAL},
+      leave_time_limit = #{leaveTimeLimit,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <resultMap id="ContainCarParkMap" type="com.cf.carpark.domain.CfCarParkCarLimit" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="car_type_key" property="carTypeKey" jdbcType="VARCHAR" />
+    <result column="free_time" property="freeTime" jdbcType="BIGINT" />
+    <result column="give_free_time" property="giveFreeTime" jdbcType="TINYINT" />
+    <result column="auto_open_door" property="autoOpenDoor" jdbcType="TINYINT" />
+    <result column="forbid_in" property="forbidIn" jdbcType="TINYINT" />
+    <result column="free_release" property="freeRelease" jdbcType="TINYINT" />
+    <result column="billing_model" property="billingModel" jdbcType="VARCHAR" />
+    <result column="upper_limit_time" property="upperLimitTime" jdbcType="BIGINT" />
+    <result column="fee_upper_limit" property="feeUpperLimit" jdbcType="DECIMAL" />
+    <result column="leave_time_limit" property="leaveTimeLimit" jdbcType="BIGINT" />
+    <collection property="cfCarPark" ofType="com.cf.carpark.domain.CfCarPark">
+      <id column="cp_id" property="id" jdbcType="VARCHAR" />
+      <result column="cp_name" property="name" jdbcType="VARCHAR" />
+      <result column="cp_image" property="image" jdbcType="VARCHAR" />
+      <result column="cp_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="cp_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="cp_start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+      <result column="cp_end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+      <result column="cp_parking_space_number" property="parkingSpaceNumber" jdbcType="INTEGER" />
+      <result column="cp_used_parking_space_number" property="usedParkingSpaceNumber" jdbcType="INTEGER" />
+      <result column="cp_address" property="address" jdbcType="VARCHAR" />
+      <result column="cp_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="cp_landline" property="landline" jdbcType="VARCHAR" />
+      <result column="cp_status" property="status" jdbcType="TINYINT" />
+      <result column="cp_country_id" property="countryId" jdbcType="VARCHAR" />
+      <result column="cp_province_id" property="provinceId" jdbcType="VARCHAR" />
+      <result column="cp_state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+      <result column="cp_zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+      <result column="cp_township_id" property="townshipId" jdbcType="VARCHAR" />
+      <result column="cp_free_time" property="freeTime" jdbcType="BIGINT" />
+      <result column="cp_leave_time_limit" property="leaveTimeLimit" jdbcType="BIGINT" />
+    </collection>
+  </resultMap>
+
+  <select id="selectContinCarParkByQuery" parameterType="com.cf.carpark.domain.request.CfCarParkCarLimitQuery" resultMap="ContainCarParkMap">
+    select cpcl.*,cp.name cp_name from cf_car_park_car_limit cpcl left join cf_car_park cp on(cpcl.car_park_id=cp.id)
+    <trim prefix="where" prefixOverrides="and">
+      <if test="id!=null">
+        and cpcl.id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="carParkId!=null">
+        and cpcl.car_park_id = #{carParkId,jdbcType=VARCHAR}
+      </if>
+      <if test="carTypeKey!=null">
+        and cpcl.car_type_key = #{carTypeKey,jdbcType=VARCHAR}
+      </if>
+    </trim>
+    <if test="page != null and size != null" >
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+
+</mapper>

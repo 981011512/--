@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>停车场道闸操作-设置</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@next/lib/index.css"/>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        [v-cloak]{
+            display: none;
+        }
+        .container{
+            max-width: 600px;
+            margin: auto;
+        }
+        .settingTitle{
+            text-align: center;
+            padding: 20px 0;
+        }
+        .container .liItem{
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            padding: 10px 0;
+        }
+        .liItem .liName{
+            flex: 1;
+            text-align: right;
+            margin-right: 20px;
+        }
+        .liItem .liOperation{
+            flex: 3;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <div class="container">
+        <div class="settingTitle">
+            <h1>道闸控制设置</h1>
+        </div>
+        <div class="liItem">
+            <div class="liName">异常出场强制开闸</div>
+            <div class="liOperation">
+                <van-switch v-model="checked" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!',
+        checked: true,
+    }
+})
+</script>
+</body>
+</html>

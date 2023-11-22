@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarPark" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+    <result column="end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+    <result column="parking_space_number" property="parkingSpaceNumber" jdbcType="INTEGER" />
+    <result column="used_parking_space_number" property="usedParkingSpaceNumber" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="landline" property="landline" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+    <result column="township_id" property="townshipId" jdbcType="VARCHAR" />
+    <result column="free_time" property="freeTime" jdbcType="BIGINT" />
+    <result column="score" property="score" jdbcType="DECIMAL" />
+    <result column="number_of_comments" property="numberOfComments" jdbcType="INTEGER" />
+    <result column="fee_upper_limit" property="feeUpperLimit" jdbcType="DECIMAL" />
+    <result column="starting_price" property="startingPrice" jdbcType="DECIMAL" />
+    <result column="unit_duration" property="unitDuration" jdbcType="BIGINT" />
+    <result column="billing_model" property="billingModel" jdbcType="VARCHAR" />
+    <result column="min_advance_subscribe_time" property="minAdvanceSubscribeTime" jdbcType="BIGINT" />
+    <result column="max_advance_subscribe_time" property="maxAdvanceSubscribeTime" jdbcType="BIGINT" />
+    <result column="subscribe_free_time" property="subscribeFreeTime" jdbcType="BIGINT" />
+    <result column="subscribe_fee" property="subscribeFee" jdbcType="DECIMAL" />
+    <result column="subscribe_timeout_fee" property="subscribeTimeoutFee" jdbcType="TINYINT" />
+    <result column="creater_id" property="createrId" jdbcType="VARCHAR" />
+    <result column="special_fee_expired_car" property="specialFeeExpiredCar" jdbcType="TINYINT" />
+    <result column="show_expired_car_type" property="showExpiredCarType" jdbcType="TINYINT" />
+    <result column="expired_car_free_time" property="expiredCarFreeTime" jdbcType="BIGINT" />
+    <result column="show_remarks" property="showRemarks" jdbcType="TINYINT" />
+    <result column="collection_carpark_id" property="collectionCarparkId" jdbcType="VARCHAR" />
+    <result column="limit_parking_space_number" property="limitParkingSpaceNumber" jdbcType="TINYINT" />
+    <result column="allow_edit_use_log" property="allowEditUseLog" jdbcType="TINYINT" />
+    <result column="abnormal_auto_release" property="abnormalAutoRelease" jdbcType="TINYINT" />
+    <result column="auto_issued_whitelist" property="autoIssuedWhitelist" jdbcType="TINYINT" />
+    <result column="adminer" property="adminer" jdbcType="VARCHAR" />
+    <result column="forbid_group_flag_same_time_in" property="forbidGroupFlagSameTimeIn" jdbcType="TINYINT" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="charging_station_id" property="chargingStationId" jdbcType="VARCHAR" />
+    <result column="data_report_platform" property="dataReportPlatform" jdbcType="VARCHAR" />
+    <result column="leave_time_limit" property="leaveTimeLimit" jdbcType="BIGINT" />
+    <result column="special_number_plate" property="specialNumberPlate" jdbcType="VARCHAR" />
+    <result column="storehouse_id" property="storehouseId" jdbcType="BIGINT" />
+    <result column="number_plate_color_to_car_type" property="numberPlateColorToCarType" jdbcType="TINYINT" />
+    <result column="package_group_flag_free_time_change" property="packageGroupFlagFreeTimeChange" jdbcType="TINYINT" />
+    <result column="visit_process_mode" property="visitProcessMode" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, image, position_x, position_y, start_business_hours, end_business_hours, 
+    parking_space_number, used_parking_space_number, address, phone, landline, status, 
+    country_id, province_id, state_or_city_id, zone_or_county_id, township_id, free_time, 
+    score, number_of_comments, fee_upper_limit, starting_price, unit_duration, billing_model, 
+    min_advance_subscribe_time, max_advance_subscribe_time, subscribe_free_time, subscribe_fee, 
+    subscribe_timeout_fee, creater_id, special_fee_expired_car, show_expired_car_type, 
+    expired_car_free_time, show_remarks, collection_carpark_id, limit_parking_space_number, 
+    allow_edit_use_log, abnormal_auto_release, auto_issued_whitelist, adminer, forbid_group_flag_same_time_in, 
+    current_price, charging_station_id, data_report_platform, leave_time_limit, special_number_plate, 
+    storehouse_id, number_plate_color_to_car_type, package_group_flag_free_time_change, 
+    visit_process_mode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkExample" >
+    delete from cf_car_park
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarPark" >
+    insert into cf_car_park (id, name, image, 
+      position_x, position_y, start_business_hours, 
+      end_business_hours, parking_space_number, used_parking_space_number, 
+      address, phone, landline, 
+      status, country_id, province_id, 
+      state_or_city_id, zone_or_county_id, township_id, 
+      free_time, score, number_of_comments, 
+      fee_upper_limit, starting_price, unit_duration, 
+      billing_model, min_advance_subscribe_time, max_advance_subscribe_time, 
+      subscribe_free_time, subscribe_fee, subscribe_timeout_fee, 
+      creater_id, special_fee_expired_car, show_expired_car_type, 
+      expired_car_free_time, show_remarks, collection_carpark_id, 
+      limit_parking_space_number, allow_edit_use_log, 
+      abnormal_auto_release, auto_issued_whitelist, 
+      adminer, forbid_group_flag_same_time_in, current_price, 
+      charging_station_id, data_report_platform, 
+      leave_time_limit, special_number_plate, storehouse_id, 
+      number_plate_color_to_car_type, package_group_flag_free_time_change, 
+      visit_process_mode)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{positionX,jdbcType=DECIMAL}, #{positionY,jdbcType=DECIMAL}, #{startBusinessHours,jdbcType=BIGINT}, 
+      #{endBusinessHours,jdbcType=BIGINT}, #{parkingSpaceNumber,jdbcType=INTEGER}, #{usedParkingSpaceNumber,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{landline,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{countryId,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, 
+      #{stateOrCityId,jdbcType=VARCHAR}, #{zoneOrCountyId,jdbcType=VARCHAR}, #{townshipId,jdbcType=VARCHAR}, 
+      #{freeTime,jdbcType=BIGINT}, #{score,jdbcType=DECIMAL}, #{numberOfComments,jdbcType=INTEGER}, 
+      #{feeUpperLimit,jdbcType=DECIMAL}, #{startingPrice,jdbcType=DECIMAL}, #{unitDuration,jdbcType=BIGINT}, 
+      #{billingModel,jdbcType=VARCHAR}, #{minAdvanceSubscribeTime,jdbcType=BIGINT}, #{maxAdvanceSubscribeTime,jdbcType=BIGINT}, 
+      #{subscribeFreeTime,jdbcType=BIGINT}, #{subscribeFee,jdbcType=DECIMAL}, #{subscribeTimeoutFee,jdbcType=TINYINT}, 
+      #{createrId,jdbcType=VARCHAR}, #{specialFeeExpiredCar,jdbcType=TINYINT}, #{showExpiredCarType,jdbcType=TINYINT}, 
+      #{expiredCarFreeTime,jdbcType=BIGINT}, #{showRemarks,jdbcType=TINYINT}, #{collectionCarparkId,jdbcType=VARCHAR}, 
+      #{limitParkingSpaceNumber,jdbcType=TINYINT}, #{allowEditUseLog,jdbcType=TINYINT}, 
+      #{abnormalAutoRelease,jdbcType=TINYINT}, #{autoIssuedWhitelist,jdbcType=TINYINT}, 
+      #{adminer,jdbcType=VARCHAR}, #{forbidGroupFlagSameTimeIn,jdbcType=TINYINT}, #{currentPrice,jdbcType=DECIMAL}, 
+      #{chargingStationId,jdbcType=VARCHAR}, #{dataReportPlatform,jdbcType=VARCHAR}, 
+      #{leaveTimeLimit,jdbcType=BIGINT}, #{specialNumberPlate,jdbcType=VARCHAR}, #{storehouseId,jdbcType=BIGINT}, 
+      #{numberPlateColorToCarType,jdbcType=TINYINT}, #{packageGroupFlagFreeTimeChange,jdbcType=TINYINT}, 
+      #{visitProcessMode,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarPark" >
+    insert into cf_car_park
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="positionX != null" >
+        position_x,
+      </if>
+      <if test="positionY != null" >
+        position_y,
+      </if>
+      <if test="startBusinessHours != null" >
+        start_business_hours,
+      </if>
+      <if test="endBusinessHours != null" >
+        end_business_hours,
+      </if>
+      <if test="parkingSpaceNumber != null" >
+        parking_space_number,
+      </if>
+      <if test="usedParkingSpaceNumber != null" >
+        used_parking_space_number,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="landline != null" >
+        landline,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id,
+      </if>
+      <if test="zoneOrCountyId != null" >
+        zone_or_county_id,
+      </if>
+      <if test="townshipId != null" >
+        township_id,
+      </if>
+      <if test="freeTime != null" >
+        free_time,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="numberOfComments != null" >
+        number_of_comments,
+      </if>
+      <if test="feeUpperLimit != null" >
+        fee_upper_limit,
+      </if>
+      <if test="startingPrice != null" >
+        starting_price,
+      </if>
+      <if test="unitDuration != null" >
+        unit_duration,
+      </if>
+      <if test="billingModel != null" >
+        billing_model,
+      </if>
+      <if test="minAdvanceSubscribeTime != null" >
+        min_advance_subscribe_time,
+      </if>
+      <if test="maxAdvanceSubscribeTime != null" >
+        max_advance_subscribe_time,
+      </if>
+      <if test="subscribeFreeTime != null" >
+        subscribe_free_time,
+      </if>
+      <if test="subscribeFee != null" >
+        subscribe_fee,
+      </if>
+      <if test="subscribeTimeoutFee != null" >
+        subscribe_timeout_fee,
+      </if>
+      <if test="createrId != null" >
+        creater_id,
+      </if>
+      <if test="specialFeeExpiredCar != null" >
+        special_fee_expired_car,
+      </if>
+      <if test="showExpiredCarType != null" >
+        show_expired_car_type,
+      </if>
+      <if test="expiredCarFreeTime != null" >
+        expired_car_free_time,
+      </if>
+      <if test="showRemarks != null" >
+        show_remarks,
+      </if>
+      <if test="collectionCarparkId != null" >
+        collection_carpark_id,
+      </if>
+      <if test="limitParkingSpaceNumber != null" >
+        limit_parking_space_number,
+      </if>
+      <if test="allowEditUseLog != null" >
+        allow_edit_use_log,
+      </if>
+      <if test="abnormalAutoRelease != null" >
+        abnormal_auto_release,
+      </if>
+      <if test="autoIssuedWhitelist != null" >
+        auto_issued_whitelist,
+      </if>
+      <if test="adminer != null" >
+        adminer,
+      </if>
+      <if test="forbidGroupFlagSameTimeIn != null" >
+        forbid_group_flag_same_time_in,
+      </if>
+      <if test="currentPrice != null" >
+        current_price,
+      </if>
+      <if test="chargingStationId != null" >
+        charging_station_id,
+      </if>
+      <if test="dataReportPlatform != null" >
+        data_report_platform,
+      </if>
+      <if test="leaveTimeLimit != null" >
+        leave_time_limit,
+      </if>
+      <if test="specialNumberPlate != null" >
+        special_number_plate,
+      </if>
+      <if test="storehouseId != null" >
+        storehouse_id,
+      </if>
+      <if test="numberPlateColorToCarType != null" >
+        number_plate_color_to_car_type,
+      </if>
+      <if test="packageGroupFlagFreeTimeChange != null" >
+        package_group_flag_free_time_change,
+      </if>
+      <if test="visitProcessMode != null" >
+        visit_process_mode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="startBusinessHours != null" >
+        #{startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="endBusinessHours != null" >
+        #{endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="parkingSpaceNumber != null" >
+        #{parkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="usedParkingSpaceNumber != null" >
+        #{usedParkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="landline != null" >
+        #{landline,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneOrCountyId != null" >
+        #{zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipId != null" >
+        #{townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="freeTime != null" >
+        #{freeTime,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="numberOfComments != null" >
+        #{numberOfComments,jdbcType=INTEGER},
+      </if>
+      <if test="feeUpperLimit != null" >
+        #{feeUpperLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="startingPrice != null" >
+        #{startingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="unitDuration != null" >
+        #{unitDuration,jdbcType=BIGINT},
+      </if>
+      <if test="billingModel != null" >
+        #{billingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="minAdvanceSubscribeTime != null" >
+        #{minAdvanceSubscribeTime,jdbcType=BIGINT},
+      </if>
+      <if test="maxAdvanceSubscribeTime != null" >
+        #{maxAdvanceSubscribeTime,jdbcType=BIGINT},
+      </if>
+      <if test="subscribeFreeTime != null" >
+        #{subscribeFreeTime,jdbcType=BIGINT},
+      </if>
+      <if test="subscribeFee != null" >
+        #{subscribeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="subscribeTimeoutFee != null" >
+        #{subscribeTimeoutFee,jdbcType=TINYINT},
+      </if>
+      <if test="createrId != null" >
+        #{createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialFeeExpiredCar != null" >
+        #{specialFeeExpiredCar,jdbcType=TINYINT},
+      </if>
+      <if test="showExpiredCarType != null" >
+        #{showExpiredCarType,jdbcType=TINYINT},
+      </if>
+      <if test="expiredCarFreeTime != null" >
+        #{expiredCarFreeTime,jdbcType=BIGINT},
+      </if>
+      <if test="showRemarks != null" >
+        #{showRemarks,jdbcType=TINYINT},
+      </if>
+      <if test="collectionCarparkId != null" >
+        #{collectionCarparkId,jdbcType=VARCHAR},
+      </if>
+      <if test="limitParkingSpaceNumber != null" >
+        #{limitParkingSpaceNumber,jdbcType=TINYINT},
+      </if>
+      <if test="allowEditUseLog != null" >
+        #{allowEditUseLog,jdbcType=TINYINT},
+      </if>
+      <if test="abnormalAutoRelease != null" >
+        #{abnormalAutoRelease,jdbcType=TINYINT},
+      </if>
+      <if test="autoIssuedWhitelist != null" >
+        #{autoIssuedWhitelist,jdbcType=TINYINT},
+      </if>
+      <if test="adminer != null" >
+        #{adminer,jdbcType=VARCHAR},
+      </if>
+      <if test="forbidGroupFlagSameTimeIn != null" >
+        #{forbidGroupFlagSameTimeIn,jdbcType=TINYINT},
+      </if>
+      <if test="currentPrice != null" >
+        #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingStationId != null" >
+        #{chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataReportPlatform != null" >
+        #{dataReportPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTimeLimit != null" >
+        #{leaveTimeLimit,jdbcType=BIGINT},
+      </if>
+      <if test="specialNumberPlate != null" >
+        #{specialNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="storehouseId != null" >
+        #{storehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="numberPlateColorToCarType != null" >
+        #{numberPlateColorToCarType,jdbcType=TINYINT},
+      </if>
+      <if test="packageGroupFlagFreeTimeChange != null" >
+        #{packageGroupFlagFreeTimeChange,jdbcType=TINYINT},
+      </if>
+      <if test="visitProcessMode != null" >
+        #{visitProcessMode,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionX != null" >
+        position_x = #{record.positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.positionY != null" >
+        position_y = #{record.positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startBusinessHours != null" >
+        start_business_hours = #{record.startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="record.endBusinessHours != null" >
+        end_business_hours = #{record.endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="record.parkingSpaceNumber != null" >
+        parking_space_number = #{record.parkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.usedParkingSpaceNumber != null" >
+        used_parking_space_number = #{record.usedParkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landline != null" >
+        landline = #{record.landline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.countryId != null" >
+        country_id = #{record.countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateOrCityId != null" >
+        state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zoneOrCountyId != null" >
+        zone_or_county_id = #{record.zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.townshipId != null" >
+        township_id = #{record.townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.freeTime != null" >
+        free_time = #{record.freeTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=DECIMAL},
+      </if>
+      <if test="record.numberOfComments != null" >
+        number_of_comments = #{record.numberOfComments,jdbcType=INTEGER},
+      </if>
+      <if test="record.feeUpperLimit != null" >
+        fee_upper_limit = #{record.feeUpperLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startingPrice != null" >
+        starting_price = #{record.startingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitDuration != null" >
+        unit_duration = #{record.unitDuration,jdbcType=BIGINT},
+      </if>
+      <if test="record.billingModel != null" >
+        billing_model = #{record.billingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minAdvanceSubscribeTime != null" >
+        min_advance_subscribe_time = #{record.minAdvanceSubscribeTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.maxAdvanceSubscribeTime != null" >
+        max_advance_subscribe_time = #{record.maxAdvanceSubscribeTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.subscribeFreeTime != null" >
+        subscribe_free_time = #{record.subscribeFreeTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.subscribeFee != null" >
+        subscribe_fee = #{record.subscribeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.subscribeTimeoutFee != null" >
+        subscribe_timeout_fee = #{record.subscribeTimeoutFee,jdbcType=TINYINT},
+      </if>
+      <if test="record.createrId != null" >
+        creater_id = #{record.createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialFeeExpiredCar != null" >
+        special_fee_expired_car = #{record.specialFeeExpiredCar,jdbcType=TINYINT},
+      </if>
+      <if test="record.showExpiredCarType != null" >
+        show_expired_car_type = #{record.showExpiredCarType,jdbcType=TINYINT},
+      </if>
+      <if test="record.expiredCarFreeTime != null" >
+        expired_car_free_time = #{record.expiredCarFreeTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.showRemarks != null" >
+        show_remarks = #{record.showRemarks,jdbcType=TINYINT},
+      </if>
+      <if test="record.collectionCarparkId != null" >
+        collection_carpark_id = #{record.collectionCarparkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitParkingSpaceNumber != null" >
+        limit_parking_space_number = #{record.limitParkingSpaceNumber,jdbcType=TINYINT},
+      </if>
+      <if test="record.allowEditUseLog != null" >
+        allow_edit_use_log = #{record.allowEditUseLog,jdbcType=TINYINT},
+      </if>
+      <if test="record.abnormalAutoRelease != null" >
+        abnormal_auto_release = #{record.abnormalAutoRelease,jdbcType=TINYINT},
+      </if>
+      <if test="record.autoIssuedWhitelist != null" >
+        auto_issued_whitelist = #{record.autoIssuedWhitelist,jdbcType=TINYINT},
+      </if>
+      <if test="record.adminer != null" >
+        adminer = #{record.adminer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forbidGroupFlagSameTimeIn != null" >
+        forbid_group_flag_same_time_in = #{record.forbidGroupFlagSameTimeIn,jdbcType=TINYINT},
+      </if>
+      <if test="record.currentPrice != null" >
+        current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chargingStationId != null" >
+        charging_station_id = #{record.chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataReportPlatform != null" >
+        data_report_platform = #{record.dataReportPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveTimeLimit != null" >
+        leave_time_limit = #{record.leaveTimeLimit,jdbcType=BIGINT},
+      </if>
+      <if test="record.specialNumberPlate != null" >
+        special_number_plate = #{record.specialNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storehouseId != null" >
+        storehouse_id = #{record.storehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.numberPlateColorToCarType != null" >
+        number_plate_color_to_car_type = #{record.numberPlateColorToCarType,jdbcType=TINYINT},
+      </if>
+      <if test="record.packageGroupFlagFreeTimeChange != null" >
+        package_group_flag_free_time_change = #{record.packageGroupFlagFreeTimeChange,jdbcType=TINYINT},
+      </if>
+      <if test="record.visitProcessMode != null" >
+        visit_process_mode = #{record.visitProcessMode,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      position_x = #{record.positionX,jdbcType=DECIMAL},
+      position_y = #{record.positionY,jdbcType=DECIMAL},
+      start_business_hours = #{record.startBusinessHours,jdbcType=BIGINT},
+      end_business_hours = #{record.endBusinessHours,jdbcType=BIGINT},
+      parking_space_number = #{record.parkingSpaceNumber,jdbcType=INTEGER},
+      used_parking_space_number = #{record.usedParkingSpaceNumber,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      landline = #{record.landline,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      country_id = #{record.countryId,jdbcType=VARCHAR},
+      province_id = #{record.provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      zone_or_county_id = #{record.zoneOrCountyId,jdbcType=VARCHAR},
+      township_id = #{record.townshipId,jdbcType=VARCHAR},
+      free_time = #{record.freeTime,jdbcType=BIGINT},
+      score = #{record.score,jdbcType=DECIMAL},
+      number_of_comments = #{record.numberOfComments,jdbcType=INTEGER},
+      fee_upper_limit = #{record.feeUpperLimit,jdbcType=DECIMAL},
+      starting_price = #{record.startingPrice,jdbcType=DECIMAL},
+      unit_duration = #{record.unitDuration,jdbcType=BIGINT},
+      billing_model = #{record.billingModel,jdbcType=VARCHAR},
+      min_advance_subscribe_time = #{record.minAdvanceSubscribeTime,jdbcType=BIGINT},
+      max_advance_subscribe_time = #{record.maxAdvanceSubscribeTime,jdbcType=BIGINT},
+      subscribe_free_time = #{record.subscribeFreeTime,jdbcType=BIGINT},
+      subscribe_fee = #{record.subscribeFee,jdbcType=DECIMAL},
+      subscribe_timeout_fee = #{record.subscribeTimeoutFee,jdbcType=TINYINT},
+      creater_id = #{record.createrId,jdbcType=VARCHAR},
+      special_fee_expired_car = #{record.specialFeeExpiredCar,jdbcType=TINYINT},
+      show_expired_car_type = #{record.showExpiredCarType,jdbcType=TINYINT},
+      expired_car_free_time = #{record.expiredCarFreeTime,jdbcType=BIGINT},
+      show_remarks = #{record.showRemarks,jdbcType=TINYINT},
+      collection_carpark_id = #{record.collectionCarparkId,jdbcType=VARCHAR},
+      limit_parking_space_number = #{record.limitParkingSpaceNumber,jdbcType=TINYINT},
+      allow_edit_use_log = #{record.allowEditUseLog,jdbcType=TINYINT},
+      abnormal_auto_release = #{record.abnormalAutoRelease,jdbcType=TINYINT},
+      auto_issued_whitelist = #{record.autoIssuedWhitelist,jdbcType=TINYINT},
+      adminer = #{record.adminer,jdbcType=VARCHAR},
+      forbid_group_flag_same_time_in = #{record.forbidGroupFlagSameTimeIn,jdbcType=TINYINT},
+      current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      charging_station_id = #{record.chargingStationId,jdbcType=VARCHAR},
+      data_report_platform = #{record.dataReportPlatform,jdbcType=VARCHAR},
+      leave_time_limit = #{record.leaveTimeLimit,jdbcType=BIGINT},
+      special_number_plate = #{record.specialNumberPlate,jdbcType=VARCHAR},
+      storehouse_id = #{record.storehouseId,jdbcType=BIGINT},
+      number_plate_color_to_car_type = #{record.numberPlateColorToCarType,jdbcType=TINYINT},
+      package_group_flag_free_time_change = #{record.packageGroupFlagFreeTimeChange,jdbcType=TINYINT},
+      visit_process_mode = #{record.visitProcessMode,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarPark" >
+    update cf_car_park
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        position_x = #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        position_y = #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="startBusinessHours != null" >
+        start_business_hours = #{startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="endBusinessHours != null" >
+        end_business_hours = #{endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="parkingSpaceNumber != null" >
+        parking_space_number = #{parkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="usedParkingSpaceNumber != null" >
+        used_parking_space_number = #{usedParkingSpaceNumber,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="landline != null" >
+        landline = #{landline,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneOrCountyId != null" >
+        zone_or_county_id = #{zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipId != null" >
+        township_id = #{townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="freeTime != null" >
+        free_time = #{freeTime,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="numberOfComments != null" >
+        number_of_comments = #{numberOfComments,jdbcType=INTEGER},
+      </if>
+      <if test="feeUpperLimit != null" >
+        fee_upper_limit = #{feeUpperLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="startingPrice != null" >
+        starting_price = #{startingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="unitDuration != null" >
+        unit_duration = #{unitDuration,jdbcType=BIGINT},
+      </if>
+      <if test="billingModel != null" >
+        billing_model = #{billingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="minAdvanceSubscribeTime != null" >
+        min_advance_subscribe_time = #{minAdvanceSubscribeTime,jdbcType=BIGINT},
+      </if>
+      <if test="maxAdvanceSubscribeTime != null" >
+        max_advance_subscribe_time = #{maxAdvanceSubscribeTime,jdbcType=BIGINT},
+      </if>
+      <if test="subscribeFreeTime != null" >
+        subscribe_free_time = #{subscribeFreeTime,jdbcType=BIGINT},
+      </if>
+      <if test="subscribeFee != null" >
+        subscribe_fee = #{subscribeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="subscribeTimeoutFee != null" >
+        subscribe_timeout_fee = #{subscribeTimeoutFee,jdbcType=TINYINT},
+      </if>
+      <if test="createrId != null" >
+        creater_id = #{createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialFeeExpiredCar != null" >
+        special_fee_expired_car = #{specialFeeExpiredCar,jdbcType=TINYINT},
+      </if>
+      <if test="showExpiredCarType != null" >
+        show_expired_car_type = #{showExpiredCarType,jdbcType=TINYINT},
+      </if>
+      <if test="expiredCarFreeTime != null" >
+        expired_car_free_time = #{expiredCarFreeTime,jdbcType=BIGINT},
+      </if>
+      <if test="showRemarks != null" >
+        show_remarks = #{showRemarks,jdbcType=TINYINT},
+      </if>
+      <if test="collectionCarparkId != null" >
+        collection_carpark_id = #{collectionCarparkId,jdbcType=VARCHAR},
+      </if>
+      <if test="limitParkingSpaceNumber != null" >
+        limit_parking_space_number = #{limitParkingSpaceNumber,jdbcType=TINYINT},
+      </if>
+      <if test="allowEditUseLog != null" >
+        allow_edit_use_log = #{allowEditUseLog,jdbcType=TINYINT},
+      </if>
+      <if test="abnormalAutoRelease != null" >
+        abnormal_auto_release = #{abnormalAutoRelease,jdbcType=TINYINT},
+      </if>
+      <if test="autoIssuedWhitelist != null" >
+        auto_issued_whitelist = #{autoIssuedWhitelist,jdbcType=TINYINT},
+      </if>
+      <if test="adminer != null" >
+        adminer = #{adminer,jdbcType=VARCHAR},
+      </if>
+      <if test="forbidGroupFlagSameTimeIn != null" >
+        forbid_group_flag_same_time_in = #{forbidGroupFlagSameTimeIn,jdbcType=TINYINT},
+      </if>
+      <if test="currentPrice != null" >
+        current_price = #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingStationId != null" >
+        charging_station_id = #{chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataReportPlatform != null" >
+        data_report_platform = #{dataReportPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTimeLimit != null" >
+        leave_time_limit = #{leaveTimeLimit,jdbcType=BIGINT},
+      </if>
+      <if test="specialNumberPlate != null" >
+        special_number_plate = #{specialNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="storehouseId != null" >
+        storehouse_id = #{storehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="numberPlateColorToCarType != null" >
+        number_plate_color_to_car_type = #{numberPlateColorToCarType,jdbcType=TINYINT},
+      </if>
+      <if test="packageGroupFlagFreeTimeChange != null" >
+        package_group_flag_free_time_change = #{packageGroupFlagFreeTimeChange,jdbcType=TINYINT},
+      </if>
+      <if test="visitProcessMode != null" >
+        visit_process_mode = #{visitProcessMode,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarPark" >
+    update cf_car_park
+    set name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      position_x = #{positionX,jdbcType=DECIMAL},
+      position_y = #{positionY,jdbcType=DECIMAL},
+      start_business_hours = #{startBusinessHours,jdbcType=BIGINT},
+      end_business_hours = #{endBusinessHours,jdbcType=BIGINT},
+      parking_space_number = #{parkingSpaceNumber,jdbcType=INTEGER},
+      used_parking_space_number = #{usedParkingSpaceNumber,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      landline = #{landline,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      country_id = #{countryId,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      zone_or_county_id = #{zoneOrCountyId,jdbcType=VARCHAR},
+      township_id = #{townshipId,jdbcType=VARCHAR},
+      free_time = #{freeTime,jdbcType=BIGINT},
+      score = #{score,jdbcType=DECIMAL},
+      number_of_comments = #{numberOfComments,jdbcType=INTEGER},
+      fee_upper_limit = #{feeUpperLimit,jdbcType=DECIMAL},
+      starting_price = #{startingPrice,jdbcType=DECIMAL},
+      unit_duration = #{unitDuration,jdbcType=BIGINT},
+      billing_model = #{billingModel,jdbcType=VARCHAR},
+      min_advance_subscribe_time = #{minAdvanceSubscribeTime,jdbcType=BIGINT},
+      max_advance_subscribe_time = #{maxAdvanceSubscribeTime,jdbcType=BIGINT},
+      subscribe_free_time = #{subscribeFreeTime,jdbcType=BIGINT},
+      subscribe_fee = #{subscribeFee,jdbcType=DECIMAL},
+      subscribe_timeout_fee = #{subscribeTimeoutFee,jdbcType=TINYINT},
+      creater_id = #{createrId,jdbcType=VARCHAR},
+      special_fee_expired_car = #{specialFeeExpiredCar,jdbcType=TINYINT},
+      show_expired_car_type = #{showExpiredCarType,jdbcType=TINYINT},
+      expired_car_free_time = #{expiredCarFreeTime,jdbcType=BIGINT},
+      show_remarks = #{showRemarks,jdbcType=TINYINT},
+      collection_carpark_id = #{collectionCarparkId,jdbcType=VARCHAR},
+      limit_parking_space_number = #{limitParkingSpaceNumber,jdbcType=TINYINT},
+      allow_edit_use_log = #{allowEditUseLog,jdbcType=TINYINT},
+      abnormal_auto_release = #{abnormalAutoRelease,jdbcType=TINYINT},
+      auto_issued_whitelist = #{autoIssuedWhitelist,jdbcType=TINYINT},
+      adminer = #{adminer,jdbcType=VARCHAR},
+      forbid_group_flag_same_time_in = #{forbidGroupFlagSameTimeIn,jdbcType=TINYINT},
+      current_price = #{currentPrice,jdbcType=DECIMAL},
+      charging_station_id = #{chargingStationId,jdbcType=VARCHAR},
+      data_report_platform = #{dataReportPlatform,jdbcType=VARCHAR},
+      leave_time_limit = #{leaveTimeLimit,jdbcType=BIGINT},
+      special_number_plate = #{specialNumberPlate,jdbcType=VARCHAR},
+      storehouse_id = #{storehouseId,jdbcType=BIGINT},
+      number_plate_color_to_car_type = #{numberPlateColorToCarType,jdbcType=TINYINT},
+      package_group_flag_free_time_change = #{packageGroupFlagFreeTimeChange,jdbcType=TINYINT},
+      visit_process_mode = #{visitProcessMode,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <resultMap id="ContainCheckPointCountsResultMap" type="com.cf.carpark.domain.CfCarPark" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+    <result column="end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+    <result column="parking_space_number" property="parkingSpaceNumber" jdbcType="INTEGER" />
+    <result column="used_parking_space_number" property="usedParkingSpaceNumber" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="landline" property="landline" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+    <result column="township_id" property="townshipId" jdbcType="VARCHAR" />
+    <result column="free_time" property="freeTime" jdbcType="BIGINT" />
+    <result column="score" property="score" jdbcType="DECIMAL" />
+    <result column="number_of_comments" property="numberOfComments" jdbcType="INTEGER" />
+    <result column="fee_upper_limit" property="feeUpperLimit" jdbcType="DECIMAL" />
+    <result column="starting_price" property="startingPrice" jdbcType="DECIMAL" />
+    <result column="unit_duration" property="unitDuration" jdbcType="BIGINT" />
+    <result column="billing_model" property="billingModel" jdbcType="VARCHAR" />
+    <result column="min_advance_subscribe_time" property="minAdvanceSubscribeTime" jdbcType="BIGINT" />
+    <result column="max_advance_subscribe_time" property="maxAdvanceSubscribeTime" jdbcType="BIGINT" />
+    <result column="subscribe_free_time" property="subscribeFreeTime" jdbcType="BIGINT" />
+    <result column="subscribe_fee" property="subscribeFee" jdbcType="DECIMAL" />
+    <result column="subscribe_timeout_fee" property="subscribeTimeoutFee" jdbcType="TINYINT" />
+    <result column="check_point_counts" property="checkPointCounts" jdbcType="VARCHAR" />
+    <result column="special_fee_expired_car" property="specialFeeExpiredCar" jdbcType="TINYINT" />
+    <result column="show_expired_car_type" property="showExpiredCarType" jdbcType="TINYINT" />
+    <result column="expired_car_free_time" property="expiredCarFreeTime" jdbcType="BIGINT" />
+    <result column="show_remarks" property="showRemarks" jdbcType="TINYINT" />
+    <result column="collection_carpark_id" property="collectionCarparkId" jdbcType="VARCHAR" />
+    <result column="limit_parking_space_number" property="limitParkingSpaceNumber" jdbcType="TINYINT" />
+    <result column="allow_edit_use_log" property="allowEditUseLog" jdbcType="TINYINT" />
+    <result column="abnormal_auto_release" property="abnormalAutoRelease" jdbcType="TINYINT" />
+    <result column="auto_issued_whitelist" property="autoIssuedWhitelist" jdbcType="TINYINT" />
+    <result column="adminer" property="adminer" jdbcType="VARCHAR" />
+    <result column="forbid_group_flag_same_time_in" property="forbidGroupFlagSameTimeIn" jdbcType="TINYINT" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="charging_station_id" property="chargingStationId" jdbcType="VARCHAR" />
+    <result column="data_report_platform" property="dataReportPlatform" jdbcType="VARCHAR" />
+    <result column="leave_time_limit" property="leaveTimeLimit" jdbcType="BIGINT" />
+    <result column="special_number_plate" property="specialNumberPlate" jdbcType="VARCHAR" />
+    <result column="storehouse_id" property="storehouseId" jdbcType="BIGINT" />
+    <result column="number_plate_color_to_car_type" property="numberPlateColorToCarType" jdbcType="TINYINT" />
+    <result column="package_group_flag_free_time_change" property="packageGroupFlagFreeTimeChange" jdbcType="TINYINT" />
+    <result column="visit_process_mode" property="visitProcessMode" jdbcType="TINYINT" />
+  </resultMap>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="ContainCheckPointCountsResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <resultMap id="ContainDistanceResultMap" type="com.cf.carpark.domain.CfCarPark" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+    <result column="end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+    <result column="parking_space_number" property="parkingSpaceNumber" jdbcType="INTEGER" />
+    <result column="used_parking_space_number" property="usedParkingSpaceNumber" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="landline" property="landline" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+    <result column="township_id" property="townshipId" jdbcType="VARCHAR" />
+    <result column="free_time" property="freeTime" jdbcType="BIGINT" />
+    <result column="score" property="score" jdbcType="DECIMAL" />
+    <result column="number_of_comments" property="numberOfComments" jdbcType="INTEGER" />
+    <result column="fee_upper_limit" property="feeUpperLimit" jdbcType="DECIMAL" />
+    <result column="starting_price" property="startingPrice" jdbcType="DECIMAL" />
+    <result column="distance" property="distance" jdbcType="DECIMAL" />
+    <result column="unit_duration" property="unitDuration" jdbcType="BIGINT" />
+    <result column="billing_model" property="billingModel" jdbcType="VARCHAR" />
+    <result column="min_advance_subscribe_time" property="minAdvanceSubscribeTime" jdbcType="BIGINT" />
+    <result column="max_advance_subscribe_time" property="maxAdvanceSubscribeTime" jdbcType="BIGINT" />
+    <result column="subscribe_free_time" property="subscribeFreeTime" jdbcType="BIGINT" />
+    <result column="subscribe_fee" property="subscribeFee" jdbcType="DECIMAL" />
+    <result column="subscribe_timeout_fee" property="subscribeTimeoutFee" jdbcType="TINYINT" />
+    <result column="activity_denomination" property="activityDenomination" jdbcType="DECIMAL" />
+    <result column="special_fee_expired_car" property="specialFeeExpiredCar" jdbcType="TINYINT" />
+    <result column="show_expired_car_type" property="showExpiredCarType" jdbcType="TINYINT" />
+    <result column="expired_car_free_time" property="expiredCarFreeTime" jdbcType="BIGINT" />
+    <result column="show_remarks" property="showRemarks" jdbcType="TINYINT" />
+    <result column="collection_carpark_id" property="collectionCarparkId" jdbcType="VARCHAR" />
+    <result column="limit_parking_space_number" property="limitParkingSpaceNumber" jdbcType="TINYINT" />
+    <result column="allow_edit_use_log" property="allowEditUseLog" jdbcType="TINYINT" />
+    <result column="abnormal_auto_release" property="abnormalAutoRelease" jdbcType="TINYINT" />
+    <result column="auto_issued_whitelist" property="autoIssuedWhitelist" jdbcType="TINYINT" />
+    <result column="adminer" property="adminer" jdbcType="VARCHAR" />
+    <result column="forbid_group_flag_same_time_in" property="forbidGroupFlagSameTimeIn" jdbcType="TINYINT" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="charging_station_id" property="chargingStationId" jdbcType="VARCHAR" />
+    <result column="data_report_platform" property="dataReportPlatform" jdbcType="VARCHAR" />
+    <result column="leave_time_limit" property="leaveTimeLimit" jdbcType="BIGINT" />
+    <result column="special_number_plate" property="specialNumberPlate" jdbcType="VARCHAR" />
+    <result column="storehouse_id" property="storehouseId" jdbcType="BIGINT" />
+    <result column="number_plate_color_to_car_type" property="numberPlateColorToCarType" jdbcType="TINYINT" />
+    <result column="package_group_flag_free_time_change" property="packageGroupFlagFreeTimeChange" jdbcType="TINYINT" />
+    <result column="visit_process_mode" property="visitProcessMode" jdbcType="TINYINT" />
+  </resultMap>
+  <select id="selectNearbyDatas"  resultMap="ContainDistanceResultMap">
+    SELECT
+    cp.*,CASE WHEN true THEN (st_distance (point (cp.position_x, cp.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195) END distance
+    FROM
+    `cf_car_park` cp
+    WHERE
+    (st_distance (point (cp.position_x, cp.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195)
+    <![CDATA[ <= ]]> 10000 order by distance asc limit #{page,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+  <select id="selectContalDistanceListByQuery"  resultMap="ContainDistanceResultMap" parameterType="com.cf.carpark.domain.request.CfCarParkQuery">
+    SELECT
+    cp.*,CASE WHEN true THEN (st_distance (point (cp.position_x, cp.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195) END distance
+    FROM
+    `cf_car_park` cp
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and cp.id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="distance!=null">
+        and (st_distance (point (cp.position_x, cp.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195) <![CDATA[ <= ]]> #{distance,jdbcType=INTEGER}
+      </if>
+      <if test="name!=null">
+        and cp.name like "%"#{name,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="minAdvanceSubscribeTime!=null">
+        and cp.min_advance_subscribe_time <![CDATA[ >= ]]> #{minAdvanceSubscribeTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+    order by distance asc limit #{page,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectContainDistanceListByCouponId"  resultMap="ContainDistanceResultMap">
+    SELECT
+      cp.*,CASE WHEN true THEN (st_distance (point (cp.position_x, cp.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195) END distance
+    FROM
+      `cf_car_park` cp
+    WHERE
+        cp.id IN(select shop_id from cf_coupon_link_shop where coupon_id = #{couponId,jdbcType=VARCHAR}) order by distance asc
+  </select>
+
+  <select id="getListByLinkerUser" resultMap="BaseResultMap">
+    select * from cf_car_park where id in(select car_park_id from cf_car_park_link_user where uid = #{uid,jdbcType=VARCHAR}) limit ${(page-1)*size},${size}
+  </select>
+
+  <resultMap id="CarParkFinanceReportMap" type="com.cf.carpark.domain.CfCarParkFinanceReport" >
+    <id column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <id column="car_park_name" property="carParkName" jdbcType="VARCHAR" />
+    <result column="goods_type" property="goodsType" jdbcType="TINYINT" />
+    <result column="parking_fee" property="parkingFee" jdbcType="DECIMAL" />
+    <result column="parking_package_fee" property="parkingPackageFee" jdbcType="DECIMAL" />
+    <result column="park_coupon_activity_recharge_fee" property="parkCouponActivityRechargeFee" jdbcType="DECIMAL" />
+  </resultMap>
+
+  <select id="getCarParkFinanceReport" parameterType="com.cf.pay.domain.request.CfOrderQuery" resultType="java.lang.Double">
+    select
+    sum(${countField})
+    from
+    cf_order
+    <trim prefix="where" prefixOverrides="and">
+      <if test="shopIds!=null">
+        and shop_id in
+        <foreach item="item" collection="shopIds" separator="," open="(" close=")" index="">
+          #{item,jdbcType=VARCHAR}
+        </foreach>
+      </if>
+      <if test="shopId!=null and shopId!=''">
+        and shop_id=#{shopId,jdbcType=VARCHAR}
+      </if>
+      <if test="minPayTime!=null">
+        and pay_time <![CDATA[ >= ]]> #{minPayTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxPayTime!=null">
+        and pay_time <![CDATA[ < ]]> #{maxPayTime,jdbcType=BIGINT}
+      </if>
+
+      <if test="minCreateTime!=null">
+        and create_time <![CDATA[ >= ]]> #{minCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxCreateTime!=null">
+        and create_time <![CDATA[ <= ]]> #{maxCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="minUpdateTime!=null">
+        and update_time <![CDATA[ >= ]]> #{minUpdateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxUpdateTime!=null">
+        and update_time <![CDATA[ <= ]]> #{maxUpdateTime,jdbcType=BIGINT}
+      </if>
+
+      <if test="paymentAgencyShortName!=null">
+        and payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR}
+      </if>
+      <if test="goodsType!=null">
+        and goods_type = #{goodsType,jdbcType=TINYINT}
+      </if>
+    </trim>
+  </select>
+
+  <update id="updateUsedParkingSpaceNumber">
+    update cf_car_park set used_parking_space_number = used_parking_space_number+(#{changeValue,jdbcType=INTEGER}) where id = #{carParkId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="countByField" parameterType="com.cf.carpark.domain.request.CfCarParkUseLogQuery" resultType="java.lang.Long">
+    select sum(${countField}) from cf_car_park
+  </select>
+
+</mapper>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.logistics.dao.mapper.CfLogisticsVehicleMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.logistics.domain.CfLogisticsVehicle" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="vehicle_owner" property="vehicleOwner" jdbcType="VARCHAR" />
+    <result column="vehicle_type" property="vehicleType" jdbcType="VARCHAR" />
+    <result column="vehicle_vin" property="vehicleVin" jdbcType="VARCHAR" />
+    <result column="vehicle_size" property="vehicleSize" jdbcType="VARCHAR" />
+    <result column="approved_load" property="approvedLoad" jdbcType="INTEGER" />
+    <result column="number_plate_color" property="numberPlateColor" jdbcType="TINYINT" />
+    <result column="road_transport_certificate_number" property="roadTransportCertificateNumber" jdbcType="VARCHAR" />
+    <result column="operating_license_number" property="operatingLicenseNumber" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="action_uid" property="actionUid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, number_plate, vehicle_owner, vehicle_type, vehicle_vin, vehicle_size, approved_load, 
+    number_plate_color, road_transport_certificate_number, operating_license_number, 
+    uid, action_uid, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.logistics.domain.CfLogisticsVehicleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_logistics_vehicle
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_logistics_vehicle
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_logistics_vehicle
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.logistics.domain.CfLogisticsVehicleExample" >
+    delete from cf_logistics_vehicle
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.logistics.domain.CfLogisticsVehicle" >
+    insert into cf_logistics_vehicle (id, number_plate, vehicle_owner, 
+      vehicle_type, vehicle_vin, vehicle_size, 
+      approved_load, number_plate_color, road_transport_certificate_number, 
+      operating_license_number, uid, action_uid, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{numberPlate,jdbcType=VARCHAR}, #{vehicleOwner,jdbcType=VARCHAR}, 
+      #{vehicleType,jdbcType=VARCHAR}, #{vehicleVin,jdbcType=VARCHAR}, #{vehicleSize,jdbcType=VARCHAR}, 
+      #{approvedLoad,jdbcType=INTEGER}, #{numberPlateColor,jdbcType=TINYINT}, #{roadTransportCertificateNumber,jdbcType=VARCHAR}, 
+      #{operatingLicenseNumber,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{actionUid,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.logistics.domain.CfLogisticsVehicle" >
+    insert into cf_logistics_vehicle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="numberPlate != null" >
+        number_plate,
+      </if>
+      <if test="vehicleOwner != null" >
+        vehicle_owner,
+      </if>
+      <if test="vehicleType != null" >
+        vehicle_type,
+      </if>
+      <if test="vehicleVin != null" >
+        vehicle_vin,
+      </if>
+      <if test="vehicleSize != null" >
+        vehicle_size,
+      </if>
+      <if test="approvedLoad != null" >
+        approved_load,
+      </if>
+      <if test="numberPlateColor != null" >
+        number_plate_color,
+      </if>
+      <if test="roadTransportCertificateNumber != null" >
+        road_transport_certificate_number,
+      </if>
+      <if test="operatingLicenseNumber != null" >
+        operating_license_number,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="actionUid != null" >
+        action_uid,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="numberPlate != null" >
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleOwner != null" >
+        #{vehicleOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleType != null" >
+        #{vehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleVin != null" >
+        #{vehicleVin,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleSize != null" >
+        #{vehicleSize,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedLoad != null" >
+        #{approvedLoad,jdbcType=INTEGER},
+      </if>
+      <if test="numberPlateColor != null" >
+        #{numberPlateColor,jdbcType=TINYINT},
+      </if>
+      <if test="roadTransportCertificateNumber != null" >
+        #{roadTransportCertificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingLicenseNumber != null" >
+        #{operatingLicenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="actionUid != null" >
+        #{actionUid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.logistics.domain.CfLogisticsVehicleExample" resultType="java.lang.Integer" >
+    select count(*) from cf_logistics_vehicle
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_logistics_vehicle
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.numberPlate != null" >
+        number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleOwner != null" >
+        vehicle_owner = #{record.vehicleOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleType != null" >
+        vehicle_type = #{record.vehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleVin != null" >
+        vehicle_vin = #{record.vehicleVin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleSize != null" >
+        vehicle_size = #{record.vehicleSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvedLoad != null" >
+        approved_load = #{record.approvedLoad,jdbcType=INTEGER},
+      </if>
+      <if test="record.numberPlateColor != null" >
+        number_plate_color = #{record.numberPlateColor,jdbcType=TINYINT},
+      </if>
+      <if test="record.roadTransportCertificateNumber != null" >
+        road_transport_certificate_number = #{record.roadTransportCertificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatingLicenseNumber != null" >
+        operating_license_number = #{record.operatingLicenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actionUid != null" >
+        action_uid = #{record.actionUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_logistics_vehicle
+    set id = #{record.id,jdbcType=BIGINT},
+      number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      vehicle_owner = #{record.vehicleOwner,jdbcType=VARCHAR},
+      vehicle_type = #{record.vehicleType,jdbcType=VARCHAR},
+      vehicle_vin = #{record.vehicleVin,jdbcType=VARCHAR},
+      vehicle_size = #{record.vehicleSize,jdbcType=VARCHAR},
+      approved_load = #{record.approvedLoad,jdbcType=INTEGER},
+      number_plate_color = #{record.numberPlateColor,jdbcType=TINYINT},
+      road_transport_certificate_number = #{record.roadTransportCertificateNumber,jdbcType=VARCHAR},
+      operating_license_number = #{record.operatingLicenseNumber,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      action_uid = #{record.actionUid,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.logistics.domain.CfLogisticsVehicle" >
+    update cf_logistics_vehicle
+    <set >
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleOwner != null" >
+        vehicle_owner = #{vehicleOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleType != null" >
+        vehicle_type = #{vehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleVin != null" >
+        vehicle_vin = #{vehicleVin,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleSize != null" >
+        vehicle_size = #{vehicleSize,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedLoad != null" >
+        approved_load = #{approvedLoad,jdbcType=INTEGER},
+      </if>
+      <if test="numberPlateColor != null" >
+        number_plate_color = #{numberPlateColor,jdbcType=TINYINT},
+      </if>
+      <if test="roadTransportCertificateNumber != null" >
+        road_transport_certificate_number = #{roadTransportCertificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingLicenseNumber != null" >
+        operating_license_number = #{operatingLicenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="actionUid != null" >
+        action_uid = #{actionUid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.logistics.domain.CfLogisticsVehicle" >
+    update cf_logistics_vehicle
+    set number_plate = #{numberPlate,jdbcType=VARCHAR},
+      vehicle_owner = #{vehicleOwner,jdbcType=VARCHAR},
+      vehicle_type = #{vehicleType,jdbcType=VARCHAR},
+      vehicle_vin = #{vehicleVin,jdbcType=VARCHAR},
+      vehicle_size = #{vehicleSize,jdbcType=VARCHAR},
+      approved_load = #{approvedLoad,jdbcType=INTEGER},
+      number_plate_color = #{numberPlateColor,jdbcType=TINYINT},
+      road_transport_certificate_number = #{roadTransportCertificateNumber,jdbcType=VARCHAR},
+      operating_license_number = #{operatingLicenseNumber,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      action_uid = #{actionUid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

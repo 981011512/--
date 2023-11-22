@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.logistics.dao.mapper.CfLogisticsQueuingAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.logistics.domain.CfLogisticsQueuingArea" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="queue_capacity" property="queueCapacity" jdbcType="INTEGER" />
+    <result column="used_queue_capacity" property="usedQueueCapacity" jdbcType="INTEGER" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="area_status" property="areaStatus" jdbcType="TINYINT" />
+    <result column="factory_id" property="factoryId" jdbcType="BIGINT" />
+    <result column="sort_index" property="sortIndex" jdbcType="INTEGER" />
+    <result column="group_flag" property="groupFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, area_name, queue_capacity, used_queue_capacity, position_x, position_y, area_status, 
+    factory_id, sort_index, group_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_logistics_queuing_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_logistics_queuing_area
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_logistics_queuing_area
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaExample" >
+    delete from cf_logistics_queuing_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.logistics.domain.CfLogisticsQueuingArea" >
+    insert into cf_logistics_queuing_area (id, area_name, queue_capacity, 
+      used_queue_capacity, position_x, position_y, 
+      area_status, factory_id, sort_index, 
+      group_flag)
+    values (#{id,jdbcType=BIGINT}, #{areaName,jdbcType=VARCHAR}, #{queueCapacity,jdbcType=INTEGER}, 
+      #{usedQueueCapacity,jdbcType=INTEGER}, #{positionX,jdbcType=DECIMAL}, #{positionY,jdbcType=DECIMAL}, 
+      #{areaStatus,jdbcType=TINYINT}, #{factoryId,jdbcType=BIGINT}, #{sortIndex,jdbcType=INTEGER}, 
+      #{groupFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.logistics.domain.CfLogisticsQueuingArea" >
+    insert into cf_logistics_queuing_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="queueCapacity != null" >
+        queue_capacity,
+      </if>
+      <if test="usedQueueCapacity != null" >
+        used_queue_capacity,
+      </if>
+      <if test="positionX != null" >
+        position_x,
+      </if>
+      <if test="positionY != null" >
+        position_y,
+      </if>
+      <if test="areaStatus != null" >
+        area_status,
+      </if>
+      <if test="factoryId != null" >
+        factory_id,
+      </if>
+      <if test="sortIndex != null" >
+        sort_index,
+      </if>
+      <if test="groupFlag != null" >
+        group_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="queueCapacity != null" >
+        #{queueCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="usedQueueCapacity != null" >
+        #{usedQueueCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="positionX != null" >
+        #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="areaStatus != null" >
+        #{areaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="factoryId != null" >
+        #{factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="sortIndex != null" >
+        #{sortIndex,jdbcType=INTEGER},
+      </if>
+      <if test="groupFlag != null" >
+        #{groupFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaExample" resultType="java.lang.Integer" >
+    select count(*) from cf_logistics_queuing_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_logistics_queuing_area
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.areaName != null" >
+        area_name = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queueCapacity != null" >
+        queue_capacity = #{record.queueCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="record.usedQueueCapacity != null" >
+        used_queue_capacity = #{record.usedQueueCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionX != null" >
+        position_x = #{record.positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.positionY != null" >
+        position_y = #{record.positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.areaStatus != null" >
+        area_status = #{record.areaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.factoryId != null" >
+        factory_id = #{record.factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sortIndex != null" >
+        sort_index = #{record.sortIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupFlag != null" >
+        group_flag = #{record.groupFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_logistics_queuing_area
+    set id = #{record.id,jdbcType=BIGINT},
+      area_name = #{record.areaName,jdbcType=VARCHAR},
+      queue_capacity = #{record.queueCapacity,jdbcType=INTEGER},
+      used_queue_capacity = #{record.usedQueueCapacity,jdbcType=INTEGER},
+      position_x = #{record.positionX,jdbcType=DECIMAL},
+      position_y = #{record.positionY,jdbcType=DECIMAL},
+      area_status = #{record.areaStatus,jdbcType=TINYINT},
+      factory_id = #{record.factoryId,jdbcType=BIGINT},
+      sort_index = #{record.sortIndex,jdbcType=INTEGER},
+      group_flag = #{record.groupFlag,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.logistics.domain.CfLogisticsQueuingArea" >
+    update cf_logistics_queuing_area
+    <set >
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="queueCapacity != null" >
+        queue_capacity = #{queueCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="usedQueueCapacity != null" >
+        used_queue_capacity = #{usedQueueCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="positionX != null" >
+        position_x = #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        position_y = #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="areaStatus != null" >
+        area_status = #{areaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="factoryId != null" >
+        factory_id = #{factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="sortIndex != null" >
+        sort_index = #{sortIndex,jdbcType=INTEGER},
+      </if>
+      <if test="groupFlag != null" >
+        group_flag = #{groupFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.logistics.domain.CfLogisticsQueuingArea" >
+    update cf_logistics_queuing_area
+    set area_name = #{areaName,jdbcType=VARCHAR},
+      queue_capacity = #{queueCapacity,jdbcType=INTEGER},
+      used_queue_capacity = #{usedQueueCapacity,jdbcType=INTEGER},
+      position_x = #{positionX,jdbcType=DECIMAL},
+      position_y = #{positionY,jdbcType=DECIMAL},
+      area_status = #{areaStatus,jdbcType=TINYINT},
+      factory_id = #{factoryId,jdbcType=BIGINT},
+      sort_index = #{sortIndex,jdbcType=INTEGER},
+      group_flag = #{groupFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <resultMap id="ContainFactoryResultMap" type="com.cf.logistics.domain.CfLogisticsQueuingArea" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="queue_capacity" property="queueCapacity" jdbcType="INTEGER" />
+    <result column="used_queue_capacity" property="usedQueueCapacity" jdbcType="INTEGER" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="area_status" property="areaStatus" jdbcType="TINYINT" />
+    <result column="factory_id" property="factoryId" jdbcType="BIGINT" />
+    <result column="sort_index" property="sortIndex" jdbcType="INTEGER" />
+    <result column="group_flag" property="groupFlag" jdbcType="VARCHAR" />
+    <collection property="cfLogisticsFactory"  ofType="com.cf.logistics.domain.CfLogisticsFactory">
+      <id column="lgft_id" property="id" jdbcType="BIGINT" />
+      <result column="lgft_factory_name" property="factoryName" jdbcType="VARCHAR" />
+      <result column="lgft_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgft_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgft_address" property="address" jdbcType="VARCHAR" />
+      <result column="lgft_principal" property="principal" jdbcType="VARCHAR" />
+      <result column="lgft_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="lgft_sign_in_range" property="signInRange" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+
+  <select id="selectListByQuery" parameterType="com.cf.logistics.domain.request.CfLogisticsQueuingAreaQuery" resultMap="ContainFactoryResultMap">
+    select lgqa.*,lgft.factory_name lgft_factory_name
+    from cf_logistics_queuing_area lgqa
+    left join cf_logistics_factory lgft on(lgqa.factory_id=lgft.id)
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and lgqa.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="factoryId!=null">
+        and lgqa.factory_id = #{factoryId,jdbcType=BIGINT}
+      </if>
+      <if test="groupFlag!=null">
+        and lgqa.group_flag = #{groupFlag,jdbcType=VARCHAR}
+      </if>
+      <if test="areaName!=null">
+        and lgqa.area_name like "%"#{areaName,jdbcType=VARCHAR}"%"
+      </if>
+    </trim>
+    <if test="orderBy!=null">
+      order by ${orderBy}
+    </if>
+    <if test="page!=null and size !=null">
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+</mapper>

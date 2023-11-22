@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfOrder" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="random_id" property="randomId" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="goods_image" property="goodsImage" jdbcType="VARCHAR" />
+    <result column="goods_type" property="goodsType" jdbcType="TINYINT" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="amounts_payable" property="amountsPayable" jdbcType="DECIMAL" />
+    <result column="amount_actually_paid" property="amountActuallyPaid" jdbcType="DECIMAL" />
+    <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="pay_time" property="payTime" jdbcType="BIGINT" />
+    <result column="refund_time" property="refundTime" jdbcType="BIGINT" />
+    <result column="cancel_time" property="cancelTime" jdbcType="BIGINT" />
+    <result column="payment_agency_short_name" property="paymentAgencyShortName" jdbcType="VARCHAR" />
+    <result column="user_payment_agency_id" property="userPaymentAgencyId" jdbcType="VARCHAR" />
+    <result column="third_party_order_id" property="thirdPartyOrderId" jdbcType="VARCHAR" />
+    <result column="effect_object" property="effectObject" jdbcType="VARCHAR" />
+    <result column="score_paid" property="scorePaid" jdbcType="DECIMAL" />
+    <result column="score_key_flag" property="scoreKeyFlag" jdbcType="VARCHAR" />
+    <result column="coupon_paid" property="couponPaid" jdbcType="DECIMAL" />
+    <result column="score_money" property="scoreMoney" jdbcType="DECIMAL" />
+    <result column="manual_offer" property="manualOffer" jdbcType="DECIMAL" />
+    <result column="manual_offer_set_time" property="manualOfferSetTime" jdbcType="BIGINT" />
+    <result column="purchase_quantity" property="purchaseQuantity" jdbcType="INTEGER" />
+    <result column="handle_uid" property="handleUid" jdbcType="VARCHAR" />
+    <result column="collection_shop_id" property="collectionShopId" jdbcType="VARCHAR" />
+    <result column="collection_order_id" property="collectionOrderId" jdbcType="VARCHAR" />
+    <result column="collection_amount" property="collectionAmount" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, random_id, uid, goods_name, goods_id, goods_image, goods_type, shop_id, amounts_payable, 
+    amount_actually_paid, refund_amount, coupon_id, status, create_time, update_time, 
+    pay_time, refund_time, cancel_time, payment_agency_short_name, user_payment_agency_id, 
+    third_party_order_id, effect_object, score_paid, score_key_flag, coupon_paid, score_money, 
+    manual_offer, manual_offer_set_time, purchase_quantity, handle_uid, collection_shop_id, 
+    collection_order_id, collection_amount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfOrderExample" >
+    delete from cf_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfOrder" >
+    insert into cf_order (id, random_id, uid, 
+      goods_name, goods_id, goods_image, 
+      goods_type, shop_id, amounts_payable, 
+      amount_actually_paid, refund_amount, coupon_id, 
+      status, create_time, update_time, 
+      pay_time, refund_time, cancel_time, 
+      payment_agency_short_name, user_payment_agency_id, 
+      third_party_order_id, effect_object, score_paid, 
+      score_key_flag, coupon_paid, score_money, 
+      manual_offer, manual_offer_set_time, purchase_quantity, 
+      handle_uid, collection_shop_id, collection_order_id, 
+      collection_amount)
+    values (#{id,jdbcType=VARCHAR}, #{randomId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, #{goodsImage,jdbcType=VARCHAR}, 
+      #{goodsType,jdbcType=TINYINT}, #{shopId,jdbcType=VARCHAR}, #{amountsPayable,jdbcType=DECIMAL}, 
+      #{amountActuallyPaid,jdbcType=DECIMAL}, #{refundAmount,jdbcType=DECIMAL}, #{couponId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{payTime,jdbcType=BIGINT}, #{refundTime,jdbcType=BIGINT}, #{cancelTime,jdbcType=BIGINT}, 
+      #{paymentAgencyShortName,jdbcType=VARCHAR}, #{userPaymentAgencyId,jdbcType=VARCHAR}, 
+      #{thirdPartyOrderId,jdbcType=VARCHAR}, #{effectObject,jdbcType=VARCHAR}, #{scorePaid,jdbcType=DECIMAL}, 
+      #{scoreKeyFlag,jdbcType=VARCHAR}, #{couponPaid,jdbcType=DECIMAL}, #{scoreMoney,jdbcType=DECIMAL}, 
+      #{manualOffer,jdbcType=DECIMAL}, #{manualOfferSetTime,jdbcType=BIGINT}, #{purchaseQuantity,jdbcType=INTEGER}, 
+      #{handleUid,jdbcType=VARCHAR}, #{collectionShopId,jdbcType=VARCHAR}, #{collectionOrderId,jdbcType=VARCHAR}, 
+      #{collectionAmount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfOrder" >
+    insert into cf_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="randomId != null" >
+        random_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsImage != null" >
+        goods_image,
+      </if>
+      <if test="goodsType != null" >
+        goods_type,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="amountsPayable != null" >
+        amounts_payable,
+      </if>
+      <if test="amountActuallyPaid != null" >
+        amount_actually_paid,
+      </if>
+      <if test="refundAmount != null" >
+        refund_amount,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="refundTime != null" >
+        refund_time,
+      </if>
+      <if test="cancelTime != null" >
+        cancel_time,
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        payment_agency_short_name,
+      </if>
+      <if test="userPaymentAgencyId != null" >
+        user_payment_agency_id,
+      </if>
+      <if test="thirdPartyOrderId != null" >
+        third_party_order_id,
+      </if>
+      <if test="effectObject != null" >
+        effect_object,
+      </if>
+      <if test="scorePaid != null" >
+        score_paid,
+      </if>
+      <if test="scoreKeyFlag != null" >
+        score_key_flag,
+      </if>
+      <if test="couponPaid != null" >
+        coupon_paid,
+      </if>
+      <if test="scoreMoney != null" >
+        score_money,
+      </if>
+      <if test="manualOffer != null" >
+        manual_offer,
+      </if>
+      <if test="manualOfferSetTime != null" >
+        manual_offer_set_time,
+      </if>
+      <if test="purchaseQuantity != null" >
+        purchase_quantity,
+      </if>
+      <if test="handleUid != null" >
+        handle_uid,
+      </if>
+      <if test="collectionShopId != null" >
+        collection_shop_id,
+      </if>
+      <if test="collectionOrderId != null" >
+        collection_order_id,
+      </if>
+      <if test="collectionAmount != null" >
+        collection_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="randomId != null" >
+        #{randomId,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImage != null" >
+        #{goodsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=TINYINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="amountsPayable != null" >
+        #{amountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="amountActuallyPaid != null" >
+        #{amountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="refundAmount != null" >
+        #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=BIGINT},
+      </if>
+      <if test="refundTime != null" >
+        #{refundTime,jdbcType=BIGINT},
+      </if>
+      <if test="cancelTime != null" >
+        #{cancelTime,jdbcType=BIGINT},
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        #{paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPaymentAgencyId != null" >
+        #{userPaymentAgencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPartyOrderId != null" >
+        #{thirdPartyOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="effectObject != null" >
+        #{effectObject,jdbcType=VARCHAR},
+      </if>
+      <if test="scorePaid != null" >
+        #{scorePaid,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreKeyFlag != null" >
+        #{scoreKeyFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="couponPaid != null" >
+        #{couponPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreMoney != null" >
+        #{scoreMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="manualOffer != null" >
+        #{manualOffer,jdbcType=DECIMAL},
+      </if>
+      <if test="manualOfferSetTime != null" >
+        #{manualOfferSetTime,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseQuantity != null" >
+        #{purchaseQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="handleUid != null" >
+        #{handleUid,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionShopId != null" >
+        #{collectionShopId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionOrderId != null" >
+        #{collectionOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionAmount != null" >
+        #{collectionAmount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfOrderExample" resultType="java.lang.Integer" >
+    select count(*) from cf_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.randomId != null" >
+        random_id = #{record.randomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsName != null" >
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsImage != null" >
+        goods_image = #{record.goodsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsType != null" >
+        goods_type = #{record.goodsType,jdbcType=TINYINT},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amountsPayable != null" >
+        amounts_payable = #{record.amountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.amountActuallyPaid != null" >
+        amount_actually_paid = #{record.amountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.refundAmount != null" >
+        refund_amount = #{record.refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.couponId != null" >
+        coupon_id = #{record.couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.payTime != null" >
+        pay_time = #{record.payTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.refundTime != null" >
+        refund_time = #{record.refundTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.cancelTime != null" >
+        cancel_time = #{record.cancelTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.paymentAgencyShortName != null" >
+        payment_agency_short_name = #{record.paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPaymentAgencyId != null" >
+        user_payment_agency_id = #{record.userPaymentAgencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdPartyOrderId != null" >
+        third_party_order_id = #{record.thirdPartyOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectObject != null" >
+        effect_object = #{record.effectObject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scorePaid != null" >
+        score_paid = #{record.scorePaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.scoreKeyFlag != null" >
+        score_key_flag = #{record.scoreKeyFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponPaid != null" >
+        coupon_paid = #{record.couponPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.scoreMoney != null" >
+        score_money = #{record.scoreMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.manualOffer != null" >
+        manual_offer = #{record.manualOffer,jdbcType=DECIMAL},
+      </if>
+      <if test="record.manualOfferSetTime != null" >
+        manual_offer_set_time = #{record.manualOfferSetTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.purchaseQuantity != null" >
+        purchase_quantity = #{record.purchaseQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.handleUid != null" >
+        handle_uid = #{record.handleUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectionShopId != null" >
+        collection_shop_id = #{record.collectionShopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectionOrderId != null" >
+        collection_order_id = #{record.collectionOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectionAmount != null" >
+        collection_amount = #{record.collectionAmount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_order
+    set id = #{record.id,jdbcType=VARCHAR},
+      random_id = #{record.randomId,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      goods_image = #{record.goodsImage,jdbcType=VARCHAR},
+      goods_type = #{record.goodsType,jdbcType=TINYINT},
+      shop_id = #{record.shopId,jdbcType=VARCHAR},
+      amounts_payable = #{record.amountsPayable,jdbcType=DECIMAL},
+      amount_actually_paid = #{record.amountActuallyPaid,jdbcType=DECIMAL},
+      refund_amount = #{record.refundAmount,jdbcType=DECIMAL},
+      coupon_id = #{record.couponId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      pay_time = #{record.payTime,jdbcType=BIGINT},
+      refund_time = #{record.refundTime,jdbcType=BIGINT},
+      cancel_time = #{record.cancelTime,jdbcType=BIGINT},
+      payment_agency_short_name = #{record.paymentAgencyShortName,jdbcType=VARCHAR},
+      user_payment_agency_id = #{record.userPaymentAgencyId,jdbcType=VARCHAR},
+      third_party_order_id = #{record.thirdPartyOrderId,jdbcType=VARCHAR},
+      effect_object = #{record.effectObject,jdbcType=VARCHAR},
+      score_paid = #{record.scorePaid,jdbcType=DECIMAL},
+      score_key_flag = #{record.scoreKeyFlag,jdbcType=VARCHAR},
+      coupon_paid = #{record.couponPaid,jdbcType=DECIMAL},
+      score_money = #{record.scoreMoney,jdbcType=DECIMAL},
+      manual_offer = #{record.manualOffer,jdbcType=DECIMAL},
+      manual_offer_set_time = #{record.manualOfferSetTime,jdbcType=BIGINT},
+      purchase_quantity = #{record.purchaseQuantity,jdbcType=INTEGER},
+      handle_uid = #{record.handleUid,jdbcType=VARCHAR},
+      collection_shop_id = #{record.collectionShopId,jdbcType=VARCHAR},
+      collection_order_id = #{record.collectionOrderId,jdbcType=VARCHAR},
+      collection_amount = #{record.collectionAmount,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfOrder" >
+    update cf_order
+    <set >
+      <if test="randomId != null" >
+        random_id = #{randomId,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImage != null" >
+        goods_image = #{goodsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        goods_type = #{goodsType,jdbcType=TINYINT},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="amountsPayable != null" >
+        amounts_payable = #{amountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="amountActuallyPaid != null" >
+        amount_actually_paid = #{amountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="refundAmount != null" >
+        refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=BIGINT},
+      </if>
+      <if test="refundTime != null" >
+        refund_time = #{refundTime,jdbcType=BIGINT},
+      </if>
+      <if test="cancelTime != null" >
+        cancel_time = #{cancelTime,jdbcType=BIGINT},
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPaymentAgencyId != null" >
+        user_payment_agency_id = #{userPaymentAgencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPartyOrderId != null" >
+        third_party_order_id = #{thirdPartyOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="effectObject != null" >
+        effect_object = #{effectObject,jdbcType=VARCHAR},
+      </if>
+      <if test="scorePaid != null" >
+        score_paid = #{scorePaid,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreKeyFlag != null" >
+        score_key_flag = #{scoreKeyFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="couponPaid != null" >
+        coupon_paid = #{couponPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreMoney != null" >
+        score_money = #{scoreMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="manualOffer != null" >
+        manual_offer = #{manualOffer,jdbcType=DECIMAL},
+      </if>
+      <if test="manualOfferSetTime != null" >
+        manual_offer_set_time = #{manualOfferSetTime,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseQuantity != null" >
+        purchase_quantity = #{purchaseQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="handleUid != null" >
+        handle_uid = #{handleUid,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionShopId != null" >
+        collection_shop_id = #{collectionShopId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionOrderId != null" >
+        collection_order_id = #{collectionOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionAmount != null" >
+        collection_amount = #{collectionAmount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfOrder" >
+    update cf_order
+    set random_id = #{randomId,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_id = #{goodsId,jdbcType=VARCHAR},
+      goods_image = #{goodsImage,jdbcType=VARCHAR},
+      goods_type = #{goodsType,jdbcType=TINYINT},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      amounts_payable = #{amountsPayable,jdbcType=DECIMAL},
+      amount_actually_paid = #{amountActuallyPaid,jdbcType=DECIMAL},
+      refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      coupon_id = #{couponId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      pay_time = #{payTime,jdbcType=BIGINT},
+      refund_time = #{refundTime,jdbcType=BIGINT},
+      cancel_time = #{cancelTime,jdbcType=BIGINT},
+      payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR},
+      user_payment_agency_id = #{userPaymentAgencyId,jdbcType=VARCHAR},
+      third_party_order_id = #{thirdPartyOrderId,jdbcType=VARCHAR},
+      effect_object = #{effectObject,jdbcType=VARCHAR},
+      score_paid = #{scorePaid,jdbcType=DECIMAL},
+      score_key_flag = #{scoreKeyFlag,jdbcType=VARCHAR},
+      coupon_paid = #{couponPaid,jdbcType=DECIMAL},
+      score_money = #{scoreMoney,jdbcType=DECIMAL},
+      manual_offer = #{manualOffer,jdbcType=DECIMAL},
+      manual_offer_set_time = #{manualOfferSetTime,jdbcType=BIGINT},
+      purchase_quantity = #{purchaseQuantity,jdbcType=INTEGER},
+      handle_uid = #{handleUid,jdbcType=VARCHAR},
+      collection_shop_id = #{collectionShopId,jdbcType=VARCHAR},
+      collection_order_id = #{collectionOrderId,jdbcType=VARCHAR},
+      collection_amount = #{collectionAmount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+  <resultMap id="ContainUserResultMap" type="com.cf.pay.domain.CfOrder" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="random_id" property="randomId" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="u_user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="goods_image" property="goodsImage" jdbcType="VARCHAR" />
+    <result column="goods_type" property="goodsType" jdbcType="TINYINT" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="amounts_payable" property="amountsPayable" jdbcType="DECIMAL" />
+    <result column="amount_actually_paid" property="amountActuallyPaid" jdbcType="DECIMAL" />
+    <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="pay_time" property="payTime" jdbcType="BIGINT" />
+    <result column="refund_time" property="refundTime" jdbcType="BIGINT" />
+    <result column="cancel_time" property="cancelTime" jdbcType="BIGINT" />
+    <result column="payment_agency_short_name" property="paymentAgencyShortName" jdbcType="VARCHAR" />
+    <result column="user_payment_agency_id" property="userPaymentAgencyId" jdbcType="VARCHAR" />
+    <result column="third_party_order_id" property="thirdPartyOrderId" jdbcType="VARCHAR" />
+    <result column="effect_object" property="effectObject" jdbcType="VARCHAR" />
+    <result column="score_paid" property="scorePaid" jdbcType="DECIMAL" />
+    <result column="score_key_flag" property="scoreKeyFlag" jdbcType="VARCHAR" />
+    <result column="coupon_paid" property="couponPaid" jdbcType="DECIMAL" />
+    <result column="score_money" property="scoreMoney" jdbcType="DECIMAL" />
+    <result column="manual_offer" property="manualOffer" jdbcType="DECIMAL" />
+    <result column="manual_offer_set_time" property="manualOfferSetTime" jdbcType="BIGINT" />
+    <result column="purchase_quantity" property="purchaseQuantity" jdbcType="INTEGER" />
+    <result column="handle_uid" property="handleUid" jdbcType="VARCHAR" />
+    <result column="handle_uid_user_name" property="handleUidUserName" jdbcType="VARCHAR" />
+    <result column="collection_shop_id" property="collectionShopId" jdbcType="VARCHAR" />
+    <result column="collection_order_id" property="collectionOrderId" jdbcType="VARCHAR" />
+    <result column="collection_amount" property="collectionAmount" jdbcType="DECIMAL" />
+  </resultMap>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <resultMap id="CountByDayMap" type="com.cf.framework.domain.report.CountByDay" >
+    <result column="date_str" property="day" jdbcType="VARCHAR" />
+    <result column="counts" property="count" jdbcType="DECIMAL" />
+  </resultMap>
+  <select id="limitDaysCountByDay" parameterType="com.cf.pay.domain.request.CfCountFinanceQuery" resultMap="CountByDayMap">
+    SELECT
+    (from_unixtime(
+    create_time / 1000,
+    '%Y-%m-%d'
+    )) date_str,
+    <if test='countField=="1"'>
+      sum(1) counts
+    </if>
+    <if test='countField=="amount_actually_paid"'>
+      sum(amount_actually_paid) counts
+    </if>
+    FROM
+    cf_order
+    WHERE
+    create_time <![CDATA[ >= ]]> unix_timestamp(
+    DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00') - INTERVAL #{day,jdbcType=INTEGER} DAY
+    ) * 1000 and create_time <![CDATA[ < ]]> unix_timestamp(
+    DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00')
+    ) * 1000
+    <if test="goodsType!=null">and goods_type=#{goodsType,jdbcType=TINYINT}</if>
+    <if test="status!=null">and status=#{status,jdbcType=TINYINT}</if>
+    <if test="payTime!=null">and pay_time <![CDATA[ >= ]]> #{payTime,jdbcType=BIGINT}</if>
+    <if test="refundTime!=null">and refund_time <![CDATA[ >= ]]> #{refundTime,jdbcType=BIGINT}</if>
+    <if test="cancelTime!=null">and cancel_time <![CDATA[ >= ]]> #{cancelTime,jdbcType=BIGINT}</if>
+    <if test="paymentAgencyShortName!=null">and payment_agency_short_name=#{paymentAgencyShortName,jdbcType=VARCHAR}</if>
+    <if test="!countAll">
+      GROUP BY date_str
+    </if>
+  </select>
+  <select id="limitDaysCountByDayFromPayTime" parameterType="com.cf.pay.domain.request.CfCountFinanceQuery" resultMap="CountByDayMap">
+    SELECT
+    <if test='!countAll'>
+      (from_unixtime(
+      pay_time / 1000,
+      '%Y-%m-%d'
+      )) date_str,
+    </if>
+    <if test='countField=="1"'>
+      sum(1) counts
+    </if>
+    <if test='countField=="amount_actually_paid"'>
+      sum(amount_actually_paid) counts
+    </if>
+    <if test='countField=="amounts_payable"'>
+      sum(amounts_payable) counts
+    </if>
+    FROM
+    cf_order
+    WHERE
+    pay_time <![CDATA[ >= ]]> unix_timestamp(#{date,jdbcType=VARCHAR})*1000 and pay_time <![CDATA[ <= ]]> unix_timestamp(#{endDate,jdbcType=VARCHAR})*1000
+    <if test="goodsType!=null">and goods_type=#{goodsType,jdbcType=TINYINT}</if>
+    <if test="status!=null">and status=#{status,jdbcType=TINYINT}</if>
+    <if test="payTime!=null">and pay_time <![CDATA[ >= ]]> #{payTime,jdbcType=BIGINT}</if>
+    <if test="refundTime!=null">and refund_time <![CDATA[ >= ]]> #{refundTime,jdbcType=BIGINT}</if>
+    <if test="cancelTime!=null">and cancel_time <![CDATA[ >= ]]> #{cancelTime,jdbcType=BIGINT}</if>
+    <if test="paymentAgencyShortName!=null">and payment_agency_short_name=#{paymentAgencyShortName,jdbcType=VARCHAR}</if>
+    <if test="shopId!=null">and shop_id=#{shopId,jdbcType=VARCHAR}</if>
+    <if test="shopIds!=null">
+      and shop_id in
+      <foreach item="item" collection="shopIds" separator="," open="(" close=")" index="">
+        #{item,jdbcType=VARCHAR}
+      </foreach>
+    </if>
+    <if test="paymentAgencyShortNames!=null">and payment_agency_short_name in
+      <foreach item="item" collection="paymentAgencyShortNames" separator="," open="(" close=")" index="">
+        #{item,jdbcType=VARCHAR}
+      </foreach>
+    </if>
+    <if test="!countAll">
+      GROUP BY date_str
+    </if>
+  </select>
+  <select id="yearMonthCountByDay" parameterType="java.lang.String" resultMap="CountByDayMap">
+    SELECT
+    ( from_unixtime( create_time / 1000, '%Y-%m-%d' ) ) date_str,
+    <if test='countField=="1"'>
+      sum(1) counts
+    </if>
+    <if test='countField=="amount_actually_paid"'>
+      sum(amount_actually_paid) counts
+    </if>
+    FROM
+    cf_order
+    WHERE
+    create_time <![CDATA[ >= ]]> unix_timestamp( DATE_ADD(DATE_FORMAT(#{date,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%S'),interval -day(DATE_FORMAT(#{date,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%S'))+1 day)
+    ) * 1000
+    AND create_time <![CDATA[ < ]]> unix_timestamp( DATE_FORMAT(last_day(DATE_FORMAT(#{date,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%S')),'%Y-%m-%d %H:%i:%S') + INTERVAL 1 DAY ) * 1000
+    <if test="goodsType!=null">and goods_type=#{goodsType,jdbcType=TINYINT}</if>
+    <if test="status!=null">and status=#{status,jdbcType=TINYINT}</if>
+    <if test="payTime!=null">and pay_time <![CDATA[ >= ]]> #{payTime,jdbcType=BIGINT}</if>
+    <if test="refundTime!=null">and refund_time <![CDATA[ >= ]]> #{refundTime,jdbcType=BIGINT}</if>
+    <if test="cancelTime!=null">and cancel_time <![CDATA[ >= ]]> #{cancelTime,jdbcType=BIGINT}</if>
+    <if test="paymentAgencyShortName!=null">and payment_agency_short_name=#{paymentAgencyShortName,jdbcType=VARCHAR}</if>
+    <if test="!countAll">
+      GROUP BY date_str
+    </if>
+  </select>
+
+  <select id="yearCountByMonth" parameterType="com.cf.pay.domain.request.CfCountFinanceQuery" resultMap="CountByDayMap">
+    SELECT
+    (from_unixtime(
+    create_time / 1000,
+    '%Y-%m'
+    )) date_str,
+    <if test='countField=="1"'>
+      sum(1) counts
+    </if>
+    <if test='countField=="amount_actually_paid"'>
+      sum(amount_actually_paid) counts
+    </if>
+    FROM
+    cf_order
+    WHERE
+    create_time <![CDATA[ >= ]]> unix_timestamp(DATE_FORMAT(#{date,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%S')) * 1000
+    AND create_time <![CDATA[ <= ]]> unix_timestamp(DATE_FORMAT(#{endDate,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%S')) * 1000
+    <if test="goodsType!=null">and goods_type=#{goodsType,jdbcType=TINYINT}</if>
+    <if test="status!=null">and status=#{status,jdbcType=TINYINT}</if>
+    <if test="payTime!=null">and pay_time <![CDATA[ >= ]]> #{payTime,jdbcType=BIGINT}</if>
+    <if test="refundTime!=null">and refund_time <![CDATA[ >= ]]> #{refundTime,jdbcType=BIGINT}</if>
+    <if test="cancelTime!=null">and cancel_time <![CDATA[ >= ]]> #{cancelTime,jdbcType=BIGINT}</if>
+    <if test="paymentAgencyShortName!=null">and payment_agency_short_name=#{paymentAgencyShortName,jdbcType=VARCHAR}</if>
+    <if test="!countAll">
+      GROUP BY date_str
+    </if>
+  </select>
+
+  <update id="flushOrderId" parameterType="java.lang.String">
+    update cf_order set id = #{newOrderId,jdbcType=VARCHAR} where id = #{oldOrderId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="countByField" parameterType="com.cf.pay.domain.request.CfOrderQuery" resultType="java.math.BigDecimal">
+    select sum(${countField}) from cf_order
+    <trim prefix="where" prefixOverrides="and|or">
+      <if test="goodsType != null">
+        and goods_type = #{goodsType,jdbcType=TINYINT}
+      </if>
+      <if test="shopId != null">
+        and shop_id = #{shopId,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=TINYINT}
+      </if>
+      <if test="minCreateTime != null">
+        and create_time <![CDATA[ >= ]]> #{minCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxCreateTime != null">
+        and create_time <![CDATA[ <= ]]> #{maxCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="payTime != null">
+        and pay_time = #{payTime,jdbcType=BIGINT}
+      </if>
+      <if test="minPayTime != null">
+        and pay_time <![CDATA[ >= ]]> #{minPayTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxPayTime != null">
+        and pay_time <![CDATA[ <= ]]> #{maxPayTime,jdbcType=BIGINT}
+      </if>
+      <if test="paymentAgencyShortName != null">
+        and payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </select>
+</mapper>

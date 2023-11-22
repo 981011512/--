@@ -1,0 +1,6 @@
+/.idea
+/.vscode
+*.log
+*.iml
+/**/target
+/**/logs

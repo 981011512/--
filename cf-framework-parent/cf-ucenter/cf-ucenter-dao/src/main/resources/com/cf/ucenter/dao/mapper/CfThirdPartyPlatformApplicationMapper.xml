@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ucenter.dao.mapper.CfThirdPartyPlatformApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ucenter.domain.CfThirdPartyPlatformApplication" >
+    <id column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="application_name" property="applicationName" jdbcType="VARCHAR" />
+    <result column="public_key" property="publicKey" jdbcType="VARCHAR" />
+    <result column="private_key" property="privateKey" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="auth_token" property="authToken" jdbcType="VARCHAR" />
+    <result column="aes_encryption" property="aesEncryption" jdbcType="VARCHAR" />
+    <result column="original_id" property="originalId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    appid, application_name, public_key, private_key, platform, auth_token, aes_encryption, 
+    original_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ucenter.domain.CfThirdPartyPlatformApplicationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_third_party_platform_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_third_party_platform_application
+    where appid = #{appid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_third_party_platform_application
+    where appid = #{appid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ucenter.domain.CfThirdPartyPlatformApplicationExample" >
+    delete from cf_third_party_platform_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ucenter.domain.CfThirdPartyPlatformApplication" >
+    insert into cf_third_party_platform_application (appid, application_name, public_key, 
+      private_key, platform, auth_token, 
+      aes_encryption, original_id)
+    values (#{appid,jdbcType=VARCHAR}, #{applicationName,jdbcType=VARCHAR}, #{publicKey,jdbcType=VARCHAR}, 
+      #{privateKey,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{authToken,jdbcType=VARCHAR}, 
+      #{aesEncryption,jdbcType=VARCHAR}, #{originalId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ucenter.domain.CfThirdPartyPlatformApplication" >
+    insert into cf_third_party_platform_application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appid != null" >
+        appid,
+      </if>
+      <if test="applicationName != null" >
+        application_name,
+      </if>
+      <if test="publicKey != null" >
+        public_key,
+      </if>
+      <if test="privateKey != null" >
+        private_key,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="authToken != null" >
+        auth_token,
+      </if>
+      <if test="aesEncryption != null" >
+        aes_encryption,
+      </if>
+      <if test="originalId != null" >
+        original_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationName != null" >
+        #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null" >
+        #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null" >
+        #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="authToken != null" >
+        #{authToken,jdbcType=VARCHAR},
+      </if>
+      <if test="aesEncryption != null" >
+        #{aesEncryption,jdbcType=VARCHAR},
+      </if>
+      <if test="originalId != null" >
+        #{originalId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ucenter.domain.CfThirdPartyPlatformApplicationExample" resultType="java.lang.Integer" >
+    select count(*) from cf_third_party_platform_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_third_party_platform_application
+    <set >
+      <if test="record.appid != null" >
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicationName != null" >
+        application_name = #{record.applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicKey != null" >
+        public_key = #{record.publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privateKey != null" >
+        private_key = #{record.privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authToken != null" >
+        auth_token = #{record.authToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aesEncryption != null" >
+        aes_encryption = #{record.aesEncryption,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalId != null" >
+        original_id = #{record.originalId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_third_party_platform_application
+    set appid = #{record.appid,jdbcType=VARCHAR},
+      application_name = #{record.applicationName,jdbcType=VARCHAR},
+      public_key = #{record.publicKey,jdbcType=VARCHAR},
+      private_key = #{record.privateKey,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=VARCHAR},
+      auth_token = #{record.authToken,jdbcType=VARCHAR},
+      aes_encryption = #{record.aesEncryption,jdbcType=VARCHAR},
+      original_id = #{record.originalId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ucenter.domain.CfThirdPartyPlatformApplication" >
+    update cf_third_party_platform_application
+    <set >
+      <if test="applicationName != null" >
+        application_name = #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null" >
+        public_key = #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null" >
+        private_key = #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="authToken != null" >
+        auth_token = #{authToken,jdbcType=VARCHAR},
+      </if>
+      <if test="aesEncryption != null" >
+        aes_encryption = #{aesEncryption,jdbcType=VARCHAR},
+      </if>
+      <if test="originalId != null" >
+        original_id = #{originalId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where appid = #{appid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ucenter.domain.CfThirdPartyPlatformApplication" >
+    update cf_third_party_platform_application
+    set application_name = #{applicationName,jdbcType=VARCHAR},
+      public_key = #{publicKey,jdbcType=VARCHAR},
+      private_key = #{privateKey,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      auth_token = #{authToken,jdbcType=VARCHAR},
+      aes_encryption = #{aesEncryption,jdbcType=VARCHAR},
+      original_id = #{originalId,jdbcType=VARCHAR}
+    where appid = #{appid,jdbcType=VARCHAR}
+  </update>
+</mapper>

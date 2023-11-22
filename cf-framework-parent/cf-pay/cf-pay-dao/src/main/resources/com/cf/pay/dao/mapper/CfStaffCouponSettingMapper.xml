@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfStaffCouponSettingMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfStaffCouponSetting" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="same_day_quota" property="sameDayQuota" jdbcType="DECIMAL" />
+    <result column="staff_id" property="staffId" jdbcType="VARCHAR" />
+    <result column="coupon_activity_id" property="couponActivityId" jdbcType="VARCHAR" />
+    <result column="coupon_type" property="couponType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, same_day_quota, staff_id, coupon_activity_id, coupon_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfStaffCouponSettingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_staff_coupon_setting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_staff_coupon_setting
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_staff_coupon_setting
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfStaffCouponSettingExample" >
+    delete from cf_staff_coupon_setting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfStaffCouponSetting" >
+    insert into cf_staff_coupon_setting (id, same_day_quota, staff_id, 
+      coupon_activity_id, coupon_type)
+    values (#{id,jdbcType=VARCHAR}, #{sameDayQuota,jdbcType=DECIMAL}, #{staffId,jdbcType=VARCHAR}, 
+      #{couponActivityId,jdbcType=VARCHAR}, #{couponType,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfStaffCouponSetting" >
+    insert into cf_staff_coupon_setting
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sameDayQuota != null" >
+        same_day_quota,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="couponActivityId != null" >
+        coupon_activity_id,
+      </if>
+      <if test="couponType != null" >
+        coupon_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sameDayQuota != null" >
+        #{sameDayQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponActivityId != null" >
+        #{couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        #{couponType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfStaffCouponSettingExample" resultType="java.lang.Integer" >
+    select count(*) from cf_staff_coupon_setting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_staff_coupon_setting
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sameDayQuota != null" >
+        same_day_quota = #{record.sameDayQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponActivityId != null" >
+        coupon_activity_id = #{record.couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponType != null" >
+        coupon_type = #{record.couponType,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_staff_coupon_setting
+    set id = #{record.id,jdbcType=VARCHAR},
+      same_day_quota = #{record.sameDayQuota,jdbcType=DECIMAL},
+      staff_id = #{record.staffId,jdbcType=VARCHAR},
+      coupon_activity_id = #{record.couponActivityId,jdbcType=VARCHAR},
+      coupon_type = #{record.couponType,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfStaffCouponSetting" >
+    update cf_staff_coupon_setting
+    <set >
+      <if test="sameDayQuota != null" >
+        same_day_quota = #{sameDayQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponActivityId != null" >
+        coupon_activity_id = #{couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfStaffCouponSetting" >
+    update cf_staff_coupon_setting
+    set same_day_quota = #{sameDayQuota,jdbcType=DECIMAL},
+      staff_id = #{staffId,jdbcType=VARCHAR},
+      coupon_activity_id = #{couponActivityId,jdbcType=VARCHAR},
+      coupon_type = #{couponType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <insert id="batchAdd" parameterType="java.util.List" useGeneratedKeys="false">
+    insert into cf_staff_coupon_setting
+    (id,same_day_quota,staff_id,coupon_activity_id,coupon_type)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id},#{item.sameDayQuota},#{item.staffId},#{item.couponActivityId},#{item.couponType})
+    </foreach>
+  </insert>
+</mapper>

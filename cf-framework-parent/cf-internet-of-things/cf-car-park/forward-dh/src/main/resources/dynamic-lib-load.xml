@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dynamic-lib>
+    <win64>
+        <lib>avnetsdk</lib>
+        <lib>dhconfigsdk</lib>
+        <lib>dhnetsdk</lib>
+        <lib>dhplay</lib>
+        <lib>ImageAlg</lib>
+        <lib>Infra</lib>
+        <lib>IvsDrawer</lib>
+        <lib>StreamConvertor</lib>
+        <lib>jninetsdk</lib>
+    </win64>
+    <win32>
+        <lib>avnetsdk</lib>
+        <lib>dhconfigsdk</lib>
+        <lib>dhnetsdk</lib>
+        <lib>dhplay</lib>
+        <lib>Infra</lib>
+        <lib>ImageAlg</lib>
+        <lib>StreamConvertor</lib>
+        <lib>jninetsdk</lib>
+    </win32>
+    <linux64>
+        <lib>avnetsdk</lib>
+        <lib>dhnetsdk</lib>
+        <lib>dhconfigsdk</lib>
+        <lib>StreamConvertor</lib>
+        <lib>jninetsdk</lib>
+    </linux64>
+    <linux32>
+        <lib>avnetsdk</lib>
+        <lib>dhconfigsdk</lib>
+        <lib>dhnetsdk</lib>
+        <lib>StreamConvertor</lib>
+        <lib>jninetsdk</lib>
+    </linux32>
+    <mac64>
+        <lib>avnetsdk</lib>
+        <lib>dhnetsdk</lib>
+        <lib>dhconfigsdk</lib>
+        <lib>StreamConvertor</lib>
+    </mac64>
+</dynamic-lib>

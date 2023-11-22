@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>logback</contextName>
+
+    <!--控制台输出内容的颜色转换以及格式-->
+    <substitutionProperty name="logging.pattern.console"
+                          value="%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan}[lineno:%line] %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <!--日志文件输出内容的格式-->
+    <substitutionProperty name="logging.pattern.file"
+                          value="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39}{cyan}[lineno:%line] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <!--输出到控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--控制台使用layout节点-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                ${logging.pattern.console}
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--按天生成日志-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Prudent>true</Prudent>
+        <!--滚动策略，我配置了按天生成日志文件-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--相对路径，生成的文件就在项目根目录下-->
+            <FileNamePattern>
+                logs/%d{yyyy-MM,aux}/%d{yyyy-MM-dd}-%i.log
+            </FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--日志文件最大的大小-->
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--注意超过30天的日志文件会被删除，即使已经按天分开也会删除-->
+            <MaxHistory>30</MaxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+        <!--日志文件里只保存ERROR及以上级别的日志-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+        <!--文件使用encoder节点-->
+        <encoder>
+            <Pattern>
+                ${logging.pattern.file}
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <!--这个logger里的配置相当于之前yml里的logging.level.com.lpc: trace-->
+    <!--additivity的作用-->
+    <!--true，则子Logger不止会在自己的appender里输出，还会在root的logger的appender里输出-->
+    <!--而这个logger里没配置appender，所以得交给root打印-->
+    <!--所以com.lpc包里的日志从TRACE级别开始-->
+    <!--其他包里的日志根据root的配置从INFO级别开始打印-->
+    <logger name="com.lpc" level="TRACE" additivity="true">
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+
+</configuration>

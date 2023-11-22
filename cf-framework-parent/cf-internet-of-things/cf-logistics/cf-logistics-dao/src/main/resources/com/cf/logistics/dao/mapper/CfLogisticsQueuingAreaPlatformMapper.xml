@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.logistics.dao.mapper.CfLogisticsQueuingAreaPlatformMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatform" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="queuing_area_id" property="queuingAreaId" jdbcType="BIGINT" />
+    <result column="logistics_storehouse_id" property="logisticsStorehouseId" jdbcType="BIGINT" />
+    <result column="logistics_storehouse_platform_id" property="logisticsStorehousePlatformId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, queuing_area_id, logistics_storehouse_id, logistics_storehouse_platform_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatformExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_logistics_queuing_area_platform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_logistics_queuing_area_platform
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_logistics_queuing_area_platform
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatformExample" >
+    delete from cf_logistics_queuing_area_platform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatform" >
+    insert into cf_logistics_queuing_area_platform (id, queuing_area_id, logistics_storehouse_id, 
+      logistics_storehouse_platform_id)
+    values (#{id,jdbcType=BIGINT}, #{queuingAreaId,jdbcType=BIGINT}, #{logisticsStorehouseId,jdbcType=BIGINT}, 
+      #{logisticsStorehousePlatformId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatform" >
+    insert into cf_logistics_queuing_area_platform
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="queuingAreaId != null" >
+        queuing_area_id,
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        logistics_storehouse_id,
+      </if>
+      <if test="logisticsStorehousePlatformId != null" >
+        logistics_storehouse_platform_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="queuingAreaId != null" >
+        #{queuingAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        #{logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsStorehousePlatformId != null" >
+        #{logisticsStorehousePlatformId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatformExample" resultType="java.lang.Integer" >
+    select count(*) from cf_logistics_queuing_area_platform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_logistics_queuing_area_platform
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.queuingAreaId != null" >
+        queuing_area_id = #{record.queuingAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="record.logisticsStorehouseId != null" >
+        logistics_storehouse_id = #{record.logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.logisticsStorehousePlatformId != null" >
+        logistics_storehouse_platform_id = #{record.logisticsStorehousePlatformId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_logistics_queuing_area_platform
+    set id = #{record.id,jdbcType=BIGINT},
+      queuing_area_id = #{record.queuingAreaId,jdbcType=BIGINT},
+      logistics_storehouse_id = #{record.logisticsStorehouseId,jdbcType=BIGINT},
+      logistics_storehouse_platform_id = #{record.logisticsStorehousePlatformId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatform" >
+    update cf_logistics_queuing_area_platform
+    <set >
+      <if test="queuingAreaId != null" >
+        queuing_area_id = #{queuingAreaId,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsStorehousePlatformId != null" >
+        logistics_storehouse_platform_id = #{logisticsStorehousePlatformId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatform" >
+    update cf_logistics_queuing_area_platform
+    set queuing_area_id = #{queuingAreaId,jdbcType=BIGINT},
+      logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT},
+      logistics_storehouse_platform_id = #{logisticsStorehousePlatformId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <resultMap id="LeftJoinResultMap" type="com.cf.logistics.domain.CfLogisticsQueuingAreaPlatform" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="queuing_area_id" property="queuingAreaId" jdbcType="BIGINT" />
+    <result column="logistics_storehouse_id" property="logisticsStorehouseId" jdbcType="BIGINT" />
+    <result column="logistics_storehouse_platform_id" property="logisticsStorehousePlatformId" jdbcType="BIGINT" />
+    <collection property="cfLogisticsStorehouse"  ofType="com.cf.logistics.domain.CfLogisticsStorehouse">
+      <id column="lgsh_id" property="id" jdbcType="BIGINT" />
+      <result column="lgsh_storehouse_name" property="storehouseName" jdbcType="VARCHAR" />
+      <result column="lgsh_country_id" property="countryId" jdbcType="VARCHAR" />
+      <result column="lgsh_province_id" property="provinceId" jdbcType="VARCHAR" />
+      <result column="lgsh_state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+      <result column="lgsh_zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+      <result column="lgsh_township_id" property="townshipId" jdbcType="VARCHAR" />
+      <result column="lgsh_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgsh_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgsh_start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+      <result column="lgsh_end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+      <result column="lgsh_address" property="address" jdbcType="VARCHAR" />
+      <result column="lgsh_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="lgsh_image" property="image" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="cfLogisticsStorehousePlatform"  ofType="com.cf.logistics.domain.CfLogisticsStorehousePlatform">
+      <id column="lgshpf_id" property="id" jdbcType="BIGINT" />
+      <result column="lgshpf_platform_name" property="platformName" jdbcType="VARCHAR" />
+      <result column="lgshpf_storehouse_id" property="storehouseId" jdbcType="BIGINT" />
+      <result column="lgshpf_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgshpf_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgshpf_queue_capacity" property="queueCapacity" jdbcType="INTEGER" />
+      <result column="lgshpf_used_queue_capacity" property="usedQueueCapacity" jdbcType="INTEGER" />
+      <result column="lgshpf_platform_status" property="platformStatus" jdbcType="TINYINT" />
+      <result column="lgshpf_sort_index" property="sortIndex" jdbcType="SMALLINT" />
+      <result column="lgshpf_handle_uid" property="handleUid" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="selectByQuery" resultMap="LeftJoinResultMap" parameterType="com.cf.logistics.domain.request.CfLogisticsQueuingAreaPlatformQuery" >
+    select lqap.*,lgsh.storehouse_name lgsh_storehouse_name,lgshpf.platform_name lgshpf_platform_name from cf_logistics_queuing_area_platform lqap
+    left join cf_logistics_storehouse lgsh on(lqap.logistics_storehouse_id=lgsh.id)
+    left join cf_logistics_storehouse_platform lgshpf on(lqap.logistics_storehouse_platform_id=lgshpf.id)
+    <trim prefix="where" prefixOverrides="and">
+      <if test="id!=null">
+        and lqap.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="queuingAreaId!=null">
+        and lqap.queuing_area_id = #{queuingAreaId,jdbcType=BIGINT}
+      </if>
+      <if test="logisticsStorehouseId!=null">
+        and lqap.logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT}
+      </if>
+      <if test="logisticsStorehousePlatformId!=null">
+        and lqap.logistics_storehouse_platform_id = #{logisticsStorehousePlatformId,jdbcType=BIGINT}
+      </if>
+    </trim>
+    <if test="orderBy!=null and orderBy!=''">
+      order by #{orderBy,jdbcType=VARCHAR}
+    </if>
+    <if test="page!=null and size !=null">
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+</mapper>

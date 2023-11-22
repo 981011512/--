@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.logistics.dao.mapper.CfLogisticsStorehouseMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.logistics.domain.CfLogisticsStorehouse" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="storehouse_name" property="storehouseName" jdbcType="VARCHAR" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+    <result column="township_id" property="townshipId" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+    <result column="end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="wx_appid" property="wxAppid" jdbcType="VARCHAR" />
+    <result column="factory_id" property="factoryId" jdbcType="BIGINT" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, storehouse_name, country_id, province_id, state_or_city_id, zone_or_county_id, 
+    township_id, position_x, position_y, start_business_hours, end_business_hours, address, 
+    phone, image, wx_appid, factory_id, principal
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.logistics.domain.CfLogisticsStorehouseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_logistics_storehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_logistics_storehouse
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_logistics_storehouse
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.logistics.domain.CfLogisticsStorehouseExample" >
+    delete from cf_logistics_storehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.logistics.domain.CfLogisticsStorehouse" >
+    insert into cf_logistics_storehouse (id, storehouse_name, country_id, 
+      province_id, state_or_city_id, zone_or_county_id, 
+      township_id, position_x, position_y, 
+      start_business_hours, end_business_hours, address, 
+      phone, image, wx_appid, 
+      factory_id, principal)
+    values (#{id,jdbcType=BIGINT}, #{storehouseName,jdbcType=VARCHAR}, #{countryId,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=VARCHAR}, #{stateOrCityId,jdbcType=VARCHAR}, #{zoneOrCountyId,jdbcType=VARCHAR}, 
+      #{townshipId,jdbcType=VARCHAR}, #{positionX,jdbcType=DECIMAL}, #{positionY,jdbcType=DECIMAL}, 
+      #{startBusinessHours,jdbcType=BIGINT}, #{endBusinessHours,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{wxAppid,jdbcType=VARCHAR}, 
+      #{factoryId,jdbcType=BIGINT}, #{principal,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.logistics.domain.CfLogisticsStorehouse" >
+    insert into cf_logistics_storehouse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storehouseName != null" >
+        storehouse_name,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id,
+      </if>
+      <if test="zoneOrCountyId != null" >
+        zone_or_county_id,
+      </if>
+      <if test="townshipId != null" >
+        township_id,
+      </if>
+      <if test="positionX != null" >
+        position_x,
+      </if>
+      <if test="positionY != null" >
+        position_y,
+      </if>
+      <if test="startBusinessHours != null" >
+        start_business_hours,
+      </if>
+      <if test="endBusinessHours != null" >
+        end_business_hours,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="wxAppid != null" >
+        wx_appid,
+      </if>
+      <if test="factoryId != null" >
+        factory_id,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storehouseName != null" >
+        #{storehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneOrCountyId != null" >
+        #{zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipId != null" >
+        #{townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="startBusinessHours != null" >
+        #{startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="endBusinessHours != null" >
+        #{endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAppid != null" >
+        #{wxAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryId != null" >
+        #{factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.logistics.domain.CfLogisticsStorehouseExample" resultType="java.lang.Integer" >
+    select count(*) from cf_logistics_storehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_logistics_storehouse
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.storehouseName != null" >
+        storehouse_name = #{record.storehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryId != null" >
+        country_id = #{record.countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateOrCityId != null" >
+        state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zoneOrCountyId != null" >
+        zone_or_county_id = #{record.zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.townshipId != null" >
+        township_id = #{record.townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionX != null" >
+        position_x = #{record.positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.positionY != null" >
+        position_y = #{record.positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startBusinessHours != null" >
+        start_business_hours = #{record.startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="record.endBusinessHours != null" >
+        end_business_hours = #{record.endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxAppid != null" >
+        wx_appid = #{record.wxAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factoryId != null" >
+        factory_id = #{record.factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_logistics_storehouse
+    set id = #{record.id,jdbcType=BIGINT},
+      storehouse_name = #{record.storehouseName,jdbcType=VARCHAR},
+      country_id = #{record.countryId,jdbcType=VARCHAR},
+      province_id = #{record.provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      zone_or_county_id = #{record.zoneOrCountyId,jdbcType=VARCHAR},
+      township_id = #{record.townshipId,jdbcType=VARCHAR},
+      position_x = #{record.positionX,jdbcType=DECIMAL},
+      position_y = #{record.positionY,jdbcType=DECIMAL},
+      start_business_hours = #{record.startBusinessHours,jdbcType=BIGINT},
+      end_business_hours = #{record.endBusinessHours,jdbcType=BIGINT},
+      address = #{record.address,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      wx_appid = #{record.wxAppid,jdbcType=VARCHAR},
+      factory_id = #{record.factoryId,jdbcType=BIGINT},
+      principal = #{record.principal,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.logistics.domain.CfLogisticsStorehouse" >
+    update cf_logistics_storehouse
+    <set >
+      <if test="storehouseName != null" >
+        storehouse_name = #{storehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneOrCountyId != null" >
+        zone_or_county_id = #{zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipId != null" >
+        township_id = #{townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        position_x = #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        position_y = #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="startBusinessHours != null" >
+        start_business_hours = #{startBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="endBusinessHours != null" >
+        end_business_hours = #{endBusinessHours,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAppid != null" >
+        wx_appid = #{wxAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryId != null" >
+        factory_id = #{factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.logistics.domain.CfLogisticsStorehouse" >
+    update cf_logistics_storehouse
+    set storehouse_name = #{storehouseName,jdbcType=VARCHAR},
+      country_id = #{countryId,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      zone_or_county_id = #{zoneOrCountyId,jdbcType=VARCHAR},
+      township_id = #{townshipId,jdbcType=VARCHAR},
+      position_x = #{positionX,jdbcType=DECIMAL},
+      position_y = #{positionY,jdbcType=DECIMAL},
+      start_business_hours = #{startBusinessHours,jdbcType=BIGINT},
+      end_business_hours = #{endBusinessHours,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      wx_appid = #{wxAppid,jdbcType=VARCHAR},
+      factory_id = #{factoryId,jdbcType=BIGINT},
+      principal = #{principal,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <resultMap id="ContainFactoryResultMap" type="com.cf.logistics.domain.CfLogisticsStorehouse" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="storehouse_name" property="storehouseName" jdbcType="VARCHAR" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+    <result column="township_id" property="townshipId" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+    <result column="end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="wx_appid" property="wxAppid" jdbcType="VARCHAR" />
+    <result column="factory_id" property="factoryId" jdbcType="BIGINT" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <collection property="cfLogisticsFactory"  ofType="com.cf.logistics.domain.CfLogisticsFactory">
+      <id column="lgft_id" property="id" jdbcType="BIGINT" />
+      <result column="lgft_factory_name" property="factoryName" jdbcType="VARCHAR" />
+      <result column="lgft_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgft_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgft_address" property="address" jdbcType="VARCHAR" />
+      <result column="lgft_principal" property="principal" jdbcType="VARCHAR" />
+      <result column="lgft_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="lgft_sign_in_range" property="signInRange" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+
+  <select id="selectNearLogisticsStorehouse" parameterType="com.cf.logistics.domain.request.CfLogisticsStorehouseQuery"  resultMap="BaseResultMap">
+    SELECT
+    lgsh.*
+    FROM
+    `cf_logistics_storehouse` lgsh
+    WHERE
+     (st_distance (point (lgsh.position_x, lgsh.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195)
+     <![CDATA[ <= ]]> 300
+  </select>
+  <select id="selectListByQuery" parameterType="com.cf.logistics.domain.request.CfLogisticsStorehouseQuery" resultMap="ContainFactoryResultMap">
+    select lgsh.*,lgft.factory_name lgft_factory_name from cf_logistics_storehouse lgsh
+    left join cf_logistics_factory lgft on (lgsh.factory_id=lgft.id)
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and lgsh.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="ids != null">
+        and lgsh.id in
+        <foreach collection="ids" item="storehouseId" index="index" open="(" close=")" separator=",">
+          #{storehouseId}
+        </foreach>
+      </if>
+      <if test="factoryId!=null">
+        and lgsh.factory_id = #{factoryId,jdbcType=BIGINT}
+      </if>
+
+      <if test="storehouseName!=null">
+        and lgsh.storehouse_name like "%"#{storehouseName,jdbcType=VARCHAR}"%"
+      </if>
+    </trim>
+    <if test="orderBy!=null">
+      order by #{orderBy,jdbcType=VARCHAR}
+    </if>
+    <if test="page!=null and size !=null">
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+</mapper>

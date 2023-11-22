@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfCouponActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfCouponActivity" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="main_body_id" property="mainBodyId" jdbcType="VARCHAR" />
+    <result column="creater_id" property="createrId" jdbcType="VARCHAR" />
+    <result column="denomination" property="denomination" jdbcType="DECIMAL" />
+    <result column="threshold_price" property="thresholdPrice" jdbcType="DECIMAL" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="total_issue_quantity" property="totalIssueQuantity" jdbcType="INTEGER" />
+    <result column="issued_quantity" property="issuedQuantity" jdbcType="INTEGER" />
+    <result column="unit_of_time" property="unitOfTime" jdbcType="BIGINT" />
+    <result column="unit_of_time_total_issue_quantity" property="unitOfTimeTotalIssueQuantity" jdbcType="INTEGER" />
+    <result column="unit_of_time_total_issued_quantity" property="unitOfTimeTotalIssuedQuantity" jdbcType="INTEGER" />
+    <result column="unit_of_time_issue_gradient" property="unitOfTimeIssueGradient" jdbcType="INTEGER" />
+    <result column="last_issue_time" property="lastIssueTime" jdbcType="BIGINT" />
+    <result column="user_condition" property="userCondition" jdbcType="VARCHAR" />
+    <result column="repeat_times" property="repeatTimes" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="show_in_carpark_list" property="showInCarparkList" jdbcType="TINYINT" />
+    <result column="total_issue_quota" property="totalIssueQuota" jdbcType="DECIMAL" />
+    <result column="issued_quota" property="issuedQuota" jdbcType="DECIMAL" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="recharge_ratio" property="rechargeRatio" jdbcType="DECIMAL" />
+    <result column="shopkeeper_name" property="shopkeeperName" jdbcType="VARCHAR" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+    <result column="coupon_type" property="couponType" jdbcType="TINYINT" />
+    <result column="auto_give_away" property="autoGiveAway" jdbcType="TINYINT" />
+    <result column="auto_cleared" property="autoCleared" jdbcType="TINYINT" />
+    <result column="auto_give_away_date" property="autoGiveAwayDate" jdbcType="VARCHAR" />
+    <result column="auto_give_away_quota" property="autoGiveAwayQuota" jdbcType="DECIMAL" />
+    <result column="auto_give_away_time" property="autoGiveAwayTime" jdbcType="BIGINT" />
+    <result column="auto_give_away_overage_quota" property="autoGiveAwayOverageQuota" jdbcType="DECIMAL" />
+    <result column="remaining_times" property="remainingTimes" jdbcType="INTEGER" />
+    <result column="remaining_time" property="remainingTime" jdbcType="BIGINT" />
+    <result column="times_coupon_price" property="timesCouponPrice" jdbcType="DECIMAL" />
+    <result column="time_coupon_price" property="timeCouponPrice" jdbcType="DECIMAL" />
+    <result column="amount_daily_limit" property="amountDailyLimit" jdbcType="DECIMAL" />
+    <result column="times_daily_limit" property="timesDailyLimit" jdbcType="INTEGER" />
+    <result column="time_daily_limit" property="timeDailyLimit" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, subtitle, image, introduction, type, start_time, end_time, main_body_id, 
+    creater_id, denomination, threshold_price, goods_id, total_issue_quantity, issued_quantity, 
+    unit_of_time, unit_of_time_total_issue_quantity, unit_of_time_total_issued_quantity, 
+    unit_of_time_issue_gradient, last_issue_time, user_condition, repeat_times, status, 
+    create_time, update_time, show_in_carpark_list, total_issue_quota, issued_quota, 
+    phone, recharge_ratio, shopkeeper_name, project_name, trade_type, coupon_type, auto_give_away, 
+    auto_cleared, auto_give_away_date, auto_give_away_quota, auto_give_away_time, auto_give_away_overage_quota, 
+    remaining_times, remaining_time, times_coupon_price, time_coupon_price, amount_daily_limit, 
+    times_daily_limit, time_daily_limit
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfCouponActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_coupon_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_coupon_activity
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_coupon_activity
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfCouponActivityExample" >
+    delete from cf_coupon_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfCouponActivity" >
+    insert into cf_coupon_activity (id, title, subtitle, 
+      image, introduction, type, 
+      start_time, end_time, main_body_id, 
+      creater_id, denomination, threshold_price, 
+      goods_id, total_issue_quantity, issued_quantity, 
+      unit_of_time, unit_of_time_total_issue_quantity, 
+      unit_of_time_total_issued_quantity, unit_of_time_issue_gradient, 
+      last_issue_time, user_condition, repeat_times, 
+      status, create_time, update_time, 
+      show_in_carpark_list, total_issue_quota, issued_quota, 
+      phone, recharge_ratio, shopkeeper_name, 
+      project_name, trade_type, coupon_type, 
+      auto_give_away, auto_cleared, auto_give_away_date, 
+      auto_give_away_quota, auto_give_away_time, auto_give_away_overage_quota, 
+      remaining_times, remaining_time, times_coupon_price, 
+      time_coupon_price, amount_daily_limit, times_daily_limit, 
+      time_daily_limit)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+      #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, #{mainBodyId,jdbcType=VARCHAR}, 
+      #{createrId,jdbcType=VARCHAR}, #{denomination,jdbcType=DECIMAL}, #{thresholdPrice,jdbcType=DECIMAL}, 
+      #{goodsId,jdbcType=VARCHAR}, #{totalIssueQuantity,jdbcType=INTEGER}, #{issuedQuantity,jdbcType=INTEGER}, 
+      #{unitOfTime,jdbcType=BIGINT}, #{unitOfTimeTotalIssueQuantity,jdbcType=INTEGER}, 
+      #{unitOfTimeTotalIssuedQuantity,jdbcType=INTEGER}, #{unitOfTimeIssueGradient,jdbcType=INTEGER}, 
+      #{lastIssueTime,jdbcType=BIGINT}, #{userCondition,jdbcType=VARCHAR}, #{repeatTimes,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{showInCarparkList,jdbcType=TINYINT}, #{totalIssueQuota,jdbcType=DECIMAL}, #{issuedQuota,jdbcType=DECIMAL}, 
+      #{phone,jdbcType=VARCHAR}, #{rechargeRatio,jdbcType=DECIMAL}, #{shopkeeperName,jdbcType=VARCHAR}, 
+      #{projectName,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, #{couponType,jdbcType=TINYINT}, 
+      #{autoGiveAway,jdbcType=TINYINT}, #{autoCleared,jdbcType=TINYINT}, #{autoGiveAwayDate,jdbcType=VARCHAR}, 
+      #{autoGiveAwayQuota,jdbcType=DECIMAL}, #{autoGiveAwayTime,jdbcType=BIGINT}, #{autoGiveAwayOverageQuota,jdbcType=DECIMAL}, 
+      #{remainingTimes,jdbcType=INTEGER}, #{remainingTime,jdbcType=BIGINT}, #{timesCouponPrice,jdbcType=DECIMAL}, 
+      #{timeCouponPrice,jdbcType=DECIMAL}, #{amountDailyLimit,jdbcType=DECIMAL}, #{timesDailyLimit,jdbcType=INTEGER}, 
+      #{timeDailyLimit,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfCouponActivity" >
+    insert into cf_coupon_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="subtitle != null" >
+        subtitle,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="mainBodyId != null" >
+        main_body_id,
+      </if>
+      <if test="createrId != null" >
+        creater_id,
+      </if>
+      <if test="denomination != null" >
+        denomination,
+      </if>
+      <if test="thresholdPrice != null" >
+        threshold_price,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="totalIssueQuantity != null" >
+        total_issue_quantity,
+      </if>
+      <if test="issuedQuantity != null" >
+        issued_quantity,
+      </if>
+      <if test="unitOfTime != null" >
+        unit_of_time,
+      </if>
+      <if test="unitOfTimeTotalIssueQuantity != null" >
+        unit_of_time_total_issue_quantity,
+      </if>
+      <if test="unitOfTimeTotalIssuedQuantity != null" >
+        unit_of_time_total_issued_quantity,
+      </if>
+      <if test="unitOfTimeIssueGradient != null" >
+        unit_of_time_issue_gradient,
+      </if>
+      <if test="lastIssueTime != null" >
+        last_issue_time,
+      </if>
+      <if test="userCondition != null" >
+        user_condition,
+      </if>
+      <if test="repeatTimes != null" >
+        repeat_times,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="showInCarparkList != null" >
+        show_in_carpark_list,
+      </if>
+      <if test="totalIssueQuota != null" >
+        total_issue_quota,
+      </if>
+      <if test="issuedQuota != null" >
+        issued_quota,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="rechargeRatio != null" >
+        recharge_ratio,
+      </if>
+      <if test="shopkeeperName != null" >
+        shopkeeper_name,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="couponType != null" >
+        coupon_type,
+      </if>
+      <if test="autoGiveAway != null" >
+        auto_give_away,
+      </if>
+      <if test="autoCleared != null" >
+        auto_cleared,
+      </if>
+      <if test="autoGiveAwayDate != null" >
+        auto_give_away_date,
+      </if>
+      <if test="autoGiveAwayQuota != null" >
+        auto_give_away_quota,
+      </if>
+      <if test="autoGiveAwayTime != null" >
+        auto_give_away_time,
+      </if>
+      <if test="autoGiveAwayOverageQuota != null" >
+        auto_give_away_overage_quota,
+      </if>
+      <if test="remainingTimes != null" >
+        remaining_times,
+      </if>
+      <if test="remainingTime != null" >
+        remaining_time,
+      </if>
+      <if test="timesCouponPrice != null" >
+        times_coupon_price,
+      </if>
+      <if test="timeCouponPrice != null" >
+        time_coupon_price,
+      </if>
+      <if test="amountDailyLimit != null" >
+        amount_daily_limit,
+      </if>
+      <if test="timesDailyLimit != null" >
+        times_daily_limit,
+      </if>
+      <if test="timeDailyLimit != null" >
+        time_daily_limit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="mainBodyId != null" >
+        #{mainBodyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createrId != null" >
+        #{createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="denomination != null" >
+        #{denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="thresholdPrice != null" >
+        #{thresholdPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalIssueQuantity != null" >
+        #{totalIssueQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="issuedQuantity != null" >
+        #{issuedQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitOfTime != null" >
+        #{unitOfTime,jdbcType=BIGINT},
+      </if>
+      <if test="unitOfTimeTotalIssueQuantity != null" >
+        #{unitOfTimeTotalIssueQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitOfTimeTotalIssuedQuantity != null" >
+        #{unitOfTimeTotalIssuedQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitOfTimeIssueGradient != null" >
+        #{unitOfTimeIssueGradient,jdbcType=INTEGER},
+      </if>
+      <if test="lastIssueTime != null" >
+        #{lastIssueTime,jdbcType=BIGINT},
+      </if>
+      <if test="userCondition != null" >
+        #{userCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatTimes != null" >
+        #{repeatTimes,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="showInCarparkList != null" >
+        #{showInCarparkList,jdbcType=TINYINT},
+      </if>
+      <if test="totalIssueQuota != null" >
+        #{totalIssueQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="issuedQuota != null" >
+        #{issuedQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeRatio != null" >
+        #{rechargeRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="shopkeeperName != null" >
+        #{shopkeeperName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        #{couponType,jdbcType=TINYINT},
+      </if>
+      <if test="autoGiveAway != null" >
+        #{autoGiveAway,jdbcType=TINYINT},
+      </if>
+      <if test="autoCleared != null" >
+        #{autoCleared,jdbcType=TINYINT},
+      </if>
+      <if test="autoGiveAwayDate != null" >
+        #{autoGiveAwayDate,jdbcType=VARCHAR},
+      </if>
+      <if test="autoGiveAwayQuota != null" >
+        #{autoGiveAwayQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="autoGiveAwayTime != null" >
+        #{autoGiveAwayTime,jdbcType=BIGINT},
+      </if>
+      <if test="autoGiveAwayOverageQuota != null" >
+        #{autoGiveAwayOverageQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="remainingTimes != null" >
+        #{remainingTimes,jdbcType=INTEGER},
+      </if>
+      <if test="remainingTime != null" >
+        #{remainingTime,jdbcType=BIGINT},
+      </if>
+      <if test="timesCouponPrice != null" >
+        #{timesCouponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="timeCouponPrice != null" >
+        #{timeCouponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amountDailyLimit != null" >
+        #{amountDailyLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="timesDailyLimit != null" >
+        #{timesDailyLimit,jdbcType=INTEGER},
+      </if>
+      <if test="timeDailyLimit != null" >
+        #{timeDailyLimit,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfCouponActivityExample" resultType="java.lang.Integer" >
+    select count(*) from cf_coupon_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_coupon_activity
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtitle != null" >
+        subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.mainBodyId != null" >
+        main_body_id = #{record.mainBodyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createrId != null" >
+        creater_id = #{record.createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.denomination != null" >
+        denomination = #{record.denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="record.thresholdPrice != null" >
+        threshold_price = #{record.thresholdPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalIssueQuantity != null" >
+        total_issue_quantity = #{record.totalIssueQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.issuedQuantity != null" >
+        issued_quantity = #{record.issuedQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitOfTime != null" >
+        unit_of_time = #{record.unitOfTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.unitOfTimeTotalIssueQuantity != null" >
+        unit_of_time_total_issue_quantity = #{record.unitOfTimeTotalIssueQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitOfTimeTotalIssuedQuantity != null" >
+        unit_of_time_total_issued_quantity = #{record.unitOfTimeTotalIssuedQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitOfTimeIssueGradient != null" >
+        unit_of_time_issue_gradient = #{record.unitOfTimeIssueGradient,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastIssueTime != null" >
+        last_issue_time = #{record.lastIssueTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.userCondition != null" >
+        user_condition = #{record.userCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repeatTimes != null" >
+        repeat_times = #{record.repeatTimes,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.showInCarparkList != null" >
+        show_in_carpark_list = #{record.showInCarparkList,jdbcType=TINYINT},
+      </if>
+      <if test="record.totalIssueQuota != null" >
+        total_issue_quota = #{record.totalIssueQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.issuedQuota != null" >
+        issued_quota = #{record.issuedQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargeRatio != null" >
+        recharge_ratio = #{record.rechargeRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopkeeperName != null" >
+        shopkeeper_name = #{record.shopkeeperName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectName != null" >
+        project_name = #{record.projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeType != null" >
+        trade_type = #{record.tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponType != null" >
+        coupon_type = #{record.couponType,jdbcType=TINYINT},
+      </if>
+      <if test="record.autoGiveAway != null" >
+        auto_give_away = #{record.autoGiveAway,jdbcType=TINYINT},
+      </if>
+      <if test="record.autoCleared != null" >
+        auto_cleared = #{record.autoCleared,jdbcType=TINYINT},
+      </if>
+      <if test="record.autoGiveAwayDate != null" >
+        auto_give_away_date = #{record.autoGiveAwayDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autoGiveAwayQuota != null" >
+        auto_give_away_quota = #{record.autoGiveAwayQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.autoGiveAwayTime != null" >
+        auto_give_away_time = #{record.autoGiveAwayTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.autoGiveAwayOverageQuota != null" >
+        auto_give_away_overage_quota = #{record.autoGiveAwayOverageQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainingTimes != null" >
+        remaining_times = #{record.remainingTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.remainingTime != null" >
+        remaining_time = #{record.remainingTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.timesCouponPrice != null" >
+        times_coupon_price = #{record.timesCouponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.timeCouponPrice != null" >
+        time_coupon_price = #{record.timeCouponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.amountDailyLimit != null" >
+        amount_daily_limit = #{record.amountDailyLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.timesDailyLimit != null" >
+        times_daily_limit = #{record.timesDailyLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeDailyLimit != null" >
+        time_daily_limit = #{record.timeDailyLimit,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_coupon_activity
+    set id = #{record.id,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      introduction = #{record.introduction,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      start_time = #{record.startTime,jdbcType=BIGINT},
+      end_time = #{record.endTime,jdbcType=BIGINT},
+      main_body_id = #{record.mainBodyId,jdbcType=VARCHAR},
+      creater_id = #{record.createrId,jdbcType=VARCHAR},
+      denomination = #{record.denomination,jdbcType=DECIMAL},
+      threshold_price = #{record.thresholdPrice,jdbcType=DECIMAL},
+      goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      total_issue_quantity = #{record.totalIssueQuantity,jdbcType=INTEGER},
+      issued_quantity = #{record.issuedQuantity,jdbcType=INTEGER},
+      unit_of_time = #{record.unitOfTime,jdbcType=BIGINT},
+      unit_of_time_total_issue_quantity = #{record.unitOfTimeTotalIssueQuantity,jdbcType=INTEGER},
+      unit_of_time_total_issued_quantity = #{record.unitOfTimeTotalIssuedQuantity,jdbcType=INTEGER},
+      unit_of_time_issue_gradient = #{record.unitOfTimeIssueGradient,jdbcType=INTEGER},
+      last_issue_time = #{record.lastIssueTime,jdbcType=BIGINT},
+      user_condition = #{record.userCondition,jdbcType=VARCHAR},
+      repeat_times = #{record.repeatTimes,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      show_in_carpark_list = #{record.showInCarparkList,jdbcType=TINYINT},
+      total_issue_quota = #{record.totalIssueQuota,jdbcType=DECIMAL},
+      issued_quota = #{record.issuedQuota,jdbcType=DECIMAL},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      recharge_ratio = #{record.rechargeRatio,jdbcType=DECIMAL},
+      shopkeeper_name = #{record.shopkeeperName,jdbcType=VARCHAR},
+      project_name = #{record.projectName,jdbcType=VARCHAR},
+      trade_type = #{record.tradeType,jdbcType=VARCHAR},
+      coupon_type = #{record.couponType,jdbcType=TINYINT},
+      auto_give_away = #{record.autoGiveAway,jdbcType=TINYINT},
+      auto_cleared = #{record.autoCleared,jdbcType=TINYINT},
+      auto_give_away_date = #{record.autoGiveAwayDate,jdbcType=VARCHAR},
+      auto_give_away_quota = #{record.autoGiveAwayQuota,jdbcType=DECIMAL},
+      auto_give_away_time = #{record.autoGiveAwayTime,jdbcType=BIGINT},
+      auto_give_away_overage_quota = #{record.autoGiveAwayOverageQuota,jdbcType=DECIMAL},
+      remaining_times = #{record.remainingTimes,jdbcType=INTEGER},
+      remaining_time = #{record.remainingTime,jdbcType=BIGINT},
+      times_coupon_price = #{record.timesCouponPrice,jdbcType=DECIMAL},
+      time_coupon_price = #{record.timeCouponPrice,jdbcType=DECIMAL},
+      amount_daily_limit = #{record.amountDailyLimit,jdbcType=DECIMAL},
+      times_daily_limit = #{record.timesDailyLimit,jdbcType=INTEGER},
+      time_daily_limit = #{record.timeDailyLimit,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfCouponActivity" >
+    update cf_coupon_activity
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="mainBodyId != null" >
+        main_body_id = #{mainBodyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createrId != null" >
+        creater_id = #{createrId,jdbcType=VARCHAR},
+      </if>
+      <if test="denomination != null" >
+        denomination = #{denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="thresholdPrice != null" >
+        threshold_price = #{thresholdPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalIssueQuantity != null" >
+        total_issue_quantity = #{totalIssueQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="issuedQuantity != null" >
+        issued_quantity = #{issuedQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitOfTime != null" >
+        unit_of_time = #{unitOfTime,jdbcType=BIGINT},
+      </if>
+      <if test="unitOfTimeTotalIssueQuantity != null" >
+        unit_of_time_total_issue_quantity = #{unitOfTimeTotalIssueQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitOfTimeTotalIssuedQuantity != null" >
+        unit_of_time_total_issued_quantity = #{unitOfTimeTotalIssuedQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitOfTimeIssueGradient != null" >
+        unit_of_time_issue_gradient = #{unitOfTimeIssueGradient,jdbcType=INTEGER},
+      </if>
+      <if test="lastIssueTime != null" >
+        last_issue_time = #{lastIssueTime,jdbcType=BIGINT},
+      </if>
+      <if test="userCondition != null" >
+        user_condition = #{userCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatTimes != null" >
+        repeat_times = #{repeatTimes,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="showInCarparkList != null" >
+        show_in_carpark_list = #{showInCarparkList,jdbcType=TINYINT},
+      </if>
+      <if test="totalIssueQuota != null" >
+        total_issue_quota = #{totalIssueQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="issuedQuota != null" >
+        issued_quota = #{issuedQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeRatio != null" >
+        recharge_ratio = #{rechargeRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="shopkeeperName != null" >
+        shopkeeper_name = #{shopkeeperName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=TINYINT},
+      </if>
+      <if test="autoGiveAway != null" >
+        auto_give_away = #{autoGiveAway,jdbcType=TINYINT},
+      </if>
+      <if test="autoCleared != null" >
+        auto_cleared = #{autoCleared,jdbcType=TINYINT},
+      </if>
+      <if test="autoGiveAwayDate != null" >
+        auto_give_away_date = #{autoGiveAwayDate,jdbcType=VARCHAR},
+      </if>
+      <if test="autoGiveAwayQuota != null" >
+        auto_give_away_quota = #{autoGiveAwayQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="autoGiveAwayTime != null" >
+        auto_give_away_time = #{autoGiveAwayTime,jdbcType=BIGINT},
+      </if>
+      <if test="autoGiveAwayOverageQuota != null" >
+        auto_give_away_overage_quota = #{autoGiveAwayOverageQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="remainingTimes != null" >
+        remaining_times = #{remainingTimes,jdbcType=INTEGER},
+      </if>
+      <if test="remainingTime != null" >
+        remaining_time = #{remainingTime,jdbcType=BIGINT},
+      </if>
+      <if test="timesCouponPrice != null" >
+        times_coupon_price = #{timesCouponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="timeCouponPrice != null" >
+        time_coupon_price = #{timeCouponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amountDailyLimit != null" >
+        amount_daily_limit = #{amountDailyLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="timesDailyLimit != null" >
+        times_daily_limit = #{timesDailyLimit,jdbcType=INTEGER},
+      </if>
+      <if test="timeDailyLimit != null" >
+        time_daily_limit = #{timeDailyLimit,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfCouponActivity" >
+    update cf_coupon_activity
+    set title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      main_body_id = #{mainBodyId,jdbcType=VARCHAR},
+      creater_id = #{createrId,jdbcType=VARCHAR},
+      denomination = #{denomination,jdbcType=DECIMAL},
+      threshold_price = #{thresholdPrice,jdbcType=DECIMAL},
+      goods_id = #{goodsId,jdbcType=VARCHAR},
+      total_issue_quantity = #{totalIssueQuantity,jdbcType=INTEGER},
+      issued_quantity = #{issuedQuantity,jdbcType=INTEGER},
+      unit_of_time = #{unitOfTime,jdbcType=BIGINT},
+      unit_of_time_total_issue_quantity = #{unitOfTimeTotalIssueQuantity,jdbcType=INTEGER},
+      unit_of_time_total_issued_quantity = #{unitOfTimeTotalIssuedQuantity,jdbcType=INTEGER},
+      unit_of_time_issue_gradient = #{unitOfTimeIssueGradient,jdbcType=INTEGER},
+      last_issue_time = #{lastIssueTime,jdbcType=BIGINT},
+      user_condition = #{userCondition,jdbcType=VARCHAR},
+      repeat_times = #{repeatTimes,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      show_in_carpark_list = #{showInCarparkList,jdbcType=TINYINT},
+      total_issue_quota = #{totalIssueQuota,jdbcType=DECIMAL},
+      issued_quota = #{issuedQuota,jdbcType=DECIMAL},
+      phone = #{phone,jdbcType=VARCHAR},
+      recharge_ratio = #{rechargeRatio,jdbcType=DECIMAL},
+      shopkeeper_name = #{shopkeeperName,jdbcType=VARCHAR},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      trade_type = #{tradeType,jdbcType=VARCHAR},
+      coupon_type = #{couponType,jdbcType=TINYINT},
+      auto_give_away = #{autoGiveAway,jdbcType=TINYINT},
+      auto_cleared = #{autoCleared,jdbcType=TINYINT},
+      auto_give_away_date = #{autoGiveAwayDate,jdbcType=VARCHAR},
+      auto_give_away_quota = #{autoGiveAwayQuota,jdbcType=DECIMAL},
+      auto_give_away_time = #{autoGiveAwayTime,jdbcType=BIGINT},
+      auto_give_away_overage_quota = #{autoGiveAwayOverageQuota,jdbcType=DECIMAL},
+      remaining_times = #{remainingTimes,jdbcType=INTEGER},
+      remaining_time = #{remainingTime,jdbcType=BIGINT},
+      times_coupon_price = #{timesCouponPrice,jdbcType=DECIMAL},
+      time_coupon_price = #{timeCouponPrice,jdbcType=DECIMAL},
+      amount_daily_limit = #{amountDailyLimit,jdbcType=DECIMAL},
+      times_daily_limit = #{timesDailyLimit,jdbcType=INTEGER},
+      time_daily_limit = #{timeDailyLimit,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <update id="updateIssuedQuotaById">
+    update cf_coupon_activity set issued_quota = issued_quota+(#{changeValue,jdbcType=DECIMAL}) where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateAutoGiveAwayOverageQuotaById">
+    update cf_coupon_activity set auto_give_away_overage_quota = auto_give_away_overage_quota+(#{changeValue,jdbcType=DECIMAL}) where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateRemainingTimesById">
+    update cf_coupon_activity set remaining_times = remaining_times+(#{changeValue,jdbcType=DECIMAL}) where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateRemainingTimeById">
+    update cf_coupon_activity set remaining_time = remaining_time+(#{changeValue,jdbcType=DECIMAL}) where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="checkCarIsInPark" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from cf_car_park_use_log where pay_time = 0 and number_plate = #{numberPlate,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkVisitMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkVisit" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="car_park_id" property="carParkId" jdbcType="BIGINT" />
+    <result column="plate_number" property="plateNumber" jdbcType="VARCHAR" />
+    <result column="from_uid" property="fromUid" jdbcType="BIGINT" />
+    <result column="to_uid" property="toUid" jdbcType="BIGINT" />
+    <result column="process_uid" property="processUid" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="process_time" property="processTime" jdbcType="BIGINT" />
+    <result column="car_park_use_log_id" property="carParkUseLogId" jdbcType="BIGINT" />
+    <result column="visit_time" property="visitTime" jdbcType="BIGINT" />
+    <result column="process_status" property="processStatus" jdbcType="TINYINT" />
+    <result column="expiration_time" property="expirationTime" jdbcType="BIGINT" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_park_id, plate_number, from_uid, to_uid, process_uid, create_time, process_time, 
+    car_park_use_log_id, visit_time, process_status, expiration_time, destination, reason
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkVisitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_visit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_visit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_car_park_visit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkVisitExample" >
+    delete from cf_car_park_visit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkVisit" >
+    insert into cf_car_park_visit (id, car_park_id, plate_number, 
+      from_uid, to_uid, process_uid, 
+      create_time, process_time, car_park_use_log_id, 
+      visit_time, process_status, expiration_time, 
+      destination, reason)
+    values (#{id,jdbcType=BIGINT}, #{carParkId,jdbcType=BIGINT}, #{plateNumber,jdbcType=VARCHAR}, 
+      #{fromUid,jdbcType=BIGINT}, #{toUid,jdbcType=BIGINT}, #{processUid,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=BIGINT}, #{processTime,jdbcType=BIGINT}, #{carParkUseLogId,jdbcType=BIGINT}, 
+      #{visitTime,jdbcType=BIGINT}, #{processStatus,jdbcType=TINYINT}, #{expirationTime,jdbcType=BIGINT}, 
+      #{destination,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkVisit" >
+    insert into cf_car_park_visit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carParkId != null" >
+        car_park_id,
+      </if>
+      <if test="plateNumber != null" >
+        plate_number,
+      </if>
+      <if test="fromUid != null" >
+        from_uid,
+      </if>
+      <if test="toUid != null" >
+        to_uid,
+      </if>
+      <if test="processUid != null" >
+        process_uid,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="processTime != null" >
+        process_time,
+      </if>
+      <if test="carParkUseLogId != null" >
+        car_park_use_log_id,
+      </if>
+      <if test="visitTime != null" >
+        visit_time,
+      </if>
+      <if test="processStatus != null" >
+        process_status,
+      </if>
+      <if test="expirationTime != null" >
+        expiration_time,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carParkId != null" >
+        #{carParkId,jdbcType=BIGINT},
+      </if>
+      <if test="plateNumber != null" >
+        #{plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fromUid != null" >
+        #{fromUid,jdbcType=BIGINT},
+      </if>
+      <if test="toUid != null" >
+        #{toUid,jdbcType=BIGINT},
+      </if>
+      <if test="processUid != null" >
+        #{processUid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="processTime != null" >
+        #{processTime,jdbcType=BIGINT},
+      </if>
+      <if test="carParkUseLogId != null" >
+        #{carParkUseLogId,jdbcType=BIGINT},
+      </if>
+      <if test="visitTime != null" >
+        #{visitTime,jdbcType=BIGINT},
+      </if>
+      <if test="processStatus != null" >
+        #{processStatus,jdbcType=TINYINT},
+      </if>
+      <if test="expirationTime != null" >
+        #{expirationTime,jdbcType=BIGINT},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkVisitExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_visit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_visit
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.carParkId != null" >
+        car_park_id = #{record.carParkId,jdbcType=BIGINT},
+      </if>
+      <if test="record.plateNumber != null" >
+        plate_number = #{record.plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromUid != null" >
+        from_uid = #{record.fromUid,jdbcType=BIGINT},
+      </if>
+      <if test="record.toUid != null" >
+        to_uid = #{record.toUid,jdbcType=BIGINT},
+      </if>
+      <if test="record.processUid != null" >
+        process_uid = #{record.processUid,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.processTime != null" >
+        process_time = #{record.processTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.carParkUseLogId != null" >
+        car_park_use_log_id = #{record.carParkUseLogId,jdbcType=BIGINT},
+      </if>
+      <if test="record.visitTime != null" >
+        visit_time = #{record.visitTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.processStatus != null" >
+        process_status = #{record.processStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.expirationTime != null" >
+        expiration_time = #{record.expirationTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.destination != null" >
+        destination = #{record.destination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_visit
+    set id = #{record.id,jdbcType=BIGINT},
+      car_park_id = #{record.carParkId,jdbcType=BIGINT},
+      plate_number = #{record.plateNumber,jdbcType=VARCHAR},
+      from_uid = #{record.fromUid,jdbcType=BIGINT},
+      to_uid = #{record.toUid,jdbcType=BIGINT},
+      process_uid = #{record.processUid,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      process_time = #{record.processTime,jdbcType=BIGINT},
+      car_park_use_log_id = #{record.carParkUseLogId,jdbcType=BIGINT},
+      visit_time = #{record.visitTime,jdbcType=BIGINT},
+      process_status = #{record.processStatus,jdbcType=TINYINT},
+      expiration_time = #{record.expirationTime,jdbcType=BIGINT},
+      destination = #{record.destination,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkVisit" >
+    update cf_car_park_visit
+    <set >
+      <if test="carParkId != null" >
+        car_park_id = #{carParkId,jdbcType=BIGINT},
+      </if>
+      <if test="plateNumber != null" >
+        plate_number = #{plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fromUid != null" >
+        from_uid = #{fromUid,jdbcType=BIGINT},
+      </if>
+      <if test="toUid != null" >
+        to_uid = #{toUid,jdbcType=BIGINT},
+      </if>
+      <if test="processUid != null" >
+        process_uid = #{processUid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="processTime != null" >
+        process_time = #{processTime,jdbcType=BIGINT},
+      </if>
+      <if test="carParkUseLogId != null" >
+        car_park_use_log_id = #{carParkUseLogId,jdbcType=BIGINT},
+      </if>
+      <if test="visitTime != null" >
+        visit_time = #{visitTime,jdbcType=BIGINT},
+      </if>
+      <if test="processStatus != null" >
+        process_status = #{processStatus,jdbcType=TINYINT},
+      </if>
+      <if test="expirationTime != null" >
+        expiration_time = #{expirationTime,jdbcType=BIGINT},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkVisit" >
+    update cf_car_park_visit
+    set car_park_id = #{carParkId,jdbcType=BIGINT},
+      plate_number = #{plateNumber,jdbcType=VARCHAR},
+      from_uid = #{fromUid,jdbcType=BIGINT},
+      to_uid = #{toUid,jdbcType=BIGINT},
+      process_uid = #{processUid,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      process_time = #{processTime,jdbcType=BIGINT},
+      car_park_use_log_id = #{carParkUseLogId,jdbcType=BIGINT},
+      visit_time = #{visitTime,jdbcType=BIGINT},
+      process_status = #{processStatus,jdbcType=TINYINT},
+      expiration_time = #{expirationTime,jdbcType=BIGINT},
+      destination = #{destination,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <resultMap id="ContainMap" type="com.cf.carpark.domain.CfCarParkVisit" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="car_park_id" property="carParkId" jdbcType="BIGINT" />
+    <result column="plate_number" property="plateNumber" jdbcType="VARCHAR" />
+    <result column="from_uid" property="fromUid" jdbcType="BIGINT" />
+    <result column="to_uid" property="toUid" jdbcType="BIGINT" />
+    <result column="process_uid" property="processUid" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="process_time" property="processTime" jdbcType="BIGINT" />
+    <result column="car_park_use_log_id" property="carParkUseLogId" jdbcType="BIGINT" />
+    <result column="visit_time" property="visitTime" jdbcType="BIGINT" />
+    <result column="process_status" property="processStatus" jdbcType="TINYINT" />
+    <result column="expiration_time" property="expirationTime" jdbcType="BIGINT" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <collection property="cfCarPark" ofType="com.cf.carpark.domain.CfCarPark">
+      <id column="cp_id" property="id" jdbcType="VARCHAR" />
+      <result column="cp_name" property="name" jdbcType="VARCHAR" />
+      <result column="cp_image" property="image" jdbcType="VARCHAR" />
+      <result column="cp_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="cp_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="cp_start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+      <result column="cp_end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+      <result column="cp_parking_space_number" property="parkingSpaceNumber" jdbcType="INTEGER" />
+      <result column="cp_used_parking_space_number" property="usedParkingSpaceNumber" jdbcType="INTEGER" />
+      <result column="cp_address" property="address" jdbcType="VARCHAR" />
+      <result column="cp_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="cp_landline" property="landline" jdbcType="VARCHAR" />
+      <result column="cp_status" property="status" jdbcType="TINYINT" />
+      <result column="cp_country_id" property="countryId" jdbcType="VARCHAR" />
+      <result column="cp_province_id" property="provinceId" jdbcType="VARCHAR" />
+      <result column="cp_state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+      <result column="cp_zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+      <result column="cp_township_id" property="townshipId" jdbcType="VARCHAR" />
+      <result column="cp_free_time" property="freeTime" jdbcType="BIGINT" />
+      <result column="cp_leave_time_limit" property="leaveTimeLimit" jdbcType="BIGINT" />
+    </collection>
+    <collection property="fromUser"  ofType="com.cf.ucenter.domain.CfUser">
+      <id column="f_usr_id" property="id" jdbcType="VARCHAR" />
+      <result column="f_usr_user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="f_usr_password" property="password" jdbcType="VARCHAR" />
+      <result column="f_usr_avatar" property="avatar" jdbcType="VARCHAR" />
+      <result column="f_usr_type" property="type" jdbcType="TINYINT" />
+      <result column="f_usr_nick_name" property="nickName" jdbcType="VARCHAR" />
+      <result column="f_usr_true_name" property="trueName" jdbcType="VARCHAR" />
+      <result column="f_usr_birthday" property="birthday" jdbcType="BIGINT" />
+      <result column="f_usr_sex" property="sex" jdbcType="BIT" />
+      <result column="f_usr_sign" property="sign" jdbcType="VARCHAR" />
+      <result column="f_usr_create_time" property="createTime" jdbcType="BIGINT" />
+      <result column="f_usr_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="f_usr_email" property="email" jdbcType="VARCHAR" />
+      <result column="f_usr_last_login_time" property="lastLoginTime" jdbcType="BIGINT" />
+    </collection>
+    <collection property="toUser"  ofType="com.cf.ucenter.domain.CfUser">
+      <id column="t_usr_id" property="id" jdbcType="VARCHAR" />
+      <result column="t_usr_user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="t_usr_password" property="password" jdbcType="VARCHAR" />
+      <result column="t_usr_avatar" property="avatar" jdbcType="VARCHAR" />
+      <result column="t_usr_type" property="type" jdbcType="TINYINT" />
+      <result column="t_usr_nick_name" property="nickName" jdbcType="VARCHAR" />
+      <result column="t_usr_true_name" property="trueName" jdbcType="VARCHAR" />
+      <result column="t_usr_birthday" property="birthday" jdbcType="BIGINT" />
+      <result column="t_usr_sex" property="sex" jdbcType="BIT" />
+      <result column="t_usr_sign" property="sign" jdbcType="VARCHAR" />
+      <result column="t_usr_create_time" property="createTime" jdbcType="BIGINT" />
+      <result column="t_usr_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="t_usr_email" property="email" jdbcType="VARCHAR" />
+      <result column="t_usr_last_login_time" property="lastLoginTime" jdbcType="BIGINT" />
+    </collection>
+  </resultMap>
+
+  <select id="selectContinByQuery" parameterType="com.cf.carpark.domain.request.CfCarParkVisitQuery" resultMap="ContainMap">
+    select cpvt.*,cp.name cp_name,
+    fusr.nick_name f_usr_nick_name,fusr.true_name f_usr_true_name,fusr.phone f_usr_phone,
+    tusr.nick_name t_usr_nick_name,tusr.true_name t_usr_true_name,tusr.phone t_usr_phone
+    from cf_car_park_visit cpvt
+    left join cf_car_park cp on(cpvt.car_park_id=cp.id)
+    left join cf_user fusr on(cpvt.from_uid=fusr.id)
+    left join cf_user tusr on(cpvt.to_uid=tusr.id)
+    <trim prefix="where" prefixOverrides="and">
+      <if test="id!=null">
+        and cpvt.id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="plateNumber!=null">
+        and cpvt.plate_number = #{plateNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="carParkId!=null">
+        and cpvt.car_park_id = #{carParkId,jdbcType=BIGINT}
+      </if>
+      <if test="carParkIds != null">
+        and cpul.number_plate in
+        <foreach collection="carParkIds" item="carParkId" index="index" open="(" close=")" separator=",">
+          #{carParkId}
+        </foreach>
+      </if>
+      <if test="fromUid!=null">
+        and cpvt.from_uid = #{fromUid,jdbcType=BIGINT}
+      </if>
+      <if test="toUid!=null">
+        and cpvt.to_uid = #{toUid,jdbcType=BIGINT}
+      </if>
+      <if test="processUid!=null">
+        and cpvt.process_uid = #{processUid,jdbcType=BIGINT}
+      </if>
+      <if test="processStatus!=null">
+        and cpvt.process_status = #{processStatus,jdbcType=TINYINT}
+      </if>
+      <if test="minCreateTime!=null">
+        and cpvt.create_time <![CDATA[ >= ]]> #{minCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxCreateTime!=null">
+        and cpvt.create_time <![CDATA[ <= ]]> #{maxCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="processTime!=null">
+        and cpvt.process_time = #{processTime,jdbcType=BIGINT}
+      </if>
+      <if test="minProcessTime!=null">
+        and cpvt.process_time <![CDATA[ >= ]]> #{minProcessTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxProcessTime!=null">
+        and cpvt.process_time <![CDATA[ <= ]]> #{maxProcessTime,jdbcType=BIGINT}
+      </if>
+      <if test="visitTime!=null">
+        and cpvt.visit_time = #{visitTime,jdbcType=BIGINT}
+      </if>
+      <if test="minVisitTime!=null">
+        and cpvt.visit_time <![CDATA[ >= ]]> #{minVisitTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxVisitTime!=null">
+        and cpvt.visit_time <![CDATA[ <= ]]> #{maxVisitTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+    <if test="page != null and size != null" >
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+</mapper>

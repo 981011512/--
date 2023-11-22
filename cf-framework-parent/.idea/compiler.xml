@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cf-pay-interface" />
+        <module name="cf-chat-interface" />
+        <module name="cf-ad-admin" />
+        <module name="cf-ucenter-api" />
+        <module name="cf-charging-service" />
+        <module name="cf-framework-utils" />
+        <module name="cf-ucenter-dao" />
+        <module name="cf-framework-model" />
+        <module name="cf-logistics-interface" />
+        <module name="cf-chat-dao" />
+        <module name="cf-car-park-admin" />
+        <module name="cf-position-api" />
+        <module name="cf-chat-api" />
+        <module name="cf-sms-service" />
+        <module name="cf-pay-admin" />
+        <module name="cf-file-api" />
+        <module name="cf-car-park-api" />
+        <module name="cf-pay-domain" />
+        <module name="cf-sms-dao" />
+        <module name="cf-file-service" />
+        <module name="cf-logistics-api" />
+        <module name="cf-charging-interface" />
+        <module name="cf-car-park-dao" />
+        <module name="cf-sms-api" />
+        <module name="cf-position-service" />
+        <module name="cf-ucenter-domain" />
+        <module name="cf-position-dao" />
+        <module name="cf-sms-interface" />
+        <module name="cf-chat-domain" />
+        <module name="cf-charging-domain" />
+        <module name="cf-ucenter-service" />
+        <module name="cf-pay-api" />
+        <module name="cf-file-dao" />
+        <module name="cf-sms-domain" />
+        <module name="cf-ad-service" />
+        <module name="cf-car-park-domain" />
+        <module name="cf-pay-dao" />
+        <module name="cf-ucenter-admin" />
+        <module name="cf-logistics-dao" />
+        <module name="cf-charging-admin" />
+        <module name="cf-position-interface" />
+        <module name="cf-position-domain" />
+        <module name="cf-charging-dao" />
+        <module name="cf-ad-domain" />
+        <module name="cf-charging-api" />
+        <module name="cf-file-interface" />
+        <module name="cf-ad-dao" />
+        <module name="cf-framework-common" />
+        <module name="cf-logistics-admin" />
+        <module name="cf-ad-api" />
+        <module name="cf-file-domain" />
+        <module name="cf-chat-service" />
+        <module name="cf-pay-service" />
+        <module name="cf-ucenter-auth" />
+        <module name="cf-car-park-service" />
+        <module name="cf-logistics-domain" />
+        <module name="cf-car-park-interface" />
+        <module name="cf-logistics-service" />
+        <module name="cf-ad-interface" />
+        <module name="cf-ucenter-interface" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

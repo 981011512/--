@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfHistoryOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfHistoryOrder" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="order_time" property="orderTime" jdbcType="BIGINT" />
+    <result column="park_fee_amounts_payable" property="parkFeeAmountsPayable" jdbcType="DECIMAL" />
+    <result column="park_fee_amount_actually_paid" property="parkFeeAmountActuallyPaid" jdbcType="DECIMAL" />
+    <result column="park_package_amounts_payable" property="parkPackageAmountsPayable" jdbcType="DECIMAL" />
+    <result column="park_package_amount_actually_paid" property="parkPackageAmountActuallyPaid" jdbcType="DECIMAL" />
+    <result column="cash_pay" property="cashPay" jdbcType="DECIMAL" />
+    <result column="weixin_h5_pay" property="weixinH5Pay" jdbcType="DECIMAL" />
+    <result column="weixin_min_pay" property="weixinMinPay" jdbcType="DECIMAL" />
+    <result column="weixin_app_pay" property="weixinAppPay" jdbcType="DECIMAL" />
+    <result column="ali_h5_pay" property="aliH5Pay" jdbcType="DECIMAL" />
+    <result column="ali_min_pay" property="aliMinPay" jdbcType="DECIMAL" />
+    <result column="ali_app_pay" property="aliAppPay" jdbcType="DECIMAL" />
+    <result column="park_package_pay" property="parkPackagePay" jdbcType="DECIMAL" />
+    <result column="bbc_pay" property="bbcPay" jdbcType="DECIMAL" />
+    <result column="recharge_amounts_payable" property="rechargeAmountsPayable" jdbcType="DECIMAL" />
+    <result column="recharge_amount_actually_paid" property="rechargeAmountActuallyPaid" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, shop_id, order_time, park_fee_amounts_payable, park_fee_amount_actually_paid, 
+    park_package_amounts_payable, park_package_amount_actually_paid, cash_pay, weixin_h5_pay, 
+    weixin_min_pay, weixin_app_pay, ali_h5_pay, ali_min_pay, ali_app_pay, park_package_pay, 
+    bbc_pay, recharge_amounts_payable, recharge_amount_actually_paid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfHistoryOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_history_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_history_order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_history_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfHistoryOrderExample" >
+    delete from cf_history_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfHistoryOrder" >
+    insert into cf_history_order (id, shop_id, order_time, 
+      park_fee_amounts_payable, park_fee_amount_actually_paid, 
+      park_package_amounts_payable, park_package_amount_actually_paid, 
+      cash_pay, weixin_h5_pay, weixin_min_pay, 
+      weixin_app_pay, ali_h5_pay, ali_min_pay, 
+      ali_app_pay, park_package_pay, bbc_pay, 
+      recharge_amounts_payable, recharge_amount_actually_paid
+      )
+    values (#{id,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, #{orderTime,jdbcType=BIGINT}, 
+      #{parkFeeAmountsPayable,jdbcType=DECIMAL}, #{parkFeeAmountActuallyPaid,jdbcType=DECIMAL}, 
+      #{parkPackageAmountsPayable,jdbcType=DECIMAL}, #{parkPackageAmountActuallyPaid,jdbcType=DECIMAL}, 
+      #{cashPay,jdbcType=DECIMAL}, #{weixinH5Pay,jdbcType=DECIMAL}, #{weixinMinPay,jdbcType=DECIMAL}, 
+      #{weixinAppPay,jdbcType=DECIMAL}, #{aliH5Pay,jdbcType=DECIMAL}, #{aliMinPay,jdbcType=DECIMAL}, 
+      #{aliAppPay,jdbcType=DECIMAL}, #{parkPackagePay,jdbcType=DECIMAL}, #{bbcPay,jdbcType=DECIMAL}, 
+      #{rechargeAmountsPayable,jdbcType=DECIMAL}, #{rechargeAmountActuallyPaid,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfHistoryOrder" >
+    insert into cf_history_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="parkFeeAmountsPayable != null" >
+        park_fee_amounts_payable,
+      </if>
+      <if test="parkFeeAmountActuallyPaid != null" >
+        park_fee_amount_actually_paid,
+      </if>
+      <if test="parkPackageAmountsPayable != null" >
+        park_package_amounts_payable,
+      </if>
+      <if test="parkPackageAmountActuallyPaid != null" >
+        park_package_amount_actually_paid,
+      </if>
+      <if test="cashPay != null" >
+        cash_pay,
+      </if>
+      <if test="weixinH5Pay != null" >
+        weixin_h5_pay,
+      </if>
+      <if test="weixinMinPay != null" >
+        weixin_min_pay,
+      </if>
+      <if test="weixinAppPay != null" >
+        weixin_app_pay,
+      </if>
+      <if test="aliH5Pay != null" >
+        ali_h5_pay,
+      </if>
+      <if test="aliMinPay != null" >
+        ali_min_pay,
+      </if>
+      <if test="aliAppPay != null" >
+        ali_app_pay,
+      </if>
+      <if test="parkPackagePay != null" >
+        park_package_pay,
+      </if>
+      <if test="bbcPay != null" >
+        bbc_pay,
+      </if>
+      <if test="rechargeAmountsPayable != null" >
+        recharge_amounts_payable,
+      </if>
+      <if test="rechargeAmountActuallyPaid != null" >
+        recharge_amount_actually_paid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=BIGINT},
+      </if>
+      <if test="parkFeeAmountsPayable != null" >
+        #{parkFeeAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="parkFeeAmountActuallyPaid != null" >
+        #{parkFeeAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="parkPackageAmountsPayable != null" >
+        #{parkPackageAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="parkPackageAmountActuallyPaid != null" >
+        #{parkPackageAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="cashPay != null" >
+        #{cashPay,jdbcType=DECIMAL},
+      </if>
+      <if test="weixinH5Pay != null" >
+        #{weixinH5Pay,jdbcType=DECIMAL},
+      </if>
+      <if test="weixinMinPay != null" >
+        #{weixinMinPay,jdbcType=DECIMAL},
+      </if>
+      <if test="weixinAppPay != null" >
+        #{weixinAppPay,jdbcType=DECIMAL},
+      </if>
+      <if test="aliH5Pay != null" >
+        #{aliH5Pay,jdbcType=DECIMAL},
+      </if>
+      <if test="aliMinPay != null" >
+        #{aliMinPay,jdbcType=DECIMAL},
+      </if>
+      <if test="aliAppPay != null" >
+        #{aliAppPay,jdbcType=DECIMAL},
+      </if>
+      <if test="parkPackagePay != null" >
+        #{parkPackagePay,jdbcType=DECIMAL},
+      </if>
+      <if test="bbcPay != null" >
+        #{bbcPay,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeAmountsPayable != null" >
+        #{rechargeAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeAmountActuallyPaid != null" >
+        #{rechargeAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfHistoryOrderExample" resultType="java.lang.Integer" >
+    select count(*) from cf_history_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_history_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderTime != null" >
+        order_time = #{record.orderTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.parkFeeAmountsPayable != null" >
+        park_fee_amounts_payable = #{record.parkFeeAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parkFeeAmountActuallyPaid != null" >
+        park_fee_amount_actually_paid = #{record.parkFeeAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parkPackageAmountsPayable != null" >
+        park_package_amounts_payable = #{record.parkPackageAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parkPackageAmountActuallyPaid != null" >
+        park_package_amount_actually_paid = #{record.parkPackageAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cashPay != null" >
+        cash_pay = #{record.cashPay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.weixinH5Pay != null" >
+        weixin_h5_pay = #{record.weixinH5Pay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.weixinMinPay != null" >
+        weixin_min_pay = #{record.weixinMinPay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.weixinAppPay != null" >
+        weixin_app_pay = #{record.weixinAppPay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.aliH5Pay != null" >
+        ali_h5_pay = #{record.aliH5Pay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.aliMinPay != null" >
+        ali_min_pay = #{record.aliMinPay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.aliAppPay != null" >
+        ali_app_pay = #{record.aliAppPay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parkPackagePay != null" >
+        park_package_pay = #{record.parkPackagePay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bbcPay != null" >
+        bbc_pay = #{record.bbcPay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rechargeAmountsPayable != null" >
+        recharge_amounts_payable = #{record.rechargeAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rechargeAmountActuallyPaid != null" >
+        recharge_amount_actually_paid = #{record.rechargeAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_history_order
+    set id = #{record.id,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=VARCHAR},
+      order_time = #{record.orderTime,jdbcType=BIGINT},
+      park_fee_amounts_payable = #{record.parkFeeAmountsPayable,jdbcType=DECIMAL},
+      park_fee_amount_actually_paid = #{record.parkFeeAmountActuallyPaid,jdbcType=DECIMAL},
+      park_package_amounts_payable = #{record.parkPackageAmountsPayable,jdbcType=DECIMAL},
+      park_package_amount_actually_paid = #{record.parkPackageAmountActuallyPaid,jdbcType=DECIMAL},
+      cash_pay = #{record.cashPay,jdbcType=DECIMAL},
+      weixin_h5_pay = #{record.weixinH5Pay,jdbcType=DECIMAL},
+      weixin_min_pay = #{record.weixinMinPay,jdbcType=DECIMAL},
+      weixin_app_pay = #{record.weixinAppPay,jdbcType=DECIMAL},
+      ali_h5_pay = #{record.aliH5Pay,jdbcType=DECIMAL},
+      ali_min_pay = #{record.aliMinPay,jdbcType=DECIMAL},
+      ali_app_pay = #{record.aliAppPay,jdbcType=DECIMAL},
+      park_package_pay = #{record.parkPackagePay,jdbcType=DECIMAL},
+      bbc_pay = #{record.bbcPay,jdbcType=DECIMAL},
+      recharge_amounts_payable = #{record.rechargeAmountsPayable,jdbcType=DECIMAL},
+      recharge_amount_actually_paid = #{record.rechargeAmountActuallyPaid,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfHistoryOrder" >
+    update cf_history_order
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=BIGINT},
+      </if>
+      <if test="parkFeeAmountsPayable != null" >
+        park_fee_amounts_payable = #{parkFeeAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="parkFeeAmountActuallyPaid != null" >
+        park_fee_amount_actually_paid = #{parkFeeAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="parkPackageAmountsPayable != null" >
+        park_package_amounts_payable = #{parkPackageAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="parkPackageAmountActuallyPaid != null" >
+        park_package_amount_actually_paid = #{parkPackageAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="cashPay != null" >
+        cash_pay = #{cashPay,jdbcType=DECIMAL},
+      </if>
+      <if test="weixinH5Pay != null" >
+        weixin_h5_pay = #{weixinH5Pay,jdbcType=DECIMAL},
+      </if>
+      <if test="weixinMinPay != null" >
+        weixin_min_pay = #{weixinMinPay,jdbcType=DECIMAL},
+      </if>
+      <if test="weixinAppPay != null" >
+        weixin_app_pay = #{weixinAppPay,jdbcType=DECIMAL},
+      </if>
+      <if test="aliH5Pay != null" >
+        ali_h5_pay = #{aliH5Pay,jdbcType=DECIMAL},
+      </if>
+      <if test="aliMinPay != null" >
+        ali_min_pay = #{aliMinPay,jdbcType=DECIMAL},
+      </if>
+      <if test="aliAppPay != null" >
+        ali_app_pay = #{aliAppPay,jdbcType=DECIMAL},
+      </if>
+      <if test="parkPackagePay != null" >
+        park_package_pay = #{parkPackagePay,jdbcType=DECIMAL},
+      </if>
+      <if test="bbcPay != null" >
+        bbc_pay = #{bbcPay,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeAmountsPayable != null" >
+        recharge_amounts_payable = #{rechargeAmountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeAmountActuallyPaid != null" >
+        recharge_amount_actually_paid = #{rechargeAmountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfHistoryOrder" >
+    update cf_history_order
+    set shop_id = #{shopId,jdbcType=VARCHAR},
+      order_time = #{orderTime,jdbcType=BIGINT},
+      park_fee_amounts_payable = #{parkFeeAmountsPayable,jdbcType=DECIMAL},
+      park_fee_amount_actually_paid = #{parkFeeAmountActuallyPaid,jdbcType=DECIMAL},
+      park_package_amounts_payable = #{parkPackageAmountsPayable,jdbcType=DECIMAL},
+      park_package_amount_actually_paid = #{parkPackageAmountActuallyPaid,jdbcType=DECIMAL},
+      cash_pay = #{cashPay,jdbcType=DECIMAL},
+      weixin_h5_pay = #{weixinH5Pay,jdbcType=DECIMAL},
+      weixin_min_pay = #{weixinMinPay,jdbcType=DECIMAL},
+      weixin_app_pay = #{weixinAppPay,jdbcType=DECIMAL},
+      ali_h5_pay = #{aliH5Pay,jdbcType=DECIMAL},
+      ali_min_pay = #{aliMinPay,jdbcType=DECIMAL},
+      ali_app_pay = #{aliAppPay,jdbcType=DECIMAL},
+      park_package_pay = #{parkPackagePay,jdbcType=DECIMAL},
+      bbc_pay = #{bbcPay,jdbcType=DECIMAL},
+      recharge_amounts_payable = #{rechargeAmountsPayable,jdbcType=DECIMAL},
+      recharge_amount_actually_paid = #{rechargeAmountActuallyPaid,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

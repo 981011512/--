@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfUserPaymentAgencyMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfUserPaymentAgency" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="payment_agency_short_name" property="paymentAgencyShortName" jdbcType="VARCHAR" />
+    <result column="pay_key" property="payKey" jdbcType="VARCHAR" />
+    <result column="secret" property="secret" jdbcType="VARCHAR" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="sub_appid" property="subAppid" jdbcType="VARCHAR" />
+    <result column="account_number_note" property="accountNumberNote" jdbcType="VARCHAR" />
+    <result column="mch_id" property="mchId" jdbcType="VARCHAR" />
+    <result column="sub_mch_id" property="subMchId" jdbcType="VARCHAR" />
+    <result column="cert_path" property="certPath" jdbcType="VARCHAR" />
+    <result column="pay_notify_url" property="payNotifyUrl" jdbcType="VARCHAR" />
+    <result column="refund_pay_notify_url" property="refundPayNotifyUrl" jdbcType="VARCHAR" />
+    <result column="use_scenes" property="useScenes" jdbcType="VARCHAR" />
+    <result column="auth_token" property="authToken" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, uid, payment_agency_short_name, pay_key, secret, appid, sub_appid, account_number_note, 
+    mch_id, sub_mch_id, cert_path, pay_notify_url, refund_pay_notify_url, use_scenes, 
+    auth_token
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfUserPaymentAgencyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_user_payment_agency
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_user_payment_agency
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_user_payment_agency
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfUserPaymentAgencyExample" >
+    delete from cf_user_payment_agency
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfUserPaymentAgency" >
+    insert into cf_user_payment_agency (id, name, uid, 
+      payment_agency_short_name, pay_key, secret, 
+      appid, sub_appid, account_number_note, 
+      mch_id, sub_mch_id, cert_path, 
+      pay_notify_url, refund_pay_notify_url, use_scenes, 
+      auth_token)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{paymentAgencyShortName,jdbcType=VARCHAR}, #{payKey,jdbcType=VARCHAR}, #{secret,jdbcType=VARCHAR}, 
+      #{appid,jdbcType=VARCHAR}, #{subAppid,jdbcType=VARCHAR}, #{accountNumberNote,jdbcType=VARCHAR}, 
+      #{mchId,jdbcType=VARCHAR}, #{subMchId,jdbcType=VARCHAR}, #{certPath,jdbcType=VARCHAR}, 
+      #{payNotifyUrl,jdbcType=VARCHAR}, #{refundPayNotifyUrl,jdbcType=VARCHAR}, #{useScenes,jdbcType=VARCHAR}, 
+      #{authToken,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfUserPaymentAgency" >
+    insert into cf_user_payment_agency
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        payment_agency_short_name,
+      </if>
+      <if test="payKey != null" >
+        pay_key,
+      </if>
+      <if test="secret != null" >
+        secret,
+      </if>
+      <if test="appid != null" >
+        appid,
+      </if>
+      <if test="subAppid != null" >
+        sub_appid,
+      </if>
+      <if test="accountNumberNote != null" >
+        account_number_note,
+      </if>
+      <if test="mchId != null" >
+        mch_id,
+      </if>
+      <if test="subMchId != null" >
+        sub_mch_id,
+      </if>
+      <if test="certPath != null" >
+        cert_path,
+      </if>
+      <if test="payNotifyUrl != null" >
+        pay_notify_url,
+      </if>
+      <if test="refundPayNotifyUrl != null" >
+        refund_pay_notify_url,
+      </if>
+      <if test="useScenes != null" >
+        use_scenes,
+      </if>
+      <if test="authToken != null" >
+        auth_token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        #{paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="payKey != null" >
+        #{payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="subAppid != null" >
+        #{subAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNumberNote != null" >
+        #{accountNumberNote,jdbcType=VARCHAR},
+      </if>
+      <if test="mchId != null" >
+        #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="subMchId != null" >
+        #{subMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="certPath != null" >
+        #{certPath,jdbcType=VARCHAR},
+      </if>
+      <if test="payNotifyUrl != null" >
+        #{payNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPayNotifyUrl != null" >
+        #{refundPayNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="useScenes != null" >
+        #{useScenes,jdbcType=VARCHAR},
+      </if>
+      <if test="authToken != null" >
+        #{authToken,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfUserPaymentAgencyExample" resultType="java.lang.Integer" >
+    select count(*) from cf_user_payment_agency
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_user_payment_agency
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentAgencyShortName != null" >
+        payment_agency_short_name = #{record.paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payKey != null" >
+        pay_key = #{record.payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secret != null" >
+        secret = #{record.secret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appid != null" >
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subAppid != null" >
+        sub_appid = #{record.subAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountNumberNote != null" >
+        account_number_note = #{record.accountNumberNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchId != null" >
+        mch_id = #{record.mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subMchId != null" >
+        sub_mch_id = #{record.subMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certPath != null" >
+        cert_path = #{record.certPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payNotifyUrl != null" >
+        pay_notify_url = #{record.payNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundPayNotifyUrl != null" >
+        refund_pay_notify_url = #{record.refundPayNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useScenes != null" >
+        use_scenes = #{record.useScenes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authToken != null" >
+        auth_token = #{record.authToken,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_user_payment_agency
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      payment_agency_short_name = #{record.paymentAgencyShortName,jdbcType=VARCHAR},
+      pay_key = #{record.payKey,jdbcType=VARCHAR},
+      secret = #{record.secret,jdbcType=VARCHAR},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      sub_appid = #{record.subAppid,jdbcType=VARCHAR},
+      account_number_note = #{record.accountNumberNote,jdbcType=VARCHAR},
+      mch_id = #{record.mchId,jdbcType=VARCHAR},
+      sub_mch_id = #{record.subMchId,jdbcType=VARCHAR},
+      cert_path = #{record.certPath,jdbcType=VARCHAR},
+      pay_notify_url = #{record.payNotifyUrl,jdbcType=VARCHAR},
+      refund_pay_notify_url = #{record.refundPayNotifyUrl,jdbcType=VARCHAR},
+      use_scenes = #{record.useScenes,jdbcType=VARCHAR},
+      auth_token = #{record.authToken,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfUserPaymentAgency" >
+    update cf_user_payment_agency
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="payKey != null" >
+        pay_key = #{payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        secret = #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null" >
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="subAppid != null" >
+        sub_appid = #{subAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNumberNote != null" >
+        account_number_note = #{accountNumberNote,jdbcType=VARCHAR},
+      </if>
+      <if test="mchId != null" >
+        mch_id = #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="subMchId != null" >
+        sub_mch_id = #{subMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="certPath != null" >
+        cert_path = #{certPath,jdbcType=VARCHAR},
+      </if>
+      <if test="payNotifyUrl != null" >
+        pay_notify_url = #{payNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="refundPayNotifyUrl != null" >
+        refund_pay_notify_url = #{refundPayNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="useScenes != null" >
+        use_scenes = #{useScenes,jdbcType=VARCHAR},
+      </if>
+      <if test="authToken != null" >
+        auth_token = #{authToken,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfUserPaymentAgency" >
+    update cf_user_payment_agency
+    set name = #{name,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR},
+      pay_key = #{payKey,jdbcType=VARCHAR},
+      secret = #{secret,jdbcType=VARCHAR},
+      appid = #{appid,jdbcType=VARCHAR},
+      sub_appid = #{subAppid,jdbcType=VARCHAR},
+      account_number_note = #{accountNumberNote,jdbcType=VARCHAR},
+      mch_id = #{mchId,jdbcType=VARCHAR},
+      sub_mch_id = #{subMchId,jdbcType=VARCHAR},
+      cert_path = #{certPath,jdbcType=VARCHAR},
+      pay_notify_url = #{payNotifyUrl,jdbcType=VARCHAR},
+      refund_pay_notify_url = #{refundPayNotifyUrl,jdbcType=VARCHAR},
+      use_scenes = #{useScenes,jdbcType=VARCHAR},
+      auth_token = #{authToken,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <select id="selectListByCarParkIdAndPaymentAgencyShortName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from cf_user_payment_agency where id in
+    (select user_payment_agency from cf_car_park_payment_agency where car_park_id = #{carParkId,jdbcType=VARCHAR})
+    and payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR}
+  </select>
+
+  <resultMap id="CarParkPaymentAgencyMap" type="com.cf.pay.domain.CarParkPaymentAgency" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="user_payment_agency" property="userPaymentAgency" jdbcType="VARCHAR" />
+    <result column="sort_index" property="sortIndex" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="findCarParkPaymentAgencyByCarParkIdAndScenes" parameterType="java.lang.String" resultMap="CarParkPaymentAgencyMap">
+    select cppa.* from cf_car_park_payment_agency cppa left join cf_user_payment_agency upa on (upa.id=cppa.user_payment_agency)
+    where cppa.car_park_id = #{carParkId,jdbcType=VARCHAR} and upa.use_scenes = #{useScenes,jdbcType=VARCHAR}
+  </select>
+</mapper>

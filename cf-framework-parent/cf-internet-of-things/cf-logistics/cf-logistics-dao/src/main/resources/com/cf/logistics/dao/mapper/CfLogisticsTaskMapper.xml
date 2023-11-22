@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.logistics.dao.mapper.CfLogisticsTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.logistics.domain.CfLogisticsTask" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="task_title" property="taskTitle" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="editer_uid" property="editerUid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="origin" property="origin" jdbcType="VARCHAR" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+    <result column="cargo_type" property="cargoType" jdbcType="VARCHAR" />
+    <result column="car_type" property="carType" jdbcType="VARCHAR" />
+    <result column="vehicles_required" property="vehiclesRequired" jdbcType="SMALLINT" />
+    <result column="reserved_vehicles" property="reservedVehicles" jdbcType="SMALLINT" />
+    <result column="res_each" property="resEach" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="BIGINT" />
+    <result column="logistics_storehouse_id" property="logisticsStorehouseId" jdbcType="BIGINT" />
+    <result column="task_status" property="taskStatus" jdbcType="TINYINT" />
+    <result column="task_type" property="taskType" jdbcType="TINYINT" />
+    <result column="factory_id" property="factoryId" jdbcType="BIGINT" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="waybill_number" property="waybillNumber" jdbcType="VARCHAR" />
+    <result column="emergency_level" property="emergencyLevel" jdbcType="TINYINT" />
+    <result column="children_task_counts" property="childrenTaskCounts" jdbcType="TINYINT" />
+    <result column="sort_index" property="sortIndex" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, task_title, pid, editer_uid, create_time, start_time, end_time, update_time, 
+    origin, destination, cargo_type, car_type, vehicles_required, reserved_vehicles, 
+    res_each, weight, logistics_storehouse_id, task_status, task_type, factory_id, supplier, 
+    waybill_number, emergency_level, children_task_counts, sort_index
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.logistics.domain.CfLogisticsTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_logistics_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_logistics_task
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_logistics_task
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.logistics.domain.CfLogisticsTaskExample" >
+    delete from cf_logistics_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.logistics.domain.CfLogisticsTask" >
+    insert into cf_logistics_task (id, task_title, pid, 
+      editer_uid, create_time, start_time, 
+      end_time, update_time, origin, 
+      destination, cargo_type, car_type, 
+      vehicles_required, reserved_vehicles, res_each, 
+      weight, logistics_storehouse_id, task_status, 
+      task_type, factory_id, supplier, 
+      waybill_number, emergency_level, children_task_counts, 
+      sort_index)
+    values (#{id,jdbcType=BIGINT}, #{taskTitle,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, 
+      #{editerUid,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{startTime,jdbcType=BIGINT}, 
+      #{endTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{origin,jdbcType=VARCHAR}, 
+      #{destination,jdbcType=VARCHAR}, #{cargoType,jdbcType=VARCHAR}, #{carType,jdbcType=VARCHAR}, 
+      #{vehiclesRequired,jdbcType=SMALLINT}, #{reservedVehicles,jdbcType=SMALLINT}, #{resEach,jdbcType=INTEGER}, 
+      #{weight,jdbcType=BIGINT}, #{logisticsStorehouseId,jdbcType=BIGINT}, #{taskStatus,jdbcType=TINYINT}, 
+      #{taskType,jdbcType=TINYINT}, #{factoryId,jdbcType=BIGINT}, #{supplier,jdbcType=VARCHAR}, 
+      #{waybillNumber,jdbcType=VARCHAR}, #{emergencyLevel,jdbcType=TINYINT}, #{childrenTaskCounts,jdbcType=TINYINT}, 
+      #{sortIndex,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.logistics.domain.CfLogisticsTask" >
+    insert into cf_logistics_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskTitle != null" >
+        task_title,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="editerUid != null" >
+        editer_uid,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="cargoType != null" >
+        cargo_type,
+      </if>
+      <if test="carType != null" >
+        car_type,
+      </if>
+      <if test="vehiclesRequired != null" >
+        vehicles_required,
+      </if>
+      <if test="reservedVehicles != null" >
+        reserved_vehicles,
+      </if>
+      <if test="resEach != null" >
+        res_each,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        logistics_storehouse_id,
+      </if>
+      <if test="taskStatus != null" >
+        task_status,
+      </if>
+      <if test="taskType != null" >
+        task_type,
+      </if>
+      <if test="factoryId != null" >
+        factory_id,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="waybillNumber != null" >
+        waybill_number,
+      </if>
+      <if test="emergencyLevel != null" >
+        emergency_level,
+      </if>
+      <if test="childrenTaskCounts != null" >
+        children_task_counts,
+      </if>
+      <if test="sortIndex != null" >
+        sort_index,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="taskTitle != null" >
+        #{taskTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="editerUid != null" >
+        #{editerUid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoType != null" >
+        #{cargoType,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehiclesRequired != null" >
+        #{vehiclesRequired,jdbcType=SMALLINT},
+      </if>
+      <if test="reservedVehicles != null" >
+        #{reservedVehicles,jdbcType=SMALLINT},
+      </if>
+      <if test="resEach != null" >
+        #{resEach,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        #{logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="taskStatus != null" >
+        #{taskStatus,jdbcType=TINYINT},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=TINYINT},
+      </if>
+      <if test="factoryId != null" >
+        #{factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillNumber != null" >
+        #{waybillNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyLevel != null" >
+        #{emergencyLevel,jdbcType=TINYINT},
+      </if>
+      <if test="childrenTaskCounts != null" >
+        #{childrenTaskCounts,jdbcType=TINYINT},
+      </if>
+      <if test="sortIndex != null" >
+        #{sortIndex,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.logistics.domain.CfLogisticsTaskExample" resultType="java.lang.Integer" >
+    select count(*) from cf_logistics_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_logistics_task
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskTitle != null" >
+        task_title = #{record.taskTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=BIGINT},
+      </if>
+      <if test="record.editerUid != null" >
+        editer_uid = #{record.editerUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.origin != null" >
+        origin = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destination != null" >
+        destination = #{record.destination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoType != null" >
+        cargo_type = #{record.cargoType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carType != null" >
+        car_type = #{record.carType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehiclesRequired != null" >
+        vehicles_required = #{record.vehiclesRequired,jdbcType=SMALLINT},
+      </if>
+      <if test="record.reservedVehicles != null" >
+        reserved_vehicles = #{record.reservedVehicles,jdbcType=SMALLINT},
+      </if>
+      <if test="record.resEach != null" >
+        res_each = #{record.resEach,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=BIGINT},
+      </if>
+      <if test="record.logisticsStorehouseId != null" >
+        logistics_storehouse_id = #{record.logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskStatus != null" >
+        task_status = #{record.taskStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.taskType != null" >
+        task_type = #{record.taskType,jdbcType=TINYINT},
+      </if>
+      <if test="record.factoryId != null" >
+        factory_id = #{record.factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.supplier != null" >
+        supplier = #{record.supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waybillNumber != null" >
+        waybill_number = #{record.waybillNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergencyLevel != null" >
+        emergency_level = #{record.emergencyLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.childrenTaskCounts != null" >
+        children_task_counts = #{record.childrenTaskCounts,jdbcType=TINYINT},
+      </if>
+      <if test="record.sortIndex != null" >
+        sort_index = #{record.sortIndex,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_logistics_task
+    set id = #{record.id,jdbcType=BIGINT},
+      task_title = #{record.taskTitle,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=BIGINT},
+      editer_uid = #{record.editerUid,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      start_time = #{record.startTime,jdbcType=BIGINT},
+      end_time = #{record.endTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      origin = #{record.origin,jdbcType=VARCHAR},
+      destination = #{record.destination,jdbcType=VARCHAR},
+      cargo_type = #{record.cargoType,jdbcType=VARCHAR},
+      car_type = #{record.carType,jdbcType=VARCHAR},
+      vehicles_required = #{record.vehiclesRequired,jdbcType=SMALLINT},
+      reserved_vehicles = #{record.reservedVehicles,jdbcType=SMALLINT},
+      res_each = #{record.resEach,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=BIGINT},
+      logistics_storehouse_id = #{record.logisticsStorehouseId,jdbcType=BIGINT},
+      task_status = #{record.taskStatus,jdbcType=TINYINT},
+      task_type = #{record.taskType,jdbcType=TINYINT},
+      factory_id = #{record.factoryId,jdbcType=BIGINT},
+      supplier = #{record.supplier,jdbcType=VARCHAR},
+      waybill_number = #{record.waybillNumber,jdbcType=VARCHAR},
+      emergency_level = #{record.emergencyLevel,jdbcType=TINYINT},
+      children_task_counts = #{record.childrenTaskCounts,jdbcType=TINYINT},
+      sort_index = #{record.sortIndex,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.logistics.domain.CfLogisticsTask" >
+    update cf_logistics_task
+    <set >
+      <if test="taskTitle != null" >
+        task_title = #{taskTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="editerUid != null" >
+        editer_uid = #{editerUid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoType != null" >
+        cargo_type = #{cargoType,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehiclesRequired != null" >
+        vehicles_required = #{vehiclesRequired,jdbcType=SMALLINT},
+      </if>
+      <if test="reservedVehicles != null" >
+        reserved_vehicles = #{reservedVehicles,jdbcType=SMALLINT},
+      </if>
+      <if test="resEach != null" >
+        res_each = #{resEach,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=BIGINT},
+      </if>
+      <if test="logisticsStorehouseId != null" >
+        logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="taskStatus != null" >
+        task_status = #{taskStatus,jdbcType=TINYINT},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType,jdbcType=TINYINT},
+      </if>
+      <if test="factoryId != null" >
+        factory_id = #{factoryId,jdbcType=BIGINT},
+      </if>
+      <if test="supplier != null" >
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillNumber != null" >
+        waybill_number = #{waybillNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyLevel != null" >
+        emergency_level = #{emergencyLevel,jdbcType=TINYINT},
+      </if>
+      <if test="childrenTaskCounts != null" >
+        children_task_counts = #{childrenTaskCounts,jdbcType=TINYINT},
+      </if>
+      <if test="sortIndex != null" >
+        sort_index = #{sortIndex,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.logistics.domain.CfLogisticsTask" >
+    update cf_logistics_task
+    set task_title = #{taskTitle,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      editer_uid = #{editerUid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      origin = #{origin,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      cargo_type = #{cargoType,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
+      vehicles_required = #{vehiclesRequired,jdbcType=SMALLINT},
+      reserved_vehicles = #{reservedVehicles,jdbcType=SMALLINT},
+      res_each = #{resEach,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=BIGINT},
+      logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT},
+      task_status = #{taskStatus,jdbcType=TINYINT},
+      task_type = #{taskType,jdbcType=TINYINT},
+      factory_id = #{factoryId,jdbcType=BIGINT},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      waybill_number = #{waybillNumber,jdbcType=VARCHAR},
+      emergency_level = #{emergencyLevel,jdbcType=TINYINT},
+      children_task_counts = #{childrenTaskCounts,jdbcType=TINYINT},
+      sort_index = #{sortIndex,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <resultMap id="ContainLogisticsStorehouseResultMap" type="com.cf.logistics.domain.CfLogisticsTask" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="editer_uid" property="editerUid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="origin" property="origin" jdbcType="VARCHAR" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+    <result column="cargo_type" property="cargoType" jdbcType="VARCHAR" />
+    <result column="car_type" property="carType" jdbcType="VARCHAR" />
+    <result column="vehicles_required" property="vehiclesRequired" jdbcType="SMALLINT" />
+    <result column="reserved_vehicles" property="reservedVehicles" jdbcType="SMALLINT" />
+    <result column="res_each" property="resEach" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="BIGINT" />
+    <result column="logistics_storehouse_id" property="logisticsStorehouseId" jdbcType="BIGINT" />
+    <result column="task_status" property="taskStatus" jdbcType="TINYINT" />
+    <result column="task_type" property="taskType" jdbcType="TINYINT" />
+    <result column="factory_id" property="factoryId" jdbcType="BIGINT" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="waybill_number" property="waybillNumber" jdbcType="VARCHAR" />
+    <result column="task_title" property="taskTitle" jdbcType="VARCHAR" />
+    <result column="emergency_level" property="emergencyLevel" jdbcType="TINYINT" />
+    <result column="children_task_counts" property="childrenTaskCounts" jdbcType="TINYINT" />
+    <result column="sort_index" property="sortIndex" jdbcType="INTEGER" />
+    <collection property="cfLogisticsStorehouse"  ofType="com.cf.logistics.domain.CfLogisticsStorehouse">
+      <id column="lgsh_id" property="id" jdbcType="BIGINT" />
+      <result column="lgsh_storehouse_name" property="storehouseName" jdbcType="VARCHAR" />
+      <result column="lgsh_country_id" property="countryId" jdbcType="VARCHAR" />
+      <result column="lgsh_province_id" property="provinceId" jdbcType="VARCHAR" />
+      <result column="lgsh_state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+      <result column="lgsh_zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+      <result column="lgsh_township_id" property="townshipId" jdbcType="VARCHAR" />
+      <result column="lgsh_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgsh_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgsh_start_business_hours" property="startBusinessHours" jdbcType="BIGINT" />
+      <result column="lgsh_end_business_hours" property="endBusinessHours" jdbcType="BIGINT" />
+      <result column="lgsh_address" property="address" jdbcType="VARCHAR" />
+      <result column="lgsh_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="lgsh_image" property="image" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="cfLogisticsFactory"  ofType="com.cf.logistics.domain.CfLogisticsFactory">
+      <id column="lgft_id" property="id" jdbcType="BIGINT" />
+      <result column="lgft_factory_name" property="factoryName" jdbcType="VARCHAR" />
+      <result column="lgft_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="lgft_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="lgft_address" property="address" jdbcType="VARCHAR" />
+      <result column="lgft_principal" property="principal" jdbcType="VARCHAR" />
+      <result column="lgft_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="lgft_sign_in_range" property="signInRange" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+
+  <select id="selectListByQuery" parameterType="com.cf.logistics.domain.request.CfLogisticsTaskQuery" resultMap="ContainLogisticsStorehouseResultMap">
+    select lgshts.*,lgsh.storehouse_name lgsh_storehouse_name,lgft.factory_name lgft_factory_name from cf_logistics_task lgshts
+    left join cf_logistics_storehouse lgsh on (lgshts.logistics_storehouse_id=lgsh.id)
+    left join cf_logistics_factory lgft on (lgshts.factory_id=lgft.id)
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and lgshts.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="logisticsStorehouseId!=null">
+        and lgshts.logistics_storehouse_id = #{logisticsStorehouseId,jdbcType=BIGINT}
+      </if>
+      <if test="logisticsStorehouseIds!=null">
+        and lgshts.logistics_storehouse_id in
+        <foreach item="item" collection="logisticsStorehouseIds" separator="," open="(" close=")" index="">
+          #{item,jdbcType=BIGINT}
+        </foreach>
+      </if>
+      <if test="pid!=null">
+        and lgshts.pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="cargoType!=null">
+        and lgshts.cargo_type = #{cargoType,jdbcType=VARCHAR}
+      </if>
+      <if test="carType!=null">
+        and lgshts.car_type = #{carType,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime!=null">
+        and lgshts.create_time = #{createTime,jdbcType=BIGINT}
+      </if>
+      <if test="minCreateTime!=null">
+        and lgshts.create_time <![CDATA[ >= ]]> #{minCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxStartTime!=null">
+        and lgshts.create_time <![CDATA[ <= ]]> #{maxStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="startTime!=null">
+        and lgshts.start_time = #{startTime,jdbcType=BIGINT}
+      </if>
+      <if test="minStartTime!=null">
+        and lgshts.start_time <![CDATA[ >= ]]> #{minStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxStartTime!=null">
+        and lgshts.start_time <![CDATA[ <= ]]> #{maxStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="endTime!=null">
+        and lgshts.end_time = #{endTime,jdbcType=BIGINT}
+      </if>
+      <if test="minEndTime!=null">
+        and lgshts.end_time <![CDATA[ >= ]]> #{minEndTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxEndTime!=null">
+        and lgshts.end_time <![CDATA[ <= ]]> #{maxEndTime,jdbcType=BIGINT}
+      </if>
+      <if test="editerUid!=null">
+        and lgshts.editer_uid = #{editerUid,jdbcType=VARCHAR}
+      </if>
+      <if test="taskStatus!=null">
+        and lgshts.task_status = #{taskStatus,jdbcType=TINYINT}
+      </if>
+      <if test="taskType!=null">
+        and lgshts.task_type = #{taskType,jdbcType=TINYINT}
+      </if>
+      <if test="waybillNumber!=null">
+        and lgshts.waybill_number = #{waybillNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="emergencyLevel!=null">
+        and lgshts.emergency_level = #{emergencyLevel,jdbcType=TINYINT}
+      </if>
+    </trim>
+    <if test="orderBy!=null">
+      order by ${orderBy}
+    </if>
+    <if test="page!=null and size !=null">
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+
+  <update id="updateReservedVehicles">
+    update cf_logistics_task set reserved_vehicles = reserved_vehicles+(#{changeValue,jdbcType=SMALLINT}) where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

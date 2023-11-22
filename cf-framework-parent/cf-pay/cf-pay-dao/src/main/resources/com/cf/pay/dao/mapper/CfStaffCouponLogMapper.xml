@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfStaffCouponLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfStaffCouponLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+    <result column="coupon_activity_id" property="couponActivityId" jdbcType="VARCHAR" />
+    <result column="staff_id" property="staffId" jdbcType="VARCHAR" />
+    <result column="to_uid" property="toUid" jdbcType="VARCHAR" />
+    <result column="denomination" property="denomination" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="recipient_body" property="recipientBody" jdbcType="VARCHAR" />
+    <result column="coupon_type" property="couponType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, coupon_id, coupon_activity_id, staff_id, to_uid, denomination, create_time, recipient_body, 
+    coupon_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfStaffCouponLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_staff_coupon_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_staff_coupon_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_staff_coupon_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfStaffCouponLogExample" >
+    delete from cf_staff_coupon_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfStaffCouponLog" >
+    insert into cf_staff_coupon_log (id, coupon_id, coupon_activity_id, 
+      staff_id, to_uid, denomination, 
+      create_time, recipient_body, coupon_type
+      )
+    values (#{id,jdbcType=VARCHAR}, #{couponId,jdbcType=VARCHAR}, #{couponActivityId,jdbcType=VARCHAR}, 
+      #{staffId,jdbcType=VARCHAR}, #{toUid,jdbcType=VARCHAR}, #{denomination,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=BIGINT}, #{recipientBody,jdbcType=VARCHAR}, #{couponType,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfStaffCouponLog" >
+    insert into cf_staff_coupon_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="couponActivityId != null" >
+        coupon_activity_id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="toUid != null" >
+        to_uid,
+      </if>
+      <if test="denomination != null" >
+        denomination,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="recipientBody != null" >
+        recipient_body,
+      </if>
+      <if test="couponType != null" >
+        coupon_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponActivityId != null" >
+        #{couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="toUid != null" >
+        #{toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="denomination != null" >
+        #{denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="recipientBody != null" >
+        #{recipientBody,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        #{couponType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfStaffCouponLogExample" resultType="java.lang.Integer" >
+    select count(*) from cf_staff_coupon_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_staff_coupon_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponId != null" >
+        coupon_id = #{record.couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponActivityId != null" >
+        coupon_activity_id = #{record.couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toUid != null" >
+        to_uid = #{record.toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.denomination != null" >
+        denomination = #{record.denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.recipientBody != null" >
+        recipient_body = #{record.recipientBody,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponType != null" >
+        coupon_type = #{record.couponType,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_staff_coupon_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      coupon_id = #{record.couponId,jdbcType=VARCHAR},
+      coupon_activity_id = #{record.couponActivityId,jdbcType=VARCHAR},
+      staff_id = #{record.staffId,jdbcType=VARCHAR},
+      to_uid = #{record.toUid,jdbcType=VARCHAR},
+      denomination = #{record.denomination,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      recipient_body = #{record.recipientBody,jdbcType=VARCHAR},
+      coupon_type = #{record.couponType,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfStaffCouponLog" >
+    update cf_staff_coupon_log
+    <set >
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponActivityId != null" >
+        coupon_activity_id = #{couponActivityId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="toUid != null" >
+        to_uid = #{toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="denomination != null" >
+        denomination = #{denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="recipientBody != null" >
+        recipient_body = #{recipientBody,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfStaffCouponLog" >
+    update cf_staff_coupon_log
+    set coupon_id = #{couponId,jdbcType=VARCHAR},
+      coupon_activity_id = #{couponActivityId,jdbcType=VARCHAR},
+      staff_id = #{staffId,jdbcType=VARCHAR},
+      to_uid = #{toUid,jdbcType=VARCHAR},
+      denomination = #{denomination,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=BIGINT},
+      recipient_body = #{recipientBody,jdbcType=VARCHAR},
+      coupon_type = #{couponType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <resultMap id="ContainNameResultMap" type="com.cf.pay.domain.CfStaffCouponLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+    <result column="coupon_activity_id" property="couponActivityId" jdbcType="VARCHAR" />
+    <result column="staff_id" property="staffId" jdbcType="VARCHAR" />
+    <result column="to_uid" property="toUid" jdbcType="VARCHAR" />
+    <result column="denomination" property="denomination" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+    <result column="staff_avatar" property="staffAvatar" jdbcType="VARCHAR" />
+    <result column="to_uid_name" property="toUidName" jdbcType="VARCHAR" />
+    <result column="to_uid_avatar" property="toUidAvatar" jdbcType="VARCHAR" />
+    <result column="recipient_body" property="recipientBody" jdbcType="VARCHAR" />
+    <result column="coupon_type" property="couponType" jdbcType="TINYINT" />
+  </resultMap>
+
+
+  <select id="selectByQuery" parameterType="com.cf.pay.domain.request.CfStaffCouponLogQuery" resultMap="ContainNameResultMap">
+    select scl.*,u1.user_name staff_name,u1.avatar staff_avatar,u2.user_name to_uid_name,u2.avatar to_uid_avatar from cf_staff_coupon_log scl
+    left join cf_user u1 on(scl.staff_id=u1.id)
+    left join cf_user u2 on(scl.to_uid=u2.id)
+    <trim prefix="where " prefixOverrides="and" >
+      <if test="id != null and id != ''" >
+        and scl.id=#{id,jdbcType=VARCHAR}
+      </if>
+      <if test="couponId != null and couponId != ''" >
+        and scl.coupon_id=#{couponId,jdbcType=VARCHAR}
+      </if>
+      <if test="couponActivityId != null and couponActivityId != ''" >
+        and scl.coupon_activity_id=#{couponActivityId,jdbcType=VARCHAR}
+      </if>
+      <if test="staffId != null and staffId != ''" >
+        and scl.staff_id=#{staffId,jdbcType=VARCHAR}
+      </if>
+      <if test="toUid != null and toUid != ''" >
+        and scl.to_uid=#{toUid,jdbcType=VARCHAR}
+      </if>
+      <if test="couponType != null" >
+        and scl.coupon_type=#{couponType,jdbcType=TINYINT}
+      </if>
+      <if test="minCreateTime != null" >
+        and scl.create_time <![CDATA[ >= ]]> #{minCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxCreateTime != null" >
+        and scl.create_time <![CDATA[ <= ]]> #{maxCreateTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+    <if test="orderBy != null and orderBy != ''" >
+      order by #{orderBy,jdbcType=VARCHAR}
+    </if>
+    <if test="page != null and size != null" >
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+
+  <select id="countDenominationByQuery" parameterType="com.cf.pay.domain.request.CfStaffCouponLogQuery" resultType="java.math.BigDecimal">
+    select sum(denomination) from cf_staff_coupon_log scl
+    <trim prefix="where " prefixOverrides="and" >
+      <if test="id != null and id != ''" >
+        and scl.id=#{id,jdbcType=VARCHAR}
+      </if>
+      <if test="couponId != null and couponId != ''" >
+        and scl.coupon_id=#{couponId,jdbcType=VARCHAR}
+      </if>
+      <if test="couponActivityId != null and couponActivityId != ''" >
+        and scl.coupon_activity_id=#{couponActivityId,jdbcType=VARCHAR}
+      </if>
+      <if test="staffId != null and staffId != ''" >
+        and scl.staff_id=#{staffId,jdbcType=VARCHAR}
+      </if>
+      <if test="toUid != null and toUid != ''" >
+        and scl.to_uid=#{toUid,jdbcType=VARCHAR}
+      </if>
+      <if test="couponType != null" >
+        and scl.coupon_type=#{couponType,jdbcType=TINYINT}
+      </if>
+      <if test="minCreateTime != null" >
+        and scl.create_time <![CDATA[ >= ]]> #{minCreateTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxCreateTime != null" >
+        and scl.create_time <![CDATA[ <= ]]> #{maxCreateTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </select>
+</mapper>

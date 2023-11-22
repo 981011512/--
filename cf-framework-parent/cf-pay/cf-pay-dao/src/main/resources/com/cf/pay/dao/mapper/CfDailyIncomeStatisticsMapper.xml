@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfDailyIncomeStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfDailyIncomeStatistics" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="goods_type" property="goodsType" jdbcType="TINYINT" />
+    <result column="year" property="year" jdbcType="SMALLINT" />
+    <result column="month" property="month" jdbcType="TINYINT" />
+    <result column="date" property="date" jdbcType="TINYINT" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="payment_agency_short_name" property="paymentAgencyShortName" jdbcType="VARCHAR" />
+    <result column="amounts_payable" property="amountsPayable" jdbcType="DECIMAL" />
+    <result column="amount_actually_paid" property="amountActuallyPaid" jdbcType="DECIMAL" />
+    <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+    <result column="pay_counts" property="payCounts" jdbcType="INTEGER" />
+    <result column="counts_time" property="countsTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, shop_id, goods_type, year, month, date, start_time, end_time, payment_agency_short_name, 
+    amounts_payable, amount_actually_paid, refund_amount, pay_counts, counts_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfDailyIncomeStatisticsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_daily_income_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_daily_income_statistics
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_daily_income_statistics
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfDailyIncomeStatisticsExample" >
+    delete from cf_daily_income_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfDailyIncomeStatistics" >
+    insert into cf_daily_income_statistics (id, title, shop_id, 
+      goods_type, year, month, 
+      date, start_time, end_time, 
+      payment_agency_short_name, amounts_payable, 
+      amount_actually_paid, refund_amount, pay_counts, 
+      counts_time)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, 
+      #{goodsType,jdbcType=TINYINT}, #{year,jdbcType=SMALLINT}, #{month,jdbcType=TINYINT}, 
+      #{date,jdbcType=TINYINT}, #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, 
+      #{paymentAgencyShortName,jdbcType=VARCHAR}, #{amountsPayable,jdbcType=DECIMAL}, 
+      #{amountActuallyPaid,jdbcType=DECIMAL}, #{refundAmount,jdbcType=DECIMAL}, #{payCounts,jdbcType=INTEGER}, 
+      #{countsTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfDailyIncomeStatistics" >
+    insert into cf_daily_income_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="goodsType != null" >
+        goods_type,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        payment_agency_short_name,
+      </if>
+      <if test="amountsPayable != null" >
+        amounts_payable,
+      </if>
+      <if test="amountActuallyPaid != null" >
+        amount_actually_paid,
+      </if>
+      <if test="refundAmount != null" >
+        refund_amount,
+      </if>
+      <if test="payCounts != null" >
+        pay_counts,
+      </if>
+      <if test="countsTime != null" >
+        counts_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=TINYINT},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=SMALLINT},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=TINYINT},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TINYINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        #{paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="amountsPayable != null" >
+        #{amountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="amountActuallyPaid != null" >
+        #{amountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="refundAmount != null" >
+        #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payCounts != null" >
+        #{payCounts,jdbcType=INTEGER},
+      </if>
+      <if test="countsTime != null" >
+        #{countsTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfDailyIncomeStatisticsExample" resultType="java.lang.Integer" >
+    select count(*) from cf_daily_income_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_daily_income_statistics
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsType != null" >
+        goods_type = #{record.goodsType,jdbcType=TINYINT},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=SMALLINT},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=TINYINT},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=TINYINT},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.paymentAgencyShortName != null" >
+        payment_agency_short_name = #{record.paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amountsPayable != null" >
+        amounts_payable = #{record.amountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.amountActuallyPaid != null" >
+        amount_actually_paid = #{record.amountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.refundAmount != null" >
+        refund_amount = #{record.refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payCounts != null" >
+        pay_counts = #{record.payCounts,jdbcType=INTEGER},
+      </if>
+      <if test="record.countsTime != null" >
+        counts_time = #{record.countsTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_daily_income_statistics
+    set id = #{record.id,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=VARCHAR},
+      goods_type = #{record.goodsType,jdbcType=TINYINT},
+      year = #{record.year,jdbcType=SMALLINT},
+      month = #{record.month,jdbcType=TINYINT},
+      date = #{record.date,jdbcType=TINYINT},
+      start_time = #{record.startTime,jdbcType=BIGINT},
+      end_time = #{record.endTime,jdbcType=BIGINT},
+      payment_agency_short_name = #{record.paymentAgencyShortName,jdbcType=VARCHAR},
+      amounts_payable = #{record.amountsPayable,jdbcType=DECIMAL},
+      amount_actually_paid = #{record.amountActuallyPaid,jdbcType=DECIMAL},
+      refund_amount = #{record.refundAmount,jdbcType=DECIMAL},
+      pay_counts = #{record.payCounts,jdbcType=INTEGER},
+      counts_time = #{record.countsTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfDailyIncomeStatistics" >
+    update cf_daily_income_statistics
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        goods_type = #{goodsType,jdbcType=TINYINT},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=SMALLINT},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=TINYINT},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TINYINT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="paymentAgencyShortName != null" >
+        payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="amountsPayable != null" >
+        amounts_payable = #{amountsPayable,jdbcType=DECIMAL},
+      </if>
+      <if test="amountActuallyPaid != null" >
+        amount_actually_paid = #{amountActuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="refundAmount != null" >
+        refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payCounts != null" >
+        pay_counts = #{payCounts,jdbcType=INTEGER},
+      </if>
+      <if test="countsTime != null" >
+        counts_time = #{countsTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfDailyIncomeStatistics" >
+    update cf_daily_income_statistics
+    set title = #{title,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      goods_type = #{goodsType,jdbcType=TINYINT},
+      year = #{year,jdbcType=SMALLINT},
+      month = #{month,jdbcType=TINYINT},
+      date = #{date,jdbcType=TINYINT},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      payment_agency_short_name = #{paymentAgencyShortName,jdbcType=VARCHAR},
+      amounts_payable = #{amountsPayable,jdbcType=DECIMAL},
+      amount_actually_paid = #{amountActuallyPaid,jdbcType=DECIMAL},
+      refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      pay_counts = #{payCounts,jdbcType=INTEGER},
+      counts_time = #{countsTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

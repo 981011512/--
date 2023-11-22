@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ucenter.dao.mapper.CfUserDriverLicenseMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ucenter.domain.CfUserDriverLicense" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="nationality" property="nationality" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="birthday_year" property="birthdayYear" jdbcType="SMALLINT" />
+    <result column="birthday_month" property="birthdayMonth" jdbcType="TINYINT" />
+    <result column="birthday_day" property="birthdayDay" jdbcType="TINYINT" />
+    <result column="first_issue_year" property="firstIssueYear" jdbcType="SMALLINT" />
+    <result column="first_issue_month" property="firstIssueMonth" jdbcType="TINYINT" />
+    <result column="first_issue_day" property="firstIssueDay" jdbcType="TINYINT" />
+    <result column="car_class" property="carClass" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="certificate_number" property="certificateNumber" jdbcType="VARCHAR" />
+    <result column="issuing_authority" property="issuingAuthority" jdbcType="VARCHAR" />
+    <result column="file_number" property="fileNumber" jdbcType="VARCHAR" />
+    <result column="internship_period_ends" property="internshipPeriodEnds" jdbcType="BIGINT" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
+    <result column="check_status" property="checkStatus" jdbcType="TINYINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="qualification_certificate_number" property="qualificationCertificateNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, uid, user_name, sex, nationality, address, birthday_year, birthday_month, birthday_day, 
+    first_issue_year, first_issue_month, first_issue_day, car_class, start_time, end_time, 
+    certificate_number, issuing_authority, file_number, internship_period_ends, images, 
+    check_status, phone, qualification_certificate_number
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ucenter.domain.CfUserDriverLicenseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_user_driver_license
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_user_driver_license
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_user_driver_license
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ucenter.domain.CfUserDriverLicenseExample" >
+    delete from cf_user_driver_license
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ucenter.domain.CfUserDriverLicense" >
+    insert into cf_user_driver_license (id, uid, user_name, 
+      sex, nationality, address, 
+      birthday_year, birthday_month, birthday_day, 
+      first_issue_year, first_issue_month, first_issue_day, 
+      car_class, start_time, end_time, 
+      certificate_number, issuing_authority, file_number, 
+      internship_period_ends, images, check_status, 
+      phone, qualification_certificate_number)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{nationality,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{birthdayYear,jdbcType=SMALLINT}, #{birthdayMonth,jdbcType=TINYINT}, #{birthdayDay,jdbcType=TINYINT}, 
+      #{firstIssueYear,jdbcType=SMALLINT}, #{firstIssueMonth,jdbcType=TINYINT}, #{firstIssueDay,jdbcType=TINYINT}, 
+      #{carClass,jdbcType=VARCHAR}, #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, 
+      #{certificateNumber,jdbcType=VARCHAR}, #{issuingAuthority,jdbcType=VARCHAR}, #{fileNumber,jdbcType=VARCHAR}, 
+      #{internshipPeriodEnds,jdbcType=BIGINT}, #{images,jdbcType=VARCHAR}, #{checkStatus,jdbcType=TINYINT}, 
+      #{phone,jdbcType=VARCHAR}, #{qualificationCertificateNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ucenter.domain.CfUserDriverLicense" >
+    insert into cf_user_driver_license
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="nationality != null" >
+        nationality,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="birthdayYear != null" >
+        birthday_year,
+      </if>
+      <if test="birthdayMonth != null" >
+        birthday_month,
+      </if>
+      <if test="birthdayDay != null" >
+        birthday_day,
+      </if>
+      <if test="firstIssueYear != null" >
+        first_issue_year,
+      </if>
+      <if test="firstIssueMonth != null" >
+        first_issue_month,
+      </if>
+      <if test="firstIssueDay != null" >
+        first_issue_day,
+      </if>
+      <if test="carClass != null" >
+        car_class,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="certificateNumber != null" >
+        certificate_number,
+      </if>
+      <if test="issuingAuthority != null" >
+        issuing_authority,
+      </if>
+      <if test="fileNumber != null" >
+        file_number,
+      </if>
+      <if test="internshipPeriodEnds != null" >
+        internship_period_ends,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+      <if test="checkStatus != null" >
+        check_status,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="qualificationCertificateNumber != null" >
+        qualification_certificate_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdayYear != null" >
+        #{birthdayYear,jdbcType=SMALLINT},
+      </if>
+      <if test="birthdayMonth != null" >
+        #{birthdayMonth,jdbcType=TINYINT},
+      </if>
+      <if test="birthdayDay != null" >
+        #{birthdayDay,jdbcType=TINYINT},
+      </if>
+      <if test="firstIssueYear != null" >
+        #{firstIssueYear,jdbcType=SMALLINT},
+      </if>
+      <if test="firstIssueMonth != null" >
+        #{firstIssueMonth,jdbcType=TINYINT},
+      </if>
+      <if test="firstIssueDay != null" >
+        #{firstIssueDay,jdbcType=TINYINT},
+      </if>
+      <if test="carClass != null" >
+        #{carClass,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="certificateNumber != null" >
+        #{certificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="issuingAuthority != null" >
+        #{issuingAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNumber != null" >
+        #{fileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="internshipPeriodEnds != null" >
+        #{internshipPeriodEnds,jdbcType=BIGINT},
+      </if>
+      <if test="images != null" >
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qualificationCertificateNumber != null" >
+        #{qualificationCertificateNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ucenter.domain.CfUserDriverLicenseExample" resultType="java.lang.Integer" >
+    select count(*) from cf_user_driver_license
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_user_driver_license
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.nationality != null" >
+        nationality = #{record.nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthdayYear != null" >
+        birthday_year = #{record.birthdayYear,jdbcType=SMALLINT},
+      </if>
+      <if test="record.birthdayMonth != null" >
+        birthday_month = #{record.birthdayMonth,jdbcType=TINYINT},
+      </if>
+      <if test="record.birthdayDay != null" >
+        birthday_day = #{record.birthdayDay,jdbcType=TINYINT},
+      </if>
+      <if test="record.firstIssueYear != null" >
+        first_issue_year = #{record.firstIssueYear,jdbcType=SMALLINT},
+      </if>
+      <if test="record.firstIssueMonth != null" >
+        first_issue_month = #{record.firstIssueMonth,jdbcType=TINYINT},
+      </if>
+      <if test="record.firstIssueDay != null" >
+        first_issue_day = #{record.firstIssueDay,jdbcType=TINYINT},
+      </if>
+      <if test="record.carClass != null" >
+        car_class = #{record.carClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.certificateNumber != null" >
+        certificate_number = #{record.certificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issuingAuthority != null" >
+        issuing_authority = #{record.issuingAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileNumber != null" >
+        file_number = #{record.fileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internshipPeriodEnds != null" >
+        internship_period_ends = #{record.internshipPeriodEnds,jdbcType=BIGINT},
+      </if>
+      <if test="record.images != null" >
+        images = #{record.images,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkStatus != null" >
+        check_status = #{record.checkStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qualificationCertificateNumber != null" >
+        qualification_certificate_number = #{record.qualificationCertificateNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_user_driver_license
+    set id = #{record.id,jdbcType=BIGINT},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=TINYINT},
+      nationality = #{record.nationality,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      birthday_year = #{record.birthdayYear,jdbcType=SMALLINT},
+      birthday_month = #{record.birthdayMonth,jdbcType=TINYINT},
+      birthday_day = #{record.birthdayDay,jdbcType=TINYINT},
+      first_issue_year = #{record.firstIssueYear,jdbcType=SMALLINT},
+      first_issue_month = #{record.firstIssueMonth,jdbcType=TINYINT},
+      first_issue_day = #{record.firstIssueDay,jdbcType=TINYINT},
+      car_class = #{record.carClass,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=BIGINT},
+      end_time = #{record.endTime,jdbcType=BIGINT},
+      certificate_number = #{record.certificateNumber,jdbcType=VARCHAR},
+      issuing_authority = #{record.issuingAuthority,jdbcType=VARCHAR},
+      file_number = #{record.fileNumber,jdbcType=VARCHAR},
+      internship_period_ends = #{record.internshipPeriodEnds,jdbcType=BIGINT},
+      images = #{record.images,jdbcType=VARCHAR},
+      check_status = #{record.checkStatus,jdbcType=TINYINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      qualification_certificate_number = #{record.qualificationCertificateNumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ucenter.domain.CfUserDriverLicense" >
+    update cf_user_driver_license
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="nationality != null" >
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdayYear != null" >
+        birthday_year = #{birthdayYear,jdbcType=SMALLINT},
+      </if>
+      <if test="birthdayMonth != null" >
+        birthday_month = #{birthdayMonth,jdbcType=TINYINT},
+      </if>
+      <if test="birthdayDay != null" >
+        birthday_day = #{birthdayDay,jdbcType=TINYINT},
+      </if>
+      <if test="firstIssueYear != null" >
+        first_issue_year = #{firstIssueYear,jdbcType=SMALLINT},
+      </if>
+      <if test="firstIssueMonth != null" >
+        first_issue_month = #{firstIssueMonth,jdbcType=TINYINT},
+      </if>
+      <if test="firstIssueDay != null" >
+        first_issue_day = #{firstIssueDay,jdbcType=TINYINT},
+      </if>
+      <if test="carClass != null" >
+        car_class = #{carClass,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="certificateNumber != null" >
+        certificate_number = #{certificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="issuingAuthority != null" >
+        issuing_authority = #{issuingAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNumber != null" >
+        file_number = #{fileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="internshipPeriodEnds != null" >
+        internship_period_ends = #{internshipPeriodEnds,jdbcType=BIGINT},
+      </if>
+      <if test="images != null" >
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qualificationCertificateNumber != null" >
+        qualification_certificate_number = #{qualificationCertificateNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ucenter.domain.CfUserDriverLicense" >
+    update cf_user_driver_license
+    set uid = #{uid,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      birthday_year = #{birthdayYear,jdbcType=SMALLINT},
+      birthday_month = #{birthdayMonth,jdbcType=TINYINT},
+      birthday_day = #{birthdayDay,jdbcType=TINYINT},
+      first_issue_year = #{firstIssueYear,jdbcType=SMALLINT},
+      first_issue_month = #{firstIssueMonth,jdbcType=TINYINT},
+      first_issue_day = #{firstIssueDay,jdbcType=TINYINT},
+      car_class = #{carClass,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      certificate_number = #{certificateNumber,jdbcType=VARCHAR},
+      issuing_authority = #{issuingAuthority,jdbcType=VARCHAR},
+      file_number = #{fileNumber,jdbcType=VARCHAR},
+      internship_period_ends = #{internshipPeriodEnds,jdbcType=BIGINT},
+      images = #{images,jdbcType=VARCHAR},
+      check_status = #{checkStatus,jdbcType=TINYINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      qualification_certificate_number = #{qualificationCertificateNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

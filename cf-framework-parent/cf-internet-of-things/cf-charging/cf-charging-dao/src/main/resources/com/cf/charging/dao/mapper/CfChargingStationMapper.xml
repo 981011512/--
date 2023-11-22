@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.charging.dao.mapper.CfChargingStationMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.charging.domain.CfChargingStation" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="station_type" property="stationType" jdbcType="TINYINT" />
+    <result column="free_park_time" property="freeParkTime" jdbcType="BIGINT" />
+    <result column="start_price" property="startPrice" jdbcType="DECIMAL" />
+    <result column="has_bathroom" property="hasBathroom" jdbcType="TINYINT" />
+    <result column="has_lounge" property="hasLounge" jdbcType="TINYINT" />
+    <result column="has_dinning_room" property="hasDinningRoom" jdbcType="TINYINT" />
+    <result column="has_shop" property="hasShop" jdbcType="TINYINT" />
+    <result column="slow_charge_number" property="slowChargeNumber" jdbcType="TINYINT" />
+    <result column="fast_charge_number" property="fastChargeNumber" jdbcType="TINYINT" />
+    <result column="super_fast_charge_number" property="superFastChargeNumber" jdbcType="TINYINT" />
+    <result column="used_slow_charge_number" property="usedSlowChargeNumber" jdbcType="SMALLINT" />
+    <result column="used_fast_charge_number" property="usedFastChargeNumber" jdbcType="SMALLINT" />
+    <result column="used_super_fast_charge_number" property="usedSuperFastChargeNumber" jdbcType="SMALLINT" />
+    <result column="floor" property="floor" jdbcType="TINYINT" />
+    <result column="indoor_or_outdoor" property="indoorOrOutdoor" jdbcType="TINYINT" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+    <result column="township_id" property="townshipId" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="start_business_time" property="startBusinessTime" jdbcType="BIGINT" />
+    <result column="end_business_time" property="endBusinessTime" jdbcType="BIGINT" />
+    <result column="station_status" property="stationStatus" jdbcType="TINYINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, station_name, image, station_type, free_park_time, start_price, has_bathroom, 
+    has_lounge, has_dinning_room, has_shop, slow_charge_number, fast_charge_number, super_fast_charge_number, 
+    used_slow_charge_number, used_fast_charge_number, used_super_fast_charge_number, 
+    floor, indoor_or_outdoor, position_x, position_y, country_id, province_id, state_or_city_id, 
+    zone_or_county_id, township_id, address, start_business_time, end_business_time, 
+    station_status, phone, service_fee, car_park_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.charging.domain.CfChargingStationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_charging_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_charging_station
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_charging_station
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.charging.domain.CfChargingStationExample" >
+    delete from cf_charging_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.charging.domain.CfChargingStation" >
+    insert into cf_charging_station (id, station_name, image, 
+      station_type, free_park_time, start_price, 
+      has_bathroom, has_lounge, has_dinning_room, 
+      has_shop, slow_charge_number, fast_charge_number, 
+      super_fast_charge_number, used_slow_charge_number, 
+      used_fast_charge_number, used_super_fast_charge_number, 
+      floor, indoor_or_outdoor, position_x, 
+      position_y, country_id, province_id, 
+      state_or_city_id, zone_or_county_id, township_id, 
+      address, start_business_time, end_business_time, 
+      station_status, phone, service_fee, 
+      car_park_id)
+    values (#{id,jdbcType=VARCHAR}, #{stationName,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{stationType,jdbcType=TINYINT}, #{freeParkTime,jdbcType=BIGINT}, #{startPrice,jdbcType=DECIMAL}, 
+      #{hasBathroom,jdbcType=TINYINT}, #{hasLounge,jdbcType=TINYINT}, #{hasDinningRoom,jdbcType=TINYINT}, 
+      #{hasShop,jdbcType=TINYINT}, #{slowChargeNumber,jdbcType=TINYINT}, #{fastChargeNumber,jdbcType=TINYINT}, 
+      #{superFastChargeNumber,jdbcType=TINYINT}, #{usedSlowChargeNumber,jdbcType=SMALLINT}, 
+      #{usedFastChargeNumber,jdbcType=SMALLINT}, #{usedSuperFastChargeNumber,jdbcType=SMALLINT}, 
+      #{floor,jdbcType=TINYINT}, #{indoorOrOutdoor,jdbcType=TINYINT}, #{positionX,jdbcType=DECIMAL}, 
+      #{positionY,jdbcType=DECIMAL}, #{countryId,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, 
+      #{stateOrCityId,jdbcType=VARCHAR}, #{zoneOrCountyId,jdbcType=VARCHAR}, #{townshipId,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{startBusinessTime,jdbcType=BIGINT}, #{endBusinessTime,jdbcType=BIGINT}, 
+      #{stationStatus,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, #{serviceFee,jdbcType=DECIMAL}, 
+      #{carParkId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.charging.domain.CfChargingStation" >
+    insert into cf_charging_station
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stationName != null" >
+        station_name,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="stationType != null" >
+        station_type,
+      </if>
+      <if test="freeParkTime != null" >
+        free_park_time,
+      </if>
+      <if test="startPrice != null" >
+        start_price,
+      </if>
+      <if test="hasBathroom != null" >
+        has_bathroom,
+      </if>
+      <if test="hasLounge != null" >
+        has_lounge,
+      </if>
+      <if test="hasDinningRoom != null" >
+        has_dinning_room,
+      </if>
+      <if test="hasShop != null" >
+        has_shop,
+      </if>
+      <if test="slowChargeNumber != null" >
+        slow_charge_number,
+      </if>
+      <if test="fastChargeNumber != null" >
+        fast_charge_number,
+      </if>
+      <if test="superFastChargeNumber != null" >
+        super_fast_charge_number,
+      </if>
+      <if test="usedSlowChargeNumber != null" >
+        used_slow_charge_number,
+      </if>
+      <if test="usedFastChargeNumber != null" >
+        used_fast_charge_number,
+      </if>
+      <if test="usedSuperFastChargeNumber != null" >
+        used_super_fast_charge_number,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="indoorOrOutdoor != null" >
+        indoor_or_outdoor,
+      </if>
+      <if test="positionX != null" >
+        position_x,
+      </if>
+      <if test="positionY != null" >
+        position_y,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id,
+      </if>
+      <if test="zoneOrCountyId != null" >
+        zone_or_county_id,
+      </if>
+      <if test="townshipId != null" >
+        township_id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="startBusinessTime != null" >
+        start_business_time,
+      </if>
+      <if test="endBusinessTime != null" >
+        end_business_time,
+      </if>
+      <if test="stationStatus != null" >
+        station_status,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="serviceFee != null" >
+        service_fee,
+      </if>
+      <if test="carParkId != null" >
+        car_park_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="stationType != null" >
+        #{stationType,jdbcType=TINYINT},
+      </if>
+      <if test="freeParkTime != null" >
+        #{freeParkTime,jdbcType=BIGINT},
+      </if>
+      <if test="startPrice != null" >
+        #{startPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="hasBathroom != null" >
+        #{hasBathroom,jdbcType=TINYINT},
+      </if>
+      <if test="hasLounge != null" >
+        #{hasLounge,jdbcType=TINYINT},
+      </if>
+      <if test="hasDinningRoom != null" >
+        #{hasDinningRoom,jdbcType=TINYINT},
+      </if>
+      <if test="hasShop != null" >
+        #{hasShop,jdbcType=TINYINT},
+      </if>
+      <if test="slowChargeNumber != null" >
+        #{slowChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="fastChargeNumber != null" >
+        #{fastChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="superFastChargeNumber != null" >
+        #{superFastChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="usedSlowChargeNumber != null" >
+        #{usedSlowChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="usedFastChargeNumber != null" >
+        #{usedFastChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="usedSuperFastChargeNumber != null" >
+        #{usedSuperFastChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=TINYINT},
+      </if>
+      <if test="indoorOrOutdoor != null" >
+        #{indoorOrOutdoor,jdbcType=TINYINT},
+      </if>
+      <if test="positionX != null" >
+        #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneOrCountyId != null" >
+        #{zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipId != null" >
+        #{townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="startBusinessTime != null" >
+        #{startBusinessTime,jdbcType=BIGINT},
+      </if>
+      <if test="endBusinessTime != null" >
+        #{endBusinessTime,jdbcType=BIGINT},
+      </if>
+      <if test="stationStatus != null" >
+        #{stationStatus,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceFee != null" >
+        #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="carParkId != null" >
+        #{carParkId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.charging.domain.CfChargingStationExample" resultType="java.lang.Integer" >
+    select count(*) from cf_charging_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_charging_station
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationName != null" >
+        station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationType != null" >
+        station_type = #{record.stationType,jdbcType=TINYINT},
+      </if>
+      <if test="record.freeParkTime != null" >
+        free_park_time = #{record.freeParkTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.startPrice != null" >
+        start_price = #{record.startPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hasBathroom != null" >
+        has_bathroom = #{record.hasBathroom,jdbcType=TINYINT},
+      </if>
+      <if test="record.hasLounge != null" >
+        has_lounge = #{record.hasLounge,jdbcType=TINYINT},
+      </if>
+      <if test="record.hasDinningRoom != null" >
+        has_dinning_room = #{record.hasDinningRoom,jdbcType=TINYINT},
+      </if>
+      <if test="record.hasShop != null" >
+        has_shop = #{record.hasShop,jdbcType=TINYINT},
+      </if>
+      <if test="record.slowChargeNumber != null" >
+        slow_charge_number = #{record.slowChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="record.fastChargeNumber != null" >
+        fast_charge_number = #{record.fastChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="record.superFastChargeNumber != null" >
+        super_fast_charge_number = #{record.superFastChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="record.usedSlowChargeNumber != null" >
+        used_slow_charge_number = #{record.usedSlowChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="record.usedFastChargeNumber != null" >
+        used_fast_charge_number = #{record.usedFastChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="record.usedSuperFastChargeNumber != null" >
+        used_super_fast_charge_number = #{record.usedSuperFastChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="record.floor != null" >
+        floor = #{record.floor,jdbcType=TINYINT},
+      </if>
+      <if test="record.indoorOrOutdoor != null" >
+        indoor_or_outdoor = #{record.indoorOrOutdoor,jdbcType=TINYINT},
+      </if>
+      <if test="record.positionX != null" >
+        position_x = #{record.positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.positionY != null" >
+        position_y = #{record.positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.countryId != null" >
+        country_id = #{record.countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateOrCityId != null" >
+        state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zoneOrCountyId != null" >
+        zone_or_county_id = #{record.zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.townshipId != null" >
+        township_id = #{record.townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startBusinessTime != null" >
+        start_business_time = #{record.startBusinessTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.endBusinessTime != null" >
+        end_business_time = #{record.endBusinessTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.stationStatus != null" >
+        station_status = #{record.stationStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceFee != null" >
+        service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.carParkId != null" >
+        car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_charging_station
+    set id = #{record.id,jdbcType=VARCHAR},
+      station_name = #{record.stationName,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      station_type = #{record.stationType,jdbcType=TINYINT},
+      free_park_time = #{record.freeParkTime,jdbcType=BIGINT},
+      start_price = #{record.startPrice,jdbcType=DECIMAL},
+      has_bathroom = #{record.hasBathroom,jdbcType=TINYINT},
+      has_lounge = #{record.hasLounge,jdbcType=TINYINT},
+      has_dinning_room = #{record.hasDinningRoom,jdbcType=TINYINT},
+      has_shop = #{record.hasShop,jdbcType=TINYINT},
+      slow_charge_number = #{record.slowChargeNumber,jdbcType=TINYINT},
+      fast_charge_number = #{record.fastChargeNumber,jdbcType=TINYINT},
+      super_fast_charge_number = #{record.superFastChargeNumber,jdbcType=TINYINT},
+      used_slow_charge_number = #{record.usedSlowChargeNumber,jdbcType=SMALLINT},
+      used_fast_charge_number = #{record.usedFastChargeNumber,jdbcType=SMALLINT},
+      used_super_fast_charge_number = #{record.usedSuperFastChargeNumber,jdbcType=SMALLINT},
+      floor = #{record.floor,jdbcType=TINYINT},
+      indoor_or_outdoor = #{record.indoorOrOutdoor,jdbcType=TINYINT},
+      position_x = #{record.positionX,jdbcType=DECIMAL},
+      position_y = #{record.positionY,jdbcType=DECIMAL},
+      country_id = #{record.countryId,jdbcType=VARCHAR},
+      province_id = #{record.provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{record.stateOrCityId,jdbcType=VARCHAR},
+      zone_or_county_id = #{record.zoneOrCountyId,jdbcType=VARCHAR},
+      township_id = #{record.townshipId,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      start_business_time = #{record.startBusinessTime,jdbcType=BIGINT},
+      end_business_time = #{record.endBusinessTime,jdbcType=BIGINT},
+      station_status = #{record.stationStatus,jdbcType=TINYINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+      car_park_id = #{record.carParkId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.charging.domain.CfChargingStation" >
+    update cf_charging_station
+    <set >
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="stationType != null" >
+        station_type = #{stationType,jdbcType=TINYINT},
+      </if>
+      <if test="freeParkTime != null" >
+        free_park_time = #{freeParkTime,jdbcType=BIGINT},
+      </if>
+      <if test="startPrice != null" >
+        start_price = #{startPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="hasBathroom != null" >
+        has_bathroom = #{hasBathroom,jdbcType=TINYINT},
+      </if>
+      <if test="hasLounge != null" >
+        has_lounge = #{hasLounge,jdbcType=TINYINT},
+      </if>
+      <if test="hasDinningRoom != null" >
+        has_dinning_room = #{hasDinningRoom,jdbcType=TINYINT},
+      </if>
+      <if test="hasShop != null" >
+        has_shop = #{hasShop,jdbcType=TINYINT},
+      </if>
+      <if test="slowChargeNumber != null" >
+        slow_charge_number = #{slowChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="fastChargeNumber != null" >
+        fast_charge_number = #{fastChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="superFastChargeNumber != null" >
+        super_fast_charge_number = #{superFastChargeNumber,jdbcType=TINYINT},
+      </if>
+      <if test="usedSlowChargeNumber != null" >
+        used_slow_charge_number = #{usedSlowChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="usedFastChargeNumber != null" >
+        used_fast_charge_number = #{usedFastChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="usedSuperFastChargeNumber != null" >
+        used_super_fast_charge_number = #{usedSuperFastChargeNumber,jdbcType=SMALLINT},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=TINYINT},
+      </if>
+      <if test="indoorOrOutdoor != null" >
+        indoor_or_outdoor = #{indoorOrOutdoor,jdbcType=TINYINT},
+      </if>
+      <if test="positionX != null" >
+        position_x = #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        position_y = #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="stateOrCityId != null" >
+        state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneOrCountyId != null" >
+        zone_or_county_id = #{zoneOrCountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="townshipId != null" >
+        township_id = #{townshipId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="startBusinessTime != null" >
+        start_business_time = #{startBusinessTime,jdbcType=BIGINT},
+      </if>
+      <if test="endBusinessTime != null" >
+        end_business_time = #{endBusinessTime,jdbcType=BIGINT},
+      </if>
+      <if test="stationStatus != null" >
+        station_status = #{stationStatus,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceFee != null" >
+        service_fee = #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="carParkId != null" >
+        car_park_id = #{carParkId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.charging.domain.CfChargingStation" >
+    update cf_charging_station
+    set station_name = #{stationName,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      station_type = #{stationType,jdbcType=TINYINT},
+      free_park_time = #{freeParkTime,jdbcType=BIGINT},
+      start_price = #{startPrice,jdbcType=DECIMAL},
+      has_bathroom = #{hasBathroom,jdbcType=TINYINT},
+      has_lounge = #{hasLounge,jdbcType=TINYINT},
+      has_dinning_room = #{hasDinningRoom,jdbcType=TINYINT},
+      has_shop = #{hasShop,jdbcType=TINYINT},
+      slow_charge_number = #{slowChargeNumber,jdbcType=TINYINT},
+      fast_charge_number = #{fastChargeNumber,jdbcType=TINYINT},
+      super_fast_charge_number = #{superFastChargeNumber,jdbcType=TINYINT},
+      used_slow_charge_number = #{usedSlowChargeNumber,jdbcType=SMALLINT},
+      used_fast_charge_number = #{usedFastChargeNumber,jdbcType=SMALLINT},
+      used_super_fast_charge_number = #{usedSuperFastChargeNumber,jdbcType=SMALLINT},
+      floor = #{floor,jdbcType=TINYINT},
+      indoor_or_outdoor = #{indoorOrOutdoor,jdbcType=TINYINT},
+      position_x = #{positionX,jdbcType=DECIMAL},
+      position_y = #{positionY,jdbcType=DECIMAL},
+      country_id = #{countryId,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      state_or_city_id = #{stateOrCityId,jdbcType=VARCHAR},
+      zone_or_county_id = #{zoneOrCountyId,jdbcType=VARCHAR},
+      township_id = #{townshipId,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      start_business_time = #{startBusinessTime,jdbcType=BIGINT},
+      end_business_time = #{endBusinessTime,jdbcType=BIGINT},
+      station_status = #{stationStatus,jdbcType=TINYINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      service_fee = #{serviceFee,jdbcType=DECIMAL},
+      car_park_id = #{carParkId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <resultMap id="ContainDistanceResultMap" type="com.cf.charging.domain.CfChargingStation" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="station_type" property="stationType" jdbcType="TINYINT" />
+    <result column="free_park_time" property="freeParkTime" jdbcType="BIGINT" />
+    <result column="start_price" property="startPrice" jdbcType="DECIMAL" />
+    <result column="has_bathroom" property="hasBathroom" jdbcType="TINYINT" />
+    <result column="has_lounge" property="hasLounge" jdbcType="TINYINT" />
+    <result column="has_dinning_room" property="hasDinningRoom" jdbcType="TINYINT" />
+    <result column="has_shop" property="hasShop" jdbcType="TINYINT" />
+    <result column="slow_charge_number" property="slowChargeNumber" jdbcType="TINYINT" />
+    <result column="fast_charge_number" property="fastChargeNumber" jdbcType="TINYINT" />
+    <result column="super_fast_charge_number" property="superFastChargeNumber" jdbcType="TINYINT" />
+    <result column="used_slow_charge_number" property="usedSlowChargeNumber" jdbcType="SMALLINT" />
+    <result column="used_fast_charge_number" property="usedFastChargeNumber" jdbcType="SMALLINT" />
+    <result column="used_super_fast_charge_number" property="usedSuperFastChargeNumber" jdbcType="SMALLINT" />
+    <result column="floor" property="floor" jdbcType="TINYINT" />
+    <result column="indoor_or_outdoor" property="indoorOrOutdoor" jdbcType="TINYINT" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+    <result column="zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+    <result column="township_id" property="townshipId" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="start_business_time" property="startBusinessTime" jdbcType="BIGINT" />
+    <result column="end_business_time" property="endBusinessTime" jdbcType="BIGINT" />
+    <result column="station_status" property="stationStatus" jdbcType="TINYINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="distance" property="distance" jdbcType="DECIMAL" />
+    <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <select id="selectContalDistanceListByQuery"  resultMap="ContainDistanceResultMap" parameterType="com.cf.charging.domain.request.CfChargingStationQuery">
+    SELECT
+    cst.*,CASE WHEN true THEN (st_distance (point (cst.position_x, cst.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195) END distance
+    FROM
+    `cf_charging_station` cst
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="distance!=null">
+        and (st_distance (point (cst.position_x, cst.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195) <![CDATA[ <= ]]> #{distance,jdbcType=INTEGER}
+      </if>
+      <if test="stationName!=null">
+        and cst.station_name like "%"#{stationName,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="stationType!=null">
+        and cst.station_type = #{stationType,jdbcType=TINYINT}
+      </if>
+    </trim>
+    order by distance asc limit #{page,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+  </select>
+
+  <update id="increaseOrreduceFieldValue" parameterType="com.cf.charging.domain.CfChargingStation" >
+    <if test="usedSlowChargeNumber!=null or usedFastChargeNumber!=null or usedSlowChargeNumber!=null">
+      update cf_charging_station
+       <set>
+        <if test="usedSlowChargeNumber != null">
+        used_slow_charge_number = used_slow_charge_number + (#{usedSlowChargeNumber,jdbcType=SMALLINT}),
+        </if>
+        <if test="usedFastChargeNumber != null">
+         used_fast_charge_number = used_fast_charge_number + (#{usedFastChargeNumber,jdbcType=SMALLINT}),
+        </if>
+        <if test="usedSuperFastChargeNumber != null">
+         used_super_fast_charge_number = used_super_fast_charge_number + (#{usedSuperFastChargeNumber,jdbcType=SMALLINT}),
+        </if>
+       </set>
+      where id = #{id,jdbcType=VARCHAR}
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkPackageLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkPackageLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="package_id" property="packageId" jdbcType="VARCHAR" />
+    <result column="before_car_park_id" property="beforeCarParkId" jdbcType="VARCHAR" />
+    <result column="after_car_park_id" property="afterCarParkId" jdbcType="VARCHAR" />
+    <result column="before_type_key" property="beforeTypeKey" jdbcType="VARCHAR" />
+    <result column="after_type_key" property="afterTypeKey" jdbcType="VARCHAR" />
+    <result column="before_start_time" property="beforeStartTime" jdbcType="BIGINT" />
+    <result column="after_start_time" property="afterStartTime" jdbcType="BIGINT" />
+    <result column="before_end_time" property="beforeEndTime" jdbcType="BIGINT" />
+    <result column="after_end_time" property="afterEndTime" jdbcType="BIGINT" />
+    <result column="before_create_time" property="beforeCreateTime" jdbcType="BIGINT" />
+    <result column="after_create_time" property="afterCreateTime" jdbcType="BIGINT" />
+    <result column="before_uid" property="beforeUid" jdbcType="VARCHAR" />
+    <result column="after_uid" property="afterUid" jdbcType="VARCHAR" />
+    <result column="before_number_plate" property="beforeNumberPlate" jdbcType="VARCHAR" />
+    <result column="after_number_plate" property="afterNumberPlate" jdbcType="VARCHAR" />
+    <result column="before_special_give" property="beforeSpecialGive" jdbcType="TINYINT" />
+    <result column="after_special_give" property="afterSpecialGive" jdbcType="TINYINT" />
+    <result column="before_package_price_id" property="beforePackagePriceId" jdbcType="VARCHAR" />
+    <result column="after_package_price_id" property="afterPackagePriceId" jdbcType="VARCHAR" />
+    <result column="before_trans_regional" property="beforeTransRegional" jdbcType="TINYINT" />
+    <result column="after_trans_regional" property="afterTransRegional" jdbcType="TINYINT" />
+    <result column="before_parent_id" property="beforeParentId" jdbcType="VARCHAR" />
+    <result column="after_parent_id" property="afterParentId" jdbcType="VARCHAR" />
+    <result column="before_phone" property="beforePhone" jdbcType="VARCHAR" />
+    <result column="after_phone" property="afterPhone" jdbcType="VARCHAR" />
+    <result column="before_main_car_park_id" property="beforeMainCarParkId" jdbcType="VARCHAR" />
+    <result column="after_main_car_park_id" property="afterMainCarParkId" jdbcType="VARCHAR" />
+    <result column="before_remarks" property="beforeRemarks" jdbcType="VARCHAR" />
+    <result column="after_remarks" property="afterRemarks" jdbcType="VARCHAR" />
+    <result column="before_car_owner_name" property="beforeCarOwnerName" jdbcType="VARCHAR" />
+    <result column="after_car_owner_name" property="afterCarOwnerName" jdbcType="VARCHAR" />
+    <result column="before_group_flag" property="beforeGroupFlag" jdbcType="VARCHAR" />
+    <result column="before_status" property="beforeStatus" jdbcType="TINYINT" />
+    <result column="after_status" property="afterStatus" jdbcType="TINYINT" />
+    <result column="handle_uid" property="handleUid" jdbcType="VARCHAR" />
+    <result column="action_time" property="actionTime" jdbcType="BIGINT" />
+    <result column="after_group_flag" property="afterGroupFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, package_id, before_car_park_id, after_car_park_id, before_type_key, after_type_key, 
+    before_start_time, after_start_time, before_end_time, after_end_time, before_create_time, 
+    after_create_time, before_uid, after_uid, before_number_plate, after_number_plate, 
+    before_special_give, after_special_give, before_package_price_id, after_package_price_id, 
+    before_trans_regional, after_trans_regional, before_parent_id, after_parent_id, before_phone, 
+    after_phone, before_main_car_park_id, after_main_car_park_id, before_remarks, after_remarks, 
+    before_car_owner_name, after_car_owner_name, before_group_flag, before_status, after_status, 
+    handle_uid, action_time, after_group_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkPackageLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_package_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_package_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_package_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkPackageLogExample" >
+    delete from cf_car_park_package_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkPackageLog" >
+    insert into cf_car_park_package_log (id, package_id, before_car_park_id, 
+      after_car_park_id, before_type_key, after_type_key, 
+      before_start_time, after_start_time, before_end_time, 
+      after_end_time, before_create_time, after_create_time, 
+      before_uid, after_uid, before_number_plate, 
+      after_number_plate, before_special_give, after_special_give, 
+      before_package_price_id, after_package_price_id, 
+      before_trans_regional, after_trans_regional, 
+      before_parent_id, after_parent_id, before_phone, 
+      after_phone, before_main_car_park_id, after_main_car_park_id, 
+      before_remarks, after_remarks, before_car_owner_name, 
+      after_car_owner_name, before_group_flag, before_status, 
+      after_status, handle_uid, action_time, 
+      after_group_flag)
+    values (#{id,jdbcType=VARCHAR}, #{packageId,jdbcType=VARCHAR}, #{beforeCarParkId,jdbcType=VARCHAR}, 
+      #{afterCarParkId,jdbcType=VARCHAR}, #{beforeTypeKey,jdbcType=VARCHAR}, #{afterTypeKey,jdbcType=VARCHAR}, 
+      #{beforeStartTime,jdbcType=BIGINT}, #{afterStartTime,jdbcType=BIGINT}, #{beforeEndTime,jdbcType=BIGINT}, 
+      #{afterEndTime,jdbcType=BIGINT}, #{beforeCreateTime,jdbcType=BIGINT}, #{afterCreateTime,jdbcType=BIGINT}, 
+      #{beforeUid,jdbcType=VARCHAR}, #{afterUid,jdbcType=VARCHAR}, #{beforeNumberPlate,jdbcType=VARCHAR}, 
+      #{afterNumberPlate,jdbcType=VARCHAR}, #{beforeSpecialGive,jdbcType=TINYINT}, #{afterSpecialGive,jdbcType=TINYINT}, 
+      #{beforePackagePriceId,jdbcType=VARCHAR}, #{afterPackagePriceId,jdbcType=VARCHAR}, 
+      #{beforeTransRegional,jdbcType=TINYINT}, #{afterTransRegional,jdbcType=TINYINT}, 
+      #{beforeParentId,jdbcType=VARCHAR}, #{afterParentId,jdbcType=VARCHAR}, #{beforePhone,jdbcType=VARCHAR}, 
+      #{afterPhone,jdbcType=VARCHAR}, #{beforeMainCarParkId,jdbcType=VARCHAR}, #{afterMainCarParkId,jdbcType=VARCHAR}, 
+      #{beforeRemarks,jdbcType=VARCHAR}, #{afterRemarks,jdbcType=VARCHAR}, #{beforeCarOwnerName,jdbcType=VARCHAR}, 
+      #{afterCarOwnerName,jdbcType=VARCHAR}, #{beforeGroupFlag,jdbcType=VARCHAR}, #{beforeStatus,jdbcType=TINYINT}, 
+      #{afterStatus,jdbcType=TINYINT}, #{handleUid,jdbcType=VARCHAR}, #{actionTime,jdbcType=BIGINT}, 
+      #{afterGroupFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkPackageLog" >
+    insert into cf_car_park_package_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="packageId != null" >
+        package_id,
+      </if>
+      <if test="beforeCarParkId != null" >
+        before_car_park_id,
+      </if>
+      <if test="afterCarParkId != null" >
+        after_car_park_id,
+      </if>
+      <if test="beforeTypeKey != null" >
+        before_type_key,
+      </if>
+      <if test="afterTypeKey != null" >
+        after_type_key,
+      </if>
+      <if test="beforeStartTime != null" >
+        before_start_time,
+      </if>
+      <if test="afterStartTime != null" >
+        after_start_time,
+      </if>
+      <if test="beforeEndTime != null" >
+        before_end_time,
+      </if>
+      <if test="afterEndTime != null" >
+        after_end_time,
+      </if>
+      <if test="beforeCreateTime != null" >
+        before_create_time,
+      </if>
+      <if test="afterCreateTime != null" >
+        after_create_time,
+      </if>
+      <if test="beforeUid != null" >
+        before_uid,
+      </if>
+      <if test="afterUid != null" >
+        after_uid,
+      </if>
+      <if test="beforeNumberPlate != null" >
+        before_number_plate,
+      </if>
+      <if test="afterNumberPlate != null" >
+        after_number_plate,
+      </if>
+      <if test="beforeSpecialGive != null" >
+        before_special_give,
+      </if>
+      <if test="afterSpecialGive != null" >
+        after_special_give,
+      </if>
+      <if test="beforePackagePriceId != null" >
+        before_package_price_id,
+      </if>
+      <if test="afterPackagePriceId != null" >
+        after_package_price_id,
+      </if>
+      <if test="beforeTransRegional != null" >
+        before_trans_regional,
+      </if>
+      <if test="afterTransRegional != null" >
+        after_trans_regional,
+      </if>
+      <if test="beforeParentId != null" >
+        before_parent_id,
+      </if>
+      <if test="afterParentId != null" >
+        after_parent_id,
+      </if>
+      <if test="beforePhone != null" >
+        before_phone,
+      </if>
+      <if test="afterPhone != null" >
+        after_phone,
+      </if>
+      <if test="beforeMainCarParkId != null" >
+        before_main_car_park_id,
+      </if>
+      <if test="afterMainCarParkId != null" >
+        after_main_car_park_id,
+      </if>
+      <if test="beforeRemarks != null" >
+        before_remarks,
+      </if>
+      <if test="afterRemarks != null" >
+        after_remarks,
+      </if>
+      <if test="beforeCarOwnerName != null" >
+        before_car_owner_name,
+      </if>
+      <if test="afterCarOwnerName != null" >
+        after_car_owner_name,
+      </if>
+      <if test="beforeGroupFlag != null" >
+        before_group_flag,
+      </if>
+      <if test="beforeStatus != null" >
+        before_status,
+      </if>
+      <if test="afterStatus != null" >
+        after_status,
+      </if>
+      <if test="handleUid != null" >
+        handle_uid,
+      </if>
+      <if test="actionTime != null" >
+        action_time,
+      </if>
+      <if test="afterGroupFlag != null" >
+        after_group_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="packageId != null" >
+        #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeCarParkId != null" >
+        #{beforeCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="afterCarParkId != null" >
+        #{afterCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeTypeKey != null" >
+        #{beforeTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="afterTypeKey != null" >
+        #{afterTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeStartTime != null" >
+        #{beforeStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="afterStartTime != null" >
+        #{afterStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="beforeEndTime != null" >
+        #{beforeEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="afterEndTime != null" >
+        #{afterEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="beforeCreateTime != null" >
+        #{beforeCreateTime,jdbcType=BIGINT},
+      </if>
+      <if test="afterCreateTime != null" >
+        #{afterCreateTime,jdbcType=BIGINT},
+      </if>
+      <if test="beforeUid != null" >
+        #{beforeUid,jdbcType=VARCHAR},
+      </if>
+      <if test="afterUid != null" >
+        #{afterUid,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeNumberPlate != null" >
+        #{beforeNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="afterNumberPlate != null" >
+        #{afterNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeSpecialGive != null" >
+        #{beforeSpecialGive,jdbcType=TINYINT},
+      </if>
+      <if test="afterSpecialGive != null" >
+        #{afterSpecialGive,jdbcType=TINYINT},
+      </if>
+      <if test="beforePackagePriceId != null" >
+        #{beforePackagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="afterPackagePriceId != null" >
+        #{afterPackagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeTransRegional != null" >
+        #{beforeTransRegional,jdbcType=TINYINT},
+      </if>
+      <if test="afterTransRegional != null" >
+        #{afterTransRegional,jdbcType=TINYINT},
+      </if>
+      <if test="beforeParentId != null" >
+        #{beforeParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="afterParentId != null" >
+        #{afterParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforePhone != null" >
+        #{beforePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="afterPhone != null" >
+        #{afterPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeMainCarParkId != null" >
+        #{beforeMainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="afterMainCarParkId != null" >
+        #{afterMainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeRemarks != null" >
+        #{beforeRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="afterRemarks != null" >
+        #{afterRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeCarOwnerName != null" >
+        #{beforeCarOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="afterCarOwnerName != null" >
+        #{afterCarOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeGroupFlag != null" >
+        #{beforeGroupFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeStatus != null" >
+        #{beforeStatus,jdbcType=TINYINT},
+      </if>
+      <if test="afterStatus != null" >
+        #{afterStatus,jdbcType=TINYINT},
+      </if>
+      <if test="handleUid != null" >
+        #{handleUid,jdbcType=VARCHAR},
+      </if>
+      <if test="actionTime != null" >
+        #{actionTime,jdbcType=BIGINT},
+      </if>
+      <if test="afterGroupFlag != null" >
+        #{afterGroupFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkPackageLogExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_package_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_package_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageId != null" >
+        package_id = #{record.packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeCarParkId != null" >
+        before_car_park_id = #{record.beforeCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterCarParkId != null" >
+        after_car_park_id = #{record.afterCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeTypeKey != null" >
+        before_type_key = #{record.beforeTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterTypeKey != null" >
+        after_type_key = #{record.afterTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeStartTime != null" >
+        before_start_time = #{record.beforeStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.afterStartTime != null" >
+        after_start_time = #{record.afterStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.beforeEndTime != null" >
+        before_end_time = #{record.beforeEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.afterEndTime != null" >
+        after_end_time = #{record.afterEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.beforeCreateTime != null" >
+        before_create_time = #{record.beforeCreateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.afterCreateTime != null" >
+        after_create_time = #{record.afterCreateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.beforeUid != null" >
+        before_uid = #{record.beforeUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterUid != null" >
+        after_uid = #{record.afterUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeNumberPlate != null" >
+        before_number_plate = #{record.beforeNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterNumberPlate != null" >
+        after_number_plate = #{record.afterNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeSpecialGive != null" >
+        before_special_give = #{record.beforeSpecialGive,jdbcType=TINYINT},
+      </if>
+      <if test="record.afterSpecialGive != null" >
+        after_special_give = #{record.afterSpecialGive,jdbcType=TINYINT},
+      </if>
+      <if test="record.beforePackagePriceId != null" >
+        before_package_price_id = #{record.beforePackagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterPackagePriceId != null" >
+        after_package_price_id = #{record.afterPackagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeTransRegional != null" >
+        before_trans_regional = #{record.beforeTransRegional,jdbcType=TINYINT},
+      </if>
+      <if test="record.afterTransRegional != null" >
+        after_trans_regional = #{record.afterTransRegional,jdbcType=TINYINT},
+      </if>
+      <if test="record.beforeParentId != null" >
+        before_parent_id = #{record.beforeParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterParentId != null" >
+        after_parent_id = #{record.afterParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforePhone != null" >
+        before_phone = #{record.beforePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterPhone != null" >
+        after_phone = #{record.afterPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeMainCarParkId != null" >
+        before_main_car_park_id = #{record.beforeMainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterMainCarParkId != null" >
+        after_main_car_park_id = #{record.afterMainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeRemarks != null" >
+        before_remarks = #{record.beforeRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterRemarks != null" >
+        after_remarks = #{record.afterRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeCarOwnerName != null" >
+        before_car_owner_name = #{record.beforeCarOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterCarOwnerName != null" >
+        after_car_owner_name = #{record.afterCarOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeGroupFlag != null" >
+        before_group_flag = #{record.beforeGroupFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeStatus != null" >
+        before_status = #{record.beforeStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.afterStatus != null" >
+        after_status = #{record.afterStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.handleUid != null" >
+        handle_uid = #{record.handleUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actionTime != null" >
+        action_time = #{record.actionTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.afterGroupFlag != null" >
+        after_group_flag = #{record.afterGroupFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_package_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      package_id = #{record.packageId,jdbcType=VARCHAR},
+      before_car_park_id = #{record.beforeCarParkId,jdbcType=VARCHAR},
+      after_car_park_id = #{record.afterCarParkId,jdbcType=VARCHAR},
+      before_type_key = #{record.beforeTypeKey,jdbcType=VARCHAR},
+      after_type_key = #{record.afterTypeKey,jdbcType=VARCHAR},
+      before_start_time = #{record.beforeStartTime,jdbcType=BIGINT},
+      after_start_time = #{record.afterStartTime,jdbcType=BIGINT},
+      before_end_time = #{record.beforeEndTime,jdbcType=BIGINT},
+      after_end_time = #{record.afterEndTime,jdbcType=BIGINT},
+      before_create_time = #{record.beforeCreateTime,jdbcType=BIGINT},
+      after_create_time = #{record.afterCreateTime,jdbcType=BIGINT},
+      before_uid = #{record.beforeUid,jdbcType=VARCHAR},
+      after_uid = #{record.afterUid,jdbcType=VARCHAR},
+      before_number_plate = #{record.beforeNumberPlate,jdbcType=VARCHAR},
+      after_number_plate = #{record.afterNumberPlate,jdbcType=VARCHAR},
+      before_special_give = #{record.beforeSpecialGive,jdbcType=TINYINT},
+      after_special_give = #{record.afterSpecialGive,jdbcType=TINYINT},
+      before_package_price_id = #{record.beforePackagePriceId,jdbcType=VARCHAR},
+      after_package_price_id = #{record.afterPackagePriceId,jdbcType=VARCHAR},
+      before_trans_regional = #{record.beforeTransRegional,jdbcType=TINYINT},
+      after_trans_regional = #{record.afterTransRegional,jdbcType=TINYINT},
+      before_parent_id = #{record.beforeParentId,jdbcType=VARCHAR},
+      after_parent_id = #{record.afterParentId,jdbcType=VARCHAR},
+      before_phone = #{record.beforePhone,jdbcType=VARCHAR},
+      after_phone = #{record.afterPhone,jdbcType=VARCHAR},
+      before_main_car_park_id = #{record.beforeMainCarParkId,jdbcType=VARCHAR},
+      after_main_car_park_id = #{record.afterMainCarParkId,jdbcType=VARCHAR},
+      before_remarks = #{record.beforeRemarks,jdbcType=VARCHAR},
+      after_remarks = #{record.afterRemarks,jdbcType=VARCHAR},
+      before_car_owner_name = #{record.beforeCarOwnerName,jdbcType=VARCHAR},
+      after_car_owner_name = #{record.afterCarOwnerName,jdbcType=VARCHAR},
+      before_group_flag = #{record.beforeGroupFlag,jdbcType=VARCHAR},
+      before_status = #{record.beforeStatus,jdbcType=TINYINT},
+      after_status = #{record.afterStatus,jdbcType=TINYINT},
+      handle_uid = #{record.handleUid,jdbcType=VARCHAR},
+      action_time = #{record.actionTime,jdbcType=BIGINT},
+      after_group_flag = #{record.afterGroupFlag,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkPackageLog" >
+    update cf_car_park_package_log
+    <set >
+      <if test="packageId != null" >
+        package_id = #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeCarParkId != null" >
+        before_car_park_id = #{beforeCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="afterCarParkId != null" >
+        after_car_park_id = #{afterCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeTypeKey != null" >
+        before_type_key = #{beforeTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="afterTypeKey != null" >
+        after_type_key = #{afterTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeStartTime != null" >
+        before_start_time = #{beforeStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="afterStartTime != null" >
+        after_start_time = #{afterStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="beforeEndTime != null" >
+        before_end_time = #{beforeEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="afterEndTime != null" >
+        after_end_time = #{afterEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="beforeCreateTime != null" >
+        before_create_time = #{beforeCreateTime,jdbcType=BIGINT},
+      </if>
+      <if test="afterCreateTime != null" >
+        after_create_time = #{afterCreateTime,jdbcType=BIGINT},
+      </if>
+      <if test="beforeUid != null" >
+        before_uid = #{beforeUid,jdbcType=VARCHAR},
+      </if>
+      <if test="afterUid != null" >
+        after_uid = #{afterUid,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeNumberPlate != null" >
+        before_number_plate = #{beforeNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="afterNumberPlate != null" >
+        after_number_plate = #{afterNumberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeSpecialGive != null" >
+        before_special_give = #{beforeSpecialGive,jdbcType=TINYINT},
+      </if>
+      <if test="afterSpecialGive != null" >
+        after_special_give = #{afterSpecialGive,jdbcType=TINYINT},
+      </if>
+      <if test="beforePackagePriceId != null" >
+        before_package_price_id = #{beforePackagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="afterPackagePriceId != null" >
+        after_package_price_id = #{afterPackagePriceId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeTransRegional != null" >
+        before_trans_regional = #{beforeTransRegional,jdbcType=TINYINT},
+      </if>
+      <if test="afterTransRegional != null" >
+        after_trans_regional = #{afterTransRegional,jdbcType=TINYINT},
+      </if>
+      <if test="beforeParentId != null" >
+        before_parent_id = #{beforeParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="afterParentId != null" >
+        after_parent_id = #{afterParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforePhone != null" >
+        before_phone = #{beforePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="afterPhone != null" >
+        after_phone = #{afterPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeMainCarParkId != null" >
+        before_main_car_park_id = #{beforeMainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="afterMainCarParkId != null" >
+        after_main_car_park_id = #{afterMainCarParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeRemarks != null" >
+        before_remarks = #{beforeRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="afterRemarks != null" >
+        after_remarks = #{afterRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeCarOwnerName != null" >
+        before_car_owner_name = #{beforeCarOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="afterCarOwnerName != null" >
+        after_car_owner_name = #{afterCarOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeGroupFlag != null" >
+        before_group_flag = #{beforeGroupFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeStatus != null" >
+        before_status = #{beforeStatus,jdbcType=TINYINT},
+      </if>
+      <if test="afterStatus != null" >
+        after_status = #{afterStatus,jdbcType=TINYINT},
+      </if>
+      <if test="handleUid != null" >
+        handle_uid = #{handleUid,jdbcType=VARCHAR},
+      </if>
+      <if test="actionTime != null" >
+        action_time = #{actionTime,jdbcType=BIGINT},
+      </if>
+      <if test="afterGroupFlag != null" >
+        after_group_flag = #{afterGroupFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkPackageLog" >
+    update cf_car_park_package_log
+    set package_id = #{packageId,jdbcType=VARCHAR},
+      before_car_park_id = #{beforeCarParkId,jdbcType=VARCHAR},
+      after_car_park_id = #{afterCarParkId,jdbcType=VARCHAR},
+      before_type_key = #{beforeTypeKey,jdbcType=VARCHAR},
+      after_type_key = #{afterTypeKey,jdbcType=VARCHAR},
+      before_start_time = #{beforeStartTime,jdbcType=BIGINT},
+      after_start_time = #{afterStartTime,jdbcType=BIGINT},
+      before_end_time = #{beforeEndTime,jdbcType=BIGINT},
+      after_end_time = #{afterEndTime,jdbcType=BIGINT},
+      before_create_time = #{beforeCreateTime,jdbcType=BIGINT},
+      after_create_time = #{afterCreateTime,jdbcType=BIGINT},
+      before_uid = #{beforeUid,jdbcType=VARCHAR},
+      after_uid = #{afterUid,jdbcType=VARCHAR},
+      before_number_plate = #{beforeNumberPlate,jdbcType=VARCHAR},
+      after_number_plate = #{afterNumberPlate,jdbcType=VARCHAR},
+      before_special_give = #{beforeSpecialGive,jdbcType=TINYINT},
+      after_special_give = #{afterSpecialGive,jdbcType=TINYINT},
+      before_package_price_id = #{beforePackagePriceId,jdbcType=VARCHAR},
+      after_package_price_id = #{afterPackagePriceId,jdbcType=VARCHAR},
+      before_trans_regional = #{beforeTransRegional,jdbcType=TINYINT},
+      after_trans_regional = #{afterTransRegional,jdbcType=TINYINT},
+      before_parent_id = #{beforeParentId,jdbcType=VARCHAR},
+      after_parent_id = #{afterParentId,jdbcType=VARCHAR},
+      before_phone = #{beforePhone,jdbcType=VARCHAR},
+      after_phone = #{afterPhone,jdbcType=VARCHAR},
+      before_main_car_park_id = #{beforeMainCarParkId,jdbcType=VARCHAR},
+      after_main_car_park_id = #{afterMainCarParkId,jdbcType=VARCHAR},
+      before_remarks = #{beforeRemarks,jdbcType=VARCHAR},
+      after_remarks = #{afterRemarks,jdbcType=VARCHAR},
+      before_car_owner_name = #{beforeCarOwnerName,jdbcType=VARCHAR},
+      after_car_owner_name = #{afterCarOwnerName,jdbcType=VARCHAR},
+      before_group_flag = #{beforeGroupFlag,jdbcType=VARCHAR},
+      before_status = #{beforeStatus,jdbcType=TINYINT},
+      after_status = #{afterStatus,jdbcType=TINYINT},
+      handle_uid = #{handleUid,jdbcType=VARCHAR},
+      action_time = #{actionTime,jdbcType=BIGINT},
+      after_group_flag = #{afterGroupFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <resultMap id="MixResultMap" type="com.cf.carpark.domain.CfCarParkPackageLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="package_id" property="packageId" jdbcType="VARCHAR" />
+    <result column="before_car_park_id" property="beforeCarParkId" jdbcType="VARCHAR" />
+    <result column="after_car_park_id" property="afterCarParkId" jdbcType="VARCHAR" />
+    <result column="before_type_key" property="beforeTypeKey" jdbcType="VARCHAR" />
+    <result column="after_type_key" property="afterTypeKey" jdbcType="VARCHAR" />
+    <result column="before_start_time" property="beforeStartTime" jdbcType="BIGINT" />
+    <result column="after_start_time" property="afterStartTime" jdbcType="BIGINT" />
+    <result column="before_end_time" property="beforeEndTime" jdbcType="BIGINT" />
+    <result column="after_end_time" property="afterEndTime" jdbcType="BIGINT" />
+    <result column="before_create_time" property="beforeCreateTime" jdbcType="BIGINT" />
+    <result column="after_create_time" property="afterCreateTime" jdbcType="BIGINT" />
+    <result column="before_uid" property="beforeUid" jdbcType="VARCHAR" />
+    <result column="after_uid" property="afterUid" jdbcType="VARCHAR" />
+    <result column="before_number_plate" property="beforeNumberPlate" jdbcType="VARCHAR" />
+    <result column="after_number_plate" property="afterNumberPlate" jdbcType="VARCHAR" />
+    <result column="before_special_give" property="beforeSpecialGive" jdbcType="TINYINT" />
+    <result column="after_special_give" property="afterSpecialGive" jdbcType="TINYINT" />
+    <result column="before_package_price_id" property="beforePackagePriceId" jdbcType="VARCHAR" />
+    <result column="after_package_price_id" property="afterPackagePriceId" jdbcType="VARCHAR" />
+    <result column="before_trans_regional" property="beforeTransRegional" jdbcType="TINYINT" />
+    <result column="after_trans_regional" property="afterTransRegional" jdbcType="TINYINT" />
+    <result column="before_parent_id" property="beforeParentId" jdbcType="VARCHAR" />
+    <result column="after_parent_id" property="afterParentId" jdbcType="VARCHAR" />
+    <result column="before_phone" property="beforePhone" jdbcType="VARCHAR" />
+    <result column="after_phone" property="afterPhone" jdbcType="VARCHAR" />
+    <result column="before_main_car_park_id" property="beforeMainCarParkId" jdbcType="VARCHAR" />
+    <result column="after_main_car_park_id" property="afterMainCarParkId" jdbcType="VARCHAR" />
+    <result column="before_remarks" property="beforeRemarks" jdbcType="VARCHAR" />
+    <result column="after_remarks" property="afterRemarks" jdbcType="VARCHAR" />
+    <result column="before_car_owner_name" property="beforeCarOwnerName" jdbcType="VARCHAR" />
+    <result column="after_car_owner_name" property="afterCarOwnerName" jdbcType="VARCHAR" />
+    <result column="before_group_flag" property="beforeGroupFlag" jdbcType="VARCHAR" />
+    <result column="before_status" property="beforeStatus" jdbcType="TINYINT" />
+    <result column="after_status" property="afterStatus" jdbcType="TINYINT" />
+    <result column="handle_uid" property="handleUid" jdbcType="VARCHAR" />
+    <result column="action_time" property="actionTime" jdbcType="BIGINT" />
+    <result column="after_group_flag" property="afterGroupFlag" jdbcType="VARCHAR" />
+    <result column="before_car_park_name" property="beforeCarParkName" jdbcType="VARCHAR" />
+    <result column="after_car_park_name" property="afterCarParkName" jdbcType="VARCHAR" />
+    <result column="before_type_key_name" property="beforeTypeKeyName" jdbcType="VARCHAR" />
+    <result column="after_type_key_name" property="afterTypeKeyName" jdbcType="VARCHAR" />
+    <result column="handle_user_name" property="handleUserName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectByQuery" parameterType="com.cf.carpark.domain.request.CfCarParkPackageLogQuery" resultMap="MixResultMap">
+    select
+    cppl.*,cp1.name before_car_park_name,cp2.name after_car_park_name,cpt1.name before_type_key_name,cpt2.name after_type_key_name,u.user_name handle_user_name
+    from cf_car_park_package_log cppl
+    left join cf_car_park cp1 on(cppl.before_car_park_id=cp1.id)
+    left join cf_car_park cp2 on(cppl.after_car_park_id=cp2.id)
+    left join cf_car_park_car_type cpt1 on(cppl.before_type_key=cpt1.flag_key)
+    left join cf_car_park_car_type cpt2 on(cppl.after_type_key=cpt2.flag_key)
+    left join cf_user u on(cppl.handle_uid=u.id)
+    <trim prefix="where" prefixOverrides="and">
+      <if test="id!=null">
+        and cppl.id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="packageId!=null">
+        and cppl.package_id = #{packageId,jdbcType=VARCHAR}
+      </if>
+      <if test="minActionTime != null" >
+        and cppl.action_time <![CDATA[ >= ]]> #{minActionTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxActionTime != null" >
+        and cppl.action_time <![CDATA[ <= ]]> #{maxActionTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+    <if test="page != null and size != null" >
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+</mapper>

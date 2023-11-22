@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkCarMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkCar" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="purchase_time" property="purchaseTime" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="identity_image" property="identityImage" jdbcType="VARCHAR" />
+    <result column="identity_number" property="identityNumber" jdbcType="VARCHAR" />
+    <result column="car_type_key" property="carTypeKey" jdbcType="VARCHAR" />
+    <result column="car_type_start_time" property="carTypeStartTime" jdbcType="BIGINT" />
+    <result column="car_type_end_time" property="carTypeEndTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, number_plate, uid, image, brand, model, purchase_time, price, create_time, update_time, 
+    status, identity_image, identity_number, car_type_key, car_type_start_time, car_type_end_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkCarExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_car
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_car
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkCarExample" >
+    delete from cf_car_park_car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkCar" >
+    insert into cf_car_park_car (id, number_plate, uid, 
+      image, brand, model, 
+      purchase_time, price, create_time, 
+      update_time, status, identity_image, 
+      identity_number, car_type_key, car_type_start_time, 
+      car_type_end_time)
+    values (#{id,jdbcType=VARCHAR}, #{numberPlate,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{purchaseTime,jdbcType=BIGINT}, #{price,jdbcType=DECIMAL}, #{createTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, #{identityImage,jdbcType=VARCHAR}, 
+      #{identityNumber,jdbcType=VARCHAR}, #{carTypeKey,jdbcType=VARCHAR}, #{carTypeStartTime,jdbcType=BIGINT}, 
+      #{carTypeEndTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkCar" >
+    insert into cf_car_park_car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="numberPlate != null" >
+        number_plate,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="purchaseTime != null" >
+        purchase_time,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="identityImage != null" >
+        identity_image,
+      </if>
+      <if test="identityNumber != null" >
+        identity_number,
+      </if>
+      <if test="carTypeKey != null" >
+        car_type_key,
+      </if>
+      <if test="carTypeStartTime != null" >
+        car_type_start_time,
+      </if>
+      <if test="carTypeEndTime != null" >
+        car_type_end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="numberPlate != null" >
+        #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseTime != null" >
+        #{purchaseTime,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="identityImage != null" >
+        #{identityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNumber != null" >
+        #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeKey != null" >
+        #{carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeStartTime != null" >
+        #{carTypeStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="carTypeEndTime != null" >
+        #{carTypeEndTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkCarExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_car
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberPlate != null" >
+        number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseTime != null" >
+        purchase_time = #{record.purchaseTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.identityImage != null" >
+        identity_image = #{record.identityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identityNumber != null" >
+        identity_number = #{record.identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carTypeKey != null" >
+        car_type_key = #{record.carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carTypeStartTime != null" >
+        car_type_start_time = #{record.carTypeStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.carTypeEndTime != null" >
+        car_type_end_time = #{record.carTypeEndTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_car
+    set id = #{record.id,jdbcType=VARCHAR},
+      number_plate = #{record.numberPlate,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      purchase_time = #{record.purchaseTime,jdbcType=BIGINT},
+      price = #{record.price,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=TINYINT},
+      identity_image = #{record.identityImage,jdbcType=VARCHAR},
+      identity_number = #{record.identityNumber,jdbcType=VARCHAR},
+      car_type_key = #{record.carTypeKey,jdbcType=VARCHAR},
+      car_type_start_time = #{record.carTypeStartTime,jdbcType=BIGINT},
+      car_type_end_time = #{record.carTypeEndTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkCar" >
+    update cf_car_park_car
+    <set >
+      <if test="numberPlate != null" >
+        number_plate = #{numberPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseTime != null" >
+        purchase_time = #{purchaseTime,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="identityImage != null" >
+        identity_image = #{identityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNumber != null" >
+        identity_number = #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeKey != null" >
+        car_type_key = #{carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeStartTime != null" >
+        car_type_start_time = #{carTypeStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="carTypeEndTime != null" >
+        car_type_end_time = #{carTypeEndTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkCar" >
+    update cf_car_park_car
+    set number_plate = #{numberPlate,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      purchase_time = #{purchaseTime,jdbcType=BIGINT},
+      price = #{price,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      identity_image = #{identityImage,jdbcType=VARCHAR},
+      identity_number = #{identityNumber,jdbcType=VARCHAR},
+      car_type_key = #{carTypeKey,jdbcType=VARCHAR},
+      car_type_start_time = #{carTypeStartTime,jdbcType=BIGINT},
+      car_type_end_time = #{carTypeEndTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <resultMap id="ContainNameResultMap" type="com.cf.carpark.domain.CfCarParkCar" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number_plate" property="numberPlate" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="purchase_time" property="purchaseTime" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="identity_image" property="identityImage" jdbcType="VARCHAR" />
+    <result column="identity_number" property="identityNumber" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="package_counts" property="packageCounts" jdbcType="INTEGER" />
+    <result column="car_type_start_time" property="carTypeStartTime" jdbcType="BIGINT" />
+    <result column="car_type_end_time" property="carTypeEndTime" jdbcType="BIGINT" />
+  </resultMap>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="ContainNameResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+
+  <select id="getCountsByUid" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from cf_car_park_car where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByQuery" parameterType="com.cf.carpark.domain.request.CfCarParkCarQuery" resultMap="ContainNameResultMap">
+    select cpc.*,(select count(*) from cf_car_park_package cpp where cpp.number_plate=cpc.number_plate) package_counts from cf_car_park_car cpc
+    <trim prefix="where " prefixOverrides="and" suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        cpc.id=#{id,jdbcType=VARCHAR}
+      </if>
+      <if test="numberPlate != null and numberPlate != ''" >
+        cpc.number_plate=#{numberPlate,jdbcType=VARCHAR}
+      </if>
+      <if test="uid != null and uid != ''" >
+        cpc.uid=#{uid,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null" >
+        cpc.status=#{status,jdbcType=TINYINT}
+      </if>
+    </trim>
+    <if test="orderBy != null and orderBy != ''" >
+      order by #{orderBy,jdbcType=VARCHAR}
+    </if>
+    <if test="page != null and size != null" >
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+
+</mapper>

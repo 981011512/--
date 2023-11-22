@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.charging.dao.mapper.CfChargingUseLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.charging.domain.CfChargingUseLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="charging_station_id" property="chargingStationId" jdbcType="VARCHAR" />
+    <result column="charging_device_id" property="chargingDeviceId" jdbcType="VARCHAR" />
+    <result column="charging_port" property="chargingPort" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="charging_fee" property="chargingFee" jdbcType="DECIMAL" />
+    <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
+    <result column="plan_charging_fee" property="planChargingFee" jdbcType="DECIMAL" />
+    <result column="charginged_kwh" property="chargingedKwh" jdbcType="REAL" />
+    <result column="plan_charging_kwh" property="planChargingKwh" jdbcType="REAL" />
+    <result column="charging_price" property="chargingPrice" jdbcType="DECIMAL" />
+    <result column="charging_status" property="chargingStatus" jdbcType="TINYINT" />
+    <result column="end_reason" property="endReason" jdbcType="VARCHAR" />
+    <result column="service_price" property="servicePrice" jdbcType="DECIMAL" />
+    <result column="charging_power" property="chargingPower" jdbcType="INTEGER" />
+    <result column="plan_charging_time" property="planChargingTime" jdbcType="BIGINT" />
+    <result column="charging_type" property="chargingType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, charging_station_id, charging_device_id, charging_port, start_time, end_time, 
+    uid, charging_fee, service_fee, plan_charging_fee, charginged_kwh, plan_charging_kwh, 
+    charging_price, charging_status, end_reason, service_price, charging_power, plan_charging_time, 
+    charging_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.charging.domain.CfChargingUseLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_charging_use_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_charging_use_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_charging_use_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.charging.domain.CfChargingUseLogExample" >
+    delete from cf_charging_use_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.charging.domain.CfChargingUseLog" >
+    insert into cf_charging_use_log (id, charging_station_id, charging_device_id, 
+      charging_port, start_time, end_time, 
+      uid, charging_fee, service_fee, 
+      plan_charging_fee, charginged_kwh, plan_charging_kwh, 
+      charging_price, charging_status, end_reason, 
+      service_price, charging_power, plan_charging_time, 
+      charging_type)
+    values (#{id,jdbcType=VARCHAR}, #{chargingStationId,jdbcType=VARCHAR}, #{chargingDeviceId,jdbcType=VARCHAR}, 
+      #{chargingPort,jdbcType=VARCHAR}, #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, 
+      #{uid,jdbcType=VARCHAR}, #{chargingFee,jdbcType=DECIMAL}, #{serviceFee,jdbcType=DECIMAL}, 
+      #{planChargingFee,jdbcType=DECIMAL}, #{chargingedKwh,jdbcType=REAL}, #{planChargingKwh,jdbcType=REAL}, 
+      #{chargingPrice,jdbcType=DECIMAL}, #{chargingStatus,jdbcType=TINYINT}, #{endReason,jdbcType=VARCHAR}, 
+      #{servicePrice,jdbcType=DECIMAL}, #{chargingPower,jdbcType=INTEGER}, #{planChargingTime,jdbcType=BIGINT}, 
+      #{chargingType,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.charging.domain.CfChargingUseLog" >
+    insert into cf_charging_use_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="chargingStationId != null" >
+        charging_station_id,
+      </if>
+      <if test="chargingDeviceId != null" >
+        charging_device_id,
+      </if>
+      <if test="chargingPort != null" >
+        charging_port,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="chargingFee != null" >
+        charging_fee,
+      </if>
+      <if test="serviceFee != null" >
+        service_fee,
+      </if>
+      <if test="planChargingFee != null" >
+        plan_charging_fee,
+      </if>
+      <if test="chargingedKwh != null" >
+        charginged_kwh,
+      </if>
+      <if test="planChargingKwh != null" >
+        plan_charging_kwh,
+      </if>
+      <if test="chargingPrice != null" >
+        charging_price,
+      </if>
+      <if test="chargingStatus != null" >
+        charging_status,
+      </if>
+      <if test="endReason != null" >
+        end_reason,
+      </if>
+      <if test="servicePrice != null" >
+        service_price,
+      </if>
+      <if test="chargingPower != null" >
+        charging_power,
+      </if>
+      <if test="planChargingTime != null" >
+        plan_charging_time,
+      </if>
+      <if test="chargingType != null" >
+        charging_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingStationId != null" >
+        #{chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingDeviceId != null" >
+        #{chargingDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingPort != null" >
+        #{chargingPort,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingFee != null" >
+        #{chargingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceFee != null" >
+        #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="planChargingFee != null" >
+        #{planChargingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingedKwh != null" >
+        #{chargingedKwh,jdbcType=REAL},
+      </if>
+      <if test="planChargingKwh != null" >
+        #{planChargingKwh,jdbcType=REAL},
+      </if>
+      <if test="chargingPrice != null" >
+        #{chargingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingStatus != null" >
+        #{chargingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="endReason != null" >
+        #{endReason,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePrice != null" >
+        #{servicePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingPower != null" >
+        #{chargingPower,jdbcType=INTEGER},
+      </if>
+      <if test="planChargingTime != null" >
+        #{planChargingTime,jdbcType=BIGINT},
+      </if>
+      <if test="chargingType != null" >
+        #{chargingType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.charging.domain.CfChargingUseLogExample" resultType="java.lang.Integer" >
+    select count(*) from cf_charging_use_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_charging_use_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargingStationId != null" >
+        charging_station_id = #{record.chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargingDeviceId != null" >
+        charging_device_id = #{record.chargingDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargingPort != null" >
+        charging_port = #{record.chargingPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargingFee != null" >
+        charging_fee = #{record.chargingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serviceFee != null" >
+        service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.planChargingFee != null" >
+        plan_charging_fee = #{record.planChargingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chargingedKwh != null" >
+        charginged_kwh = #{record.chargingedKwh,jdbcType=REAL},
+      </if>
+      <if test="record.planChargingKwh != null" >
+        plan_charging_kwh = #{record.planChargingKwh,jdbcType=REAL},
+      </if>
+      <if test="record.chargingPrice != null" >
+        charging_price = #{record.chargingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chargingStatus != null" >
+        charging_status = #{record.chargingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.endReason != null" >
+        end_reason = #{record.endReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePrice != null" >
+        service_price = #{record.servicePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chargingPower != null" >
+        charging_power = #{record.chargingPower,jdbcType=INTEGER},
+      </if>
+      <if test="record.planChargingTime != null" >
+        plan_charging_time = #{record.planChargingTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.chargingType != null" >
+        charging_type = #{record.chargingType,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_charging_use_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      charging_station_id = #{record.chargingStationId,jdbcType=VARCHAR},
+      charging_device_id = #{record.chargingDeviceId,jdbcType=VARCHAR},
+      charging_port = #{record.chargingPort,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=BIGINT},
+      end_time = #{record.endTime,jdbcType=BIGINT},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      charging_fee = #{record.chargingFee,jdbcType=DECIMAL},
+      service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+      plan_charging_fee = #{record.planChargingFee,jdbcType=DECIMAL},
+      charginged_kwh = #{record.chargingedKwh,jdbcType=REAL},
+      plan_charging_kwh = #{record.planChargingKwh,jdbcType=REAL},
+      charging_price = #{record.chargingPrice,jdbcType=DECIMAL},
+      charging_status = #{record.chargingStatus,jdbcType=TINYINT},
+      end_reason = #{record.endReason,jdbcType=VARCHAR},
+      service_price = #{record.servicePrice,jdbcType=DECIMAL},
+      charging_power = #{record.chargingPower,jdbcType=INTEGER},
+      plan_charging_time = #{record.planChargingTime,jdbcType=BIGINT},
+      charging_type = #{record.chargingType,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.charging.domain.CfChargingUseLog" >
+    update cf_charging_use_log
+    <set >
+      <if test="chargingStationId != null" >
+        charging_station_id = #{chargingStationId,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingDeviceId != null" >
+        charging_device_id = #{chargingDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingPort != null" >
+        charging_port = #{chargingPort,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingFee != null" >
+        charging_fee = #{chargingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceFee != null" >
+        service_fee = #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="planChargingFee != null" >
+        plan_charging_fee = #{planChargingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingedKwh != null" >
+        charginged_kwh = #{chargingedKwh,jdbcType=REAL},
+      </if>
+      <if test="planChargingKwh != null" >
+        plan_charging_kwh = #{planChargingKwh,jdbcType=REAL},
+      </if>
+      <if test="chargingPrice != null" >
+        charging_price = #{chargingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingStatus != null" >
+        charging_status = #{chargingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="endReason != null" >
+        end_reason = #{endReason,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePrice != null" >
+        service_price = #{servicePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingPower != null" >
+        charging_power = #{chargingPower,jdbcType=INTEGER},
+      </if>
+      <if test="planChargingTime != null" >
+        plan_charging_time = #{planChargingTime,jdbcType=BIGINT},
+      </if>
+      <if test="chargingType != null" >
+        charging_type = #{chargingType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.charging.domain.CfChargingUseLog" >
+    update cf_charging_use_log
+    set charging_station_id = #{chargingStationId,jdbcType=VARCHAR},
+      charging_device_id = #{chargingDeviceId,jdbcType=VARCHAR},
+      charging_port = #{chargingPort,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      uid = #{uid,jdbcType=VARCHAR},
+      charging_fee = #{chargingFee,jdbcType=DECIMAL},
+      service_fee = #{serviceFee,jdbcType=DECIMAL},
+      plan_charging_fee = #{planChargingFee,jdbcType=DECIMAL},
+      charginged_kwh = #{chargingedKwh,jdbcType=REAL},
+      plan_charging_kwh = #{planChargingKwh,jdbcType=REAL},
+      charging_price = #{chargingPrice,jdbcType=DECIMAL},
+      charging_status = #{chargingStatus,jdbcType=TINYINT},
+      end_reason = #{endReason,jdbcType=VARCHAR},
+      service_price = #{servicePrice,jdbcType=DECIMAL},
+      charging_power = #{chargingPower,jdbcType=INTEGER},
+      plan_charging_time = #{planChargingTime,jdbcType=BIGINT},
+      charging_type = #{chargingType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+
+  <resultMap id="ContainStationResultMap" type="com.cf.charging.domain.CfChargingUseLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="charging_station_id" property="chargingStationId" jdbcType="VARCHAR" />
+    <result column="charging_device_id" property="chargingDeviceId" jdbcType="VARCHAR" />
+    <result column="charging_port" property="chargingPort" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="charging_fee" property="chargingFee" jdbcType="DECIMAL" />
+    <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
+    <result column="plan_charging_fee" property="planChargingFee" jdbcType="DECIMAL" />
+    <result column="charginged_kwh" property="chargingedKwh" jdbcType="REAL" />
+    <result column="plan_charging_kwh" property="planChargingKwh" jdbcType="REAL" />
+    <result column="charging_price" property="chargingPrice" jdbcType="DECIMAL" />
+    <result column="charging_status" property="chargingStatus" jdbcType="TINYINT" />
+    <result column="end_reason" property="endReason" jdbcType="VARCHAR" />
+    <result column="service_price" property="servicePrice" jdbcType="DECIMAL" />
+    <result column="charging_power" property="chargingPower" jdbcType="INTEGER" />
+    <result column="plan_charging_time" property="planChargingTime" jdbcType="BIGINT" />
+    <result column="charging_type" property="chargingType" jdbcType="TINYINT" />
+    <collection property="cfChargingStation"  ofType="com.cf.charging.domain.CfChargingStation">
+      <id column="cs_id" property="id" jdbcType="VARCHAR" />
+      <result column="cs_station_name" property="stationName" jdbcType="VARCHAR" />
+      <result column="cs_image" property="image" jdbcType="VARCHAR" />
+      <result column="cs_station_type" property="stationType" jdbcType="TINYINT" />
+      <result column="cs_free_park_time" property="freeParkTime" jdbcType="BIGINT" />
+      <result column="cs_start_price" property="startPrice" jdbcType="DECIMAL" />
+      <result column="cs_has_bathroom" property="hasBathroom" jdbcType="TINYINT" />
+      <result column="cs_has_lounge" property="hasLounge" jdbcType="TINYINT" />
+      <result column="cs_has_dinning_room" property="hasDinningRoom" jdbcType="TINYINT" />
+      <result column="cs_has_shop" property="hasShop" jdbcType="TINYINT" />
+      <result column="cs_slow_charge_number" property="slowChargeNumber" jdbcType="TINYINT" />
+      <result column="cs_fast_charge_number" property="fastChargeNumber" jdbcType="TINYINT" />
+      <result column="cs_super_fast_charge_number" property="superFastChargeNumber" jdbcType="TINYINT" />
+      <result column="cs_used_slow_charge_number" property="usedSlowChargeNumber" jdbcType="SMALLINT" />
+      <result column="cs_used_fast_charge_number" property="usedFastChargeNumber" jdbcType="SMALLINT" />
+      <result column="cs_used_super_fast_charge_number" property="usedSuperFastChargeNumber" jdbcType="SMALLINT" />
+      <result column="cs_floor" property="floor" jdbcType="TINYINT" />
+      <result column="cs_indoor_or_outdoor" property="indoorOrOutdoor" jdbcType="TINYINT" />
+      <result column="cs_position_x" property="positionX" jdbcType="DECIMAL" />
+      <result column="cs_position_y" property="positionY" jdbcType="DECIMAL" />
+      <result column="cs_country_id" property="countryId" jdbcType="VARCHAR" />
+      <result column="cs_province_id" property="provinceId" jdbcType="VARCHAR" />
+      <result column="cs_state_or_city_id" property="stateOrCityId" jdbcType="VARCHAR" />
+      <result column="cs_zone_or_county_id" property="zoneOrCountyId" jdbcType="VARCHAR" />
+      <result column="cs_township_id" property="townshipId" jdbcType="VARCHAR" />
+      <result column="cs_address" property="address" jdbcType="VARCHAR" />
+      <result column="cs_start_business_time" property="startBusinessTime" jdbcType="BIGINT" />
+      <result column="cs_end_business_time" property="endBusinessTime" jdbcType="BIGINT" />
+      <result column="cs_station_status" property="stationStatus" jdbcType="TINYINT" />
+      <result column="cs_phone" property="phone" jdbcType="VARCHAR" />
+      <result column="cs_service_fee" property="serviceFee" jdbcType="DECIMAL" />
+      <result column="cs_car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="cfChargingStationDevice"  ofType="com.cf.charging.domain.CfChargingStationDevice">
+      <id column="csd_id" property="id" jdbcType="VARCHAR" />
+      <result column="csd_charging_station_id" property="chargingStationId" jdbcType="VARCHAR" />
+      <result column="csd_bar_code" property="barCode" jdbcType="VARCHAR" />
+      <result column="csd_brand" property="brand" jdbcType="VARCHAR" />
+      <result column="csd_model" property="model" jdbcType="VARCHAR" />
+      <result column="csd_status" property="status" jdbcType="TINYINT" />
+      <result column="csd_last_online_time" property="lastOnlineTime" jdbcType="BIGINT" />
+      <result column="csd_link_mode" property="linkMode" jdbcType="VARCHAR" />
+      <result column="csd_type" property="type" jdbcType="TINYINT" />
+      <result column="csd_checkpoint_id" property="checkpointId" jdbcType="VARCHAR" />
+      <result column="csd_product_id" property="productId" jdbcType="VARCHAR" />
+      <result column="csd_play_contents" property="playContents" jdbcType="VARCHAR" />
+      <result column="csd_ip" property="ip" jdbcType="VARCHAR" />
+      <result column="csd_video_address" property="videoAddress" jdbcType="VARCHAR" />
+      <result column="csd_history_video_address" property="historyVideoAddress" jdbcType="VARCHAR" />
+      <result column="csd_username" property="username" jdbcType="VARCHAR" />
+      <result column="csd_password" property="password" jdbcType="VARCHAR" />
+      <result column="csd_index_no" property="indexNo" jdbcType="TINYINT" />
+      <result column="csd_noticed" property="noticed" jdbcType="TINYINT" />
+      <result column="csd_rows" property="rows" jdbcType="TINYINT" />
+      <result column="csd_mac_address" property="macAddress" jdbcType="VARCHAR" />
+      <result column="csd_power" property="power" jdbcType="INTEGER" />
+      <result column="csd_power_type" property="powerType" jdbcType="TINYINT" />
+      <result column="csd_alias_name" property="aliasName" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="selectListByQuery" parameterType="com.cf.charging.domain.request.CfChargingUseLogQuery" resultMap="ContainStationResultMap">
+    select cul.*,cs.station_name cs_station_name from cf_charging_use_log cul left join cf_charging_station cs on (cul.charging_station_id=cs.id)
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and cul.id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="chargingStationId!=null">
+        and cul.charging_station_id = #{chargingStationId,jdbcType=VARCHAR}
+      </if>
+      <if test="chargingDeviceId!=null">
+        and cul.charging_device_id = #{chargingDeviceId,jdbcType=VARCHAR}
+      </if>
+      <if test="chargingPort!=null">
+        and cul.charging_port = #{chargingPort,jdbcType=VARCHAR}
+      </if>
+      <if test="startTime!=null">
+        and cul.start_time = #{startTime,jdbcType=BIGINT}
+      </if>
+      <if test="minStartTime!=null">
+        and cul.start_time <![CDATA[ >= ]]> #{minStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxStartTime!=null">
+        and cul.start_time <![CDATA[ <= ]]> #{maxStartTime,jdbcType=BIGINT}
+      </if>
+      <if test="endTime!=null">
+        and cul.end_time = #{endTime,jdbcType=BIGINT}
+      </if>
+      <if test="minEndTime!=null">
+        and cul.end_time <![CDATA[ >= ]]> #{minEndTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxEndTime!=null">
+        and cul.end_time <![CDATA[ <= ]]> #{maxEndTime,jdbcType=BIGINT}
+      </if>
+      <if test="uid!=null">
+        and cul.uid = #{uid,jdbcType=VARCHAR}
+      </if>
+      <if test="chargingStatus!=null">
+        and cul.charging_status = #{chargingStatus,jdbcType=TINYINT}
+      </if>
+      <if test="chargingType!=null">
+        and cul.charging_type = #{chargingType,jdbcType=TINYINT}
+      </if>
+    </trim>
+    <if test="orderBy!=null">
+      order by #{orderBy,jdbcType=VARCHAR}
+    </if>
+    <if test="page!=null and size !=null">
+      limit ${(page-1)*size},${size}
+    </if>
+  </select>
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="ContainStationResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+</mapper>

@@ -1,0 +1,14 @@
+server:
+  port: 8085
+  max-http-header-size: 64KB
+spring:
+  application:
+    name: cf-sms-api
+  profiles:
+    active: dev
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: zookeeper://127.0.0.1:2181
+

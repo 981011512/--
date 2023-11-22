@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.ucenter.dao.mapper.CfSubscribeMessageTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.ucenter.domain.CfSubscribeMessageTemplate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="message_scenes" property="messageScenes" jdbcType="VARCHAR" />
+    <result column="template_id" property="templateId" jdbcType="VARCHAR" />
+    <result column="template_contents" property="templateContents" jdbcType="VARCHAR" />
+    <result column="template_notes" property="templateNotes" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, appid, message_scenes, template_id, template_contents, template_notes
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.ucenter.domain.CfSubscribeMessageTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_subscribe_message_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_subscribe_message_template
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cf_subscribe_message_template
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.ucenter.domain.CfSubscribeMessageTemplateExample" >
+    delete from cf_subscribe_message_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.ucenter.domain.CfSubscribeMessageTemplate" >
+    insert into cf_subscribe_message_template (id, appid, message_scenes, 
+      template_id, template_contents, template_notes
+      )
+    values (#{id,jdbcType=BIGINT}, #{appid,jdbcType=VARCHAR}, #{messageScenes,jdbcType=VARCHAR}, 
+      #{templateId,jdbcType=VARCHAR}, #{templateContents,jdbcType=VARCHAR}, #{templateNotes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.ucenter.domain.CfSubscribeMessageTemplate" >
+    insert into cf_subscribe_message_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appid != null" >
+        appid,
+      </if>
+      <if test="messageScenes != null" >
+        message_scenes,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="templateContents != null" >
+        template_contents,
+      </if>
+      <if test="templateNotes != null" >
+        template_notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="messageScenes != null" >
+        #{messageScenes,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="templateContents != null" >
+        #{templateContents,jdbcType=VARCHAR},
+      </if>
+      <if test="templateNotes != null" >
+        #{templateNotes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.ucenter.domain.CfSubscribeMessageTemplateExample" resultType="java.lang.Integer" >
+    select count(*) from cf_subscribe_message_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_subscribe_message_template
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appid != null" >
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageScenes != null" >
+        message_scenes = #{record.messageScenes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateId != null" >
+        template_id = #{record.templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateContents != null" >
+        template_contents = #{record.templateContents,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateNotes != null" >
+        template_notes = #{record.templateNotes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_subscribe_message_template
+    set id = #{record.id,jdbcType=BIGINT},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      message_scenes = #{record.messageScenes,jdbcType=VARCHAR},
+      template_id = #{record.templateId,jdbcType=VARCHAR},
+      template_contents = #{record.templateContents,jdbcType=VARCHAR},
+      template_notes = #{record.templateNotes,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.ucenter.domain.CfSubscribeMessageTemplate" >
+    update cf_subscribe_message_template
+    <set >
+      <if test="appid != null" >
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="messageScenes != null" >
+        message_scenes = #{messageScenes,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        template_id = #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="templateContents != null" >
+        template_contents = #{templateContents,jdbcType=VARCHAR},
+      </if>
+      <if test="templateNotes != null" >
+        template_notes = #{templateNotes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.ucenter.domain.CfSubscribeMessageTemplate" >
+    update cf_subscribe_message_template
+    set appid = #{appid,jdbcType=VARCHAR},
+      message_scenes = #{messageScenes,jdbcType=VARCHAR},
+      template_id = #{templateId,jdbcType=VARCHAR},
+      template_contents = #{templateContents,jdbcType=VARCHAR},
+      template_notes = #{templateNotes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

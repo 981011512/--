@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.carpark.dao.mapper.CfCarParkCheckpointMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.carpark.domain.CfCarParkCheckpoint" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="position_describe" property="positionDescribe" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="TINYINT" />
+    <result column="mode" property="mode" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="duty_uid" property="dutyUid" jdbcType="VARCHAR" />
+    <result column="direction" property="direction" jdbcType="VARCHAR" />
+    <result column="allow_temporary_car" property="allowTemporaryCar" jdbcType="TINYINT" />
+    <result column="allow_unconditional_open" property="allowUnconditionalOpen" jdbcType="TINYINT" />
+    <result column="default_check_point" property="defaultCheckPoint" jdbcType="TINYINT" />
+    <result column="add_forbidden_data" property="addForbiddenData" jdbcType="TINYINT" />
+    <result column="allow_expired_car" property="allowExpiredCar" jdbcType="TINYINT" />
+    <result column="allow_package_car" property="allowPackageCar" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, car_park_id, position_x, position_y, position_describe, floor, mode, status, 
+    duty_uid, direction, allow_temporary_car, allow_unconditional_open, default_check_point, 
+    add_forbidden_data, allow_expired_car, allow_package_car
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.carpark.domain.CfCarParkCheckpointExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_car_park_checkpoint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_car_park_checkpoint
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_car_park_checkpoint
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.carpark.domain.CfCarParkCheckpointExample" >
+    delete from cf_car_park_checkpoint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.carpark.domain.CfCarParkCheckpoint" >
+    insert into cf_car_park_checkpoint (id, name, car_park_id, 
+      position_x, position_y, position_describe, 
+      floor, mode, status, 
+      duty_uid, direction, allow_temporary_car, 
+      allow_unconditional_open, default_check_point, 
+      add_forbidden_data, allow_expired_car, allow_package_car
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{carParkId,jdbcType=VARCHAR}, 
+      #{positionX,jdbcType=DECIMAL}, #{positionY,jdbcType=DECIMAL}, #{positionDescribe,jdbcType=VARCHAR}, 
+      #{floor,jdbcType=TINYINT}, #{mode,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{dutyUid,jdbcType=VARCHAR}, #{direction,jdbcType=VARCHAR}, #{allowTemporaryCar,jdbcType=TINYINT}, 
+      #{allowUnconditionalOpen,jdbcType=TINYINT}, #{defaultCheckPoint,jdbcType=TINYINT}, 
+      #{addForbiddenData,jdbcType=TINYINT}, #{allowExpiredCar,jdbcType=TINYINT}, #{allowPackageCar,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.carpark.domain.CfCarParkCheckpoint" >
+    insert into cf_car_park_checkpoint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="carParkId != null" >
+        car_park_id,
+      </if>
+      <if test="positionX != null" >
+        position_x,
+      </if>
+      <if test="positionY != null" >
+        position_y,
+      </if>
+      <if test="positionDescribe != null" >
+        position_describe,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="mode != null" >
+        mode,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="dutyUid != null" >
+        duty_uid,
+      </if>
+      <if test="direction != null" >
+        direction,
+      </if>
+      <if test="allowTemporaryCar != null" >
+        allow_temporary_car,
+      </if>
+      <if test="allowUnconditionalOpen != null" >
+        allow_unconditional_open,
+      </if>
+      <if test="defaultCheckPoint != null" >
+        default_check_point,
+      </if>
+      <if test="addForbiddenData != null" >
+        add_forbidden_data,
+      </if>
+      <if test="allowExpiredCar != null" >
+        allow_expired_car,
+      </if>
+      <if test="allowPackageCar != null" >
+        allow_package_car,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="positionDescribe != null" >
+        #{positionDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=TINYINT},
+      </if>
+      <if test="mode != null" >
+        #{mode,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="dutyUid != null" >
+        #{dutyUid,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null" >
+        #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="allowTemporaryCar != null" >
+        #{allowTemporaryCar,jdbcType=TINYINT},
+      </if>
+      <if test="allowUnconditionalOpen != null" >
+        #{allowUnconditionalOpen,jdbcType=TINYINT},
+      </if>
+      <if test="defaultCheckPoint != null" >
+        #{defaultCheckPoint,jdbcType=TINYINT},
+      </if>
+      <if test="addForbiddenData != null" >
+        #{addForbiddenData,jdbcType=TINYINT},
+      </if>
+      <if test="allowExpiredCar != null" >
+        #{allowExpiredCar,jdbcType=TINYINT},
+      </if>
+      <if test="allowPackageCar != null" >
+        #{allowPackageCar,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.carpark.domain.CfCarParkCheckpointExample" resultType="java.lang.Integer" >
+    select count(*) from cf_car_park_checkpoint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_car_park_checkpoint
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carParkId != null" >
+        car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionX != null" >
+        position_x = #{record.positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.positionY != null" >
+        position_y = #{record.positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.positionDescribe != null" >
+        position_describe = #{record.positionDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floor != null" >
+        floor = #{record.floor,jdbcType=TINYINT},
+      </if>
+      <if test="record.mode != null" >
+        mode = #{record.mode,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.dutyUid != null" >
+        duty_uid = #{record.dutyUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.direction != null" >
+        direction = #{record.direction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allowTemporaryCar != null" >
+        allow_temporary_car = #{record.allowTemporaryCar,jdbcType=TINYINT},
+      </if>
+      <if test="record.allowUnconditionalOpen != null" >
+        allow_unconditional_open = #{record.allowUnconditionalOpen,jdbcType=TINYINT},
+      </if>
+      <if test="record.defaultCheckPoint != null" >
+        default_check_point = #{record.defaultCheckPoint,jdbcType=TINYINT},
+      </if>
+      <if test="record.addForbiddenData != null" >
+        add_forbidden_data = #{record.addForbiddenData,jdbcType=TINYINT},
+      </if>
+      <if test="record.allowExpiredCar != null" >
+        allow_expired_car = #{record.allowExpiredCar,jdbcType=TINYINT},
+      </if>
+      <if test="record.allowPackageCar != null" >
+        allow_package_car = #{record.allowPackageCar,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_car_park_checkpoint
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      car_park_id = #{record.carParkId,jdbcType=VARCHAR},
+      position_x = #{record.positionX,jdbcType=DECIMAL},
+      position_y = #{record.positionY,jdbcType=DECIMAL},
+      position_describe = #{record.positionDescribe,jdbcType=VARCHAR},
+      floor = #{record.floor,jdbcType=TINYINT},
+      mode = #{record.mode,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      duty_uid = #{record.dutyUid,jdbcType=VARCHAR},
+      direction = #{record.direction,jdbcType=VARCHAR},
+      allow_temporary_car = #{record.allowTemporaryCar,jdbcType=TINYINT},
+      allow_unconditional_open = #{record.allowUnconditionalOpen,jdbcType=TINYINT},
+      default_check_point = #{record.defaultCheckPoint,jdbcType=TINYINT},
+      add_forbidden_data = #{record.addForbiddenData,jdbcType=TINYINT},
+      allow_expired_car = #{record.allowExpiredCar,jdbcType=TINYINT},
+      allow_package_car = #{record.allowPackageCar,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.carpark.domain.CfCarParkCheckpoint" >
+    update cf_car_park_checkpoint
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="carParkId != null" >
+        car_park_id = #{carParkId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionX != null" >
+        position_x = #{positionX,jdbcType=DECIMAL},
+      </if>
+      <if test="positionY != null" >
+        position_y = #{positionY,jdbcType=DECIMAL},
+      </if>
+      <if test="positionDescribe != null" >
+        position_describe = #{positionDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=TINYINT},
+      </if>
+      <if test="mode != null" >
+        mode = #{mode,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="dutyUid != null" >
+        duty_uid = #{dutyUid,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null" >
+        direction = #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="allowTemporaryCar != null" >
+        allow_temporary_car = #{allowTemporaryCar,jdbcType=TINYINT},
+      </if>
+      <if test="allowUnconditionalOpen != null" >
+        allow_unconditional_open = #{allowUnconditionalOpen,jdbcType=TINYINT},
+      </if>
+      <if test="defaultCheckPoint != null" >
+        default_check_point = #{defaultCheckPoint,jdbcType=TINYINT},
+      </if>
+      <if test="addForbiddenData != null" >
+        add_forbidden_data = #{addForbiddenData,jdbcType=TINYINT},
+      </if>
+      <if test="allowExpiredCar != null" >
+        allow_expired_car = #{allowExpiredCar,jdbcType=TINYINT},
+      </if>
+      <if test="allowPackageCar != null" >
+        allow_package_car = #{allowPackageCar,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.carpark.domain.CfCarParkCheckpoint" >
+    update cf_car_park_checkpoint
+    set name = #{name,jdbcType=VARCHAR},
+      car_park_id = #{carParkId,jdbcType=VARCHAR},
+      position_x = #{positionX,jdbcType=DECIMAL},
+      position_y = #{positionY,jdbcType=DECIMAL},
+      position_describe = #{positionDescribe,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=TINYINT},
+      mode = #{mode,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      duty_uid = #{dutyUid,jdbcType=VARCHAR},
+      direction = #{direction,jdbcType=VARCHAR},
+      allow_temporary_car = #{allowTemporaryCar,jdbcType=TINYINT},
+      allow_unconditional_open = #{allowUnconditionalOpen,jdbcType=TINYINT},
+      default_check_point = #{defaultCheckPoint,jdbcType=TINYINT},
+      add_forbidden_data = #{addForbiddenData,jdbcType=TINYINT},
+      allow_expired_car = #{allowExpiredCar,jdbcType=TINYINT},
+      allow_package_car = #{allowPackageCar,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <resultMap id="ContainCarParkNameResultMap" type="com.cf.carpark.domain.CfCarParkCheckpoint" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="car_park_id" property="carParkId" jdbcType="VARCHAR" />
+    <result column="position_x" property="positionX" jdbcType="DECIMAL" />
+    <result column="position_y" property="positionY" jdbcType="DECIMAL" />
+    <result column="position_describe" property="positionDescribe" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="TINYINT" />
+    <result column="mode" property="mode" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="duty_uid" property="dutyUid" jdbcType="VARCHAR" />
+    <result column="direction" property="direction" jdbcType="VARCHAR" />
+    <result column="carpark_name" property="carParkName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="allow_temporary_car" property="allowTemporaryCar" jdbcType="TINYINT" />
+    <result column="allow_unconditional_open" property="allowUnconditionalOpen" jdbcType="TINYINT" />
+    <result column="default_check_point" property="defaultCheckPoint" jdbcType="TINYINT" />
+    <result column="add_forbidden_data" property="addForbiddenData" jdbcType="TINYINT" />
+    <result column="allow_expired_car" property="allowExpiredCar" jdbcType="TINYINT" />
+    <result column="allow_package_car" property="allowPackageCar" jdbcType="TINYINT" />
+  </resultMap>
+  <select id="selectNearbyCheckPoint" parameterType="com.cf.carpark.domain.request.CfCarParkCheckpointQuery"  resultMap="ContainCarParkNameResultMap">
+    SELECT
+    cpck.*,CASE WHEN true THEN (st_distance (point (cpck.position_x, cpck.position_y),point(#{positionX,jdbcType=DECIMAL},
+    #{positionY,jdbcType=DECIMAL}) ) * 111195) END distance,cp.name carpark_name
+    FROM
+    `cf_car_park_checkpoint` cpck
+    LEFT JOIN
+    `cf_car_park` cp ON(cp.id=cpck.car_park_id)
+    WHERE
+    <trim prefixOverrides="and" >
+      <if test="distance != null" >
+        AND (st_distance (point (cpck.position_x, cpck.position_y),point(#{positionX,jdbcType=DECIMAL},#{positionY,jdbcType=DECIMAL}) ) * 111195)
+        <![CDATA[ <= ]]> #{distance,jdbcType=INTEGER}
+      </if>
+      <if test="carParkId != null and carParkId!=''" >
+          AND cpck.car_park_id = #{carParkId,jdbcType=VARCHAR}
+      </if>
+      <if test="direction != null and direction!=''" >
+          AND cpck.direction = #{direction,jdbcType=VARCHAR}
+      </if>
+    </trim>
+    order by distance asc limit #{page,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByQuery" parameterType="com.cf.carpark.domain.request.CfCarParkCheckpointQuery"  resultMap="ContainCarParkNameResultMap">
+    select cpck.*,u.user_name from cf_car_park_checkpoint cpck left join cf_user u on(cpck.duty_uid=u.id)
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="carParkId!=null and carParkId!=''">
+        and cpck.car_park_id = #{carParkId,jdbcType=VARCHAR}
+      </if>
+      <if test="floor!=null and floor!=''">
+        and cpck.floor = #{floor,jdbcType=TINYINT}
+      </if>
+      <if test="mode!=null and mode!=''">
+        and cpck.mode = #{mode,jdbcType=TINYINT}
+      </if>
+      <if test="status!=null and status!=''">
+        and cpck.status = #{status,jdbcType=TINYINT}
+      </if>
+      <if test="dutyUid!=null and dutyUid!=''">
+        and cpck.duty_uid = #{dutyUid,jdbcType=VARCHAR}
+      </if>
+      <if test="direction!=null and direction!=''">
+        and cpck.direction = #{direction,jdbcType=VARCHAR}
+      </if>
+    </trim>
+    <if test="page!=null and size!=null">
+      limit #{page,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </if>
+  </select>
+</mapper>

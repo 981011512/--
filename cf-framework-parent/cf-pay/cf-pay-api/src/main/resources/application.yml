@@ -1,0 +1,25 @@
+server:
+  port: 8096
+  max-http-header-size: 64KB
+spring:
+  application:
+    name: cf-pay-api
+  profiles:
+    active: dev
+  redis:
+    host: redis数据库地址
+    port: 6379
+    password: redis密码
+    database: 0
+    jedis:
+      pool:
+        maxActive: 3
+        maxIdle: 3
+        minIdle: 1
+        maxWait: -1
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: zookeeper://127.0.0.1:2181
+

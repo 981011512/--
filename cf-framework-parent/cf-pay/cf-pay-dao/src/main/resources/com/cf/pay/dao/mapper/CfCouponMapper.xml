@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cf.pay.dao.mapper.CfCouponMapper" >
+  <resultMap id="BaseResultMap" type="com.cf.pay.domain.CfCoupon" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="to_uid" property="toUid" jdbcType="VARCHAR" />
+    <result column="from_uid" property="fromUid" jdbcType="VARCHAR" />
+    <result column="scenes" property="scenes" jdbcType="TINYINT" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="denomination" property="denomination" jdbcType="DECIMAL" />
+    <result column="threshold_price" property="thresholdPrice" jdbcType="DECIMAL" />
+    <result column="effective_time" property="effectiveTime" jdbcType="BIGINT" />
+    <result column="expire_time" property="expireTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="use_time" property="useTime" jdbcType="BIGINT" />
+    <result column="amount_used" property="amountUsed" jdbcType="DECIMAL" />
+    <result column="coupon_type" property="couponType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, to_uid, from_uid, scenes, shop_id, goods_id, denomination, threshold_price, effective_time, 
+    expire_time, status, create_time, use_time, amount_used, coupon_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cf.pay.domain.CfCouponExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_coupon
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cf_coupon
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cf.pay.domain.CfCouponExample" >
+    delete from cf_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cf.pay.domain.CfCoupon" >
+    insert into cf_coupon (id, to_uid, from_uid, 
+      scenes, shop_id, goods_id, 
+      denomination, threshold_price, effective_time, 
+      expire_time, status, create_time, 
+      use_time, amount_used, coupon_type
+      )
+    values (#{id,jdbcType=VARCHAR}, #{toUid,jdbcType=VARCHAR}, #{fromUid,jdbcType=VARCHAR}, 
+      #{scenes,jdbcType=TINYINT}, #{shopId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
+      #{denomination,jdbcType=DECIMAL}, #{thresholdPrice,jdbcType=DECIMAL}, #{effectiveTime,jdbcType=BIGINT}, 
+      #{expireTime,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, 
+      #{useTime,jdbcType=BIGINT}, #{amountUsed,jdbcType=DECIMAL}, #{couponType,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cf.pay.domain.CfCoupon" >
+    insert into cf_coupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="toUid != null" >
+        to_uid,
+      </if>
+      <if test="fromUid != null" >
+        from_uid,
+      </if>
+      <if test="scenes != null" >
+        scenes,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="denomination != null" >
+        denomination,
+      </if>
+      <if test="thresholdPrice != null" >
+        threshold_price,
+      </if>
+      <if test="effectiveTime != null" >
+        effective_time,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="useTime != null" >
+        use_time,
+      </if>
+      <if test="amountUsed != null" >
+        amount_used,
+      </if>
+      <if test="couponType != null" >
+        coupon_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="toUid != null" >
+        #{toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="fromUid != null" >
+        #{fromUid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenes != null" >
+        #{scenes,jdbcType=TINYINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="denomination != null" >
+        #{denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="thresholdPrice != null" >
+        #{thresholdPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="effectiveTime != null" >
+        #{effectiveTime,jdbcType=BIGINT},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="useTime != null" >
+        #{useTime,jdbcType=BIGINT},
+      </if>
+      <if test="amountUsed != null" >
+        #{amountUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="couponType != null" >
+        #{couponType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cf.pay.domain.CfCouponExample" resultType="java.lang.Integer" >
+    select count(*) from cf_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_coupon
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toUid != null" >
+        to_uid = #{record.toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromUid != null" >
+        from_uid = #{record.fromUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scenes != null" >
+        scenes = #{record.scenes,jdbcType=TINYINT},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.denomination != null" >
+        denomination = #{record.denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="record.thresholdPrice != null" >
+        threshold_price = #{record.thresholdPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.effectiveTime != null" >
+        effective_time = #{record.effectiveTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.expireTime != null" >
+        expire_time = #{record.expireTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.useTime != null" >
+        use_time = #{record.useTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.amountUsed != null" >
+        amount_used = #{record.amountUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="record.couponType != null" >
+        coupon_type = #{record.couponType,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_coupon
+    set id = #{record.id,jdbcType=VARCHAR},
+      to_uid = #{record.toUid,jdbcType=VARCHAR},
+      from_uid = #{record.fromUid,jdbcType=VARCHAR},
+      scenes = #{record.scenes,jdbcType=TINYINT},
+      shop_id = #{record.shopId,jdbcType=VARCHAR},
+      goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      denomination = #{record.denomination,jdbcType=DECIMAL},
+      threshold_price = #{record.thresholdPrice,jdbcType=DECIMAL},
+      effective_time = #{record.effectiveTime,jdbcType=BIGINT},
+      expire_time = #{record.expireTime,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      use_time = #{record.useTime,jdbcType=BIGINT},
+      amount_used = #{record.amountUsed,jdbcType=DECIMAL},
+      coupon_type = #{record.couponType,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cf.pay.domain.CfCoupon" >
+    update cf_coupon
+    <set >
+      <if test="toUid != null" >
+        to_uid = #{toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="fromUid != null" >
+        from_uid = #{fromUid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenes != null" >
+        scenes = #{scenes,jdbcType=TINYINT},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="denomination != null" >
+        denomination = #{denomination,jdbcType=DECIMAL},
+      </if>
+      <if test="thresholdPrice != null" >
+        threshold_price = #{thresholdPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="effectiveTime != null" >
+        effective_time = #{effectiveTime,jdbcType=BIGINT},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="useTime != null" >
+        use_time = #{useTime,jdbcType=BIGINT},
+      </if>
+      <if test="amountUsed != null" >
+        amount_used = #{amountUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cf.pay.domain.CfCoupon" >
+    update cf_coupon
+    set to_uid = #{toUid,jdbcType=VARCHAR},
+      from_uid = #{fromUid,jdbcType=VARCHAR},
+      scenes = #{scenes,jdbcType=TINYINT},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      goods_id = #{goodsId,jdbcType=VARCHAR},
+      denomination = #{denomination,jdbcType=DECIMAL},
+      threshold_price = #{thresholdPrice,jdbcType=DECIMAL},
+      effective_time = #{effectiveTime,jdbcType=BIGINT},
+      expire_time = #{expireTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      use_time = #{useTime,jdbcType=BIGINT},
+      amount_used = #{amountUsed,jdbcType=DECIMAL},
+      coupon_type = #{couponType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <select id="selectListByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+
+  <select id="selectListByConditionCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+    ${value}
+  </select>
+  
+  <select id="getAvailableByShopIdAndScenes" resultMap="BaseResultMap">
+    select cp.id,cp.to_uid,cp.from_uid,cp.scenes,cls.shop_id,cp.goods_id,cp.denomination,cp.threshold_price,cp.effective_time,
+       cp.expire_time,cp.status,cp.create_time,cp.use_time,cp.amount_used,cp.coupon_type from cf_coupon cp left join cf_coupon_link_shop cls on(cp.id=cls.coupon_id)
+    where cp.status = 1 and cp.goods_id = #{goodsId,jdbcType=VARCHAR} and cp.scenes = #{scenes,jdbcType=TINYINT} and cp.effective_time <![CDATA[ <= ]]> #{nowTime,jdbcType=BIGINT} and cp.expire_time <![CDATA[ > ]]> #{nowTime,jdbcType=BIGINT}
+    and cls.shop_id = #{shopId,jdbcType=VARCHAR} order by cp.coupon_type ASC,cp.denomination DESC,cp.create_time ASC
+  </select>
+
+  <select id="getAvailableByShopIdAndScenesAndUid" resultMap="BaseResultMap">
+    select cp.id,cp.to_uid,cp.from_uid,cp.scenes,cls.shop_id,cp.goods_id,cp.denomination,cp.threshold_price,cp.effective_time,
+       cp.expire_time,cp.status,cp.create_time,cp.use_time,cp.amount_used,cp.coupon_type from cf_coupon cp left join cf_coupon_link_shop cls on(cp.id=cls.coupon_id)
+    where cp.status = 1and cp.to_uid = #{uid,jdbcType=VARCHAR} and cp.scenes = #{scenes,jdbcType=TINYINT} and cp.effective_time <![CDATA[ <= ]]> #{nowTime,jdbcType=BIGINT} and cp.expire_time <![CDATA[ > ]]> #{nowTime,jdbcType=BIGINT}
+    and cls.shop_id = #{shopId,jdbcType=VARCHAR} order by cp.coupon_type ASC,cp.denomination DESC,cp.create_time ASC
+  </select>
+
+  <select id="getAvailableByShopIdAndScenesAndUidOrGoodsId" resultMap="BaseResultMap">
+    select cp.id,cp.to_uid,cp.from_uid,cp.scenes,cls.shop_id,cp.goods_id,cp.denomination,cp.threshold_price,cp.effective_time,
+    cp.expire_time,cp.status,cp.create_time,cp.use_time,cp.amount_used,cp.coupon_type from cf_coupon cp left join cf_coupon_link_shop cls on(cp.id=cls.coupon_id)
+    where cp.status = 1
+    <if test="uid != null">
+      and cp.to_uid = #{uid,jdbcType=VARCHAR}
+    </if>
+    <if test="goodsId != null">
+      and cp.goods_id = #{goodsId,jdbcType=VARCHAR}
+    </if>
+    and cp.scenes = #{scenes,jdbcType=TINYINT} and cp.effective_time <![CDATA[ <= ]]> #{nowTime,jdbcType=BIGINT} and cp.expire_time <![CDATA[ > ]]> #{nowTime,jdbcType=BIGINT}
+    and cls.shop_id = #{shopId,jdbcType=VARCHAR} order by cp.coupon_type ASC,cp.denomination DESC,cp.create_time ASC
+  </select>
+
+  <select id="getAvailableByShopIdAndScenesAndLinkUids" resultMap="BaseResultMap">
+    select cp.id,cp.to_uid,cp.from_uid,cp.scenes,cls.shop_id,cp.goods_id,cp.denomination,cp.threshold_price,cp.effective_time,
+       cp.expire_time,cp.status,cp.create_time,cp.use_time,cp.amount_used,cp.coupon_type from cf_coupon cp left join cf_coupon_link_shop cls on(cp.id=cls.coupon_id)
+    where cp.status = 1 and cp.to_uid in
+     (select uid from cf_car_park_car where number_plate = #{goodsId,jdbcType=VARCHAR})
+     and cp.scenes = #{scenes,jdbcType=TINYINT} and cp.effective_time <![CDATA[ <= ]]> #{nowTime,jdbcType=BIGINT} and cp.expire_time <![CDATA[ > ]]> #{nowTime,jdbcType=BIGINT}
+    and cls.shop_id = #{shopId,jdbcType=VARCHAR} order by cp.coupon_type ASC,cp.denomination DESC,cp.create_time ASC
+  </select>
+
+  <select id="sumByFieldAndQuery" parameterType="com.cf.pay.domain.request.CfCouponQuery" resultType="java.math.BigDecimal">
+    SELECT sum(${countField}) FROM `cf_coupon`
+    <trim prefix="WHERE" prefixOverrides="and" >
+      <if test="id!=null">
+        and id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="toUid!=null">
+        and to_uid = #{toUid,jdbcType=VARCHAR}
+      </if>
+      <if test="fromUid!=null">
+        and from_uid = #{fromUid,jdbcType=VARCHAR}
+      </if>
+      <if test="scenes!=null">
+        and scenes = #{scenes,jdbcType=TINYINT}
+      </if>
+      <if test="shopId!=null">
+        and shop_id = #{shopId,jdbcType=VARCHAR}
+      </if>
+      <if test="goodsId!=null">
+        and goods_id = #{goodsId,jdbcType=VARCHAR}
+      </if>
+      <if test="minEffectiveTime!=null">
+        and effective_time <![CDATA[ >= ]]> #{minEffectiveTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxEffectiveTime!=null">
+        and effective_time <![CDATA[ <= ]]> #{maxEffectiveTime,jdbcType=BIGINT}
+      </if>
+
+      <if test="minExpireTime!=null">
+        and expire_time <![CDATA[ >= ]]> #{minExpireTime,jdbcType=BIGINT}
+      </if>
+      <if test="maxExpireTime!=null">
+        and expire_time <![CDATA[ <= ]]> #{maxExpireTime,jdbcType=BIGINT}
+      </if>
+      <if test="status!=null">
+        and status = #{status,jdbcType=TINYINT}
+      </if>
+      <if test="couponType!=null">
+        and coupon_type = #{couponType,jdbcType=TINYINT}
+      </if>
+    </trim>
+    <if test="page!=null and size !=null">
+      limit #{page,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </if>
+  </select>
+</mapper>

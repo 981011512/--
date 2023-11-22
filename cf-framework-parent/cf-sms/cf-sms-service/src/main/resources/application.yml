@@ -1,0 +1,93 @@
+#默认使用配置
+server:
+  port: 8084
+spring:
+  application:
+    name: cf-sms-service
+  profiles:
+    active: dev
+  datasource:
+    name: caifeng
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://mysql数据库地址:3306/caifeng?characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+    username: caifeng
+    password: mysql数据库密码
+    driver-class-name: com.mysql.jdbc.Driver
+    maxActive: 32
+  redis:
+    host: redis数据库地址
+    port: 6379
+    password: redis密码
+    database: 0
+    jedis:
+      pool:
+        maxActive: 3
+        maxIdle: 3
+        minIdle: 1
+        maxWait: -1
+
+#公共配置与profiles选择无关
+mybatis:
+  #  mapperScanPackage: com.cf.mapper
+  #  typeAliasesPackage: com.cf.pojo
+  mapperLocations: classpath:com.cf.sms.dao.mapper/*.xml
+  configLocation: classpath:config/SqlMapConfig.xml
+dubbo:
+  scan:
+    base-packages: com.cf.sms.service.impl
+  application:
+    name: ${spring.application.name}
+  protocol:
+    name: dubbo
+    port: 20884
+    threads: 200
+    accepts: 0
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  provider.filter: -exception
+
+  # 数据源 ds0,ds1
+#  shardingsphere:
+#    datasource:
+#      names: ds0,ds1
+#      # 第一个数据库
+#      ds0:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://mysql数据库地址:3306/caifeng?characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+#        username: caifeng
+#        password: mysql数据库密码
+#      # 第二个数据库
+#      ds1:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://127.0.0.1:3306/caifeng?characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+#        username: root
+#        password: root
+#    # 水平拆分的数据库（表） 配置分库 + 分表策略 行表达式分片策略
+#    sharding:
+#      # 分库策略
+#      default-database-strategy:
+#        inline:
+#          sharding-column: create_time
+#          algorithm-expression: ds$->{create_time % 2}
+#      # 分表策略 其中user为逻辑表 分表主要取决于create_time行
+#      tables:
+#        cf_ad:
+#          actual-data-nodes: ds$->{0..1}.cf_ad$->{0..1}
+#          table-strategy:
+#            inline:
+#              sharding-column: create_time
+#              # 分片算法表达式
+#              algorithm-expression: cf_ad$->{create_time % 2}
+#          # 主键 雪花算法 19位数 如果是分布式还要进行一个设置 防止主键重复
+#          key-generator-column:
+#            name: id
+#            type: SNOWFLAKE
+#    # 打印执行的数据库
+#    props:
+#      sql:
+#        show: true
+#  main:
+#    allow-bean-definition-overriding: true
+
