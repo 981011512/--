@@ -12,11 +12,11 @@
 
 【开发建议】：想研究相机对接的，建议自己买个开发机器，连个两三百的开发机器你都没有，不要谈啥研究车牌识别系统。先声明，我自己不是推销产品啥的，根据个人需求，需要购买的自己去某宝购买，
 
-前端小程序开源地址(2.0)：https://gitee.com/wangdefu/parking_system_applet
+【前端小程序开源地址】(3.0)：[https://gitee.com/gebixiaowangzi/cfzhv3.0](https://gitee.com/wangdefu_admin/cfzhvmin3.0)
 
-前端小程序开源地址(3.0)：https://gitee.com/gebixiaowangzi/cfzhv3.0
+【后台管理开源地址】(3.0)：https://gitee.com/wangdefu/admin3.0
 
-后台管理开源地址(3.0)：https://gitee.com/gebixiaowangzi/cfzhv3.0_public_admin
+【岗亭端开源地址】(3.0)：https://gitee.com/wangdefu/public_v3_duty
 
 【我们的优势】：最近我们新增了充电桩功能模块，物业系统，人脸门禁，上门报修，准备更新开源版，欢迎大家体验
 
