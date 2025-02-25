@@ -12,11 +12,11 @@
 
 【开发建议】：想研究相机对接的，建议自己买个开发机器，连个两三百的开发机器你都没有，不要谈啥研究车牌识别系统。先声明，我自己不是推销产品啥的，根据个人需求，需要购买的自己去某宝购买，
 
-【前端小程序开源地址】(3.0)：https://gitee.com/cfzhv3/cfzhvmin3.0
+【前端小程序开源地址】(3.0)：[https://gitee.com/cfzhv3/cfzhvmin3.0](https://gitee.com/next-door-xiaoma-xian/min-public)
 
-【后台管理开源地址】(3.0)：https://gitee.com/cfzhv3/cfzhv3.0_public_admin
+【后台管理开源地址】(3.0)：[https://gitee.com/cfzhv3/cfzhv3.0_public_admin](https://gitee.com/next-door-xiaoma-xian/admin-public)
 
-【岗亭端开源地址】(3.0)：https://gitee.com/cfzhv3/cfzhv3-duty_public
+【岗亭端开源地址】(3.0)：[https://gitee.com/cfzhv3/cfzhv3-duty_public](https://gitee.com/next-door-xiaoma-xian/duty-public)
 
 【我们的优势】：最近我们新增了充电桩功能模块，物业系统，人脸门禁，上门报修，准备更新开源版，欢迎大家体验
 
